@@ -6,6 +6,19 @@
   "background_color": "#ffffff",
   "theme_color": "#0b5fff",
   "icons": [
+    { "src": "/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
+
+{
+  "name": "Optra ERP",
+  "short_name": "Optra",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b5fff",
+  "icons": [
     { "src": "/public/logo-optra.png", "sizes": "192x192", "type": "image/png" }
   ]
 }

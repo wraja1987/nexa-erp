@@ -28,6 +28,10 @@ export default function PreviewShell({ children }: PropsWithChildren) {
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
+  const isiOS = typeof navigator !== 'undefined' && /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isSafari = typeof navigator !== 'undefined' && /safari/i.test(navigator.userAgent) && !/chrome|crios|fxios/i.test(navigator.userAgent);
+  const showA2HSBanner = isiOS && isSafari && !deferredPrompt;
+
   const installButton = useMemo(() => (
     <button
       type="button"
@@ -68,6 +72,11 @@ export default function PreviewShell({ children }: PropsWithChildren) {
         </div>
       </header>
       <section aria-live="polite" style={{ padding: 16 }}>
+        {showA2HSBanner && (
+          <div role="note" style={{ background: 'var(--card)', border: '1px solid var(--border)', padding: 12, borderRadius: 8, marginBottom: 12 }}>
+            To install, tap the Share icon and choose "Add to Home Screen".
+          </div>
+        )}
         <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 12 }}>
           Viewing as <strong>{role}</strong>. Seeded demo data available (Leads 50+, Opps 30+, Activities 100+, Tickets 25, etc.).
         </div>
