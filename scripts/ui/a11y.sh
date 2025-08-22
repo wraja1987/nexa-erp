@@ -3,6 +3,8 @@ set -euo pipefail
 
 THEME="${1:-light}"
 BASE="${BASE_URL:-http://127.0.0.1:3000}"
+ROOT="$(cd "$(dirname "$0")"/../.. && pwd)"
+REPORTS_DIR="$ROOT/reports"
 
 URLS=(
   "$BASE/"
@@ -23,8 +25,8 @@ fi
 
 echo "A11Y scan starting (theme=$THEME, base=$BASE)"
 
-mkdir -p reports
-LOG="reports/.next-start-a11y.log"
+mkdir -p "$REPORTS_DIR"
+LOG="$REPORTS_DIR/.next-start-a11y.log"
 : > "$LOG"
 
 need_kill=0
@@ -37,8 +39,8 @@ if ! is_up; then
   echo "No server on ${BASE} — building and starting ephemeral Next server…"
   pnpm --filter web build >>"$LOG" 2>&1 || true
   # bind explicitly to localhost to avoid container/DNS quirks
-  (cd apps/web && npx --yes next start -p 3000 -H 127.0.0.1 >>"$LOG" 2>&1 & echo $! > "../.."/reports/.next-start.pid)
-  server_pid="$(cat reports/.next-start.pid || true)"
+  (cd "$ROOT/apps/web" && npx --yes next start -p 3000 -H 127.0.0.1 >>"$LOG" 2>&1 & echo $! > "$REPORTS_DIR/.next-start.pid")
+  server_pid="$(cat "$REPORTS_DIR/.next-start.pid" || true)"
   need_kill=1
 
   # Wait up to 60s for readiness
