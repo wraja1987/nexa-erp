@@ -20,34 +20,6 @@ jobs:
       - run: pnpm -w golden:all
       - run: pnpm -w a11y || true
       - run: bash scripts/ci/prelogin-guard-web.sh
-      - name: Phase 5 gate (web)
-        run: pnpm -w gate:phase5
-      - name: Phase 5 summary (web)
-        run: bash scripts/ci/phase5-summary.sh
-      - name: Upload Phase 5 report
-        uses: actions/upload-artifact@v4
-        with:
-          name: phase5-report-${{ github.run_id }}
-          path: reports/
-          if-no-files-found: warn
-      - name: Upload OpenAPI JSON
-        uses: actions/upload-artifact@v4
-        with:
-          name: openapi-${{ github.run_id }}
-          path: apps/web/public/openapi.json
-          if-no-files-found: warn
-      - name: Upload SDK dist
-        uses: actions/upload-artifact@v4
-        with:
-          name: sdk-dist-${{ github.run_id }}
-          path: packages/sdk-optra/dist
-          if-no-files-found: warn
-      - name: Upload goldens
-        uses: actions/upload-artifact@v4
-        with:
-          name: goldens-${{ github.run_id }}
-          path: scripts/tests/fixtures
-          if-no-files-found: warn
 
   build-mobile:
     runs-on: ubuntu-latest
@@ -63,14 +35,12 @@ jobs:
       - run: pnpm --filter mobile expo:doctor || true
       - run: pnpm --filter mobile expo:export:test || true
       - run: bash scripts/ci/prelogin-guard-mobile.sh
-      - name: Phase 5 gate (mobile context)
-        run: pnpm -w gate:phase5
 
 name: ci
 
 on:
   push:
-    branches: [ main, phase-4/**, phase-5/** ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 

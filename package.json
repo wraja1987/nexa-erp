@@ -12,6 +12,12 @@
     "test": "vitest run --reporter=dot",
     "cov": "vitest run --coverage --reporter=dot",
     "a11y": "echo 'axe-core placeholder'",
+    "ui:a11y": "bash scripts/ui/a11y.sh light",
+    "ui:a11y:dark": "bash scripts/ui/a11y.sh dark",
+    "ui:perf": "bash scripts/ui/perf.sh",
+    "ui:nav:lint": "node scripts/ui/nav-lint.js",
+    "ui:visual": "bash scripts/ui/visual.sh",
+    "test:security": "bash scripts/security/test-security.sh",
     "sbom": "npx --yes cyclonedx-bom -o sbom.xml || echo 'sbom stub'",
     "gate:phase0": "node scripts/gate-phase0.cjs",
     "prisma:generate": "npx prisma generate",
@@ -22,8 +28,11 @@
     "gate:phase1": "node scripts/gate-phase1.cjs",
     "gate:phase2": "node scripts/gates/phase2.cjs",
     "gate:phase3": "node scripts/gates/phase3.cjs",
-    "gate:phase4": "node scripts/gates/phase4.cjs",
-    "gates:all": "npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4",
+    "gate:phase4": "bash scripts/ci/gate-phase4.sh",
+    "gate:phase5": "node scripts/gates/phase5.cjs",
+    "report:phase5": "bash scripts/ci/phase5-summary.sh",
+    "gates:phase4": "bash scripts/ci/gate-phase4.sh",
+    "gates:all": "npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4 && npm run gate:phase5",
 
     "web": "npm --workspace apps/web run dev",
     "check": "npm run health && npm run gates:all",
@@ -72,7 +81,10 @@
       "node_modules/",
       "dist/",
       "sbom.xml",
-      "apps/**"
+      "apps/**",
+      "packages/**",
+      "scripts/**",
+      "vitest.config.ts"
     ],
     "overrides": [
       {

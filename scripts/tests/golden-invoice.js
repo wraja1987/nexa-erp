@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
@@ -9,10 +8,7 @@ const expectedSha = '8a72462281b6dd8de026f3ca7ab870dfb81425fa6227a37789e526aea7d
 const buf = fs.readFileSync(pdfPath)
 const sha = crypto.createHash('sha256').update(buf).digest('hex')
 if (sha !== expectedSha) {
-  console.error('Invoice PDF hash mismatch')
-  console.error(' expected:', expectedSha)
-  console.error('   actual:', sha)
-  process.exit(1)
+  throw new Error(`Invoice PDF hash mismatch expected ${expectedSha} actual ${sha}`)
 }
 console.log('Invoice golden OK', sha)
 
