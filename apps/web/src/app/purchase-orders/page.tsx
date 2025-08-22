@@ -3,7 +3,7 @@ export default function PurchaseOrders() {
     <main>
       <div className="card" style={{ marginTop: 12 }}>
         <h2 style={{ marginTop: 0 }}>Purchase Orders</h2>
-        <p className="text-muted">This page inherits the Neo‑Fluid theme globally.</p>
+        <p className="text-muted">This page uses the global theme.</p>
         <button className="btn-primary">Create PO</button>
         <div style={{ marginTop: 12 }} className="ai-confirm">
           <div style={{ padding: 12 }}>

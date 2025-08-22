@@ -24,10 +24,18 @@
     "gate:phase3": "node scripts/gates/phase3.cjs",
     "gate:phase4": "node scripts/gates/phase4.cjs",
     "gates:all": "npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4",
+
     "web": "npm --workspace apps/web run dev",
     "check": "npm run health && npm run gates:all",
     "build": "pnpm -r run build",
-    "dev:web": "pnpm --filter web dev"
+    "dev:web": "pnpm --filter web dev",
+    "openapi:generate": "node scripts/docs/publish-openapi.js",
+    "sdk:build": "pnpm -C packages/sdk-optra build",
+    "golden:invoice": "node scripts/tests/golden-invoice.js",
+    "golden:siem": "node scripts/tests/golden-siem.js",
+    "golden:all": "pnpm -w golden:invoice && pnpm -w golden:siem",
+    "seed:phase4": "tsx scripts/seeds/seed-phase4.ts",
+    "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
@@ -42,7 +50,8 @@
     "prisma": "^6.14.0",
     "typescript": "^5.5.4",
     "vitest": "3.2.4",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "tsx": "4.20.4"
   },
   "eslintConfig": {
     "env": {
@@ -78,7 +87,12 @@
   },
   "vitest": {
     "test": {
-      "environment": "node"
+      "environment": "node",
+      "exclude": [
+        "**/node_modules/**",
+        "apps/web/node_modules/**",
+        "apps/mobile/**"
+      ]
     },
     "coverage": {
       "provider": "v8",

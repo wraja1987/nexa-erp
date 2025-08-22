@@ -1,4 +1,42 @@
 name: ci
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with: { node-version: 18, cache: 'pnpm' }
+      - run: pnpm -v && pnpm install --frozen-lockfile
+      - run: pnpm -w lint && pnpm -w typecheck && pnpm -w test
+      - run: pnpm --filter web build
+      - run: pnpm -w openapi:generate && pnpm -w sdk:build
+      - run: pnpm -w golden:all
+      - run: pnpm -w a11y || true
+      - run: bash scripts/ci/prelogin-guard-web.sh
+
+  build-mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with: { node-version: 18, cache: 'pnpm' }
+      - run: pnpm -v && pnpm install --frozen-lockfile
+      - run: pnpm --filter mobile lint || true
+      - run: pnpm --filter mobile typecheck || true
+      - run: pnpm --filter mobile test
+      - run: pnpm --filter mobile expo:doctor || true
+      - run: pnpm --filter mobile expo:export:test || true
+      - run: bash scripts/ci/prelogin-guard-mobile.sh
+
+name: ci
 
 on:
   push:

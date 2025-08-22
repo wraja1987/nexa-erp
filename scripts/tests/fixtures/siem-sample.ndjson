@@ -1,0 +1,5 @@
+{"ts":"2024-01-01T00:00:00Z","tenantId":"t1","type":"login","ok":true}
+{"ts":"2024-01-01T00:01:00Z","tenantId":"t1","type":"api","route":"/api/assistant","ms":12}
+{"ts":"2024-01-01T00:02:00Z","tenantId":"t1","type":"error","code":"E123","msg":"timeout"}
+
+
