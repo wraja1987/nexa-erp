@@ -1,3 +1,23 @@
+function calculatePayroll(employees) {
+  if (!Array.isArray(employees)) return 0
+  return employees.reduce((sum, e) => sum + ((e.hours || 0) * (e.rate || 0)), 0)
+}
+
+function validateEmployee(e) {
+  return !!(e && e.id)
+}
+
+function run(config) {
+  return { ok: true, config: !!config }
+}
+
+module.exports = {
+  calculatePayroll,
+  validateEmployee,
+  run,
+  default: run,
+}
+
 // Minimal payroll engine stubs: PAYE/NI samples, statutory pay skeleton, AE assessment, journal output
 function calcPAYE(gross, code) {
   // Extremely simplified: demo only, not production-calibre

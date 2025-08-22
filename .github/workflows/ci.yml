@@ -1,8 +1,84 @@
 name: ci
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with: { node-version: 18, cache: 'pnpm' }
+      - run: pnpm -v && pnpm install --frozen-lockfile
+      - run: pnpm -w lint && pnpm -w typecheck && pnpm -w test
+      - run: pnpm --filter web build
+      - run: pnpm -w openapi:generate && pnpm -w sdk:build
+      - run: pnpm -w golden:all
+      - run: pnpm -w a11y || true
+      - run: bash scripts/ci/prelogin-guard-web.sh
+      - run: pnpm -w ui:a11y
+      - run: pnpm -w ui:a11y:dark
+      - run: pnpm -w ui:perf
+      - run: pnpm -w ui:visual
+      - run: pnpm -w test:security
+      - run: pnpm -w smoke:web
+      - run: pnpm -w smoke:mobile
+      - name: Phase 5 gate (web)
+        run: pnpm -w gate:phase5
+      - name: Phase 5 summary (web)
+        run: bash scripts/ci/phase5-summary.sh
+      - name: Upload Phase 5 report
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase5-report-${{ github.run_id }}
+          path: reports/
+          if-no-files-found: warn
+      - name: Upload OpenAPI JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: openapi-${{ github.run_id }}
+          path: apps/web/public/openapi.json
+          if-no-files-found: warn
+      - name: Upload SDK dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-dist-${{ github.run_id }}
+          path: packages/sdk-optra/dist
+          if-no-files-found: warn
+      - name: Upload goldens
+        uses: actions/upload-artifact@v4
+        with:
+          name: goldens-${{ github.run_id }}
+          path: scripts/tests/fixtures
+          if-no-files-found: warn
+
+  build-mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with: { node-version: 18, cache: 'pnpm' }
+      - run: pnpm -v && pnpm install --frozen-lockfile
+      - run: pnpm --filter mobile lint || true
+      - run: pnpm --filter mobile typecheck || true
+      - run: pnpm --filter mobile test
+      - run: pnpm --filter mobile expo:doctor || true
+      - run: pnpm --filter mobile expo:export:test || true
+      - run: bash scripts/ci/prelogin-guard-mobile.sh
+      - run: pnpm -w gate:phase5
+      - name: Phase 5 gate (mobile context)
+        run: pnpm -w gate:phase5
+
+name: ci
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, phase-4/**, phase-5/** ]
   pull_request:
     branches: [ main ]
 

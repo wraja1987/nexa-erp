@@ -1,0 +1,65 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Optra ERP API",
+    "version": "0.1.0"
+  },
+  "tags": [
+    {
+      "name": "Billing"
+    },
+    {
+      "name": "Developer Portal"
+    },
+    {
+      "name": "Monitoring"
+    },
+    {
+      "name": "Settings"
+    },
+    {
+      "name": "Assistant"
+    }
+  ],
+  "paths": {
+    "/api/assistant": {
+      "post": {
+        "tags": [
+          "Assistant"
+        ],
+        "requestBody": {
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "assistant reply"
+          }
+        }
+      }
+    },
+    "/api/healthz": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/api/readyz": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "responses": {
+          "200": {
+            "description": "ready"
+          }
+        }
+      }
+    }
+  }
+}

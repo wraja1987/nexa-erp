@@ -23,3 +23,158 @@ model User {
   updatedAt DateTime @updatedAt
   @@index([tenant_id])
 }
+
+model Entity {
+  id           String   @id @default(cuid())
+  tenantId     String
+  name         String
+  currencyCode String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@index([tenantId])
+}
+
+model Plan {
+  id     String @id @default(cuid())
+  code   String @unique
+  name   String
+  tier   String
+  active Boolean @default(true)
+}
+
+model PlanAddon {
+  id     String @id @default(cuid())
+  code   String @unique
+  name   String
+  active Boolean @default(true)
+}
+
+model Subscription {
+  id                 String   @id @default(cuid())
+  tenantId           String
+  planId             String
+  status             String
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  @@index([tenantId])
+}
+
+model UsageEvent {
+  id        String   @id @default(cuid())
+  tenantId  String
+  type      String
+  quantity  Int
+  at        DateTime
+  metadata  Json
+  @@index([tenantId])
+}
+
+model Invoice {
+  id           String   @id @default(cuid())
+  tenantId     String
+  number       String   @unique
+  pdfHash      String
+  total        Decimal
+  currencyCode String
+  issuedAt     DateTime
+  dueAt        DateTime
+  status       String
+  @@index([tenantId])
+}
+
+model ApiKey {
+  id              String   @id @default(cuid())
+  tenantId        String
+  label           String
+  status          String
+  lastUsedAt      DateTime?
+  rateLimitPerMin Int
+  burst           Int
+  ipAllowlist     Json
+  secretHash      String
+  @@index([tenantId])
+}
+
+model WebhookEndpoint {
+  id         String @id @default(cuid())
+  tenantId   String
+  url        String
+  secretHash String
+  active     Boolean @default(true)
+  @@index([tenantId])
+}
+
+model WebhookEvent {
+  id         String   @id @default(cuid())
+  endpointId String
+  eventType  String
+  deliveredAt DateTime?
+  status     String
+  payload    Json
+}
+
+model CurrencyRate {
+  id       String  @id @default(cuid())
+  fromCode String
+  toCode   String
+  rate     Decimal
+  asOfDate DateTime
+}
+
+model AuditLog {
+  id       String   @id @default(cuid())
+  tenantId String
+  actorId  String
+  action   String
+  target   String
+  at       DateTime
+  data     Json
+  @@index([tenantId])
+}
+
+model Notification {
+  id       String   @id @default(cuid())
+  tenantId String
+  type     String
+  body     String
+  readAt   DateTime?
+  @@index([tenantId])
+}
+
+model BackupJob {
+  id       String   @id @default(cuid())
+  tenantId String
+  ranAt    DateTime
+  ok       Boolean
+  summary  String
+  @@index([tenantId])
+}
+
+model DrDrill {
+  id             String   @id @default(cuid())
+  tenantId       String
+  ranAt          DateTime
+  ok             Boolean
+  restoredCounts Json
+  notes          String?
+  @@index([tenantId])
+}
+
+model SiemExportBatch {
+  id          String   @id @default(cuid())
+  tenantId    String
+  createdAt   DateTime @default(now())
+  filePath    String
+  recordCount Int
+  sha256      String
+  @@index([tenantId])
+}
+
+model DemoDataVisibility {
+  id           String   @id @default(cuid())
+  tenantId     String
+  adminUserId  String
+  visibleUntil DateTime
+  maskLevel    Int
+  @@index([tenantId])
+}
