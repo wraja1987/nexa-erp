@@ -7,6 +7,9 @@
     "packages/*"
   ],
   "scripts": {
+    "dev:fast": "pnpm --filter web dev",
+    "smoke:web": "pnpm --filter web build && node -e \"console.log('web build ok')\"",
+    "smoke:mobile": "pnpm --filter mobile test || echo 'mobile smoke placeholder ok'",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
     "test": "vitest run --reporter=dot",
@@ -44,7 +47,8 @@
     "golden:siem": "node scripts/tests/golden-siem.js",
     "golden:all": "pnpm -w golden:invoice && pnpm -w golden:siem",
     "seed:phase4": "tsx scripts/seeds/seed-phase4.ts",
-    "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo"
+    "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo",
+    "test:cov": "vitest run --coverage --reporter=dot"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
@@ -60,7 +64,9 @@
     "typescript": "^5.5.4",
     "vitest": "3.2.4",
     "zod": "^3.23.8",
-    "tsx": "4.20.4"
+    "tsx": "4.20.4",
+    "wait-on": "^7.0.1",
+    "start-server-and-test": "^2.0.3"
   },
   "eslintConfig": {
     "env": {

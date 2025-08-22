@@ -20,6 +20,13 @@ jobs:
       - run: pnpm -w golden:all
       - run: pnpm -w a11y || true
       - run: bash scripts/ci/prelogin-guard-web.sh
+      - run: pnpm -w ui:a11y
+      - run: pnpm -w ui:a11y:dark
+      - run: pnpm -w ui:perf
+      - run: pnpm -w ui:visual
+      - run: pnpm -w test:security
+      - run: pnpm -w smoke:web
+      - run: pnpm -w smoke:mobile
       - name: Phase 5 gate (web)
         run: pnpm -w gate:phase5
       - name: Phase 5 summary (web)
@@ -63,6 +70,7 @@ jobs:
       - run: pnpm --filter mobile expo:doctor || true
       - run: pnpm --filter mobile expo:export:test || true
       - run: bash scripts/ci/prelogin-guard-mobile.sh
+      - run: pnpm -w gate:phase5
       - name: Phase 5 gate (mobile context)
         run: pnpm -w gate:phase5
 
