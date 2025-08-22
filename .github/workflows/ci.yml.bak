@@ -33,3 +33,4 @@ jobs:
           pnpm -w gate:phase1
           pnpm -w gate:phase2
       - run: pnpm -w gate:phase3
+      - run: pnpm -w gate:phase4
