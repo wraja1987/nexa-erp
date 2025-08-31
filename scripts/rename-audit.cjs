@@ -22,7 +22,7 @@ for (const f of files){
   if (/^\.env(\..+)?$/.test(base) || base === '.env' || base === '.env.bak') continue;
   try{
     const t = fs.readFileSync(f, 'utf8');
-    // Ignore valid PR links to optra-erp repo in acceptance script and this audit tool itself
+    // Ignore valid PR links to nexa-erp repo in acceptance script and this audit tool itself
     if (f.endsWith('scripts/ci/phase4-acceptance.sh')) continue;
     if (f.endsWith('scripts/rename-audit.cjs')) continue;
     if (f.endsWith('scripts/phase5-to-6-audit.cjs')) continue;

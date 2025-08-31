@@ -4,16 +4,16 @@ export function maskPII(v: string): string {
   return ipv4.replace(/\b([a-zA-Z0-9]{5,})\b/g, (m) => m.slice(0, 4) + "****");
 }
 
-export function safeAudit(obj: Record<string, any>) {
-  const masked: any = { ...obj };
-  if (masked.ip) masked.ip = maskPII(String(masked.ip));
-  if (masked.session) masked.session = maskPII(String(masked.session));
-  masked.hasMasked = true;
-  return masked;
+type AuditPayload = { ip?: unknown; session?: unknown } & Record<string, unknown>;
+
+export function safeAudit(obj: AuditPayload): AuditPayload & { hasMasked: true } {
+  const working: AuditPayload = { ...obj };
+  if (working.ip !== undefined) working.ip = maskPII(String(working.ip));
+  if (working.session !== undefined) working.session = maskPII(String(working.session));
+  return { ...working, hasMasked: true } as AuditPayload & { hasMasked: true };
 }
 
-export function audit(payload: Record<string, any>) {
-  // eslint-disable-next-line no-console
+export function audit(payload: AuditPayload): void {
   console.log('[assistant_audit]', safeAudit(payload));
 }
 

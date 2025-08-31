@@ -1,7 +1,7 @@
 {
   "stamp": "2025-08-31T0746",
   "findings": [
-    "/Users/waheedraja/Projects/optra-erp/scripts/ci/phase4-acceptance.sh"
+    "/Users/waheedraja/Projects/nexa-erp/scripts/ci/phase4-acceptance.sh"
   ],
   "count": 1
 }

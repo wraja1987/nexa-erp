@@ -17,7 +17,7 @@
 
 ## Artifacts
 - OpenAPI: exists (apps/web/public/openapi.json)
-- SDK: built (packages/sdk-optra/dist)
+- SDK: built (packages/sdk-nexa/dist)
 - Goldens: scripts/tests/fixtures (invoice-sample.pdf, siem-sample.ndjson)
 
 ## Scripts

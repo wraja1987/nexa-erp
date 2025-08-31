@@ -50,6 +50,7 @@
     "golden:siem": "node scripts/tests/golden-siem.js",
     "golden:all": "pnpm -w golden:invoice && pnpm -w golden:siem",
     "seed:phase4": "tsx scripts/seeds/seed-phase4.ts",
+    "seed:phase6": "tsx scripts/seeds/seed-phase6.ts",
     "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo",
     "test:cov": "vitest run --coverage --reporter=dot"
   },

@@ -1,9 +1,9 @@
 {
   "stamp": "2025-08-31T0745",
   "findings": [
-    "/Users/waheedraja/Projects/optra-erp/.env",
-    "/Users/waheedraja/Projects/optra-erp/.env.bak",
-    "/Users/waheedraja/Projects/optra-erp/scripts/ci/phase4-acceptance.sh"
+    "/Users/waheedraja/Projects/nexa-erp/.env",
+    "/Users/waheedraja/Projects/nexa-erp/.env.bak",
+    "/Users/waheedraja/Projects/nexa-erp/scripts/ci/phase4-acceptance.sh"
   ],
   "count": 3
 }

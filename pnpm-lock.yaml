@@ -158,7 +158,7 @@ importers:
 
   packages/sdk-nexa: {}
 
-  packages/sdk-optra: {}
+  packages/sdk-nexa: {}
 
 packages:
 
