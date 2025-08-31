@@ -46,7 +46,7 @@ function ForgotPasswordScreen({ navigation }: any) {
 function HomeScreen() {
   return (
     <View style={{ padding: 16 }}>
-      <Text accessibilityRole="header" style={{ fontSize: 20, marginBottom: 12 }}>Optra ERP</Text>
+      <Text accessibilityRole="header" style={{ fontSize: 20, marginBottom: 12 }}>Nexa ERP</Text>
       {modules.map((m) => (
         <View key={m.id} style={{ padding: 8, backgroundColor: '#efefef', borderRadius: 8, marginBottom: 8 }}>
           <Text>{m.title}</Text>
@@ -74,5 +74,6 @@ export default function App() {
     </NavigationContainer>
   )
 }
+
 
 

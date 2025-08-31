@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="${REPO:-$HOME/Projects/optra-erp}"; cd "$REPO"
+# Determine repo root dynamically; fallback to previous default if not a git repo
+if git rev-parse --show-toplevel >/dev/null 2>&1; then
+  REPO="$(git rev-parse --show-toplevel)"; cd "$REPO"
+else
+  REPO="${REPO:-$(pwd)}"; cd "$REPO"
+fi
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 OUT="reports/phase4-acceptance-$STAMP.md"

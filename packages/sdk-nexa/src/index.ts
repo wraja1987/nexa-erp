@@ -1,6 +1,6 @@
 export type SdkConfig = { baseUrl?: string; apiKey?: string }
 
-export class OptraClient {
+export class NexaClient {
   private readonly baseUrl: string
   private readonly apiKey?: string
 
@@ -22,5 +22,6 @@ export class OptraClient {
     return res.json()
   }
 }
+
 
 

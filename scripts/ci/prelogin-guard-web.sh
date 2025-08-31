@@ -4,7 +4,7 @@ set -euo pipefail
 PORT=${PORT:-3000}
 
 pnpm --filter web build >/dev/null 2>&1 || true
-pnpm --filter web start -p "$PORT" >/tmp/optra-ci-web.log 2>&1 &
+pnpm --filter web start -p "$PORT" >/tmp/nexa-ci-web.log 2>&1 &
 PID=$!
 cleanup(){ kill $PID 2>/dev/null || true; }
 trap cleanup EXIT
@@ -18,4 +18,5 @@ check /login
 check /forgot-password
 
 echo "Prelogin guard (web) passed."
+
 

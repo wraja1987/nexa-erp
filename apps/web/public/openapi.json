@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Optra ERP API",
+    "title": "Nexa ERP API",
     "version": "0.1.0"
   },
   "tags": [

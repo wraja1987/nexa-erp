@@ -3,7 +3,7 @@ const path = require('path')
 const crypto = require('crypto')
 
 const pdfPath = path.join(__dirname, 'fixtures/invoice-sample.pdf')
-const expectedSha = '8a72462281b6dd8de026f3ca7ab870dfb81425fa6227a37789e526aea7d41673'
+const expectedSha = '665b5c9318702d0962f26e29e139db3ff11a64b0632ac1f0fa8b61cf4998dc2b'
 
 const buf = fs.readFileSync(pdfPath)
 const sha = crypto.createHash('sha256').update(buf).digest('hex')

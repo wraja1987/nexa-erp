@@ -116,3 +116,13 @@ html.dark .ai-confirm{
 html.dark .bg-fluid{
   border: 1px solid rgba(255,255,255,.06);
 }
+
+/* Nexa "N" loader animation */
+.ai-loader-n {
+  animation: nexaPulse 1.25s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(37,99,235,.5));
+}
+@keyframes nexaPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(124,58,237,.45)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 12px rgba(20,184,166,.65)); }
+}

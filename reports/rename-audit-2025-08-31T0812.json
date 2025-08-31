@@ -1,0 +1,8 @@
+{
+  "stamp": "2025-08-31T0812",
+  "findings": [
+    "/Users/waheedraja/Projects/optra-erp/scripts/phase5-to-6-audit.cjs",
+    "/Users/waheedraja/Projects/optra-erp/scripts/rename-audit.cjs"
+  ],
+  "count": 2
+}

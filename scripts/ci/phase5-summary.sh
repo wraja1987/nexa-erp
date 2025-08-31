@@ -34,7 +34,7 @@ run pnpm -w gate:phase5        && ok "gate:phase5"        || bad "gate:phase5"
   echo
   echo "## Artifacts"
   [ -f apps/web/public/openapi.json ] && echo "- OpenAPI: apps/web/public/openapi.json"
-  [ -d packages/sdk-optra/dist ] && echo "- SDK: packages/sdk-optra/dist"
+  [ -d packages/sdk-nexa/dist ] && echo "- SDK: packages/sdk-nexa/dist"
   echo "- Goldens: scripts/tests/fixtures (invoice-sample.pdf, siem-sample.ndjson)"
   echo
   echo "## Totals"
@@ -49,5 +49,6 @@ run pnpm -w gate:phase5        && ok "gate:phase5"        || bad "gate:phase5"
     exit 1
   fi
 } >> "$OUT"
+
 
 

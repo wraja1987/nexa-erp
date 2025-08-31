@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Optra ERP",
-    "slug": "optra-erp",
-    "scheme": "optra",
+    "name": "Nexa ERP",
+    "slug": "nexa-erp",
+    "scheme": "nexa",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,5 +16,6 @@
     }
   }
 }
+
 
 

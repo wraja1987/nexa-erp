@@ -19,7 +19,7 @@ async function main() {
 
   const tenant = await prisma.tenant.upsert({
     where: { id: 't-demo' },
-    create: { id: 't-demo', name: 'Demo Tenant' },
+    create: { id: 't-demo', name: 'Nexa ERP' },
     update: {},
   })
 
@@ -131,5 +131,6 @@ main()
   .finally(async () => {
     await prisma.$disconnect()
   })
+
 
 

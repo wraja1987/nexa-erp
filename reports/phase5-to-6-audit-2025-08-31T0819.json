@@ -1,0 +1,10 @@
+{
+  "ts": "2025-08-31T0819",
+  "checks": {
+    "logoOk": true,
+    "iconsOk": false,
+    "loaderCssOk": true,
+    "loaderCompOk": true,
+    "mobileOk": true
+  }
+}

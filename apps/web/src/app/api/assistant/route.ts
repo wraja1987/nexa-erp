@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { audit } from '../../../lib/log/mask'
 
 const rateLimitWindowMs = 60_000
 const maxRequestsPerWindow = 30
@@ -47,8 +48,8 @@ export async function POST(req: Request) {
 
   sessionToTokens.set(session, used + Math.min(200, (selection?.length || 0) + (lastError?.length || 0)))
 
-  // Audit stub: in real impl write to DB; here just emit to stdout
-  console.log('[assistant_audit]', { ip, session, route, hasMasked: Boolean(lastError || selection) })
+  // Emit masked audit log (IP/session always masked within audit())
+  audit({ ip, session, route })
 
   return NextResponse.json({ message: `Assistant ready for ${route}`, actions: [] })
 }

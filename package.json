@@ -1,5 +1,5 @@
 {
-  "name": "optra-erp",
+  "name": "nexa-erp",
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "workspaces": [
@@ -42,7 +42,10 @@
     "build": "pnpm -r run build",
     "dev:web": "pnpm --filter web dev",
     "openapi:generate": "node scripts/docs/publish-openapi.js",
-    "sdk:build": "pnpm -C packages/sdk-optra build",
+    "sdk:build": "pnpm -C packages/sdk-nexa build",
+    "rename:audit": "node scripts/rename-audit.cjs",
+    "rename:gaps": "node scripts/rename-gap-scan.cjs",
+    "phase5to6:audit": "node scripts/phase5-to-6-audit.cjs",
     "golden:invoice": "node scripts/tests/golden-invoice.js",
     "golden:siem": "node scripts/tests/golden-siem.js",
     "golden:all": "pnpm -w golden:invoice && pnpm -w golden:siem",

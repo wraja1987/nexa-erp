@@ -4,7 +4,7 @@ const path = require('path')
 const outPath = path.join(__dirname, '../../apps/web/public/openapi.json')
 const doc = {
   openapi: '3.0.3',
-  info: { title: 'Optra ERP API', version: '0.1.0' },
+  info: { title: 'Nexa ERP API', version: '0.1.0' },
   tags: [
     { name: 'Billing' },
     { name: 'Developer Portal' },
