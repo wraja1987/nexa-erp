@@ -1,0 +1,3 @@
+=== Nexa ERP Branding Check (20250901T123448Z) ===
+Branding ...................... PASSED
+OVERALL (quick recheck): PASSED

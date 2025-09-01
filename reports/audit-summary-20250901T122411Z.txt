@@ -1,0 +1,12 @@
+=== Nexa ERP Full Audit Summary (20250901T122411Z) ===
+Install ....................... PASSED
+Gates 0–5 ..................... PASSED
+Gate 6 ........................ PASSED
+Web build ..................... PASSED
+Accessibility (light/dark) .... PASSED
+Performance ................... PASSED
+Security ...................... PASSED
+Unit tests .................... PASSED
+Coverage ...................... PASSED
+Branding ...................... FAILED
+OVERALL: FAILED
