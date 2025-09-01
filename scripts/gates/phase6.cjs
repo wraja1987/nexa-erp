@@ -4,7 +4,7 @@
  * Fast checks:
  * - Re-run Phases 0–5 gates
  * - a11y / perf / security scripts
- * - Branding: no "Optra", logo-nexa.png exists
+ * - Branding: no legacy brand tokens, logo-nexa.png exists
  * - .env.example has COMPOSE_PROJECT_NAME=nexa-erp
  * - Help route exists
  * Emits single PASS/FAIL line.
