@@ -99,8 +99,9 @@ echo "- FAIL items: $fail" | tee -a "$OUT"
 echo
 echo "== Print PR link =="
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-echo "PR: https://github.com/wraja1987/optra-erp/compare/main...$BRANCH?expand=1"
-echo "Actions: https://github.com/wraja1987/optra-erp/actions?query=branch%3A${BRANCH//\//%2F}"
+REPO_SLUG=$(git remote get-url origin | sed -E 's#.*github.com[:/ ]([^/]+/[^/.]+).*#\1#')
+echo "PR: https://github.com/$REPO_SLUG/compare/main...$BRANCH?expand=1"
+echo "Actions: https://github.com/$REPO_SLUG/actions?query=branch%3A${BRANCH//\//%2F}"
 
 if [ $fail -eq 0 ]; then
   if git rev-parse -q --verify refs/tags/phase-4-ready >/dev/null; then
