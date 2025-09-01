@@ -11,8 +11,8 @@ export default function AiRunsPage() {
 
 async function fetchRuns() {
   const res = await fetch('/api/orchestration/runs', { cache: 'no-store' })
-  if (!res.ok) return { items: [] as Array<{ id: string; enqueuedAt: string }> }
-  return (await res.json()) as { items: Array<{ id: string; enqueuedAt: string }> }
+  if (!res.ok) return { items: [] as Array<{ id: string; enqueuedAt: string; status: string }> }
+  return (await res.json()) as { items: Array<{ id: string; enqueuedAt: string; status: string }> }
 }
 
 async function RunsTable() {
@@ -23,6 +23,7 @@ async function RunsTable() {
         <tr>
           <th>ID</th>
           <th>Enqueued</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,7 @@ async function RunsTable() {
           <tr key={it.id}>
             <td>{it.id}</td>
             <td>{new Date(it.enqueuedAt).toLocaleString()}</td>
+            <td>{it.status}</td>
           </tr>
         ))}
       </tbody>
