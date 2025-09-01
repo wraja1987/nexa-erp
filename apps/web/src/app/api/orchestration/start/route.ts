@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { OrchestrationStartSchema, OrchestrationStartResultSchema } from '../../../../types/phase6'
 import { audit } from '../../../../lib/log/mask'
+import { enqueueOrchestration } from '../../../../lib/orchestration/runner'
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'local'
   const session = req.headers.get('x-session') || 'local'
   let payload: unknown
@@ -17,7 +18,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'invalid payload', issues: parse.error.issues }, { status: 400 })
   }
   const now = new Date().toISOString()
-  const result = { orchestrationId: 'orc_' + Math.random().toString(36).slice(2), acceptedAt: now }
+  const orchestrationId = enqueueOrchestration(parse.data)
+  const result = { orchestrationId, acceptedAt: now }
   const check = OrchestrationStartResultSchema.safeParse(result)
   if (!check.success) {
     audit({ ip, session, route: '/api/orchestration/start', generate: 'fail' })

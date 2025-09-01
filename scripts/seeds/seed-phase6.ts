@@ -22,7 +22,22 @@ async function main() {
     fs.mkdirSync(markerDir, { recursive: true })
     const marker = path.join(markerDir, 'phase6-seed-marker.txt')
     fs.writeFileSync(marker, 'phase6-seed-run\n', { flag: 'a', encoding: 'utf8' })
+    const demo = path.join(markerDir, 'phase6-enterprise-demo.json')
+    const payload = {
+      entities: [
+        { code: 'NEXA', name: 'Nexa HQ', timezone: 'UTC' },
+        { code: 'EU', name: 'Nexa EU', timezone: 'Europe/Paris' },
+      ],
+      intercompanyJournals: [
+        { from: 'NEXA', to: 'EU', amount: 1000, currency: 'EUR' },
+      ],
+      consolidations: [
+        { period: '2025-08', entities: ['NEXA', 'EU'], status: 'draft' },
+      ],
+    }
+    fs.writeFileSync(demo, JSON.stringify(payload, null, 2))
     console.log('[phase6:seed] wrote marker to reports/phase6-seed-marker.txt')
+    console.log('[phase6:seed] wrote demo data to reports/phase6-enterprise-demo.json')
   } catch (err) {
     console.error('[phase6:seed] error:', err)
     process.exitCode = 1
