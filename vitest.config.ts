@@ -14,12 +14,21 @@ export default defineConfig({
       'dist/**',
       'apps/mobile/**',
       'apps/web/node_modules/**',
+      'apps/web/.next/**',
+      'coverage/**',
     ],
     passWithNoTests: false,
   },
   coverage: {
     provider: 'v8',
-    exclude: ['scripts/**'],
+    exclude: [
+      'scripts/**',
+      'apps/web/.next/**',
+      'coverage/**',
+      '**/*.d.ts',
+      '**/*.config.{js,ts}',
+      'packages/sdk-nexa/dist/**'
+    ],
     thresholds: {
       lines: 80,
       branches: 70,
