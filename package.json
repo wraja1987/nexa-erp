@@ -53,7 +53,9 @@
     "seed:stubs": "tsx scripts/seeds/seed-stubs.ts",
     "report:stubs": "tsx scripts/reports/stubs-ai-audit-summary.ts",
     "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo",
-    "test:cov": "vitest run --coverage --reporter=dot"
+    "test:cov": "vitest run --coverage --reporter=dot",
+    "gate:phase6": "node scripts/gates/phase6.cjs",
+    "report:phase6": "node scripts/reports/phase6-audit-summary.cjs"
   },
   "devDependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
@@ -109,7 +111,6 @@
       }
     ]
   },
-  
   "dependencies": {
     "@prisma/client": "^6.14.0",
     "pg": "^8.16.3",

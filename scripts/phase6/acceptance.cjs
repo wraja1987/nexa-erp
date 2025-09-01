@@ -94,7 +94,7 @@ if (maskCheck) logLine('````\n' + maskCheck.trim() + '\n````');
 
 // 5) Branding scan (apps & packages only)
 section('Branding');
-const brand = sh("grep -RInE '(^|[^A-Za-z0-9_])Optra([^A-Za-z0-9_]|$)|optra-erp|sdk-optra' apps packages --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.next --exclude-dir=dist --exclude-dir=build --exclude-dir=coverage --exclude-dir=reports --exclude-dir=.turbo --exclude-dir=.expo --exclude-dir=.tmp --exclude-dir=.husky --exclude-dir=.vscode");
+const brand = sh("grep -RInE '(^|[^A-Za-z0-9_])Nexa([^A-Za-z0-9_]|$)|optra-erp|sdk-optra' apps packages --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.next --exclude-dir=dist --exclude-dir=build --exclude-dir=coverage --exclude-dir=reports --exclude-dir=.turbo --exclude-dir=.expo --exclude-dir=.tmp --exclude-dir=.husky --exclude-dir=.vscode");
 if (brand.ok && brand.out.trim().length > 0) {
   logLine('❌ Branding hits detected:');
   logLine('````\n' + brand.out.trim() + '\n````');
