@@ -6,8 +6,8 @@ describe('orchestration runs API', () => {
   it('lists queued runs', async () => {
     clearQueue()
     enqueueOrchestration({ wf: 'demo' })
-    const res = (await GET()) as Response
-    const json = (await res.json()) as { items: Array<{ id: string; enqueuedAt: string; status: string }> }
+    const res = (await GET(new Request('http://localhost/api/orchestration/runs'))) as Response
+    const json = (await res.json()) as { items: Array<{ id: string; enqueuedAt: string; status: string }>; total: number; page: number; pageSize: number }
     expect(json.items.length).toBe(1)
     expect(json.items[0].id).toMatch(/^orc_/)
     expect(json.items[0].status).toBe('queued')
@@ -21,7 +21,7 @@ describe('orchestration runs API', () => {
       body: JSON.stringify({ id })
     }))) as Response
     expect(res.ok).toBe(true)
-    const after = (await (await GET()).json()) as { items: Array<{ id: string; status: string }> }
+    const after = (await (await GET(new Request('http://localhost/api/orchestration/runs?status=completed'))).json()) as { items: Array<{ id: string; status: string }>; total: number }
     expect(after.items[0].status).toBe('completed')
   })
 })

@@ -9,15 +9,20 @@ export default function AiRunsPage() {
   )
 }
 
-async function fetchRuns() {
-  const res = await fetch('/api/orchestration/runs', { cache: 'no-store' })
-  if (!res.ok) return { items: [] as Array<{ id: string; enqueuedAt: string; status: string }> }
-  return (await res.json()) as { items: Array<{ id: string; enqueuedAt: string; status: string }> }
+async function fetchRuns(status?: string, page = 1, pageSize = 10) {
+  const u = new URL('/api/orchestration/runs', 'http://localhost')
+  if (status) u.searchParams.set('status', status)
+  u.searchParams.set('page', String(page))
+  u.searchParams.set('pageSize', String(pageSize))
+  const res = await fetch(u.toString(), { cache: 'no-store' })
+  if (!res.ok) return { items: [] as Array<{ id: string; enqueuedAt: string; status: string }>, total: 0, page, pageSize }
+  return (await res.json()) as { items: Array<{ id: string; enqueuedAt: string; status: string }>; total: number; page: number; pageSize: number }
 }
 
 async function RunsTable() {
-  const { items } = await fetchRuns()
+  const { items, total, page, pageSize } = await fetchRuns()
   return (
+    <>
     <table className="table" style={{ marginTop: 12 }}>
       <thead>
         <tr>
@@ -36,6 +41,8 @@ async function RunsTable() {
         ))}
       </tbody>
     </table>
+    <p className="text-muted">Total: {total} • Page {page} • Page size {pageSize}</p>
+    </>
   )
 }
 
