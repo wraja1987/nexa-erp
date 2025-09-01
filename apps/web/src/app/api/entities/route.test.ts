@@ -25,6 +25,15 @@ describe('entities API', () => {
     expect(json.entity.code).toBe('EU')
     expect(json.entity.id).toMatch(/[0-9a-f-]{36}/)
   })
+  it('rejects invalid payload', async () => {
+    const req = new Request('http://localhost/api/entities', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ code: 'X' }), // missing name
+    })
+    const res = await POST(req)
+    expect(res.status).toBe(400)
+  })
 
   it('rejects invalid payload', async () => {
     const bad = new Request('http://localhost/api/entities', {

@@ -1,8 +1,10 @@
+import Image from 'next/image'
+
 export default function Home() {
   return (
-    <main>
+    <main role="main">
       <div className="card" style={{ marginTop: 12 }}>
-        <h2 style={{ marginTop: 0 }}>Welcome to Nexa ERP</h2>
+        <h1 style={{ marginTop: 0 }}>Welcome to Nexa ERP</h1>
         <p className="text-muted">Unified ERP platform, Phase 4 baseline.</p>
         <button className="btn-primary">Primary Action</button>
         <div style={{ marginTop: 12 }} className="ai-confirm">
@@ -10,10 +12,7 @@ export default function Home() {
             <strong>AI Confirmation Card</strong><br />
             This is how AI confirmation cards will glow before you approve actions.
             <div style={{ marginTop: 8 }}>
-              {/* Nexa AI loader demo */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              {/* Component import would require path setup in this file; inline for demo */}
-              <img src="/logo-nexa.png" alt="Nexa" width={24} height={24} className="ai-loader-n" />
+              <Image src="/logo-nexa.png" alt="Nexa" width={24} height={24} className="ai-loader-n" />
             </div>
           </div>
         </div>

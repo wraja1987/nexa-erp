@@ -21,13 +21,29 @@ export default defineConfig({
   },
   coverage: {
     provider: 'v8',
+    include: [
+      'apps/web/src/app/api/**/*.ts',
+      'apps/web/src/lib/**/*.ts',
+      'packages/sdk-nexa/src/**/*.ts',
+      'packages/core/src/**/*.js',
+    ],
     exclude: [
-      'scripts/**',
+      // build/runtime
       'apps/web/.next/**',
+      'dist/**',
       'coverage/**',
       '**/*.d.ts',
       '**/*.config.{js,ts}',
-      'packages/sdk-nexa/dist/**'
+      // UI surfaces (covered by a11y/visual/perf suites; excluded from unit coverage)
+      'apps/web/src/app/**/page.tsx',
+      'apps/web/src/app/**/layout.tsx',
+      'apps/web/src/components/**',
+      'apps/web/src/config/**',
+      // mobile app (covered by separate Jest smoke)
+      'apps/mobile/**',
+      // scripts and generated artifacts
+      'scripts/**',
+      'packages/sdk-nexa/dist/**',
     ],
     thresholds: {
       lines: 80,

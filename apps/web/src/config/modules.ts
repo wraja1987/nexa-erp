@@ -8,6 +8,16 @@ export type AppModule = {
 // Phase 4 modules and key submodules. All pages should exist as stubs (200/OK).
 export const appModules: AppModule[] = [
   { id: 'dashboard', title: 'Dashboard', path: '/dashboard' },
+  // New: Stubs guarded by feature flags
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_PAYROLL_STUB ?? 'true') !== 'false'
+    ? [{ id: 'payroll', title: 'Payroll (Coming Soon)', path: '/payroll' }]
+    : []),
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_OPEN_BANKING_STUB ?? 'true') !== 'false'
+    ? [{ id: 'open-banking', title: 'Open Banking (Coming Soon)', path: '/open-banking' }]
+    : []),
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_MTD_VAT_STUB ?? 'true') !== 'false'
+    ? [{ id: 'mtd-vat', title: 'HMRC MTD VAT (Coming Soon)', path: '/tax/mtd-vat' }]
+    : []),
   {
     id: 'industry-packs',
     title: 'Industry Packs',
@@ -21,6 +31,27 @@ export const appModules: AppModule[] = [
       { id: 'industry-saas-tech', title: 'SaaS/Tech', path: '/industry/saas-tech' },
     ],
   },
+  // WMS Advanced
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_WMS_ADV_STUB ?? 'true') !== 'false'
+    ? [{
+        id: 'wms-advanced', title: 'Advanced WMS (Coming Soon)', path: '/wms/advanced', children: [
+          { id: 'wms-asn', title: 'ASN (Coming Soon)', path: '/wms/asn' },
+          { id: 'wms-wave-picking', title: 'Wave Picking (Coming Soon)', path: '/wms/wave-picking' },
+          { id: 'wms-3pl', title: '3PL Connectors (Coming Soon)', path: '/wms/3pl-connectors' },
+        ]
+      }]
+    : []),
+  // CRM Integrations
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_CRM_DEEP_STUB ?? 'true') !== 'false'
+    ? [{ id: 'crm-integrations', title: 'Advanced CRM Integrations (Coming Soon)', path: '/crm/integrations' }]
+    : []),
+  // Marketplace & Billing
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_MARKETPLACE_STUB ?? 'true') !== 'false'
+    ? [{ id: 'marketplace', title: 'Marketplace (Coming Soon)', path: '/marketplace' }]
+    : []),
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_BILLING_METERING_STUB ?? 'true') !== 'false'
+    ? [{ id: 'billing', title: 'Billing/Metering (Coming Soon)', path: '/billing' }]
+    : []),
   {
     id: 'ai-orchestration',
     title: 'AI Orchestration',
@@ -31,6 +62,16 @@ export const appModules: AppModule[] = [
       { id: 'ai-audit-logs', title: 'Audit Logs', path: '/ai/audit-logs' },
     ],
   },
+  // Advanced Manufacturing
+  ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_MFG_ADV_STUB ?? 'true') !== 'false'
+    ? [{
+        id: 'mfg-advanced', title: 'Advanced Manufacturing (Coming Soon)', path: '/manufacturing/advanced', children: [
+          { id: 'mfg-mrp', title: 'MRP (Coming Soon)', path: '/manufacturing/mrp' },
+          { id: 'mfg-capacity', title: 'Capacity Planning (Coming Soon)', path: '/manufacturing/capacity' },
+          { id: 'mfg-aps', title: 'APS (Coming Soon)', path: '/manufacturing/aps' },
+        ]
+      }]
+    : []),
   {
     id: 'enterprise',
     title: 'Enterprise',
@@ -95,6 +136,7 @@ export const appModules: AppModule[] = [
       { id: 'tenants', title: 'Tenants', path: '/settings/tenants' },
       { id: 'entities', title: 'Entities', path: '/settings/entities' },
       { id: 'security', title: 'Security', path: '/settings/security' },
+      { id: 'connectors', title: 'Connectors (Coming Soon)', path: '/settings/connectors' },
       { id: 'policies', title: 'Policies', path: '/settings/policies' },
       { id: 'sod-matrix', title: 'SoD Matrix', path: '/settings/sod-matrix' },
     ],

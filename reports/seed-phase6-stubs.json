@@ -1,0 +1,165 @@
+{
+  "entityId": "default",
+  "payslips": [
+    {
+      "employee": "A. Example",
+      "period": "Aug 2025",
+      "gross": 3200,
+      "net": 2500
+    },
+    {
+      "employee": "B. Sample",
+      "period": "Aug 2025",
+      "gross": 3600,
+      "net": 2800
+    }
+  ],
+  "vatDraft": [
+    {
+      "box": "Box 1",
+      "amount": 1234.56
+    },
+    {
+      "box": "Box 4",
+      "amount": 800
+    },
+    {
+      "box": "Net VAT",
+      "amount": 434.56
+    }
+  ],
+  "bankFeed": [
+    {
+      "date": "2025-08-20",
+      "desc": "Coffee",
+      "amount": -3.2
+    },
+    {
+      "date": "2025-08-21",
+      "desc": "Supplier Payment",
+      "amount": -420
+    },
+    {
+      "date": "2025-08-22",
+      "desc": "Customer Receipt",
+      "amount": 1200
+    }
+  ],
+  "wmsAsn": [
+    {
+      "asn": "ASN-1001",
+      "supplier": "ACME",
+      "lines": 12
+    },
+    {
+      "asn": "ASN-1002",
+      "supplier": "Contoso",
+      "lines": 7
+    }
+  ],
+  "wmsWaves": [
+    {
+      "wave": "W-12",
+      "orders": 5,
+      "picker": "J. Smith"
+    },
+    {
+      "wave": "W-13",
+      "orders": 8,
+      "picker": "L. Brown"
+    }
+  ],
+  "wms3pl": [
+    {
+      "name": "ShipBob",
+      "status": "Available"
+    },
+    {
+      "name": "Shippo",
+      "status": "Available"
+    }
+  ],
+  "crmApps": [
+    {
+      "key": "google",
+      "label": "Google"
+    },
+    {
+      "key": "microsoft",
+      "label": "Microsoft 365"
+    },
+    {
+      "key": "twilio",
+      "label": "Twilio"
+    }
+  ],
+  "marketplace": [
+    {
+      "name": "Shopify Connector"
+    },
+    {
+      "name": "Xero Export"
+    },
+    {
+      "name": "Open Banking"
+    },
+    {
+      "name": "HMRC MTD"
+    }
+  ],
+  "plans": [
+    {
+      "name": "Free",
+      "price": "£0",
+      "features": [
+        "1 user",
+        "Basic"
+      ]
+    },
+    {
+      "name": "Standard",
+      "price": "£49",
+      "features": [
+        "5 users",
+        "Core"
+      ]
+    },
+    {
+      "name": "Professional",
+      "price": "£149",
+      "features": [
+        "25 users",
+        "Advanced"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price": "Custom",
+      "features": [
+        "Unlimited",
+        "SLA"
+      ]
+    }
+  ],
+  "mfg": {
+    "mrp": [
+      {
+        "sku": "NEX-001",
+        "qty": 120
+      }
+    ],
+    "capacity": [
+      {
+        "workCenter": "WC-1",
+        "utilisation": 0.72
+      }
+    ],
+    "aps": [
+      {
+        "sku": "NEX-001",
+        "start": "2025-09-01",
+        "end": "2025-09-03"
+      }
+    ]
+  }
+}

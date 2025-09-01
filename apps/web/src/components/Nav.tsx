@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { appModules } from '../config/modules'
+import ComingSoonBadge from './ui/ComingSoonBadge'
 
 export default function Nav() {
   return (
@@ -10,6 +11,7 @@ export default function Nav() {
             <Link href={mod.path} style={{ textDecoration: 'none' }}>
               <span style={{ padding: '6px 10px', borderRadius: 8, background: '#f5f5f7', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                 <span>{mod.title}</span>
+                {mod.title.includes('(Coming Soon)') && <ComingSoonBadge />}
                 <span aria-hidden>›</span>
               </span>
             </Link>
@@ -20,6 +22,7 @@ export default function Nav() {
                     <Link href={child.path} style={{ textDecoration: 'none' }}>
                       <span style={{ padding: '4px 8px', borderRadius: 8, background: '#eef0f3', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                         <span>{child.title}</span>
+                        {child.title.includes('(Coming Soon)') && <ComingSoonBadge />}
                         <span aria-hidden>›</span>
                       </span>
                     </Link>

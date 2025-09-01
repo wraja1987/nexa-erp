@@ -1,7 +1,7 @@
 export default function LoginPage() {
   return (
-    <main>
-      <h2 style={{ textAlign: 'center', marginTop: 0 }}>Sign in</h2>
+    <main role="main">
+      <h1 style={{ textAlign: 'center', marginTop: 0 }}>Sign in</h1>
       <form style={{ display: 'grid', gap: 12 }}>
         <label>
           <div style={{ fontSize: 12, marginBottom: 6 }}>Email</div>

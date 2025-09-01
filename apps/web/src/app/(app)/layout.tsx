@@ -1,5 +1,6 @@
 import ThemeToggle from '../../components/ThemeToggle'
 import Header from '../../components/Header'
+import RecommendationsPanel from '../../components/ai/RecommendationsPanel'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,7 +9,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <ThemeToggle />
       </div>
       <Header />
-      {children}
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 320px', gap:16, alignItems:'start' }}>
+        <div>{children}</div>
+        <RecommendationsPanel />
+      </div>
     </div>
   )
 }

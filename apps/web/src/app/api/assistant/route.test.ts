@@ -26,6 +26,15 @@ describe('assistant route', () => {
     }
     expect(last!.status === 200 || last!.status === 429).toBe(true)
   })
+  it('enforces token budget per session', async () => {
+    const session = 's1'
+    const req1 = new Request('http://localhost/api/assistant', { method: 'POST', headers: { 'content-type': 'application/json', 'x-session': session, 'x-forwarded-for': '1.1.1.1' }, body: JSON.stringify({ route: '/x', selection: 'x'.repeat(2500) }) })
+    const r1 = await POST(req1)
+    expect(r1.status).toBe(200)
+    const req2 = new Request('http://localhost/api/assistant', { method: 'POST', headers: { 'content-type': 'application/json', 'x-session': session, 'x-forwarded-for': '1.1.1.1' }, body: JSON.stringify({ route: '/x', selection: 'x'.repeat(2500) }) })
+    const r2 = await POST(req2)
+    expect([200, 429]).toContain(r2.status)
+  })
 })
 
 

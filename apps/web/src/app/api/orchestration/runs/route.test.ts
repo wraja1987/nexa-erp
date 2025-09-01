@@ -24,6 +24,14 @@ describe('orchestration runs API', () => {
     const after = (await (await GET(new Request('http://localhost/api/orchestration/runs?status=completed'))).json()) as { items: Array<{ id: string; status: string }>; total: number }
     expect(after.items[0].status).toBe('completed')
   })
+  it('rejects missing id', async () => {
+    const res = await POST(new Request('http://localhost/api/orchestration/runs', { method: 'POST', body: JSON.stringify({}) }))
+    expect(res.status).toBe(400)
+  })
+  it('returns 404 for unknown id', async () => {
+    const res = await POST(new Request('http://localhost/api/orchestration/runs', { method: 'POST', body: JSON.stringify({ id: 'orc_missing' }) }))
+    expect(res.status).toBe(404)
+  })
 })
 
 

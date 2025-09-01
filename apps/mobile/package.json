@@ -35,7 +35,8 @@
     "preset": "jest-expo",
     "testEnvironment": "jsdom",
     "setupFiles": [
-      "<rootDir>/node_modules/react-native/jest/setup.js"
+      "<rootDir>/node_modules/react-native/jest/setup.js",
+      "<rootDir>/jest.setup.js"
     ],
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"

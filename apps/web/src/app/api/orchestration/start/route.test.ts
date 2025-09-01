@@ -23,6 +23,24 @@ describe('orchestration start DTO', () => {
     expect(body.orchestrationId).toMatch(/^orc_/)
     expect(getQueueLength()).toBe(1)
   })
+  it('rejects invalid JSON with 400', async () => {
+    const bad = new Request('http://localhost/api/orchestration/start', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: '{bad json',
+    })
+    const res = await POST(bad)
+    expect(res.status).toBe(400)
+  })
+  it('rejects invalid payload with 400', async () => {
+    const req = new Request('http://localhost/api/orchestration/start', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ noWorkflowId: true }),
+    })
+    const res = await POST(req)
+    expect(res.status).toBe(400)
+  })
 })
 
 
