@@ -1,3 +1,5 @@
+"use client"
+
 export default function ComingSoonBadge() {
   return (
     <span aria-label="Coming Soon" style={{
@@ -11,5 +13,6 @@ export default function ComingSoonBadge() {
     }}>Coming Soon</span>
   )
 }
+
 
 

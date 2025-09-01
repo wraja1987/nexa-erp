@@ -39,10 +39,13 @@ export default defineConfig({
       'apps/web/src/app/**/layout.tsx',
       'apps/web/src/components/**',
       'apps/web/src/config/**',
+      'apps/web/src/types/**',
       // mobile app (covered by separate Jest smoke)
       'apps/mobile/**',
       // scripts and generated artifacts
       'scripts/**',
+      'docs/**',
+      'PLANS/**',
       'packages/sdk-nexa/dist/**',
     ],
     thresholds: {

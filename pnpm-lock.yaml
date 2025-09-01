@@ -161,8 +161,6 @@ importers:
 
   packages/sdk-nexa: {}
 
-  packages/sdk-nexa: {}
-
 packages:
 
   '@ampproject/remapping@2.3.0':

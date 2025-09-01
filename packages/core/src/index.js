@@ -23,7 +23,7 @@ const OpenApiStub = z.object({
 });
 
 function compileOpenApi() {
-  const doc = { openapi: '3.1.0', info: { title: 'V5 API', version: '0.0.0' }, paths: {} };
+  const doc = { openapi: '3.1.0', info: { title: 'Nexa API', version: '0.0.0' }, paths: {} };
   OpenApiStub.parse(doc);
   return true;
 }

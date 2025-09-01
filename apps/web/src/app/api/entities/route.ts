@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { randomUUID } from 'crypto'
 import { z } from 'zod'
 import { audit } from '../../../lib/log/mask'
 
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
     const data = await req.json()
     const parsed = EntityCreateSchema.parse(data)
     const entity: Entity = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       code: parsed.code,
       name: parsed.name,
       timezone: parsed.timezone ?? 'UTC',

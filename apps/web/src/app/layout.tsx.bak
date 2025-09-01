@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
   <div className="bg-fluid" style={{borderRadius:\"12px\", padding:\"16px\", marginBottom:\"16px\"}}>
-    <h1 style={{margin:0, fontSize:18}}>V5 Ultra — Neo-Fluid Intelligence</h1>
+    <h1 style={{margin:0, fontSize:18}}>Nexa ERP — Intelligence Assistant</h1>
   </div>
         {children}
       </body>
