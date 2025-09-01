@@ -2,21 +2,7 @@
   "expo": {
     "name": "Nexa ERP",
     "slug": "nexa-erp",
-    "scheme": "nexa",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "ios": {
-      "bundleIdentifier": "com.nexa.erp"
-    },
-    "android": {
-      "package": "com.nexa.erp"
-    },
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     }
