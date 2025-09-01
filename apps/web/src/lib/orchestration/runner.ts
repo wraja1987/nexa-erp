@@ -17,4 +17,8 @@ export function clearQueue(): void {
   queue.splice(0, queue.length)
 }
 
+export function getQueueSnapshot(): Array<Pick<OrchestrationJob, 'id' | 'enqueuedAt'>> {
+  return queue.map((j) => ({ id: j.id, enqueuedAt: j.enqueuedAt }))
+}
+
 
