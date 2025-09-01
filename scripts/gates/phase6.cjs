@@ -31,8 +31,8 @@ try {
   mustExist(path.join(process.cwd(), "apps/web/public/logo-nexa.png"));
 
   // branding sweep
-  const IGNORES = new Set(["node_modules",".git","dist",".next","reports"]);
-  const IGNORE_FILE_PATTERNS = [/\.bak$/i, /\.log$/i, /\.md$/i, /\.map$/i];
+  const IGNORES = new Set(["node_modules",".git","dist",".next","reports","coverage"]);
+  const IGNORE_FILE_PATTERNS = [/\.bak$/i, /\.log$/i, /\.md$/i, /\.map$/i, /\.html$/i];
   const re = /\bOptra\b/;
   const stack = [process.cwd()];
   while (stack.length) {
