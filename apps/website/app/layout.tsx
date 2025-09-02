@@ -1,6 +1,8 @@
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.nexaai.co.uk'),
   title: 'Nexa — AI-powered ERP',
-  description: 'Run finance, operations, and analytics in one place.'
+  description: 'Run finance, operations, and analytics in one place.',
+  alternates: { canonical: '/' }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
