@@ -1,0 +1,14 @@
+{
+  "billing:reconcile": {
+    "lastRun": "2025-09-02T20:58:46.970Z",
+    "outcome": "success"
+  },
+  "openbanking:sync": {
+    "lastRun": "2025-09-02T20:58:46.972Z",
+    "outcome": "success"
+  },
+  "hmrc:pull-obligations": {
+    "lastRun": "2025-09-02T20:58:46.972Z",
+    "outcome": "success"
+  }
+}

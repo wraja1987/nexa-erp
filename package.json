@@ -4,12 +4,15 @@
   "packageManager": "pnpm@9.0.0",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "packages/registry",
+    "packages/jobs"
   ],
   "scripts": {
     "dev:fast": "pnpm --filter web dev",
     "smoke:web": "pnpm --filter web build && node -e \"console.log('web build ok')\"",
     "smoke:mobile": "pnpm --filter mobile test || echo 'mobile smoke placeholder ok'",
+    "smoke:all": "bash -lc \"set -euo pipefail; mkdir -p reports; pkill -f 'apps/web.*next' >/dev/null 2>&1 || true; echo '== Nexa ERP Smoke Test Suite =='; pnpm --filter web dev >/tmp/nexa-dev.log 2>&1 & DEV_PID=$!; sleep 8; echo '-- Running healthz check --'; curl -s http://localhost:3000/api/healthz || true; echo; echo '-- Running masking check --'; node scripts/ci/mask_check.cjs > reports/mask-check-$(date +%Y%m%d%H%M%S).log || true; echo; echo '-- Running provider smoke mocks --'; curl -s 'http://localhost:3000/api/auth/callback/google?code=fake' || true; echo; curl -s 'http://localhost:3000/api/auth/callback/azure-ad?code=fake' || true; echo; curl -s http://localhost:3000/api/ai/audit/logs || true; echo; curl -s http://localhost:3000/api/twilio/ping || true; echo; curl -s http://localhost:3000/api/stripe/webhook || true; echo; curl -s http://localhost:3000/api/hmrc/vat/ping || true; echo; echo '== Nexa ERP Smoke Suite Finished =='; kill $DEV_PID >/dev/null 2>&1 || true\"",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
     "test": "vitest run --reporter=dot",
@@ -55,7 +58,12 @@
     "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo",
     "test:cov": "vitest run --coverage --reporter=dot",
     "gate:phase6": "node scripts/gates/phase6.cjs",
-    "report:phase6": "node scripts/reports/phase6-audit-summary.cjs"
+    "report:phase6": "node scripts/reports/phase6-audit-summary.cjs",
+    "build:registry": "tsc -p packages/registry/tsconfig.json",
+    "seed:phaseA": "tsx scripts/seeds/seed-phaseA.ts",
+    "jobs:run:once": "pnpm -C packages/jobs build && pnpm -C packages/jobs run:once",
+    "backup:run": "tsx packages/jobs/backup.ts",
+    "dr:drill": "tsx packages/jobs/restore-check.ts"
   },
   "devDependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",

@@ -1,7 +1,9 @@
 "use client"
 import ComingSoonBadge from '../../../components/ui/ComingSoonBadge'
+import AIHelperBar from '../../components/AIHelperBar'
 
 export default function BillingPage() {
+  const configured = !!process.env.STRIPE_SECRET_KEY
   const plans = [
     { name:'Free', price:'£0', features:['1 user','Basic'] },
     { name:'Standard', price:'£49', features:['5 users','Core'] },
@@ -11,6 +13,7 @@ export default function BillingPage() {
   return (
     <main role="main" style={{ padding: 16 }}>
       <h1 style={{ display:'flex', alignItems:'center', gap:8 }}>Billing & Metering <ComingSoonBadge /></h1>
+      <p><span style={{ padding:'2px 8px', borderRadius: 12, background: configured ? '#e6f4ea' : '#fdecea', color: configured ? '#1e4620' : '#8a1f11' }}>{configured ? 'Configured' : 'Not configured'}</span></p>
       <p>Plan overview with mocked subscribe buttons and demo usage counters.</p>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:12 }}>
         {plans.map(p => (
@@ -26,8 +29,10 @@ export default function BillingPage() {
         <h2 id="usage">Usage/Metering</h2>
         <p>API calls this month: 1,234 (demo)</p>
       </section>
+      <AIHelperBar />
     </main>
   )
 }
+
 
 

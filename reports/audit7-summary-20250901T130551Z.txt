@@ -1,0 +1,14 @@
+=== Nexa ERP Gates 0–7 Full Audit Summary (20250901T130551Z) ===
+Install ....................... PASSED
+Gates 0–5 ..................... PASSED
+Gate 6 ........................ PASSED
+Gate 7 (routes) .............. PASSED
+Web build ..................... PASSED
+Accessibility (light/dark) .... PASSED
+Performance ................... PASSED
+Security ...................... PASSED
+Unit tests .................... PASSED
+Coverage ...................... PASSED
+Branding ...................... PASSED
+Mobile (Expo doctor) .......... PASSED
+OVERALL: PASSED

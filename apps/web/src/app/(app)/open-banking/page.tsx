@@ -1,7 +1,9 @@
 "use client"
 import ComingSoonBadge from '../../../components/ui/ComingSoonBadge'
+import AIHelperBar from '../../components/AIHelperBar'
 
 export default function OpenBankingPage() {
+  const configured = !!(process.env.OPEN_BANKING_CLIENT_ID && process.env.OPEN_BANKING_CLIENT_SECRET && String(process.env.OPEN_BANKING_ENV).toLowerCase() === 'sandbox')
   const rows = [
     { date: '2025-08-20', desc: 'Coffee', amount: -3.2 },
     { date: '2025-08-21', desc: 'Supplier Payment', amount: -420.0 },
@@ -18,6 +20,7 @@ export default function OpenBankingPage() {
   return (
     <main role="main" style={{ padding: 16 }}>
       <h1 style={{ display:'flex', alignItems:'center', gap:8 }}>Open Banking <ComingSoonBadge /></h1>
+      <p><span style={{ padding:'2px 8px', borderRadius: 12, background: configured ? '#e6f4ea' : '#fdecea', color: configured ? '#1e4620' : '#8a1f11' }}>{configured ? 'Configured' : 'Not configured'}</span></p>
       <p>Bank feeds and reconciliation preview with example transactions. All actions are mocked.</p>
       <div role="status" aria-live="polite" style={{ background:'#fff6d6', padding:12, borderRadius:8, margin:'12px 0' }}>
         This module is coming soon. Live features will include automatic feeds and matching.
@@ -44,8 +47,10 @@ export default function OpenBankingPage() {
           <li>Draft reconciliation summaries for month-end.</li>
         </ul>
       </section>
+      <AIHelperBar />
     </main>
   )
 }
+
 
 

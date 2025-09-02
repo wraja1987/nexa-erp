@@ -1,7 +1,9 @@
 "use client"
 import ComingSoonBadge from '../../../../components/ui/ComingSoonBadge'
+import AIHelperBar from '../../../components/AIHelperBar'
 
 export default function MtdVatPage() {
+  const configured = !!(process.env.HMRC_CLIENT_ID && process.env.HMRC_CLIENT_SECRET && String(process.env.HMRC_ENVIRONMENT).toLowerCase() === 'sandbox' && process.env.HMRC_VRN)
   const rows = [
     { box: 'Box 1', amount: 1234.56 },
     { box: 'Box 4', amount: 800.00 },
@@ -18,6 +20,7 @@ export default function MtdVatPage() {
   return (
     <main role="main" style={{ padding: 16 }}>
       <h1 style={{ display:'flex', alignItems:'center', gap:8 }}>HMRC MTD VAT <ComingSoonBadge /></h1>
+      <p><span style={{ padding:'2px 8px', borderRadius: 12, background: configured ? '#e6f4ea' : '#fdecea', color: configured ? '#1e4620' : '#8a1f11' }}>{configured ? 'Configured' : 'Not configured'}</span></p>
       <p>Draft view of a VAT return with example figures. All connections are mocked.</p>
       <div role="status" aria-live="polite" style={{ background:'#fff6d6', padding:12, borderRadius:8, margin:'12px 0' }}>
         This module is coming soon. Live features will include HMRC MTD integration and submissions.
@@ -42,8 +45,10 @@ export default function MtdVatPage() {
           <li>Draft submission note for audit.</li>
         </ul>
       </section>
+      <AIHelperBar />
     </main>
   )
 }
+
 
 

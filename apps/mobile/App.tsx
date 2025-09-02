@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Tabs from './src/navigation/Tabs'
 import { Text, View, TextInput, Button, Pressable } from 'react-native'
 import { useState } from 'react'
 import { modules } from './src/registry'
@@ -68,7 +69,7 @@ export default function App() {
             <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
           </>
         ) : (
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Home" component={Tabs} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
