@@ -9,7 +9,7 @@ describe('po orders API', () => {
     expect(Array.isArray(json.data)).toBe(true)
   })
   it('rejects invalid create', async () => {
-    const bad = new Request('http://localhost/api/po/orders', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({}) })
+    const bad = new Request('http://localhost/api/po/orders', { method: 'POST', headers: { 'content-type': 'application/json', 'x-role': 'admin' }, body: JSON.stringify({}) })
     const res = (await POST(bad)) as Response
     expect(res.status).toBe(400)
   })

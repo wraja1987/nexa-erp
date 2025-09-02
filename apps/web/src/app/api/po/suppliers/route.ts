@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import { z } from 'zod'
 import { audit } from '../../../../lib/log/mask'
+import { ensureRoleAllowed, getRoleFromRequest } from '../../../../lib/rbac'
 
 const prisma = new PrismaClient()
 
@@ -21,6 +22,9 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const role = getRoleFromRequest(req)
+    const guard = ensureRoleAllowed('purchase_orders', role)
+    if (!guard.ok) return NextResponse.json({ ok: false, status: 'access_denied' }, { status: 403 })
     const data = CreateSchema.parse(await req.json())
     const created = await prisma.supplier.create({ data })
     audit({ route: '/api/po/suppliers', action: 'create' })

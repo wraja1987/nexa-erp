@@ -50,13 +50,29 @@ export async function runOnce() {
   await record('wms:wave:dispatch', async () => { /* dispatch wave */ })
   await record('asn:auto-close', async () => { /* close ASNs */ })
   await record('po:remind-suppliers', async () => { /* reminders */ })
-  await record('consolidation:rollup', async () => { /* finance rollup */ })
-  await record('treasury:reconcile', async () => { /* reconcile balances */ })
-  await record('payroll:run', async () => { /* payroll calc */ })
-  await record('channel:sync:amazon', async () => { /* mock sync */ })
-  await record('channel:sync:ebay', async () => { /* mock sync */ })
-  await record('channel:sync:shopify', async () => { /* mock sync */ })
-  await record('notify:send', async () => { /* mock send notifications */ })
+  await record('consolidation:rollup', async () => {
+    // simple KPI rollup demo
+    await prisma.kpiSnapshot.create({ data: { tenantId: 'demo-tenant', name: 'sales_7d', value: 100, asOf: new Date() } })
+  })
+  await record('treasury:reconcile', async () => {
+    await prisma.treasuryMovement.create({ data: { tenantId: 'demo-tenant', type: 'in', amount: 10, currency: 'GBP' } })
+  })
+  await record('payroll:run', async () => {
+    const schedule = await prisma.paySchedule.findFirst()
+    if (schedule) {
+      await prisma.payrollRun.create({ data: { tenantId: schedule.tenantId, scheduleId: schedule.id, periodStart: new Date(), periodEnd: new Date() } })
+    }
+  })
+  await record('channel:sync:amazon', async () => {
+    const chan = await prisma.channel.findFirst({ where: { provider: 'amazon' } })
+    if (chan) await prisma.orderExternal.create({ data: { tenantId: chan.tenantId, channelId: chan.id, extId: `amz-${Date.now()}`, status: 'created', total: 1 } })
+  })
+  await record('channel:sync:ebay', async () => { /* no-op mock */ })
+  await record('channel:sync:shopify', async () => { /* no-op mock */ })
+  await record('notify:send', async () => {
+    const job = await prisma.notificationJob.findFirst({ where: { status: 'queued' } })
+    if (job) await prisma.notificationJob.update({ where: { id: job.id }, data: { status: 'sent' } })
+  })
   const file = join(process.cwd(), '..', '..', 'reports', 'jobs-status.json')
   await writeFile(file, JSON.stringify(status, null, 2))
 }

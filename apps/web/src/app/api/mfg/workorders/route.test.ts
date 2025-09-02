@@ -12,7 +12,7 @@ describe('mfg workorders API', () => {
     const uniqueNo = `WO-TEST-${Date.now()}`
     const req = new Request('http://localhost/api/mfg/workorders', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', 'x-role': 'admin' },
       body: JSON.stringify({ number: uniqueNo, tenantId: 'demo-tenant', itemCode: 'FG-100', quantity: 10 })
     })
     const res = (await POST(req)) as Response
