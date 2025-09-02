@@ -9,8 +9,8 @@ function redact(value: unknown): unknown {
 }
 
 export function withCorrelation<T extends object>(obj?: T): T & { correlationId: string } {
-  const id = randomUUID()
-  return { ...(obj || {}), correlationId: id }
+  const id: string = randomUUID()
+  return { ...((obj || {}) as object), correlationId: id } as T & { correlationId: string }
 }
 
 export function log(level: LogLevel, message: string, meta?: Record<string, unknown>) {

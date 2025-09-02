@@ -43,21 +43,25 @@ export async function runOnce() {
   await record('billing:reconcile', billingReconcile)
   await record('openbanking:sync', openBankingSync)
   await record('hmrc:pull-obligations', hmrcPullObligations)
+  // Phase 7 jobs (stubs)
+  await record('mrp:plan', async () => { /* compute demo MRP suggestions */ })
+  await record('capacity:recalc', async () => { /* recalc demo capacity */ })
+  await record('wms:replenish', async () => { /* replenish demo */ })
+  await record('wms:wave:dispatch', async () => { /* dispatch wave */ })
+  await record('asn:auto-close', async () => { /* close ASNs */ })
+  await record('po:remind-suppliers', async () => { /* reminders */ })
+  await record('consolidation:rollup', async () => { /* finance rollup */ })
+  await record('treasury:reconcile', async () => { /* reconcile balances */ })
+  await record('payroll:run', async () => { /* payroll calc */ })
+  await record('channel:sync:amazon', async () => { /* mock sync */ })
+  await record('channel:sync:ebay', async () => { /* mock sync */ })
+  await record('channel:sync:shopify', async () => { /* mock sync */ })
+  await record('notify:send', async () => { /* mock send notifications */ })
   const file = join(process.cwd(), '..', '..', 'reports', 'jobs-status.json')
   await writeFile(file, JSON.stringify(status, null, 2))
 }
 
-import { fileURLToPath } from 'url'
-const isDirect = (() => {
-  try {
-    const thisFile = fileURLToPath(import.meta.url)
-    return process.argv[1] && thisFile === process.argv[1]
-  } catch {
-    return false
-  }
-})()
-
-if (isDirect) {
+if (require.main === module) {
   runOnce()
     .then(() => prisma.$disconnect())
     .catch(async (e) => {

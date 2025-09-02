@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { PrismaClient } from '@prisma/client'
-import { audit } from '../../../../../lib/log/mask'
+import { audit } from '../../../../lib/log/mask'
 
 const prisma = new PrismaClient()
 
@@ -27,7 +27,17 @@ export async function POST(req: Request) {
   const evt = JSON.parse(raw)
   const type = evt?.type || 'unknown'
   const id = evt?.id || 'unknown'
-  await prisma.webhookEvent.create({ data: { source: 'stripe', eventId: id, type, receivedAt: new Date(), payload: evt } })
+  await prisma.webhookEvent.create({
+    data: {
+      source: 'stripe',
+      eventId: id,
+      eventType: type,
+      receivedAt: new Date(),
+      endpointId: 'stripe_webhook',
+      status: 'received',
+      payload: evt,
+    },
+  })
   audit({ route: '/api/stripe/webhook', eventType: type, hasMasked: true })
   return NextResponse.json({ ok: true, status: 'active' })
 }

@@ -8,20 +8,19 @@ datasource db {
 }
 
 model Tenant {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   tenant_id String
-  email     String   @unique
+  email     String  @unique
   role      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   @@index([tenant_id])
 }
 
@@ -32,27 +31,26 @@ model Entity {
   currencyCode String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
   @@index([tenantId])
 }
 
 model Plan {
-  id     String  @id @default(cuid())
-  code   String  @unique
+  id     String @id @default(cuid())
+  code   String @unique
   name   String
   tier   String
   active Boolean @default(true)
 }
 
 model PlanAddon {
-  id     String  @id @default(cuid())
-  code   String  @unique
+  id     String @id @default(cuid())
+  code   String @unique
   name   String
   active Boolean @default(true)
 }
 
 model Subscription {
-  id                 String    @id @default(cuid())
+  id                 String   @id @default(cuid())
   tenantId           String
   planId             String
   status             String
@@ -61,20 +59,18 @@ model Subscription {
   customerId         String?
   trialEnd           DateTime?
   cancelAt           DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
   @@index([tenantId])
 }
 
 model UsageEvent {
-  id       String   @id @default(cuid())
-  tenantId String
-  type     String
-  quantity Int
-  at       DateTime
-  metadata Json
-
+  id        String   @id @default(cuid())
+  tenantId  String
+  type      String
+  quantity  Int
+  at        DateTime
+  metadata  Json
   @@index([tenantId])
 }
 
@@ -88,12 +84,11 @@ model Invoice {
   issuedAt     DateTime
   dueAt        DateTime
   status       String
-
   @@index([tenantId])
 }
 
 model ApiKey {
-  id              String    @id @default(cuid())
+  id              String   @id @default(cuid())
   tenantId        String
   label           String
   status          String
@@ -102,30 +97,28 @@ model ApiKey {
   burst           Int
   ipAllowlist     Json
   secretHash      String
-
   @@index([tenantId])
 }
 
 model WebhookEndpoint {
-  id         String  @id @default(cuid())
+  id         String @id @default(cuid())
   tenantId   String
   url        String
   secretHash String
   active     Boolean @default(true)
-
   @@index([tenantId])
 }
 
 model WebhookEvent {
-  id          String         @id @default(cuid())
-  endpointId  String
-  eventType   String
+  id         String   @id @default(cuid())
+  endpointId String
+  eventType  String
   deliveredAt DateTime?
-  status      String
-  payload     Json
-  source      WebhookSource?
-  eventId     String?
-  receivedAt  DateTime?
+  status     String
+  payload    Json
+  source     WebhookSource?
+  eventId    String?
+  receivedAt DateTime?
 }
 
 enum WebhookSource {
@@ -135,14 +128,14 @@ enum WebhookSource {
 }
 
 model BillingPlan {
-  id             String   @id @default(cuid())
-  code           String   @unique
-  name           String
-  currency       String
-  unitPriceMinor Int
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  currency        String
+  unitPriceMinor  Int
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model BankConnection {
@@ -157,7 +150,7 @@ model BankConnection {
 }
 
 model VatReturn {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   vrn         String
   periodKey   String
   start       DateTime
@@ -166,14 +159,13 @@ model VatReturn {
   status      String
   totalDue    Decimal?
   submittedAt DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   @@index([vrn, periodKey])
 }
 
 model CurrencyRate {
-  id       String   @id @default(cuid())
+  id       String  @id @default(cuid())
   fromCode String
   toCode   String
   rate     Decimal
@@ -188,17 +180,15 @@ model AuditLog {
   target   String
   at       DateTime
   data     Json
-
   @@index([tenantId])
 }
 
 model Notification {
-  id       String    @id @default(cuid())
+  id       String   @id @default(cuid())
   tenantId String
   type     String
   body     String
   readAt   DateTime?
-
   @@index([tenantId])
 }
 
@@ -208,7 +198,6 @@ model BackupJob {
   ranAt    DateTime
   ok       Boolean
   summary  String
-
   @@index([tenantId])
 }
 
@@ -219,7 +208,6 @@ model DrDrill {
   ok             Boolean
   restoredCounts Json
   notes          String?
-
   @@index([tenantId])
 }
 
@@ -230,7 +218,6 @@ model SiemExportBatch {
   filePath    String
   recordCount Int
   sha256      String
-
   @@index([tenantId])
 }
 
@@ -240,6 +227,506 @@ model DemoDataVisibility {
   adminUserId  String
   visibleUntil DateTime
   maskLevel    Int
-
   @@index([tenantId])
+}
+
+/// Phase 7 — Manufacturing & Planning
+enum WorkOrderStatus {
+  planned
+  released
+  completed
+  cancelled
+}
+
+enum TaskStatus {
+  pending
+  in_progress
+  done
+  blocked
+}
+
+model WorkOrder {
+  id            String           @id @default(cuid())
+  number        String           @unique
+  tenantId      String
+  itemCode      String
+  quantity      Decimal
+  status        WorkOrderStatus  @default(planned)
+  startPlanned  DateTime?
+  endPlanned    DateTime?
+  startActual   DateTime?
+  endActual     DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  steps         RoutingStep[]
+  @@index([tenantId])
+  @@index([itemCode])
+}
+
+model BomItem {
+  id                 String   @id @default(cuid())
+  tenantId           String
+  parentItemCode     String
+  componentItemCode  String
+  quantity           Decimal
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  @@index([tenantId])
+  @@index([parentItemCode])
+}
+
+model RoutingStep {
+  id            String     @id @default(cuid())
+  workOrderId   String?
+  seq           Int
+  resourceCode  String?
+  durationMins  Int?
+  status        TaskStatus @default(pending)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  workOrder     WorkOrder? @relation(fields: [workOrderId], references: [id])
+  @@index([workOrderId])
+}
+
+model MrpPlan {
+  id             String   @id @default(cuid())
+  tenantId       String
+  itemCode       String
+  planDate       DateTime
+  suggestedQty   Decimal
+  recommendation String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  @@index([tenantId, itemCode])
+}
+
+model CapacityCalendar {
+  id            String   @id @default(cuid())
+  tenantId      String
+  resourceCode  String
+  date          DateTime
+  availableMins Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  @@index([tenantId, resourceCode, date])
+}
+
+/// Phase 7 — WMS & Inventory
+enum AsnStatus {
+  created
+  received
+  closed
+}
+
+enum WaveStatus {
+  planned
+  released
+  dispatched
+}
+
+enum PickStatus {
+  queued
+  picked
+  short
+  cancelled
+}
+
+model Warehouse {
+  id        String   @id @default(cuid())
+  tenantId  String
+  code      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  locations Location[]
+  @@index([tenantId])
+}
+
+model Location {
+  id           String    @id @default(cuid())
+  tenantId     String
+  warehouseId  String
+  code         String
+  type         String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  warehouse    Warehouse @relation(fields: [warehouseId], references: [id])
+  fromTasks    PickTask[] @relation("FromLocationTasks")
+  toTasks      PickTask[] @relation("ToLocationTasks")
+  @@index([tenantId])
+  @@index([warehouseId, code])
+}
+
+model InventoryItem {
+  id          String   @id @default(cuid())
+  tenantId    String
+  sku         String
+  qtyOnHand   Decimal  @default(0)
+  warehouseId String?
+  locationId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  warehouse   Warehouse? @relation(fields: [warehouseId], references: [id])
+  location    Location?  @relation(fields: [locationId], references: [id])
+  @@index([tenantId, sku])
+}
+
+model Asn {
+  id          String    @id @default(cuid())
+  tenantId    String
+  number      String    @unique
+  supplierRef String?
+  status      AsnStatus @default(created)
+  eta         DateTime?
+  receivedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  @@index([tenantId])
+}
+
+model Wave {
+  id         String     @id @default(cuid())
+  tenantId   String
+  number     String     @unique
+  status     WaveStatus @default(planned)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  pickTasks  PickTask[]
+  @@index([tenantId])
+}
+
+model PickTask {
+  id         String     @id @default(cuid())
+  tenantId   String
+  waveId     String?
+  sku        String
+  qty        Decimal
+  fromLocId  String?
+  toLocId    String?
+  status     PickStatus @default(queued)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  wave       Wave?      @relation(fields: [waveId], references: [id])
+  fromLoc    Location?  @relation("FromLocationTasks", fields: [fromLocId], references: [id])
+  toLoc      Location?  @relation("ToLocationTasks", fields: [toLocId], references: [id])
+  @@index([tenantId])
+}
+
+model ThirdPartyConnector {
+  id         String   @id @default(cuid())
+  tenantId   String
+  provider   String   // e.g. 3PL brand
+  name       String
+  config     Json
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([tenantId, provider])
+}
+
+/// Phase 7 — Purchase Orders
+enum PoStatus {
+  draft
+  approved
+  sent
+  received
+  closed
+  cancelled
+}
+
+model Supplier {
+  id        String   @id @default(cuid())
+  tenantId  String
+  code      String   @unique
+  name      String
+  email     String?
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId])
+}
+
+model PurchaseOrder {
+  id         String   @id @default(cuid())
+  tenantId   String
+  number     String   @unique
+  supplierId String
+  status     PoStatus @default(draft)
+  orderDate  DateTime @default(now())
+  expectedAt DateTime?
+  currency   String   @default("GBP")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  lines      PoLine[]
+  @@index([tenantId, supplierId])
+}
+
+model PoLine {
+  id        String   @id @default(cuid())
+  poId      String
+  lineNo    Int
+  sku       String
+  qty       Decimal
+  price     Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  po        PurchaseOrder @relation(fields: [poId], references: [id])
+  @@unique([poId, lineNo])
+}
+
+/// Phase 7 — Enterprise & Finance
+model EntityExt {
+  id        String   @id @default(cuid())
+  entityId  String
+  vatNumber String?
+  eori      String?
+  meta      Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model IntercompanyTxn {
+  id           String   @id @default(cuid())
+  fromEntityId String
+  toEntityId   String
+  ref          String   @unique
+  amount       Decimal
+  currency     String   @default("GBP")
+  postedAt     DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@index([fromEntityId, toEntityId])
+}
+
+model ConsolidationMap {
+  id        String   @id @default(cuid())
+  groupCode String
+  entityId  String
+  account   String
+  mapTo     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([groupCode, entityId])
+}
+
+model Ledger {
+  id        String   @id @default(cuid())
+  tenantId  String
+  entryNo   Int      @default(0)
+  account   String
+  debit     Decimal  @default(0)
+  credit    Decimal  @default(0)
+  docRef    String?
+  postedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, account])
+}
+
+model TreasuryMovement {
+  id        String   @id @default(cuid())
+  tenantId  String
+  type      String   // in/out/transfer
+  amount    Decimal
+  currency  String   @default("GBP")
+  notes     String?
+  at        DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, type])
+}
+
+model KpiSnapshot {
+  id        String   @id @default(cuid())
+  tenantId  String
+  name      String
+  value     Decimal
+  asOf      DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, name, asOf])
+}
+
+/// Phase 7 — Payroll
+enum PayrollRunStatus {
+  draft
+  calculated
+  posted
+}
+
+model Employee {
+  id         String   @id @default(cuid())
+  tenantId   String
+  empNo      String   @unique
+  firstName  String
+  lastName   String
+  email      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  payslips   Payslip[]
+  @@index([tenantId])
+}
+
+model PaySchedule {
+  id         String   @id @default(cuid())
+  tenantId   String
+  name       String
+  frequency  String   // monthly/weekly
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model PayrollRun {
+  id            String            @id @default(cuid())
+  tenantId      String
+  scheduleId    String
+  periodStart   DateTime
+  periodEnd     DateTime
+  status        PayrollRunStatus  @default(draft)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  schedule      PaySchedule       @relation(fields: [scheduleId], references: [id])
+}
+
+model Payslip {
+  id         String    @id @default(cuid())
+  tenantId   String
+  runId      String
+  employeeId String
+  grossPay   Decimal   @default(0)
+  netPay     Decimal   @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  run        PayrollRun @relation(fields: [runId], references: [id])
+  employee   Employee   @relation(fields: [employeeId], references: [id])
+  @@index([tenantId, runId, employeeId])
+}
+
+model Deduction {
+  id        String   @id @default(cuid())
+  payslipId String
+  name      String
+  amount    Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payslip   Payslip  @relation(fields: [payslipId], references: [id])
+}
+
+model Allowance {
+  id        String   @id @default(cuid())
+  payslipId String
+  name      String
+  amount    Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payslip   Payslip  @relation(fields: [payslipId], references: [id])
+}
+
+/// Phase 7 — Marketplace / EDI
+model Channel {
+  id        String   @id @default(cuid())
+  tenantId  String
+  provider  String   // amazon/ebay/shopify
+  name      String
+  config    Json
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, provider])
+}
+
+model Listing {
+  id        String   @id @default(cuid())
+  tenantId  String
+  channelId String
+  sku       String
+  title     String
+  price     Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  channel   Channel  @relation(fields: [channelId], references: [id])
+  @@index([tenantId, channelId, sku])
+}
+
+model OrderExternal {
+  id         String   @id @default(cuid())
+  tenantId   String
+  channelId  String
+  extId      String   @unique
+  status     String
+  total      Decimal
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  channel    Channel  @relation(fields: [channelId], references: [id])
+  @@index([tenantId, channelId])
+}
+
+model ShipmentExternal {
+  id         String   @id @default(cuid())
+  tenantId   String
+  orderId    String
+  carrier    String?
+  tracking   String?
+  shippedAt  DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  order      OrderExternal @relation(fields: [orderId], references: [id])
+}
+
+model EdiMessage {
+  id        String   @id @default(cuid())
+  tenantId  String
+  direction String   // in/out
+  type      String   // 850, 810, etc.
+  payload   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, type])
+}
+
+/// Phase 7 — Notifications & Industry
+model NotificationTemplate {
+  id        String   @id @default(cuid())
+  tenantId  String
+  code      String   @unique
+  name      String
+  subject   String?
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NotificationJob {
+  id         String   @id @default(cuid())
+  tenantId   String
+  templateId String
+  to         String
+  channel    String   // sms/email
+  status     String   @default("queued")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  template   NotificationTemplate @relation(fields: [templateId], references: [id])
+}
+
+model IndustryWidget {
+  id        String   @id @default(cuid())
+  tenantId  String
+  sector    String   // retail/manufacturing/saas/logistics/construction/profserv
+  code      String
+  config    Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, sector])
+}
+
+model IndustryInsight {
+  id        String   @id @default(cuid())
+  tenantId  String
+  sector    String
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([tenantId, sector])
 }

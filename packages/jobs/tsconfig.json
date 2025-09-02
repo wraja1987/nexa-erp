@@ -3,8 +3,9 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "module": "ESNext",
-    "noEmit": false
+    "module": "CommonJS",
+    "noEmit": false,
+    "moduleResolution": "Node"
   },
   "include": ["src/**/*"]
 }

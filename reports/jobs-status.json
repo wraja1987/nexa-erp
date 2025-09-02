@@ -1,14 +1,66 @@
 {
   "billing:reconcile": {
-    "lastRun": "2025-09-02T20:58:46.970Z",
+    "lastRun": "2025-09-02T22:36:15.902Z",
     "outcome": "success"
   },
   "openbanking:sync": {
-    "lastRun": "2025-09-02T20:58:46.972Z",
+    "lastRun": "2025-09-02T22:36:15.902Z",
     "outcome": "success"
   },
   "hmrc:pull-obligations": {
-    "lastRun": "2025-09-02T20:58:46.972Z",
+    "lastRun": "2025-09-02T22:36:15.902Z",
+    "outcome": "success"
+  },
+  "mrp:plan": {
+    "lastRun": "2025-09-02T22:36:15.902Z",
+    "outcome": "success"
+  },
+  "capacity:recalc": {
+    "lastRun": "2025-09-02T22:36:15.902Z",
+    "outcome": "success"
+  },
+  "wms:replenish": {
+    "lastRun": "2025-09-02T22:36:15.902Z",
+    "outcome": "success"
+  },
+  "wms:wave:dispatch": {
+    "lastRun": "2025-09-02T22:36:15.902Z",
+    "outcome": "success"
+  },
+  "asn:auto-close": {
+    "lastRun": "2025-09-02T22:36:15.910Z",
+    "outcome": "success"
+  },
+  "po:remind-suppliers": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "consolidation:rollup": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "treasury:reconcile": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "payroll:run": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "channel:sync:amazon": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "channel:sync:ebay": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "channel:sync:shopify": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
+    "outcome": "success"
+  },
+  "notify:send": {
+    "lastRun": "2025-09-02T22:36:15.918Z",
     "outcome": "success"
   }
 }

@@ -63,7 +63,8 @@
     "seed:phaseA": "tsx scripts/seeds/seed-phaseA.ts",
     "jobs:run:once": "pnpm -C packages/jobs build && pnpm -C packages/jobs run:once",
     "backup:run": "tsx packages/jobs/backup.ts",
-    "dr:drill": "tsx packages/jobs/restore-check.ts"
+    "dr:drill": "tsx packages/jobs/restore-check.ts",
+    "seed:phase7": "tsx scripts/seeds/seed-phase7.ts"
   },
   "devDependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",

@@ -1,17 +1,24 @@
 "use client"
-import ComingSoonBadge from '../../../../components/ui/ComingSoonBadge'
+import { useEffect, useState } from 'react'
+
+type Wave = { id: string; number: string; status: string; createdAt: string }
 
 export default function WmsWavePickingPage() {
-  const rows = [ { wave:'W-12', orders: 5, picker:'J. Smith' }, { wave:'W-13', orders: 8, picker:'L. Brown' } ]
+  const [rows, setRows] = useState<Wave[]>([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    fetch('/api/wms/waves').then(r=>r.json()).then(j=>{ setRows(j?.data || []); setLoading(false) }).catch(()=>setLoading(false))
+  }, [])
   return (
     <main role="main" style={{ padding: 16 }}>
-      <h1 style={{ display:'flex', alignItems:'center', gap:8 }}>WMS Wave Picking <ComingSoonBadge /></h1>
-      <p>Demo of wave picking assignments and batch size. All actions are mocked.</p>
-      <div style={{overflowX:'auto'}}>
-        <table role="table" aria-label="Wave picking"><thead><tr><th>Wave</th><th>Orders</th><th>Picker</th></tr></thead>
-          <tbody>{rows.map((r,i)=> <tr key={i}><td>{r.wave}</td><td>{r.orders}</td><td>{r.picker}</td></tr>)}</tbody>
-        </table>
-      </div>
+      <h1>WMS Wave Picking</h1>
+      {loading ? <div>Loading…</div> : (
+        <div style={{overflowX:'auto'}}>
+          <table role="table" aria-label="Wave picking"><thead><tr><th>Wave</th><th>Status</th><th>Created</th></tr></thead>
+            <tbody>{rows.map((r)=> <tr key={r.id}><td>{r.number}</td><td>{r.status}</td><td>{new Date(r.createdAt).toLocaleString()}</td></tr>)}</tbody>
+          </table>
+        </div>
+      )}
     </main>
   )
 }

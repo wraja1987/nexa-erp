@@ -20,7 +20,8 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const isExempt = pathname.startsWith('/api/health') || pathname.startsWith('/api/readyz') || pathname.startsWith('/api/stripe/webhook')
   if (pathname.startsWith('/api') && !isExempt) {
-    const ip = req.ip || req.headers.get('x-forwarded-for') || '0.0.0.0'
+    const fwd = req.headers.get('x-forwarded-for') || ''
+    const ip = (fwd.split(',')[0] || '').trim() || '0.0.0.0'
     const now = Date.now()
     const rec = rateMap.get(ip) || { count: 0, ts: now }
     if (now - rec.ts > WINDOW_MS) { rec.count = 0; rec.ts = now }

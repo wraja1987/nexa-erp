@@ -1,0 +1,34 @@
+import { NextResponse } from 'next/server'
+import { PrismaClient } from '@prisma/client'
+import { z } from 'zod'
+import { audit } from '../../../../lib/log/mask'
+
+const prisma = new PrismaClient()
+
+const CreateSchema = z.object({
+  code: z.string().min(2),
+  tenantId: z.string().min(1),
+  name: z.string().min(1),
+  email: z.string().email().optional(),
+  phone: z.string().optional(),
+})
+
+export async function GET() {
+  const rows = await prisma.supplier.findMany({ orderBy: { name: 'asc' }, take: 100 })
+  audit({ route: '/api/po/suppliers', action: 'list' })
+  return NextResponse.json({ ok: true, status: 'active', data: rows })
+}
+
+export async function POST(req: Request) {
+  try {
+    const data = CreateSchema.parse(await req.json())
+    const created = await prisma.supplier.create({ data })
+    audit({ route: '/api/po/suppliers', action: 'create' })
+    return NextResponse.json({ ok: true, status: 'created', data: created }, { status: 201 })
+  } catch (e) {
+    const message = e instanceof Error ? e.message : 'invalid'
+    return NextResponse.json({ ok: false, status: 'error', error: message }, { status: 400 })
+  }
+}
+
+
