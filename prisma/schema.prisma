@@ -568,6 +568,8 @@ model Account {
   type      String   // asset/liability/equity/income/expense
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  // Back-relation for JournalLine.account
+  lines     JournalLine[]
 
   @@unique([tenantId, code])
 }

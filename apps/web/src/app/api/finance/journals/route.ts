@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import { z } from 'zod'
-import { ensureRoleAllowed, getRoleFromRequest } from '../../../../../lib/rbac'
-import { audit } from '../../../../../lib/log/mask'
-import { withCorrelation } from '../../../../../lib/logger'
+import { ensureRoleAllowed, getRoleFromRequest } from '../../../../lib/rbac'
+import { audit } from '../../../../lib/log/mask'
+import { withCorrelation } from '../../../../lib/logger'
 
 const prisma = new PrismaClient()
 
