@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "seed:admin": "tsx scripts/createAdmin.ts"
+    "seed:admin": "tsx scripts/createAdmin.ts",
+    "seed:employees": "tsx scripts/seedEmployees.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",

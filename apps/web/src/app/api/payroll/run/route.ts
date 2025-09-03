@@ -18,7 +18,15 @@ export async function POST(req: Request) {
     const role = getRoleFromRequest(req)
     const guard = ensureRoleAllowed('payroll', role)
     if (!guard.ok) return NextResponse.json({ ok: false, code: 'access_denied', message: 'Forbidden' }, { status: 403 })
-    const body = Body.parse(await req.json())
+    // Accept JSON or accidental text payloads
+    let raw: any
+    try {
+      raw = await req.json()
+    } catch {
+      const txt = await req.text()
+      raw = JSON.parse(txt)
+    }
+    const body = Body.parse(raw)
     const { runId } = await runPayrollJob(body)
     audit({ route: '/api/payroll/run', action: 'create', runId })
     return NextResponse.json({ ok: true, runId, ...corr })
