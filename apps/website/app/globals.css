@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nexa-bg: #ffffff;
+  --nexa-fg: #0f172a; /* slate-900 */
+  --nexa-muted: #475569; /* slate-600 */
+  --nexa-primary: #2563eb; /* blue-600 */
+  --nexa-primary-700: #1d4ed8; /* blue-700 */
+  --nexa-accent: #0ea5e9; /* sky-500 */
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--nexa-bg);
+  color: var(--nexa-fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container {
+  @apply mx-auto max-w-6xl px-4;
+}
+
+.btn-primary {
+  @apply inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-white font-medium shadow hover:bg-blue-700 transition-colors;
+}
+.btn-secondary {
+  @apply inline-flex items-center rounded-md border border-blue-600 px-4 py-2 text-blue-700 hover:bg-blue-50 transition-colors;
+}
+
+.section {
+  @apply py-12 md:py-16;
+}
+.section-title {
+  @apply text-2xl md:text-3xl font-semibold tracking-tight;
+}
+.section-subtitle {
+  @apply text-slate-600 mt-2;
+}
+.card {
+  @apply rounded-lg border bg-white shadow-sm;
+}

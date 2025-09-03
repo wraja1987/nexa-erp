@@ -1,12 +1,89 @@
+function Feature({ title, desc }: { title: string; desc: string }) {
+  return (
+    <div className="card p-5 h-full">
+      <h3 className="font-semibold mb-2">{title}</h3>
+      <p className="text-slate-600 text-sm leading-relaxed">{desc}</p>
+    </div>
+  )
+}
+
 export default function HomePage() {
   return (
-    <div>
-      <h1>Nexa — the AI-powered ERP that’s fast, clear, and secure.</h1>
-      <p>Run finance, operations, and analytics in one place — with AI in every module.</p>
-      <div style={{ display:'flex', gap:8, marginTop:12 }}>
-        <a href="/contact" className="btn">Book a demo</a>
-        <a href="/solutions" className="btn">Explore modules</a>
-      </div>
+    <div className="space-y-16">
+      {/* Hero */}
+      <section className="section">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+              Nexa — the AI-powered ERP that’s fast, clear, and secure.
+            </h1>
+            <p className="mt-4 text-lg text-slate-600">
+              Run finance, operations, and analytics in one place — with AI woven into every module.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <a href="/contact" className="btn-primary">Book a demo</a>
+              <a href="/solutions" className="btn-secondary">Explore modules</a>
+            </div>
+          </div>
+          <div className="card p-6">
+            <h3 className="font-semibold mb-3">Why teams choose Nexa</h3>
+            <ul className="space-y-2 text-sm text-slate-700 list-disc pl-5">
+              <li>One platform for Billing, Open Banking, HMRC VAT, MFG, WMS, PO, Payroll, Marketplace.</li>
+              <li>RBAC & Separation of Duties built-in. Secure by default.</li>
+              <li>Observability, backups, and DR drills ready from day one.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="section">
+        <h2 className="section-title">Key benefits</h2>
+        <p className="section-subtitle">Out-of-the-box capabilities that grow with you.</p>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          <Feature title="AI throughout" desc="Assistants and quick actions in every module to speed up reconciliation, planning, and analysis." />
+          <Feature title="Governance & security" desc="RBAC/SoD, rate limits, secret masking, security headers, and audit trails built-in." />
+          <Feature title="Performance & scale" desc="Fast pages with sensible defaults, pagination, and background jobs designed for scale." />
+        </div>
+      </section>
+
+      {/* Modules teaser */}
+      <section className="section">
+        <h2 className="section-title">Modules</h2>
+        <p className="section-subtitle">From finance to operations — activate only what you need.</p>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          <Feature title="Billing & Subscriptions" desc="Plans, subscriptions, usage, invoices and Stripe integration." />
+          <Feature title="Open Banking" desc="TrueLayer sandbox, accounts and transactions with masked logs." />
+          <Feature title="HMRC MTD VAT" desc="OAuth, obligations, returns and filing with audit safety." />
+          <Feature title="Manufacturing & MRP" desc="Work orders, BOM, routing, MRP and capacity calendars." />
+          <Feature title="WMS & ASN/Waves" desc="Inbound ASNs, waves, picks and 3PL connectors." />
+          <Feature title="Purchase Orders" desc="Suppliers, POs and lines with reminders and receiving." />
+        </div>
+        <div className="mt-6">
+          <a href="/solutions" className="btn-secondary">See all modules</a>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="section">
+        <h2 className="section-title">How Nexa works</h2>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          <Feature title="Connect" desc="Add keys for Stripe, Open Banking, HMRC, Twilio — or run in demo mode." />
+          <Feature title="Operate" desc="Use the web app and mobile parity screens. Jobs sync and reconcile on a schedule." />
+          <Feature title="Observe" desc="Health, metrics, masked logs and job status — with backups and DR drills ready." />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section">
+        <div className="card p-8 flex items-center justify-between gap-6">
+          <div>
+            <h3 className="text-2xl font-semibold">Ready to see Nexa in action?</h3>
+            <p className="text-slate-600 mt-1">We’ll tailor a quick walkthrough to your use case.</p>
+          </div>
+          <a href="/contact" className="btn-primary">Book a demo</a>
+        </div>
+      </section>
     </div>
   )
 }
