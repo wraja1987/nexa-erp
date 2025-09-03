@@ -1,3 +1,30 @@
+export default function ConnectorsPage() {
+  const items = [
+    { key: 'Google', configured: Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET), note: 'OAuth 2.0; redirect /api/auth/callback/google' },
+    { key: 'Microsoft', configured: Boolean(process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET), note: 'Azure AD; redirect /api/auth/callback/azure-ad' },
+    { key: 'HubSpot', configured: Boolean(process.env.HUBSPOT_CLIENT_ID && process.env.HUBSPOT_CLIENT_SECRET), note: 'Client ID/Secret; scopes: crm.objects.contacts.read' },
+    { key: 'Stripe', configured: Boolean(process.env.STRIPE_WEBHOOK_SECRET), note: 'Webhook: /api/stripe/webhook' },
+    { key: 'TrueLayer', configured: Boolean(process.env.TRUELAYER_CLIENT_ID && process.env.TRUELAYER_CLIENT_SECRET), note: 'Open Banking health at /api/integrations/open-banking/status' },
+    { key: 'HMRC', configured: Boolean(process.env.HMRC_CLIENT_ID && process.env.HMRC_CLIENT_SECRET), note: 'RTI status at /api/integrations/hmrc-rti/status' },
+  ]
+  return (
+    <div className="p-6 space-y-4">
+      <h1 className="text-2xl font-semibold">Connectors</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map(it => (
+          <div key={it.key} className="border rounded p-4">
+            <div className="flex items-center justify-between">
+              <div className="font-medium">{it.key}</div>
+              <span className={`px-2 py-1 rounded text-xs ${it.configured?'bg-green-100 text-green-800':'bg-gray-100 text-gray-700'}`}>{it.configured?'Configured':'Not Configured'}</span>
+            </div>
+            <div className="text-sm text-gray-700 mt-2">{it.note}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 "use client"
 import { useState } from 'react'
 import ComingSoonBadge from '../../../../components/ui/ComingSoonBadge'
