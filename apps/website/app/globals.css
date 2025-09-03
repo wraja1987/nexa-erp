@@ -6,8 +6,9 @@
   --nexa-bg: #ffffff;
   --nexa-fg: #0f172a; /* slate-900 */
   --nexa-muted: #475569; /* slate-600 */
-  --nexa-primary: #2563eb; /* blue-600 */
-  --nexa-primary-700: #1d4ed8; /* blue-700 */
+  /* Tuned primary to better match the Nexa logo */
+  --nexa-primary: #1f6feb; /* brand blue */
+  --nexa-primary-700: #1756c9; /* hover state */
   --nexa-accent: #0ea5e9; /* sky-500 */
 }
 
@@ -24,10 +25,18 @@ body {
 }
 
 .btn-primary {
-  @apply inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-white font-medium shadow hover:bg-blue-700 transition-colors;
+  @apply inline-flex items-center rounded-md px-4 py-2 text-white font-medium shadow transition-colors;
+  background-color: var(--nexa-primary);
 }
+.btn-primary:hover { background-color: var(--nexa-primary-700); }
+
 .btn-secondary {
-  @apply inline-flex items-center rounded-md border border-blue-600 px-4 py-2 text-blue-700 hover:bg-blue-50 transition-colors;
+  @apply inline-flex items-center rounded-md border px-4 py-2 font-medium transition-colors;
+  color: var(--nexa-primary);
+  border-color: color-mix(in srgb, var(--nexa-primary) 60%, transparent);
+}
+.btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--nexa-primary) 10%, #ffffff);
 }
 
 .section {
