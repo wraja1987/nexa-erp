@@ -1,9 +1,9 @@
 type Sector = { name: string; value: string[] }
 
 const sectors: Sector[] = [
-  { name: 'Retail', value: ['Unified inventory', 'Omnichannel orders', 'Replenishment insights'] },
-  { name: 'Manufacturing', value: ['MRP & capacity', 'Work orders & routing', 'Supplier POs'] },
-  { name: 'SaaS', value: ['Subscriptions & usage', 'Billing & dunning', 'Revenue insights'] },
+  { name: 'Retail', value: ['Unified inventory & sales', 'Omnichannel orders', 'Replenishment insights'] },
+  { name: 'Manufacturing', value: ['MRP & capacity planning', 'Work orders & routing', 'Supplier POs & receiving'] },
+  { name: 'SaaS', value: ['Subscriptions & usage metering', 'Billing & dunning', 'Revenue snapshots'] },
   { name: 'Logistics', value: ['WMS waves & picks', '3PL connectors', 'ASN & receiving'] },
   { name: 'Construction', value: ['Project cost tracking', 'PO approvals', 'Material logistics'] },
   { name: 'Professional Services', value: ['Timesheets & invoicing', 'Expense control', 'KPI snapshots'] },

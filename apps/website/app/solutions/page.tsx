@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MODULES, type Module, type ModuleCategory, type ModuleStatus } from "@nexa/registry";
+import { MODULES, type Module, type ModuleCategory, type ModuleStatus } from "@nexa/registry/src/catalog";
 import ModuleCard from "@/components/ModuleCard";
 
 export const metadata: Metadata = {

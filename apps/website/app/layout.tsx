@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <header className="border-b">
+        <header className="border-b sticky top-0 z-50 bg-white/80 backdrop-blur">
           <div className="container flex items-center justify-between py-4">
             <a href="/" className="text-xl font-semibold">Nexa</a>
             <nav className="flex gap-4 text-sm">

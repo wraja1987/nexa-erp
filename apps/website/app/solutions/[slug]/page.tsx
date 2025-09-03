@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { MODULES } from "@nexa/registry";
+import { MODULES } from "@nexa/registry/src/catalog";
 import ModuleCard from "@/components/ModuleCard";
 
 type Props = { params: { slug: string } };

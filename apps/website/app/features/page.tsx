@@ -1,10 +1,19 @@
 const items = [
-  { title: 'AI throughout', desc: 'Assistant bar with context suggestions and safe prompt masking.' },
-  { title: 'Governance & RBAC', desc: 'Roles, Separation of Duties and access guards across modules and APIs.' },
-  { title: 'Security by default', desc: 'CSP, HSTS, X-Content-Type-Options, rate limiting and secret masking.' },
+  { title: 'AI throughout', desc: 'Assistant bar, quick actions, token budgets, prompt masking and audit.' },
+  { title: 'Billing & Subscriptions', desc: 'Plans, subscriptions, usage, invoices and Stripe health.' },
+  { title: 'Open Banking', desc: 'TrueLayer OAuth, accounts and transactions with masked logs.' },
+  { title: 'HMRC MTD VAT', desc: 'Obligations and returns with demo filing and audit trail.' },
+  { title: 'Manufacturing (MRP/APS)', desc: 'Work orders, BOM, routing, MRP suggestions and capacity calendars.' },
+  { title: 'WMS & ASN/Waves', desc: 'Inbound ASNs, wave planning, pick tasks; 3PL connectors.' },
+  { title: 'Purchase Orders', desc: 'Suppliers, POs and lines; reminders and receiving.' },
+  { title: 'Enterprise & Treasury', desc: 'Intercompany journals, consolidation maps, treasury movements, KPIs.' },
+  { title: 'Payroll', desc: 'Schedules, runs and payslips with demo calculations.' },
+  { title: 'Marketplace / EDI', desc: 'Channels, listings, external orders and shipments; sandbox sync jobs.' },
+  { title: 'Notifications', desc: 'Templates and jobs; SMS/Email placeholders with Twilio.' },
   { title: 'Observability & Ops', desc: 'Health, metrics, masked logs, correlation IDs, job last runs, backups and DR drills.' },
+  { title: 'Security & Governance', desc: 'RBAC/SoD, CSP/HSTS, rate limits and secret redaction by default.' },
   { title: 'Performance', desc: 'Fast pages with pagination, batched fetching and background jobs.' },
-  { title: 'Integrations', desc: 'Stripe, TrueLayer, HMRC VAT, Twilio, Amazon/eBay/Shopify (mocks/sandbox).'},
+  { title: 'Mobile parity', desc: 'Expo screens for key modules; offline upload path ready.' },
 ]
 
 function Card({ title, desc }: { title: string; desc: string }) {

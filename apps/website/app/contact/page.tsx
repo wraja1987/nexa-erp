@@ -7,7 +7,7 @@ export default function ContactPage() {
       company: String(formData.get('company')||''),
       message: String(formData.get('message')||''),
     }
-    await fetch('/api/contact', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+    await fetch('/api/contact', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) } as any)
   }
   return (
     <form action={submit}>

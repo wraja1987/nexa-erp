@@ -25,14 +25,29 @@ export default function HomePage() {
               <a href="/solutions" className="btn-secondary">Explore modules</a>
             </div>
           </div>
-          <div className="card p-6">
-            <h3 className="font-semibold mb-3">Why teams choose Nexa</h3>
-            <ul className="space-y-2 text-sm text-slate-700 list-disc pl-5">
-              <li>One platform for Billing, Open Banking, HMRC VAT, MFG, WMS, PO, Payroll, Marketplace.</li>
-              <li>RBAC & Separation of Duties built-in. Secure by default.</li>
-              <li>Observability, backups, and DR drills ready from day one.</li>
-            </ul>
+          <div className="card p-0 overflow-hidden">
+            <img src="/hero-nexa.jpg" alt="Nexa ERP overview" className="w-full h-64 object-cover" />
+            <div className="p-6">
+              <h3 className="font-semibold mb-3">Why teams choose Nexa</h3>
+              <ul className="space-y-2 text-sm text-slate-700 list-disc pl-5">
+                <li>Unified platform: Billing, Open Banking, HMRC VAT, Manufacturing, WMS, PO, Payroll, Marketplace.</li>
+                <li>Security by default: RBAC/SoD, headers, rate limits, masked logs.</li>
+                <li>Operable from day one: Observability, backups, DR drills, and jobs runner.</li>
+              </ul>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Logos */}
+      <section className="section">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-6 items-center opacity-80">
+          <img src="/logos/stripe.svg" alt="Stripe" className="h-8 mx-auto" />
+          <img src="/logos/truelayer.svg" alt="TrueLayer" className="h-8 mx-auto" />
+          <img src="/logos/hmrc.svg" alt="HMRC" className="h-8 mx-auto" />
+          <img src="/logos/shopify.svg" alt="Shopify" className="h-8 mx-auto" />
+          <img src="/logos/amazon.svg" alt="Amazon" className="h-8 mx-auto" />
+          <img src="/logos/twilio.svg" alt="Twilio" className="h-8 mx-auto" />
         </div>
       </section>
 
@@ -71,6 +86,26 @@ export default function HomePage() {
           <Feature title="Connect" desc="Add keys for Stripe, Open Banking, HMRC, Twilio — or run in demo mode." />
           <Feature title="Operate" desc="Use the web app and mobile parity screens. Jobs sync and reconcile on a schedule." />
           <Feature title="Observe" desc="Health, metrics, masked logs and job status — with backups and DR drills ready." />
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="section">
+        <h2 className="section-title">What customers say</h2>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          <div className="card p-5"><p className="text-slate-700">“Nexa brought billing and ops into one place. The AI helper saves our team hours every week.”</p><p className="mt-3 text-sm text-slate-500">Ops Director, Retail</p></div>
+          <div className="card p-5"><p className="text-slate-700">“MRP and WMS in the same tool — we can plan, execute and reconcile much faster.”</p><p className="mt-3 text-sm text-slate-500">COO, Manufacturing</p></div>
+          <div className="card p-5"><p className="text-slate-700">“Governance is built‑in: RBAC, SoD and audit trails are exactly what we need.”</p><p className="mt-3 text-sm text-slate-500">Finance Lead, SaaS</p></div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="section">
+        <h2 className="section-title">Simple pricing</h2>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          <div className="card p-6"><h3 className="font-semibold text-lg">Starter</h3><p className="text-3xl font-bold mt-2">£0</p><p className="text-slate-600 mt-1">Sandbox, demo data, API keys</p></div>
+          <div className="card p-6 border-blue-600"><h3 className="font-semibold text-lg">Growth</h3><p className="text-3xl font-bold mt-2">£199</p><p className="text-slate-600 mt-1">Core modules + jobs + export</p></div>
+          <div className="card p-6"><h3 className="font-semibold text-lg">Enterprise</h3><p className="text-3xl font-bold mt-2">Talk to us</p><p className="text-slate-600 mt-1">Full stack, SSO, support</p></div>
         </div>
       </section>
 
