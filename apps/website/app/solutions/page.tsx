@@ -1,41 +1,78 @@
-type Mod = { name: string; status: 'Active' | 'Coming Soon'; desc: string }
+import type { Metadata } from "next";
+import { MODULES, type Module, type ModuleCategory, type ModuleStatus } from "@nexa/registry";
+import ModuleCard from "@/components/ModuleCard";
 
-const modules: Mod[] = [
-  { name: 'Billing & Metering (Stripe)', status: 'Active', desc: 'Plans, subscriptions, usage events and invoices with Stripe integrations.' },
-  { name: 'Open Banking (TrueLayer)', status: 'Active', desc: 'OAuth, accounts and transactions; sandbox-first with masked logs.' },
-  { name: 'HMRC MTD VAT', status: 'Active', desc: 'Obligations and returns APIs; demo filing and audit trail.' },
-  { name: 'Manufacturing (MRP/APS/Capacity)', status: 'Active', desc: 'Work orders, BOM, routing, MRP and capacity calendars.' },
-  { name: 'WMS (ASN/Waves/Picks)', status: 'Active', desc: 'Inbound ASNs, wave planning and pick tasks; 3PL connectors.' },
-  { name: 'Purchase Orders', status: 'Active', desc: 'Suppliers, POs and lines; reminders and receiving.' },
-  { name: 'Enterprise (Intercompany/Treasury)', status: 'Active', desc: 'Intercompany journals, consolidation maps, treasury movements and KPIs.' },
-  { name: 'Payroll', status: 'Active', desc: 'Schedules, runs and payslips; demo calculations.' },
-  { name: 'Marketplace / EDI', status: 'Active', desc: 'Channels, listings, external orders and shipments; demo sync jobs.' },
-  { name: 'Notifications', status: 'Active', desc: 'Templates and jobs; SMS/Email placeholders with Twilio.' },
-]
+export const metadata: Metadata = {
+  title: "Nexa Modules & Solutions",
+  description: "Explore Nexa’s modules across finance, operations, inventory, manufacturing, HR, and analytics.",
+  alternates: { canonical: "https://www.nexaai.co.uk/solutions" },
+};
 
-function Badge({ text, tone='blue' }: { text: string; tone?: 'blue'|'slate' }) {
-  const cls = tone === 'blue' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-700 border-slate-200'
-  return <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs ${cls}`}>{text}</span>
+function unique<T>(arr: T[]) { return Array.from(new Set(arr)); }
+
+function getFilters(mods: Module[]) {
+  const categories = unique(mods.map(m => m.category)).sort();
+  const statuses = unique(mods.map(m => m.status)).sort();
+  return { categories, statuses };
 }
 
-export default function SolutionsPage() {
+function applyFilters(mods: Module[], searchParams: { [k: string]: string | string[] | undefined }) {
+  const q = (searchParams.q as string)?.toLowerCase()?.trim() || "";
+  const cat = (searchParams.category as string) || "All";
+  const st = (searchParams.status as string) || "All";
+
+  return mods.filter(m => {
+    const matchesQ = !q || m.name.toLowerCase().includes(q) || m.blurb.toLowerCase().includes(q) || m.category.toLowerCase().includes(q);
+    const matchesCat = cat === "All" || m.category === (cat as ModuleCategory);
+    const matchesSt = st === "All" || m.status === (st as ModuleStatus);
+    return matchesQ && matchesCat && matchesSt;
+  });
+}
+
+export default function SolutionsPage({ searchParams }: { searchParams: { [k: string]: string | string[] | undefined }}) {
+  const all = MODULES;
+  const { categories, statuses } = getFilters(all);
+  const filtered = applyFilters(all, searchParams);
+
+  const q = (searchParams.q as string) ?? "";
+  const category = (searchParams.category as string) ?? "All";
+  const status = (searchParams.status as string) ?? "All";
+
   return (
-    <div className="space-y-8">
-      <header className="mt-8">
-        <h1 className="text-3xl font-semibold">Solutions</h1>
-        <p className="text-slate-600 mt-2">Everything you need to run finance and operations — with AI in every module.</p>
-      </header>
-      <div className="grid md:grid-cols-2 gap-6">
-        {modules.map((m) => (
-          <div key={m.name} className="card p-5">
-            <div className="flex items-center justify-between gap-3">
-              <h3 className="font-semibold">{m.name}</h3>
-              <Badge text={m.status} />
-            </div>
-            <p className="text-slate-600 text-sm mt-2">{m.desc}</p>
+    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <section className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight">Solutions</h1>
+        <p className="mt-2 max-w-3xl text-zinc-600">Nexa brings finance, operations, and analytics together. Filter by category or status and pick what you need today.</p>
+      </section>
+
+      <form className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-4" action="/solutions" method="get">
+        <label className="sr-only" htmlFor="q">Search</label>
+        <input id="q" name="q" defaultValue={q} placeholder="Search modules…" className="col-span-2 rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-300" />
+        <select name="category" defaultValue={category} className="rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-300" aria-label="Filter by category">
+          <option value="All">All categories</option>
+          {categories.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+        <select name="status" defaultValue={status} className="rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-300" aria-label="Filter by status">
+          <option value="All">All statuses</option>
+          {statuses.map(s => <option key={s} value={s}>{s}</option>)}
+        </select>
+      </form>
+
+      <section aria-live="polite" aria-busy="false">
+        {filtered.length === 0 ? (
+          <p className="rounded-xl bg-zinc-50 p-6 text-sm text-zinc-600">No modules match your search. Try clearing filters.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map(m => <ModuleCard key={m.slug} mod={m} />)}
           </div>
-        ))}
-      </div>
-    </div>
-  )
+        )}
+      </section>
+
+      <section className="mt-12 rounded-2xl border border-zinc-200 bg-gradient-to-br from-zinc-50 to-white p-6">
+        <h2 className="text-xl font-semibold">Not sure where to start?</h2>
+        <p className="mt-1 text-sm text-zinc-600">Book a short walkthrough and we’ll tailor a Nexa stack for your team.</p>
+        <a href="/contact" className="mt-4 inline-flex rounded-xl bg-black px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-black">Book a demo</a>
+      </section>
+    </main>
+  );
 }
