@@ -1,3 +1,32 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+// Simple per-IP rate limiting: 100 req/min
+const BUCKET: Map<string, { count: number; resetAt: number }> = new Map()
+const LIMIT = 100
+export function middleware(req: NextRequest) {
+  try {
+    const ip = req.ip || req.headers.get('x-forwarded-for') || 'unknown'
+    const now = Date.now()
+    const key = String(ip)
+    const slot = BUCKET.get(key)
+    if (!slot || now > slot.resetAt) {
+      BUCKET.set(key, { count: 1, resetAt: now + 60_000 })
+    } else {
+      slot.count += 1
+      if (slot.count > LIMIT) {
+        const res = NextResponse.json({ ok: false, code: 429, message: 'Too Many Requests' }, { status: 429 })
+        res.headers.set('x-ratelimit-limit', String(LIMIT))
+        res.headers.set('x-ratelimit-remaining', '0')
+        return res
+      }
+    }
+  } catch {}
+  return NextResponse.next()
+}
+
+export const config = { matcher: ['/api/:path*'] }
+
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 

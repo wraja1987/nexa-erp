@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 import { z } from 'zod'
-import { ensureRoleAllowed, getRoleFromRequest } from '../../../../../lib/rbac'
+import { ensureRoleAllowed, getRoleFromRequest, ensurePermissionAllowed, getActorIdFromRequest } from '../../../../../lib/rbac'
 import { audit } from '../../../../../lib/log/mask'
 import { withCorrelation } from '../../../../../lib/logger'
 import { toBacsCsv } from '../../../../../server/payroll/bacs'
@@ -15,6 +15,8 @@ export async function GET(req: Request) {
     const role = getRoleFromRequest(req)
     const guard = ensureRoleAllowed('payroll', role)
     if (!guard.ok) return NextResponse.json({ ok: false, code: 'access_denied', message: 'Forbidden' }, { status: 403 })
+    const perm = ensurePermissionAllowed('payroll:read', role)
+    if (!perm.ok) return NextResponse.json({ ok: false, code: 403, message: 'Forbidden' }, { status: 403 })
     const { searchParams } = new URL(req.url)
     const runId = searchParams.get('runId')
     const processingDate = searchParams.get('processingDate') || new Date().toISOString().slice(0,10).replace(/-/g,'')
@@ -29,7 +31,7 @@ export async function GET(req: Request) {
       ProcessingDate: yyyymmdd,
     }))
     const csv = toBacsCsv(rows)
-    audit({ route: '/api/payroll/export/bacs', action: 'export', runId: rid, rows: rows.length })
+    audit({ route: '/api/payroll/export/bacs', module: 'payroll', action: 'PAYSLIP_EXPORT', status: 'ok', actorId: getActorIdFromRequest(req), runId: rid, rows: rows.length })
     return new NextResponse(csv, {
       status: 200,
       headers: {
@@ -40,7 +42,7 @@ export async function GET(req: Request) {
     })
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Bad Request'
-    audit({ route: '/api/payroll/export/bacs', action: 'error', message })
+    audit({ route: '/api/payroll/export/bacs', module: 'payroll', action: 'PAYSLIP_EXPORT', status: 'error', message })
     return NextResponse.json({ ok: false, code: 'bad_request', message, ...corr }, { status: 400 })
   }
 }

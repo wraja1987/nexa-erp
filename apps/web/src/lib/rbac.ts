@@ -1,4 +1,9 @@
 export type Role = 'superadmin' | 'admin' | 'user'
+export type Permission =
+  | 'payroll:run' | 'payroll:read'
+  | 'wms:write' | 'wms:read'
+  | 'mfg:plan' | 'mfg:write' | 'mfg:read'
+  | 'crm:sync' | 'crm:read'
 export type ModuleKey =
   | 'billing'
   | 'open_banking'
@@ -43,6 +48,28 @@ export function ensureRoleAllowed(moduleKey: ModuleKey, role: Role): { ok: true 
     return { ok: false, reason: 'access_denied' }
   }
   return { ok: true }
+}
+
+const permissionsByRole: Record<Role, Permission[]> = {
+  superadmin: [
+    'payroll:run','payroll:read','wms:write','wms:read','mfg:plan','mfg:write','mfg:read','crm:sync','crm:read',
+  ],
+  admin: [
+    'payroll:run','payroll:read','wms:write','wms:read','mfg:plan','mfg:write','mfg:read','crm:sync','crm:read',
+  ],
+  user: [
+    'payroll:read','wms:read','mfg:read','crm:read',
+  ],
+}
+
+export function ensurePermissionAllowed(permission: Permission, role: Role): { ok: true } | { ok: false; reason: string } {
+  const granted = permissionsByRole[role] || []
+  return granted.includes(permission) ? { ok: true } : { ok: false, reason: 'access_denied' }
+}
+
+export function getActorIdFromRequest(req: Request): string | undefined {
+  const v = req.headers.get('x-actor-id')
+  return v || undefined
 }
 
 

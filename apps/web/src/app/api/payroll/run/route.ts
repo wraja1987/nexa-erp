@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { ensureRoleAllowed, getRoleFromRequest } from '../../../../lib/rbac'
+import { ensureRoleAllowed, getRoleFromRequest, ensurePermissionAllowed, getActorIdFromRequest } from '../../../../lib/rbac'
 import { audit } from '../../../../lib/log/mask'
 import { withCorrelation } from '../../../../lib/logger'
 import { runPayrollJob } from '../../../../jobs/payroll/run'
@@ -18,6 +18,8 @@ export async function POST(req: Request) {
     const role = getRoleFromRequest(req)
     const guard = ensureRoleAllowed('payroll', role)
     if (!guard.ok) return NextResponse.json({ ok: false, code: 'access_denied', message: 'Forbidden' }, { status: 403 })
+    const perm = ensurePermissionAllowed('payroll:run', role)
+    if (!perm.ok) return NextResponse.json({ ok: false, code: 403, message: 'Forbidden' }, { status: 403 })
     // Accept JSON or accidental text payloads
     let raw: any
     try {
@@ -28,12 +30,14 @@ export async function POST(req: Request) {
       raw = JSON.parse(txt)
     }
     const body = Body.parse(raw)
+    const t0 = Date.now()
     const { runId } = await runPayrollJob(body)
-    audit({ route: '/api/payroll/run', action: 'create', runId })
+    const durationMs = Date.now() - t0
+    audit({ route: '/api/payroll/run', module: 'payroll', action: 'PAYROLL_RUN', status: 'ok', durationMs, actorId: getActorIdFromRequest(req), runId })
     return NextResponse.json({ ok: true, runId, ...corr })
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Bad Request'
-    audit({ route: '/api/payroll/run', action: 'error', message })
+    audit({ route: '/api/payroll/run', module: 'payroll', action: 'PAYROLL_RUN', status: 'error', message })
     return NextResponse.json({ ok: false, code: 'bad_request', message, ...corr }, { status: 400 })
   }
 }

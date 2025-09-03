@@ -14,7 +14,27 @@ export function safeAudit(obj: AuditPayload): AuditPayload & { hasMasked: true }
 }
 
 export function audit(payload: AuditPayload): void {
-  console.log('[assistant_audit]', safeAudit(payload));
+  const entry = safeAudit(payload)
+  console.log('[assistant_audit]', entry);
+  try {
+    bufferAudit(entry)
+  } catch {}
+}
+
+// Simple in-memory audit buffer for observability page
+type AuditEntry = ReturnType<typeof safeAudit> & { time?: string }
+const _auditBuffer: AuditEntry[] = []
+export function bufferAudit(entry: AuditEntry): void {
+  const e = { ...entry, time: new Date().toISOString() }
+  _auditBuffer.unshift(e)
+  if (_auditBuffer.length > 500) _auditBuffer.pop()
+}
+
+export function getRecentAudits(filter?: { action?: string; module?: string }): AuditEntry[] {
+  let list = _auditBuffer
+  if (filter?.action) list = list.filter(e => String(e.action||'') === filter!.action)
+  if (filter?.module) list = list.filter(e => String(e.module||'') === filter!.module)
+  return list.slice(0, 100)
 }
 
 

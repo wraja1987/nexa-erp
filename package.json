@@ -64,6 +64,8 @@
     "jobs:run:once": "pnpm -C packages/jobs build && pnpm -C packages/jobs run:once",
     "backup:run": "tsx packages/jobs/backup.ts",
     "dr:drill": "tsx packages/jobs/restore-check.ts",
+    "dr:backup": "tsx packages/jobs/src/dr/backup.ts",
+    "dr:restore": "tsx packages/jobs/src/dr/restore.ts",
     "seed:phase7": "tsx scripts/seeds/seed-phase7.ts"
   },
   "devDependencies": {
