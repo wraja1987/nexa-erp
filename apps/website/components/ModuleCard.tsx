@@ -1,7 +1,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import Icon from "@/components/Icon";
-import type { Module } from "@nexa/registry";
+import type { Module } from "@nexa/registry/src/catalog";
 
 const statusStyles: Record<Module["status"], string> = {
   Active: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20",
