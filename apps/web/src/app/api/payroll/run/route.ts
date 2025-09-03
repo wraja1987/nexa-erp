@@ -21,7 +21,8 @@ export async function POST(req: Request) {
     // Accept JSON or accidental text payloads
     let raw: any
     try {
-      raw = await req.json()
+      const c = req.clone()
+      raw = await c.json()
     } catch {
       const txt = await req.text()
       raw = JSON.parse(txt)
