@@ -559,6 +559,72 @@ model Ledger {
   @@index([tenantId, account])
 }
 
+/// Phase C — Core Finance (minimal)
+model Account {
+  id        String   @id @default(cuid())
+  tenantId  String
+  code      String
+  name      String
+  type      String   // asset/liability/equity/income/expense
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, code])
+}
+
+model JournalEntry {
+  id        String   @id @default(cuid())
+  tenantId  String
+  docRef    String?
+  memo      String?
+  postedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lines     JournalLine[]
+
+  @@index([tenantId, postedAt])
+}
+
+model JournalLine {
+  id        String   @id @default(cuid())
+  entryId   String
+  accountId String
+  debit     Decimal  @default(0)
+  credit    Decimal  @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  entry     JournalEntry @relation(fields: [entryId], references: [id])
+  account   Account      @relation(fields: [accountId], references: [id])
+}
+
+model CustomerInvoice {
+  id         String   @id @default(cuid())
+  tenantId   String
+  number     String   @unique
+  customerId String
+  currency   String   @default("GBP")
+  total      Decimal  @default(0)
+  status     String   @default("draft")
+  issuedAt   DateTime @default(now())
+  dueAt      DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SupplierBill {
+  id         String   @id @default(cuid())
+  tenantId   String
+  number     String   @unique
+  supplierId String
+  currency   String   @default("GBP")
+  total      Decimal  @default(0)
+  status     String   @default("draft")
+  receivedAt DateTime @default(now())
+  dueAt      DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
 model TreasuryMovement {
   id        String   @id @default(cuid())
   tenantId  String
