@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { buildAuthConfig } from '../lib/auth/options'
+import { buildAuthConfig } from '../src/lib/auth/options'
 
 describe('auth providers', () => {
   test('includes credentials provider by default', () => {

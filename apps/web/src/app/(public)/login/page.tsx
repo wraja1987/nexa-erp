@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
-import { hasGoogle, hasMicrosoft } from '@/lib/env/auth'
+import { hasGoogle, hasMicrosoft } from '../../../lib/env/auth'
 
 export default function LoginPage() {
   const searchParams = useSearchParams()
