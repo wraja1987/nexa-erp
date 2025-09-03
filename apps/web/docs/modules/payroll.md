@@ -1,9 +1,9 @@
-# Payroll
+# Payroll UI
 
-- What it does: Schedules, runs, payslips, deductions and allowances (demo calculation).
-- Key endpoints: `/api/payroll/runs` (GET/POST).
-- Roles & permissions: superadmin/admin write; users can view their payslips.
-- Data model: `Employee`, `PaySchedule`, `PayrollRun`, `Payslip`, `Deduction`, `Allowance`.
-- Jobs: `payroll:run` creates demo runs.
-- Common tasks: create schedule, run payroll, review payslips.
-- Troubleshooting: date range must be valid; ensure `scheduleId` exists.
+- Path: `/payroll`
+- Actions:
+  - Run Payroll (drawer) → POST /api/payroll/run
+  - View Payslips → GET /api/payroll/payslips?runId=...
+  - Export BACS → GET /api/payroll/export/bacs?runId=...
+- Notes: RBAC via `x-role`, errors surfaced as toasts, accessible form labels.
+- Mobile parity: Run Payroll form and recent payslips list.

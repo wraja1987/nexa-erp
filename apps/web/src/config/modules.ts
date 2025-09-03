@@ -10,7 +10,7 @@ export const appModules: AppModule[] = [
   { id: 'dashboard', title: 'Dashboard', path: '/dashboard' },
   // New: Stubs guarded by feature flags
   ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_PAYROLL_STUB ?? 'true') !== 'false'
-    ? [{ id: 'payroll', title: 'Payroll (Coming Soon)', path: '/payroll' }]
+    ? [{ id: 'payroll', title: 'Payroll', path: '/payroll' }]
     : []),
   ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_OPEN_BANKING_STUB ?? 'true') !== 'false'
     ? [{ id: 'open-banking', title: 'Open Banking (Coming Soon)', path: '/open-banking' }]
@@ -33,17 +33,11 @@ export const appModules: AppModule[] = [
   },
   // WMS Advanced
   ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_WMS_ADV_STUB ?? 'true') !== 'false'
-    ? [{
-        id: 'wms-advanced', title: 'Advanced WMS (Coming Soon)', path: '/wms/advanced', children: [
-          { id: 'wms-asn', title: 'ASN (Coming Soon)', path: '/wms/asn' },
-          { id: 'wms-wave-picking', title: 'Wave Picking (Coming Soon)', path: '/wms/wave-picking' },
-          { id: 'wms-3pl', title: '3PL Connectors (Coming Soon)', path: '/wms/3pl-connectors' },
-        ]
-      }]
+    ? [{ id: 'wms-advanced', title: 'Advanced WMS', path: '/wms/advanced' }]
     : []),
   // CRM Integrations
   ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_CRM_DEEP_STUB ?? 'true') !== 'false'
-    ? [{ id: 'crm-integrations', title: 'Advanced CRM Integrations (Coming Soon)', path: '/crm/integrations' }]
+    ? [{ id: 'crm-integrations', title: 'CRM Integrations', path: '/crm/integrations' }]
     : []),
   // Marketplace & Billing
   ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_MARKETPLACE_STUB ?? 'true') !== 'false'
@@ -64,13 +58,7 @@ export const appModules: AppModule[] = [
   },
   // Advanced Manufacturing
   ...(typeof process !== 'undefined' && (process.env.NEXA_FEATURE_MFG_ADV_STUB ?? 'true') !== 'false'
-    ? [{
-        id: 'mfg-advanced', title: 'Advanced Manufacturing (Coming Soon)', path: '/manufacturing/advanced', children: [
-          { id: 'mfg-mrp', title: 'MRP (Coming Soon)', path: '/manufacturing/mrp' },
-          { id: 'mfg-capacity', title: 'Capacity Planning (Coming Soon)', path: '/manufacturing/capacity' },
-          { id: 'mfg-aps', title: 'APS (Coming Soon)', path: '/manufacturing/aps' },
-        ]
-      }]
+    ? [{ id: 'mfg-advanced', title: 'Advanced Manufacturing', path: '/manufacturing/advanced' }]
     : []),
   {
     id: 'enterprise',
@@ -136,7 +124,7 @@ export const appModules: AppModule[] = [
       { id: 'tenants', title: 'Tenants', path: '/settings/tenants' },
       { id: 'entities', title: 'Entities', path: '/settings/entities' },
       { id: 'security', title: 'Security', path: '/settings/security' },
-      { id: 'connectors', title: 'Connectors (Coming Soon)', path: '/settings/connectors' },
+      { id: 'connectors', title: 'Connectors', path: '/settings/connectors' },
       { id: 'policies', title: 'Policies', path: '/settings/policies' },
       { id: 'sod-matrix', title: 'SoD Matrix', path: '/settings/sod-matrix' },
     ],
