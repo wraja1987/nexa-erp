@@ -783,3 +783,47 @@ model IndustryInsight {
 
   @@index([tenantId, sector])
 }
+
+/// Phase 7 — CRM Sync (HubSpot mirrors)
+model HubspotContact {
+  id         String   @id @default(cuid())
+  tenantId   String
+  hsId       String   @unique
+  email      String?
+  firstName  String?
+  lastName   String?
+  phone      String?
+  lastSyncAt DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([tenantId, hsId])
+}
+
+model HubspotCompany {
+  id         String   @id @default(cuid())
+  tenantId   String
+  hsId       String   @unique
+  name       String?
+  domain     String?
+  lastSyncAt DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([tenantId, hsId])
+}
+
+model HubspotDeal {
+  id         String   @id @default(cuid())
+  tenantId   String
+  hsId       String   @unique
+  name       String?
+  amount     Decimal?
+  stage      String?
+  closeDate  DateTime?
+  lastSyncAt DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([tenantId, hsId])
+}
