@@ -1,0 +1,1677 @@
+
+====================================================
+== Pre-Build Audit (mandatory)
+====================================================
+
+====================================================
+== Audit: Phase 00 — Pre-Build_Audit (2025-09-06 10:04:07 BST)
+====================================================
+[step] workspace install
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+Done in 652ms
+[step] lint
+
+> nexa-erp@ lint /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> eslint . --ext .js,.ts,.tsx --max-warnings=0
+
+[step] typecheck
+
+> nexa-erp@ typecheck /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> tsc -p tsconfig.base.json --noEmit
+
+[step] unit tests
+
+> nexa-erp@ test /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> vitest run --reporter=dot -- --run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v3.2.4 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+
+·stdout | apps/web/src/app/api/orchestration/queue/route.test.ts > orchestration queue API > returns queued count
+[assistant_audit] { route: [32m'/api/orchestration/queue'[39m, queued: [33m1[39m, hasMasked: [33mtrue[39m }
+
+·stdout | apps/web/src/app/api/integrations/shopify/status/route.test.ts > shopify status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/shopify/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/finance/fa/assets/route.test.ts > fixed assets > creates an asset
+[assistant_audit] {
+  route: [32m'/api/finance/fa/assets'[39m,
+  module: [32m'finance'[39m,
+  action: [32m'FA_CREATE'[39m,
+  status: [32m'ok'[39m,
+  assetCode: [32m'FA-001'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/mfg/workorders/route.test.ts > mfg workorders API > lists work orders
+[assistant_audit] { route: [32m'/api/mfg/workorders'[39m, action: [32m'list'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/po/orders/route.test.ts > po orders API > lists POs
+[assistant_audit] { route: [32m'/api/po/orders'[39m, action: [32m'list'[39m, hasMasked: [33mtrue[39m }
+
+····stdout | apps/web/src/app/api/mfg/workorders/route.test.ts > mfg workorders API > creates a work order with valid payload
+[assistant_audit] { route: [32m'/api/mfg/workorders'[39m, action: [32m'create'[39m, hasMasked: [33mtrue[39m }
+
+··stderr | apps/web/src/__tests__/auth.smoke.test.ts > auth providers configured (best-effort)
+[next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error Unexpected token '<', "<!DOCTYPE "... is not valid JSON {
+  error: {
+    message: [32m`Unexpected token '<', "<!DOCTYPE "... is not valid JSON`[39m,
+    stack: [32m`SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON\n`[39m +
+      [32m'    at JSON.parse (<anonymous>)\n'[39m +
+      [32m'    at parseJSONFromBytes (node:internal/deps/undici/undici:5738:19)\n'[39m +
+      [32m'    at successSteps (node:internal/deps/undici/undici:5719:27)\n'[39m +
+      [32m'    at fullyReadBody (node:internal/deps/undici/undici:4609:9)\n'[39m +
+      [32m'    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n'[39m +
+      [32m'    at consumeBody (node:internal/deps/undici/undici:5728:7)'[39m,
+    name: [32m'SyntaxError'[39m
+  },
+  url: [32m'http://localhost:3000/api/auth/providers'[39m,
+  message: [32m`Unexpected token '<', "<!DOCTYPE "... is not valid JSON`[39m
+}
+
+·stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > masks sensitive fields and responds ok
+[assistant_audit] {
+  ip: [32m'loca****'[39m,
+  session: [32m'loca****'[39m,
+  route: [32m'/dashboard'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > enforces token budget per session
+[assistant_audit] { ip: [32m'1.xxx.xxx.xxx'[39m, session: [32m's1'[39m, route: [32m'/x'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > enforces token budget per session
+[assistant_audit] { ip: [32m'1.xxx.xxx.xxx'[39m, session: [32m's1'[39m, route: [32m'/x'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/integrations/ebay/status/route.test.ts > ebay status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/ebay/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/entities/route.test.ts > entities API > lists entities
+[assistant_audit] {
+  route: [32m'/api/entities'[39m,
+  action: [32m'list'[39m,
+  session: [32m'enti****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···stdout | apps/web/src/app/api/entities/route.test.ts > entities API > creates an entity with valid payload
+[assistant_audit] {
+  route: [32m'/api/entities'[39m,
+  action: [32m'create'[39m,
+  session: [32m'enti****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/amazon/status/route.test.ts > amazon status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/amazon/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/integrations/open-banking/status/route.test.ts > open-banking status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/open-banking/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/pos/stripe/webhook/route.test.ts > pos stripe webhook signature verification and idempotency
+[POS AUDIT] {
+  at: [32m'2025-09-06T09:04:11.847Z'[39m,
+  route: [32m'/api/pos/stripe/webhook'[39m,
+  eventType: [32m'payment_intent.succeeded'[39m
+}
+
+stdout | apps/web/src/app/api/pos/stripe/webhook/route.test.ts > pos stripe webhook signature verification and idempotency
+[POS AUDIT] {
+  at: [32m'2025-09-06T09:04:11.849Z'[39m,
+  route: [32m'/api/pos/stripe/webhook'[39m,
+  eventType: [32m'payment_intent.succeeded'[39m,
+  status: [32m'duplicate_ignored'[39m
+}
+
+·stdout | apps/web/src/app/api/integrations/health/route.test.ts > integrations health DTO > honors enable flags env
+[assistant_audit] {
+  route: [32m'/api/integrations/health'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···stdout | apps/web/src/app/api/enterprise/demo/route.test.ts > enterprise demo route > returns counts from demo file
+[assistant_audit] {
+  route: [32m'/api/enterprise/demo'[39m,
+  session: [32m'demo'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > lists queued runs
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  count: [33m1[39m,
+  total: [33m1[39m,
+  status: [32m'all'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > completes a run via POST
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  action: [32m'complete'[39m,
+  id: [32m'orc_hy8t4wxlxlq'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > completes a run via POST
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  count: [33m1[39m,
+  total: [33m1[39m,
+  status: [32m'completed'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/orchestration/start/route.test.ts > orchestration start DTO > enqueues on POST and returns orchestration id
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'sess****-1'[39m,
+  route: [32m'/api/orchestration/start'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/start/route.test.ts > orchestration start DTO > rejects invalid payload with 400
+[assistant_audit] {
+  ip: [32m'loca****'[39m,
+  session: [32m'loca****'[39m,
+  route: [32m'/api/orchestration/start'[39m,
+  validation: [32m'fail'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/hmrc-rti/status/route.test.ts > hmrc-rti status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/hmrc-rti/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/edi/status/route.test.ts > edi status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/edi/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+········stdout | apps/web/src/app/api/billing/webhook/status/route.test.ts > billing webhook status > responds 200 with configured flag
+[assistant_audit] {
+  route: [32m'/api/billing/webhook/status'[39m,
+  configured: [33mfalse[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···stdout | apps/web/src/__tests__/connectors.mock.test.ts > mockConnectorService > connects and disconnects
+[assistant_audit] {
+  route: [32m'/settings/connectors'[39m,
+  action: [32m'connect'[39m,
+  key: [32m'google'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/__tests__/connectors.mock.test.ts > mockConnectorService > connects and disconnects
+[assistant_audit] {
+  route: [32m'/settings/connectors'[39m,
+  action: [32m'disconnect'[39m,
+  key: [32m'google'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···············stdout | apps/web/src/app/api/crm/hubspot/status/route.test.ts > hubspot status > responds 200 with configured flag
+[assistant_audit] {
+  route: [32m'/api/crm/hubspot/status'[39m,
+  configured: [33mfalse[39m,
+  hasMasked: [33mtrue[39m
+}
+
+······························
+
+ Test Files  47 passed (47)
+      Tests  98 passed (98)
+   Start at  10:04:10
+   Duration  2.47s (transform 689ms, setup 152ms, collect 4.23s, tests 808ms, environment 7ms, prepare 4.72s)
+
+[step] smoke
+
+> nexa-erp@ smoke:all /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> bash -lc "set -euo pipefail; mkdir -p reports; pkill -f 'apps/web.*next' >/dev/null 2>&1 || true; echo '== Nexa ERP Smoke Test Suite =='; pnpm --filter web dev >/tmp/nexa-dev.log 2>&1 & DEV_PID=$!; sleep 8; echo '-- Running healthz check --'; curl -s http://localhost:3000/api/healthz || true; echo; echo '-- Running masking check --'; node scripts/ci/mask_check.cjs > reports/mask-check-$(date +%Y%m%d%H%M%S).log || true; echo; echo '-- Running provider smoke mocks --'; curl -s 'http://localhost:3000/api/auth/callback/google?code=fake' || true; echo; curl -s 'http://localhost:3000/api/auth/callback/azure-ad?code=fake' || true; echo; curl -s http://localhost:3000/api/ai/audit/logs || true; echo; curl -s http://localhost:3000/api/twilio/ping || true; echo; curl -s http://localhost:3000/api/stripe/webhook || true; echo; curl -s http://localhost:3000/api/hmrc/vat/ping || true; echo; echo '== Nexa ERP Smoke Suite Finished =='; kill $DEV_PID >/dev/null 2>&1 || true"
+
+== Nexa ERP Smoke Test Suite ==
+-- Running healthz check --
+{"ok":true,"services":{"payroll":true,"wms":true,"mfg":true,"crm":true}}
+-- Running masking check --
+
+-- Running provider smoke mocks --
+
+
+
+
+
+
+== Nexa ERP Smoke Suite Finished ==
+[step] gates
+
+> nexa-erp@ gates:all /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4 && npm run gate:phase5
+
+
+> gate:phase0
+> node scripts/gate-phase0.cjs
+
+PASS: SoD block
+PASS: Tenant scoping
+PASS: AI defaults
+PASS: OpenAPI compiles
+
+> gate:phase1
+> node scripts/gate-phase1.cjs
+
+PASS: Double-entry
+PASS: Period close block
+PASS: Adjustment mode
+PASS: Intercompany elimination
+PASS: Bank auto-match >=80%
+PASS: Payroll journals + AE
+
+> gate:phase2
+> node scripts/gates/phase2.cjs
+
+PASS: WMS FEFO
+PASS: WMS putaway
+PASS: WMS replenishment trigger
+PASS: MRP planned orders
+PASS: WO backflush
+PASS: Quality hold block
+PASS: CPQ rules
+PASS: Contract evidence
+PASS: Projects billing
+PASS: Analytics signed links
+
+> gate:phase3
+> node scripts/gates/phase3.cjs
+
+PASS: BOM versioning
+PASS: BOM multi-level
+PASS: MRP planned orders
+PASS: WO backflush
+PASS: Lot genealogy
+PASS: Quality hold + CAPA
+PASS: Supplier scoring
+PASS: Field service checklist/SLA/sign-off
+PASS: Treasury
+PASS: Analytics NLQ/scheduler/OData
+PASS: Marketplace core
+
+> gate:phase4
+> bash scripts/ci/gate-phase4.sh
+
+
+> nexa-erp@ gate:phase0 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> node scripts/gate-phase0.cjs
+
+PASS: SoD block
+PASS: Tenant scoping
+PASS: AI defaults
+PASS: OpenAPI compiles
+
+> nexa-erp@ gate:phase1 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> node scripts/gate-phase1.cjs
+
+PASS: Double-entry
+PASS: Period close block
+PASS: Adjustment mode
+PASS: Intercompany elimination
+PASS: Bank auto-match >=80%
+PASS: Payroll journals + AE
+
+> nexa-erp@ gate:phase2 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> node scripts/gates/phase2.cjs
+
+PASS: WMS FEFO
+PASS: WMS putaway
+PASS: WMS replenishment trigger
+PASS: MRP planned orders
+PASS: WO backflush
+PASS: Quality hold block
+PASS: CPQ rules
+PASS: Contract evidence
+PASS: Projects billing
+PASS: Analytics signed links
+
+> nexa-erp@ gate:phase3 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> node scripts/gates/phase3.cjs
+
+PASS: BOM versioning
+PASS: BOM multi-level
+PASS: MRP planned orders
+PASS: WO backflush
+PASS: Lot genealogy
+PASS: Quality hold + CAPA
+PASS: Supplier scoring
+PASS: Field service checklist/SLA/sign-off
+PASS: Treasury
+PASS: Analytics NLQ/scheduler/OData
+PASS: Marketplace core
+Phase 4 gate OK
+
+> gate:phase5
+> node scripts/gates/phase5.cjs
+
+PASS: web route present: apps/web/src/app/(app)/dashboard/page.tsx
+PASS: web route present: apps/web/src/app/(app)/help/page.tsx
+PASS: web route present: apps/web/src/app/(app)/enterprise/consolidation/page.tsx
+PASS: web route present: apps/web/src/app/(app)/enterprise/intercompany/page.tsx
+PASS: web route present: apps/web/src/app/(app)/industry/manufacturing/page.tsx
+PASS: web route present: apps/web/src/app/(app)/industry/construction/page.tsx
+PASS: web route present: apps/web/src/app/(app)/industry/logistics/page.tsx
+PASS: web route present: apps/web/src/app/(app)/industry/retail/page.tsx
+PASS: web route present: apps/web/src/app/(app)/industry/saas-tech/page.tsx
+PASS: web route present: apps/web/src/app/(app)/industry/professional-services/page.tsx
+PASS: web route present: apps/web/src/app/(app)/ai/workflows/page.tsx
+PASS: web route present: apps/web/src/app/(app)/ai/runs/page.tsx
+PASS: web route present: apps/web/src/app/(app)/ai/audit-logs/page.tsx
+PASS: mobile parity test present: apps/mobile/__tests__/parity.test.tsx
+PASS: script present: ui:nav:lint
+PASS: script present: ui:a11y
+PASS: script present: ui:a11y:dark
+PASS: script present: ui:perf
+PASS: script present: ui:visual
+PASS: script present: test:security
+PASS: script present: gate:phase5
+PASS: CI watches phase-5/**
+PASS: script present: openapi:generate
+PASS: script present: sdk:build
+PASS: script present: golden:all
+Phase 5 gate: OK
+[step] build
+
+> nexa-erp@ build /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> pnpm -r run build
+
+Scope: 7 of 8 workspace projects
+apps/web build$ next build
+apps/website-static build$ next build
+packages/jobs build$ tsc -p tsconfig.json
+packages/registry build$ tsc -p tsconfig.json
+apps/website-static build:   ▲ Next.js 14.2.5
+apps/website-static build:    Creating an optimized production build ...
+packages/registry build: Done
+packages/sdk-nexa build$ tsc -p tsconfig.json
+apps/web build:    ▲ Next.js 15.4.6
+apps/web build:    - Environments: .env.local
+apps/web build:    Creating an optimized production build ...
+packages/jobs build: Done
+packages/sdk-nexa build: Done
+apps/website-static build:  ✓ Compiled successfully
+apps/website-static build:    Linting and checking validity of types ...
+apps/website-static build:    Collecting page data ...
+apps/web build:  ⚠ Compiled with warnings in 3.0s
+apps/web build: ./src/app/api/pos/payment_capture/route.ts
+apps/web build: Attempted import error: 'auditPOS' is not exported from '@/lib/pos/audit' (imported as 'auditPOS').
+apps/web build: Import trace for requested module:
+apps/web build: ./src/app/api/pos/payment_capture/route.ts
+apps/web build: ./src/app/api/pos/payment_intent/route.ts
+apps/web build: Attempted import error: 'auditPOS' is not exported from '@/lib/pos/audit' (imported as 'auditPOS').
+apps/web build: Import trace for requested module:
+apps/web build: ./src/app/api/pos/payment_intent/route.ts
+apps/web build: ./src/app/api/pos/refund/route.ts
+apps/web build: Attempted import error: 'auditPOS' is not exported from '@/lib/pos/audit' (imported as 'auditPOS').
+apps/web build: Import trace for requested module:
+apps/web build: ./src/app/api/pos/refund/route.ts
+apps/web build: ./src/app/api/stripe/webhook/route.ts
+apps/web build: Attempted import error: 'auditPOS' is not exported from '@/lib/pos/audit' (imported as 'auditPOS').
+apps/web build: Import trace for requested module:
+apps/web build: ./src/app/api/stripe/webhook/route.ts
+apps/website-static build:    Generating static pages (0/33) ...
+apps/website-static build:    Generating static pages (8/33) 
+apps/website-static build:    Generating static pages (16/33) 
+apps/website-static build:    Generating static pages (24/33) 
+apps/website-static build:  ✓ Generating static pages (33/33)
+apps/website-static build:    Finalizing page optimization ...
+apps/website-static build:    Collecting build traces ...
+apps/website-static build: Route (app)                              Size     First Load JS
+apps/website-static build: ┌ ○ /                                    1.38 kB        88.5 kB
+apps/website-static build: ├ ○ /_not-found                          871 B            88 kB
+apps/website-static build: ├ ○ /about                               198 B          87.4 kB
+apps/website-static build: ├ ○ /compliance/accessibility            198 B          87.4 kB
+apps/website-static build: ├ ○ /compliance/cookies                  198 B          87.4 kB
+apps/website-static build: ├ ○ /compliance/privacy                  198 B          87.4 kB
+apps/website-static build: ├ ○ /compliance/security                 199 B          87.4 kB
+apps/website-static build: ├ ○ /contact                             198 B          87.4 kB
+apps/website-static build: ├ ○ /docs                                198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/finance                        198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/getting-started                198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/manufacturing                  198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/pos                            198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/projects                       198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/purchasing                     198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/sales-crm                      198 B          87.4 kB
+apps/website-static build: ├ ○ /docs/wms                            198 B          87.4 kB
+apps/website-static build: ├ ○ /features                            240 B          87.4 kB
+apps/website-static build: ├ ○ /industries                          198 B          87.4 kB
+apps/website-static build: ├ ○ /integrations                        198 B          87.4 kB
+apps/website-static build: ├ ○ /legal                               198 B          87.4 kB
+apps/website-static build: ├ ○ /partners                            198 B          87.4 kB
+apps/website-static build: ├ ○ /pos                                 198 B          87.4 kB
+apps/website-static build: ├ ○ /pricing                             198 B          87.4 kB
+apps/website-static build: ├ ○ /product                             3.2 kB         90.4 kB
+apps/website-static build: ├ ○ /resources                           199 B          87.4 kB
+apps/website-static build: ├ ○ /resources/posts                     198 B          87.4 kB
+apps/website-static build: ├ ○ /resources/whitepapers               198 B          87.4 kB
+apps/website-static build: ├ ○ /security                            198 B          87.4 kB
+apps/website-static build: ├ ○ /solutions                           240 B          87.4 kB
+apps/website-static build: └ ○ /status                              198 B          87.4 kB
+apps/website-static build: + First Load JS shared by all            87.2 kB
+apps/website-static build:   ├ chunks/822-fcbe836346d29027.js       31.7 kB
+apps/website-static build:   ├ chunks/ecc5d69f-34c804ab0068948e.js  53.6 kB
+apps/website-static build:   └ other shared chunks (total)          1.86 kB
+apps/website-static build: ○  (Static)  prerendered as static content
+apps/website-static build: Done
+apps/web build:  ✓ Compiled successfully in 3.0s
+apps/web build:    Skipping linting
+apps/web build:    Checking validity of types ...
+apps/web build: Failed to compile.
+apps/web build: src/app/api/billing/webhook/status/route.ts
+apps/web build: Type error: Route "src/app/api/billing/webhook/status/route.ts" has an invalid "GET" export:
+apps/web build:   Type "Request | undefined" is not a valid type for the function's first argument.
+apps/web build:     Expected "Request | NextRequest", got "Request | undefined".
+apps/web build:       Expected "Request | NextRequest", got "undefined".
+apps/web build: Next.js build worker exited with code: 1 and signal: null
+apps/web build: Failed
+/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/apps/web:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  web@0.1.0 build: `next build`
+Exit status 1
+ ELIFECYCLE  Command failed with exit code 1.
+[step] addons-check
+
+> nexa-erp@ test /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> vitest run --reporter=dot -- --run tests/security/sod-matrix.spec.ts
+
+
+ RUN  v3.2.4 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > masks sensitive fields and responds ok
+[assistant_audit] {
+  ip: [32m'loca****'[39m,
+  session: [32m'loca****'[39m,
+  route: [32m'/dashboard'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/entities/route.test.ts > entities API > lists entities
+[assistant_audit] {
+  route: [32m'/api/entities'[39m,
+  action: [32m'list'[39m,
+  session: [32m'enti****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > enforces token budget per session
+[assistant_audit] { ip: [32m'1.xxx.xxx.xxx'[39m, session: [32m's1'[39m, route: [32m'/x'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > enforces token budget per session
+[assistant_audit] { ip: [32m'1.xxx.xxx.xxx'[39m, session: [32m's1'[39m, route: [32m'/x'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/entities/route.test.ts > entities API > creates an entity with valid payload
+[assistant_audit] {
+  route: [32m'/api/entities'[39m,
+  action: [32m'create'[39m,
+  session: [32m'enti****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/integrations/hmrc-rti/status/route.test.ts > hmrc-rti status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/hmrc-rti/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·········stdout | apps/web/src/app/api/mfg/workorders/route.test.ts > mfg workorders API > lists work orders
+[assistant_audit] { route: [32m'/api/mfg/workorders'[39m, action: [32m'list'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/po/orders/route.test.ts > po orders API > lists POs
+[assistant_audit] { route: [32m'/api/po/orders'[39m, action: [32m'list'[39m, hasMasked: [33mtrue[39m }
+
+···stdout | apps/web/src/app/api/mfg/workorders/route.test.ts > mfg workorders API > creates a work order with valid payload
+[assistant_audit] { route: [32m'/api/mfg/workorders'[39m, action: [32m'create'[39m, hasMasked: [33mtrue[39m }
+
+·stdout | apps/web/src/app/api/finance/fa/assets/route.test.ts > fixed assets > creates an asset
+[assistant_audit] {
+  route: [32m'/api/finance/fa/assets'[39m,
+  module: [32m'finance'[39m,
+  action: [32m'FA_CREATE'[39m,
+  status: [32m'ok'[39m,
+  assetCode: [32m'FA-001'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·····stdout | apps/web/src/app/api/integrations/open-banking/status/route.test.ts > open-banking status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/open-banking/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/health/route.test.ts > integrations health DTO > honors enable flags env
+[assistant_audit] {
+  route: [32m'/api/integrations/health'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/orchestration/start/route.test.ts > orchestration start DTO > enqueues on POST and returns orchestration id
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'sess****-1'[39m,
+  route: [32m'/api/orchestration/start'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/start/route.test.ts > orchestration start DTO > rejects invalid payload with 400
+[assistant_audit] {
+  ip: [32m'loca****'[39m,
+  session: [32m'loca****'[39m,
+  route: [32m'/api/orchestration/start'[39m,
+  validation: [32m'fail'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/shopify/status/route.test.ts > shopify status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/shopify/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/integrations/amazon/status/route.test.ts > amazon status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/amazon/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/orchestration/queue/route.test.ts > orchestration queue API > returns queued count
+[assistant_audit] { route: [32m'/api/orchestration/queue'[39m, queued: [33m1[39m, hasMasked: [33mtrue[39m }
+
+··stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > lists queued runs
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  count: [33m1[39m,
+  total: [33m1[39m,
+  status: [32m'all'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > completes a run via POST
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  action: [32m'complete'[39m,
+  id: [32m'orc_92egxh5y94o'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > completes a run via POST
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  count: [33m1[39m,
+  total: [33m1[39m,
+  status: [32m'completed'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/pos/stripe/webhook/route.test.ts > pos stripe webhook signature verification and idempotency
+[POS AUDIT] {
+  at: [32m'2025-09-06T09:04:41.553Z'[39m,
+  route: [32m'/api/pos/stripe/webhook'[39m,
+  eventType: [32m'payment_intent.succeeded'[39m
+}
+
+stdout | apps/web/src/app/api/pos/stripe/webhook/route.test.ts > pos stripe webhook signature verification and idempotency
+[POS AUDIT] {
+  at: [32m'2025-09-06T09:04:41.558Z'[39m,
+  route: [32m'/api/pos/stripe/webhook'[39m,
+  eventType: [32m'payment_intent.succeeded'[39m,
+  status: [32m'duplicate_ignored'[39m
+}
+
+·stdout | apps/web/src/app/api/integrations/edi/status/route.test.ts > edi status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/edi/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·····stdout | apps/web/src/__tests__/connectors.mock.test.ts > mockConnectorService > connects and disconnects
+[assistant_audit] {
+  route: [32m'/settings/connectors'[39m,
+  action: [32m'connect'[39m,
+  key: [32m'google'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/__tests__/connectors.mock.test.ts > mockConnectorService > connects and disconnects
+[assistant_audit] {
+  route: [32m'/settings/connectors'[39m,
+  action: [32m'disconnect'[39m,
+  key: [32m'google'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·········stdout | apps/web/src/app/api/billing/webhook/status/route.test.ts > billing webhook status > responds 200 with configured flag
+[assistant_audit] {
+  route: [32m'/api/billing/webhook/status'[39m,
+  configured: [33mfalse[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·stdout | apps/web/src/app/api/enterprise/demo/route.test.ts > enterprise demo route > returns counts from demo file
+[assistant_audit] {
+  route: [32m'/api/enterprise/demo'[39m,
+  session: [32m'demo'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/integrations/ebay/status/route.test.ts > ebay status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/ebay/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·······stdout | apps/web/src/app/api/crm/hubspot/status/route.test.ts > hubspot status > responds 200 with configured flag
+[assistant_audit] {
+  route: [32m'/api/crm/hubspot/status'[39m,
+  configured: [33mfalse[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···································
+
+ Test Files  47 passed (47)
+      Tests  98 passed (98)
+   Start at  10:04:40
+   Duration  3.23s (transform 516ms, setup 164ms, collect 4.02s, tests 3.52s, environment 14ms, prepare 4.65s)
+
+
+> nexa-erp@ test /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+> vitest run --reporter=dot -- --run tests/webhooks/stripe-replay.spec.ts
+
+
+ RUN  v3.2.4 /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > masks sensitive fields and responds ok
+[assistant_audit] {
+  ip: [32m'loca****'[39m,
+  session: [32m'loca****'[39m,
+  route: [32m'/dashboard'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > rate limits excessive calls
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'1.xxx.xxx.xxx'[39m,
+  route: [32m'/x'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > enforces token budget per session
+[assistant_audit] { ip: [32m'1.xxx.xxx.xxx'[39m, session: [32m's1'[39m, route: [32m'/x'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/assistant/route.test.ts > assistant route > enforces token budget per session
+[assistant_audit] { ip: [32m'1.xxx.xxx.xxx'[39m, session: [32m's1'[39m, route: [32m'/x'[39m, hasMasked: [33mtrue[39m }
+
+···stdout | apps/web/src/app/api/orchestration/start/route.test.ts > orchestration start DTO > enqueues on POST and returns orchestration id
+[assistant_audit] {
+  ip: [32m'1.xxx.xxx.xxx'[39m,
+  session: [32m'sess****-1'[39m,
+  route: [32m'/api/orchestration/start'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/start/route.test.ts > orchestration start DTO > rejects invalid payload with 400
+[assistant_audit] {
+  ip: [32m'loca****'[39m,
+  session: [32m'loca****'[39m,
+  route: [32m'/api/orchestration/start'[39m,
+  validation: [32m'fail'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·····stdout | apps/web/src/app/api/mfg/workorders/route.test.ts > mfg workorders API > lists work orders
+[assistant_audit] { route: [32m'/api/mfg/workorders'[39m, action: [32m'list'[39m, hasMasked: [33mtrue[39m }
+
+stdout | apps/web/src/app/api/mfg/workorders/route.test.ts > mfg workorders API > creates a work order with valid payload
+[assistant_audit] { route: [32m'/api/mfg/workorders'[39m, action: [32m'create'[39m, hasMasked: [33mtrue[39m }
+
+··stdout | apps/web/src/app/api/finance/fa/assets/route.test.ts > fixed assets > creates an asset
+[assistant_audit] {
+  route: [32m'/api/finance/fa/assets'[39m,
+  module: [32m'finance'[39m,
+  action: [32m'FA_CREATE'[39m,
+  status: [32m'ok'[39m,
+  assetCode: [32m'FA-001'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/po/orders/route.test.ts > po orders API > lists POs
+[assistant_audit] { route: [32m'/api/po/orders'[39m, action: [32m'list'[39m, hasMasked: [33mtrue[39m }
+
+·····stdout | apps/web/src/app/api/billing/webhook/status/route.test.ts > billing webhook status > responds 200 with configured flag
+[assistant_audit] {
+  route: [32m'/api/billing/webhook/status'[39m,
+  configured: [33mfalse[39m,
+  hasMasked: [33mtrue[39m
+}
+
+·stdout | apps/web/src/app/api/pos/stripe/webhook/route.test.ts > pos stripe webhook signature verification and idempotency
+[POS AUDIT] {
+  at: [32m'2025-09-06T09:04:44.573Z'[39m,
+  route: [32m'/api/pos/stripe/webhook'[39m,
+  eventType: [32m'payment_intent.succeeded'[39m
+}
+
+stdout | apps/web/src/app/api/pos/stripe/webhook/route.test.ts > pos stripe webhook signature verification and idempotency
+[POS AUDIT] {
+  at: [32m'2025-09-06T09:04:44.576Z'[39m,
+  route: [32m'/api/pos/stripe/webhook'[39m,
+  eventType: [32m'payment_intent.succeeded'[39m,
+  status: [32m'duplicate_ignored'[39m
+}
+
+·stdout | apps/web/src/app/api/crm/hubspot/status/route.test.ts > hubspot status > responds 200 with configured flag
+[assistant_audit] {
+  route: [32m'/api/crm/hubspot/status'[39m,
+  configured: [33mfalse[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/integrations/shopify/status/route.test.ts > shopify status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/shopify/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/entities/route.test.ts > entities API > lists entities
+[assistant_audit] {
+  route: [32m'/api/entities'[39m,
+  action: [32m'list'[39m,
+  session: [32m'enti****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/entities/route.test.ts > entities API > creates an entity with valid payload
+[assistant_audit] {
+  route: [32m'/api/entities'[39m,
+  action: [32m'create'[39m,
+  session: [32m'enti****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··············stdout | apps/web/src/__tests__/connectors.mock.test.ts > mockConnectorService > connects and disconnects
+[assistant_audit] {
+  route: [32m'/settings/connectors'[39m,
+  action: [32m'connect'[39m,
+  key: [32m'google'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/__tests__/connectors.mock.test.ts > mockConnectorService > connects and disconnects
+[assistant_audit] {
+  route: [32m'/settings/connectors'[39m,
+  action: [32m'disconnect'[39m,
+  key: [32m'google'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > lists queued runs
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  count: [33m1[39m,
+  total: [33m1[39m,
+  status: [32m'all'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > completes a run via POST
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  action: [32m'complete'[39m,
+  id: [32m'orc_6letu38953d'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+stdout | apps/web/src/app/api/orchestration/runs/route.test.ts > orchestration runs API > completes a run via POST
+[assistant_audit] {
+  route: [32m'/api/orchestration/runs'[39m,
+  count: [33m1[39m,
+  total: [33m1[39m,
+  status: [32m'completed'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/hmrc-rti/status/route.test.ts > hmrc-rti status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/hmrc-rti/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/orchestration/queue/route.test.ts > orchestration queue API > returns queued count
+[assistant_audit] { route: [32m'/api/orchestration/queue'[39m, queued: [33m1[39m, hasMasked: [33mtrue[39m }
+
+·stdout | apps/web/src/app/api/integrations/health/route.test.ts > integrations health DTO > honors enable flags env
+[assistant_audit] {
+  route: [32m'/api/integrations/health'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+···········stdout | apps/web/src/app/api/enterprise/demo/route.test.ts > enterprise demo route > returns counts from demo file
+[assistant_audit] {
+  route: [32m'/api/enterprise/demo'[39m,
+  session: [32m'demo'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/integrations/amazon/status/route.test.ts > amazon status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/amazon/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/integrations/edi/status/route.test.ts > edi status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/edi/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+··stdout | apps/web/src/app/api/integrations/open-banking/status/route.test.ts > open-banking status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/open-banking/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+····stdout | apps/web/src/app/api/integrations/ebay/status/route.test.ts > ebay status > responds 200 with JSON
+[assistant_audit] {
+  route: [32m'/api/integrations/ebay/status'[39m,
+  session: [32m'heal****'[39m,
+  ip: [32m'0.xxx.xxx.xxx'[39m,
+  hasMasked: [33mtrue[39m
+}
+
+································
+
+ Test Files  47 passed (47)
+      Tests  98 passed (98)
+   Start at  10:04:43
+   Duration  2.41s (transform 583ms, setup 286ms, collect 3.86s, tests 1.20s, environment 5ms, prepare 4.46s)
+
+[error] Failures detected in Phase 00 — Pre-Build_Audit. See reports/phase-00-Pre-Build_Audit-20250906100407.log
+[fatal] Pre-Build Audit failed. Fix issues and re-run.
