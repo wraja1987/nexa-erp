@@ -1,4 +1,23 @@
 {
+  "modules": [
+    "Dashboard",
+    "Finance",
+    "HR & Payroll",
+    "Inventory & WMS",
+    "Manufacturing",
+    "Sales & CRM",
+    "Purchasing",
+    "Projects",
+    "Compliance & Tax",
+    "Banking & Billing",
+    "Enterprise & Analytics",
+    "AI & Automation",
+    "Mobile & PWA",
+    "Settings & Connectors",
+    "POS",
+    "Help",
+    "Settings"
+  ],
   "Core": [
     { "name": "Dashboard", "desc": "At-a-glance health, quick actions and AI recommendations." },
     { "name": "Users & Roles (RBAC/SoD)", "desc": "Granular access, segregation of duties, MFA and full audit trails." },
