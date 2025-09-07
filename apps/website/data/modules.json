@@ -1,0 +1,92 @@
+[
+  {"category":"Core","items":[
+    {"slug":"dashboard","name":"Dashboard","desc":"At-a-glance health, actions and AI recommendations.","actions":["Check status","See actions","Review AI tips"]},
+    {"slug":"users-roles","name":"Users & Roles (RBAC/SoD)","desc":"Granular roles, segregation of duties, MFA and audit trails.","actions":["Assign roles","Enforce SoD","Review audit"]},
+    {"slug":"tenants-settings","name":"Tenants & Settings","desc":"Multi-entity, regions/timezones, profile, backups and restore.","actions":["Manage entities","Set timezone","Run restore"]},
+    {"slug":"help-docs","name":"Help & Docs","desc":"Built-in documentation with role-based tips and tours.","actions":["Browse guides","Follow tours","Search help"]},
+    {"slug":"ai-audit-logs","name":"AI Audit Logs","desc":"Audit of AI prompts, responses and decisions with masking.","actions":["View prompts","Mask PII","Export logs"]}
+  ]},
+  {"category":"Finance","items":[
+    {"slug":"general-ledger","name":"General Ledger","desc":"Multi-company GL with journals, budgets and approvals.","actions":["Post journals","Lock periods","Approve budgets"]},
+    {"slug":"ap","name":"Accounts Payable","desc":"Supplier invoices, approvals, payments and ageing.","actions":["Capture invoice","Approve","Pay supplier"]},
+    {"slug":"ar","name":"Accounts Receivable","desc":"Customer invoices, receipts and ageing.","actions":["Raise invoice","Record receipt","Send reminder"]},
+    {"slug":"bank-cash","name":"Bank & Cash","desc":"Bank accounts, open banking feeds, cashbook and allocations.","actions":["Import feed","Allocate","Reconcile"]},
+    {"slug":"bank-reconciliation","name":"Bank Reconciliation","desc":"Auto-match with rules, manual reconcile and audit.","actions":["Match rules","Tick lines","Post diff"]},
+    {"slug":"vat-mtd","name":"VAT (MTD)","desc":"HMRC MTD VAT: authorise, view obligations and submit returns.","actions":["Authorise","View obligations","Submit return"]},
+    {"slug":"fixed-assets","name":"Fixed Assets","desc":"Register, depreciation and disposals posted to GL.","actions":["Add asset","Run depreciation","Dispose"]},
+    {"slug":"period-close","name":"Period Close","desc":"Close workflow with checklists and automated postings.","actions":["Checklist","Post close","Re-open"]},
+    {"slug":"fx-revaluation","name":"FX Revaluation","desc":"Revalue AR/AP and GL balances with postings.","actions":["Select accounts","Set rate","Post reval"]},
+    {"slug":"costing","name":"Costing","desc":"FIFO/WAV and standard costs with GL postings.","actions":["Set method","Revalue stock","Post COGS"]}
+  ]},
+  {"category":"HR & Payroll","items":[
+    {"slug":"payroll","name":"Payroll","desc":"Payroll runs, PAYE, NI, deductions, journals to GL.","actions":["Prepare run","Calculate","Post journals"]},
+    {"slug":"employees","name":"Employees","desc":"Employee master data and HR basics.","actions":["Add employee","Manage leave","Update details"]}
+  ]},
+  {"category":"Inventory & WMS","items":[
+    {"slug":"items-lots","name":"Items & Lots","desc":"Item master, lots/batches, serials and traceability.","actions":["Create item","Issue/receipt","Track lot"]},
+    {"slug":"warehouses","name":"Warehouses","desc":"Bins, locations, transfers and replenishment.","actions":["Move stock","Replenish","Transfer"]},
+    {"slug":"stock-movements","name":"Stock Movements","desc":"Issues, receipts, adjustments and inter-warehouse moves.","actions":["Adjust","Issue","Receive"]},
+    {"slug":"advanced-wms","name":"Advanced WMS (ASN, Wave, 3PL)","desc":"ASN receiving, wave picking and 3PL connectors.","actions":["Receive ASN","Create wave","Export 3PL"]},
+    {"slug":"cycle-counting","name":"Cycle Counting","desc":"Count schedules, variance analysis and approvals.","actions":["Schedule","Count","Approve"]},
+    {"slug":"quality-capa","name":"Quality (Holds & CAPA)","desc":"Inspections, holds, CAPA and tasks.","actions":["Add hold","Raise CAPA","Close task"]}
+  ]},
+  {"category":"Manufacturing","items":[
+    {"slug":"bom-routings","name":"BOM & Routings","desc":"Multi-level BOMs, alternates and routings.","actions":["Edit BOM","Add routing","Approve"]},
+    {"slug":"work-orders","name":"Work Orders","desc":"Plan, release, track and complete with backflushing.","actions":["Release","Start","Complete"]},
+    {"slug":"mrp","name":"MRP","desc":"Net requirements, proposals and exceptions.","actions":["Run MRP","Review","Accept"]},
+    {"slug":"capacity","name":"Capacity Planning","desc":"Finite capacity, bottlenecks and scenarios.","actions":["Set shifts","Simulate","Resolve bottleneck"]},
+    {"slug":"aps","name":"APS","desc":"Advanced planning and scheduling with constraints.","actions":["Sequence","Commit plan","Publish"]},
+    {"slug":"maintenance","name":"Maintenance","desc":"Preventive/corrective maintenance for assets and tooling.","actions":["Schedule PM","Record CM","Close WO"]},
+    {"slug":"plm","name":"PLM","desc":"Revisions and change control.","actions":["Revise","Approve change","Notify"]}
+  ]},
+  {"category":"Sales & CRM","items":[
+    {"slug":"leads","name":"Leads & Opportunities","desc":"Capture, score and progress opportunities.","actions":["Add lead","Score","Convert"]},
+    {"slug":"sales","name":"Quotations & Sales Orders","desc":"Quote, convert, fulfil and invoice.","actions":["Quote","Convert","Fulfil"]},
+    {"slug":"pos","name":"Point of Sale (POS)","desc":"Enterprise‑ready store‑front POS with Stripe Terminal, offline queue and PDF receipts.","actions":["Open shift","Add items","Take card/cash","Print receipt"]},
+    {"slug":"returns","name":"Returns (RMA)","desc":"Receive and credit returns with disposition.","actions":["RMA","Inspect","Credit"]},
+    {"slug":"crm-integrations","name":"CRM Integrations","desc":"HubSpot and Microsoft 365 connectors.","actions":["Connect","Sync","Review"]},
+    {"slug":"marketplace","name":"Marketplace","desc":"Shopify, Amazon and eBay order sync.","actions":["Authorise","Import","Acknowledge"]}
+  ]},
+  {"category":"Purchasing","items":[
+    {"slug":"requisitions","name":"Requisitions","desc":"Raise and approve requests before ordering.","actions":["Request","Approve","Convert to PO"]},
+    {"slug":"purchase-orders","name":"Purchase Orders","desc":"Place POs, receive, three-way match and post to AP.","actions":["Create PO","Receive","3-way match"]},
+    {"slug":"supplier-invoices","name":"Supplier Invoices & Payments","desc":"Invoice capture, approvals and payments.","actions":["Capture","Approve","Pay"]}
+  ]},
+  {"category":"Projects","items":[
+    {"slug":"projects","name":"Projects & Tasks","desc":"Milestones, tasks, time/expense and budgets.","actions":["Add task","Log time","Track budget"]},
+    {"slug":"projects-billing","name":"Costing & Billing","desc":"Track costs and bill project work.","actions":["Collect costs","Invoice","Report"]}
+  ]},
+  {"category":"Compliance & Tax","items":[
+    {"slug":"gdpr","name":"GDPR Tools & Audit","desc":"Data subject tools, retention and audit.","actions":["Search data","Export","Log audit"]},
+    {"slug":"cis","name":"CIS","desc":"Construction Industry Scheme reporting.","actions":["Record CIS","Report","Submit"]}
+  ]},
+  {"category":"Banking & Billing","items":[
+    {"slug":"open-banking","name":"Open Banking","desc":"TrueLayer feeds and authorisations.","actions":["Connect bank","Refresh","Allocate"]},
+    {"slug":"billing-metering","name":"Billing & Metering","desc":"Plans, subscriptions and usage-based billing.","actions":["Create plan","Meter usage","Invoice"]},
+    {"slug":"stripe-payments","name":"Stripe Payments","desc":"Card payments and customer portal.","actions":["Charge","Refund","Portal"]}
+  ]},
+  {"category":"Enterprise & Analytics","items":[
+    {"slug":"intercompany","name":"Intercompany & Consolidation","desc":"Post across entities and consolidate.","actions":["Map entities","Post","Consolidate"]},
+    {"slug":"multicurrency","name":"Multi-Currency & Multi-Entity","desc":"Operate globally with confidence.","actions":["Add currency","Set rates","Close"]},
+    {"slug":"analytics","name":"Analytics & Dashboards","desc":"Prebuilt and ad-hoc analysis.","actions":["Open dashboard","Build view","Export"]},
+    {"slug":"observability","name":"Observability & SIEM","desc":"Metrics, logs and SIEM export.","actions":["View logs","Mask","Export"]}
+  ]},
+  {"category":"AI & Automation","items":[
+    {"slug":"ai-assist","name":"Nexa AI Assist","desc":"Contextual AI helper in every module.","actions":["Ask","Insert","Audit"]},
+    {"slug":"ocr","name":"OCR & Document AI","desc":"Read invoices, POs and receipts.","actions":["Capture","Validate","Post"]},
+    {"slug":"predictive","name":"Predictive Scenarios","desc":"Forecasts and risk alerts.","actions":["Run scenario","Compare","Act"]},
+    {"slug":"workflows","name":"Workflows & Jobs","desc":"Automate checks and postings.","actions":["Schedule","Approve","Execute"]},
+    {"slug":"notifications","name":"Notifications","desc":"Email/SMS with audit logs.","actions":["Template","Send","Audit"]}
+  ]},
+  {"category":"Mobile & PWA","items":[
+    {"slug":"pwa","name":"Installable PWA","desc":"Works offline; add to Home Screen.","actions":["Install","Work offline","Sync"]},
+    {"slug":"apps","name":"iOS & Android App","desc":"App with biometric login.","actions":["Login","Sync","Notify"]},
+    {"slug":"offline-queue","name":"Offline Queue & Push","desc":"Sync when online; get alerts.","actions":["Queue","Sync","Receive push"]}
+  ]},
+  {"category":"Settings & Connectors","items":[
+    {"slug":"connectors","name":"Connectors","desc":"Microsoft 365, Google Workspace, Stripe, TrueLayer, HMRC VAT, Twilio, Shopify, Amazon, eBay.","actions":["Add key","Test","Monitor"]},
+    {"slug":"api-keys","name":"API Keys & Rate Limits","desc":"Manage keys, quotas and access.","actions":["Create key","Set quota","Revoke"]},
+    {"slug":"backups","name":"Backups & DR","desc":"Automated backups and disaster recovery drills.","actions":["Backup now","Restore","Review drill"]}
+  ]}
+]
+
