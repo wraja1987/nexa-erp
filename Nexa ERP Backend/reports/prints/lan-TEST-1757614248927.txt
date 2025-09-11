@@ -1,0 +1,8 @@
+Nexa POS Receipt
+Order: TEST-1757614248927
+Total: 12.34 GBP
+
+Item A 1 x 10.00
+VAT 20% 2.34
+
+Thank you
