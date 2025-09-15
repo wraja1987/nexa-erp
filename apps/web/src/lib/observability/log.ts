@@ -1,0 +1,1 @@
+export function logClient(event: string, details?: Record<string, unknown>) { console.log("[CLIENT]", event, details || {}); } export function logServer(event: string, details?: Record<string, unknown>) { console.log("[SERVER]", event, details || {}); }

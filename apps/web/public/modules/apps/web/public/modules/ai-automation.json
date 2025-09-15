@@ -1,0 +1,49 @@
+{
+  "module": "ai-automation",
+  "title": "AI & Automation",
+  "breadcrumbs": ["AI & Automation"],
+  "layout": {
+    "grid": [
+      { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+      { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+      { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+      { "area": "aiEngine", "row": 3, "col": 1, "colSpan": 12 }
+    ]
+  },
+  "kpis": [
+    { "id": "automation-runs", "label": "Automation Runs (30d)", "value": 1284, "changePct": 11.2, "changeDirection": "up", "sparkline": [32,40,38,45,44,52,60,58,65,70,72,80,84,88] },
+    { "id": "saved-hours", "label": "Saved Hours (est.)", "value": 416, "changePct": 9.4, "changeDirection": "up", "sparkline": [8,9,10,11,12,12,13,14,15,16,16,17,18,19] },
+    { "id": "active-workflows", "label": "Active Workflows", "value": 37, "changePct": 0.0, "changeDirection": "flat", "sparkline": [30,31,31,32,33,33,34,35,35,36,36,37,37,37] }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "invoice-automation",
+        "icon": "Wand2",
+        "message": "Automating invoice data capture would remove ~18 manual steps per invoice.",
+        "tags": ["Finance", "OCR", "Workflows"],
+        "severity": "info",
+        "actions": [
+          { "label": "Enable OCR flow", "href": "/app/ai-automation/ocr-document-ai" }
+        ]
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      { "id": "open-assist", "label": "Open Nexa AI Assist", "icon": "Bot", "href": "/app/ai-automation/nexa-ai-assist" },
+      { "id": "new-workflow", "label": "Create Workflow", "icon": "Workflow", "href": "/app/ai-automation/workflows-jobs" },
+      { "id": "upload-doc", "label": "Upload Document", "icon": "FileUp", "href": "/app/ai-automation/ocr-document-ai" },
+      { "id": "notification-rules", "label": "Notification Rules", "icon": "Bell", "href": "/app/ai-automation/notifications" }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Describe an automation you want to build…",
+    "endpoint": "/api/ai/engine"
+  }
+}
+
+

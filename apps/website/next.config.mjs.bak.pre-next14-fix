@@ -1,0 +1,9 @@
+/** @type {import(next).NextConfig} */
+const nextConfig = {
+  // Disable static export to allow Server Actions (fixes: "Server Actions are not supported with static export")
+  output: standalone,
+  // If you had experimental server action settings, keep defaults; marketing site should be simple
+  experimental: {},
+  // Optional: ensure images/domains etc. can be added later
+};
+export default nextConfig;

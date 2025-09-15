@@ -1,0 +1,36 @@
+{
+  "module": "admin/backups",
+  "title": "Backups & DR",
+  "breadcrumbs": ["Admin", "Backups & DR"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "snapshots", "label": "Snapshots", "value": 96 },
+    { "id": "last-backup", "label": "Last Backup (hrs)", "value": 2 },
+    { "id": "retention", "label": "Retention (days)", "value": 30 }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "retention", "icon": "Info", "message": "Backups meet retention policy. Consider weekly archive to cold storage.", "tags": ["DR"], "severity": "info" }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "backup-now", "label": "Run Backup", "icon": "Play", "href": "/admin/backups?run=1" },
+    { "id": "restore", "label": "Restore", "icon": "History", "href": "/admin/backups/restore" }
+  ]},
+  "table": {
+    "title": "Recent Backups",
+    "columns": ["ID","Time","Size","Status","Retention"],
+    "rows": [
+      ["bk-2381","2025-09-14 10:00","1.2 GB","OK","30d"],
+      ["bk-2380","2025-09-13 10:00","1.1 GB","OK","30d"],
+      ["bk-2379","2025-09-12 10:00","1.1 GB","OK","30d"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about Backups & DR…", "endpoint": "/api/ai/engine" }
+}
+
+

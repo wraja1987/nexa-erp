@@ -1,0 +1,20 @@
+# name: Synthetic Transactions
+# on:
+#   schedule:
+#     - cron: '0 2 * * *'  # nightly
+#   push:
+#     branches: [ main ]
+# jobs:
+#   synthetic:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: '20'
+#       - run: npm i -g playwright && npx playwright install --with-deps
+#       - run: npx playwright test
+#         working-directory: ops/synthetic
+#         env:
+#           PORTAL_URL: https://nexaai.co.uk
+

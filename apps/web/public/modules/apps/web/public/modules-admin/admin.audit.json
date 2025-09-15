@@ -1,0 +1,39 @@
+{
+  "module": "admin/audit-logs",
+  "title": "Audit Logs",
+  "breadcrumbs": ["Admin", "Audit Logs"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "events-24h", "label": "Events (24h)", "value": 18240 },
+    { "id": "flagged", "label": "Flagged", "value": 12 },
+    { "id": "users", "label": "Active Users", "value": 196 }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "spike", "icon": "Activity", "message": "Login failures spiked 24% in the last hour.", "tags": ["Security","Auth"], "severity": "warning",
+      "actions": [{ "label": "Open SIEM", "href": "/app/enterprise-analytics/observability-siem" }] }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "export", "label": "Export CSV", "icon": "Download", "href": "/admin/audit-logs/export" },
+    { "id": "filters", "label": "Advanced Filters", "icon": "Filter", "href": "/admin/audit-logs?filters=1" }
+  ]},
+  "table": {
+    "title": "Audit (recent)",
+    "columns": ["Time", "Actor", "Action", "Target", "Result"],
+    "rows": [
+      ["2025-09-14 11:02", "akhan", "login", "-", "success"],
+      ["2025-09-14 11:00", "spatel", "update", "role:Finance Manager", "success"],
+      ["2025-09-14 10:58", "mlewis", "delete", "wh:BIN-02", "denied"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about Audit Logs…", "endpoint": "/api/ai/engine" }
+}
+
+
+
+

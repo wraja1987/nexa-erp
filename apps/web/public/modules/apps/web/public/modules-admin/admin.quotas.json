@@ -1,0 +1,37 @@
+{
+  "module": "admin/quotas",
+  "title": "Quotas",
+  "breadcrumbs": ["Admin", "Quotas"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "near-limit", "label": "Near Limit", "value": 2 },
+    { "id": "at-limit", "label": "At/Over Limit", "value": 0 },
+    { "id": "avg-usage", "label": "Avg Usage %", "value": 41, "suffix": "%" }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "scale", "icon": "TrendingUp", "message": "Acme is trending to 80% API call usage by Friday; consider tier bump.", "tags": ["Quota"], "severity": "info" }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "set-quota", "label": "Set Quota", "icon": "Gauge", "href": "/admin/quotas?set=1" }
+  ]},
+  "table": {
+    "title": "Tenant Quotas",
+    "columns": ["Tenant","Metric","Limit","Usage (24h)","% Used"],
+    "rows": [
+      ["Acme Ltd","API calls","1200/min","1130/min","94%"],
+      ["Globex EU","Storage","2 TB","1.1 TB","55%"],
+      ["Umbrella Plc","Events/day","5M","2.6M","52%"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about Quotas…", "endpoint": "/api/ai/engine" }
+}
+
+
+
+

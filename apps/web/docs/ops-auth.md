@@ -14,3 +14,7 @@ pnpm --filter ./apps/web run seed:admin
 Creates or updates `admin@nexa.local` with password `NexaAdmin!123`.
 
 
+
+
+
+

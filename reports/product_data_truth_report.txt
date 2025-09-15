@@ -1,0 +1,39 @@
+Nexa ERP — Product & Data Truth Run
+Started: 2025-09-14T08:16:31Z
+Repo: /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP
+
+PASS: pnpm present
+PASS: Env flag present: HUBSPOT_ENABLED
+PASS: Env flag present: MARKETPLACE_ENABLED
+PASS: Env flag present: TWILIO_SMS_ENABLED
+
+[2025-09-14T08:16:31Z] Installing dependencies…
+PASS: Dependencies installed
+[2025-09-14T08:16:32Z] Applying Prisma migrations…
+PASS: Prisma migrations applied
+
+{
+  "ok": true,
+  "results": {
+    "demo": {
+      "demoHandled": false,
+      "userHandled": false
+    },
+    "flagsTable": null,
+    "modules": {
+      "synced": false,
+      "reason": "No Module table"
+    }
+  }
+}
+
+Alignment Test: PASS
+
+========== SUMMARY ==========
+Env flags set: HUBSPOT_ENABLED=false, MARKETPLACE_ENABLED=false, TWILIO_SMS_ENABLED=false
+Demo tenant & user: 
+Flags backend (DB table used): 
+Modules sync (DB): 
+Website↔ERP alignment test: PASS
+Report saved to: reports/product_data_truth_report.txt
+Finished: 2025-09-14T08:16:35Z

@@ -1,0 +1,36 @@
+{
+  "module": "admin/keys",
+  "title": "API Keys & Rate Limits",
+  "breadcrumbs": ["Admin", "API Keys & Rate Limits"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "active-keys", "label": "Active Keys", "value": 42 },
+    { "id": "rate-limit", "label": "Default Rate Limit", "value": 1200, "suffix": "/min" },
+    { "id": "calls-24h", "label": "Calls (24h)", "value": 186000 }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "abuse", "icon": "AlertTriangle", "message": "Key sk_****9TZ hit 95% of its minute limit twice today.", "tags": ["Rate Limits"], "severity": "warning" }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "new-key", "label": "Create API Key", "icon": "KeyRound", "href": "/admin/keys?new=1" },
+    { "id": "limits", "label": "Adjust Rate Limits", "icon": "Sliders", "href": "/admin/keys?view=limits" }
+  ]},
+  "table": {
+    "title": "Keys",
+    "columns": ["Key", "Scope", "Created", "Limit (/min)", "Status"],
+    "rows": [
+      ["sk_live_****1AB", "public", "2025-08-02", "1200", "Active"],
+      ["sk_live_****9TZ", "internal", "2025-05-16", "1200", "Active"],
+      ["sk_test_****3XY", "test", "2025-01-10", "600", "Revoked"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about API Keys & Rate Limits…", "endpoint": "/api/ai/engine" }
+}
+
+

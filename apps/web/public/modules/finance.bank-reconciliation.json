@@ -1,0 +1,112 @@
+{
+  "module": "finance/bank-reconciliation",
+  "title": "Bank Reconciliation",
+  "breadcrumbs": [
+    "Finance",
+    "Bank Reconciliation"
+  ],
+  "layout": {
+    "grid": [
+      {
+        "area": "kpis",
+        "row": 1,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "insights",
+        "row": 2,
+        "col": 1,
+        "colSpan": 8
+      },
+      {
+        "area": "quickLinks",
+        "row": 2,
+        "col": 9,
+        "colSpan": 4
+      },
+      {
+        "area": "data",
+        "row": 3,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "aiEngine",
+        "row": 4,
+        "col": 1,
+        "colSpan": 12
+      }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Ask about Bank Reconciliation…",
+    "endpoint": "/api/ai/engine"
+  },
+  "kpis": [
+    {
+      "id": "pending",
+      "label": "Statements Pending",
+      "value": 3
+    },
+    {
+      "id": "matched",
+      "label": "Matched %",
+      "value": 98,
+      "suffix": "%"
+    },
+    {
+      "id": "oldest",
+      "label": "Oldest Pending (d)",
+      "value": 4
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "insight-1",
+        "icon": "Lightbulb",
+        "message": "Consider reviewing bank reconciliation KPIs this week.",
+        "tags": [
+          "Bank"
+        ],
+        "severity": "info"
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      {
+        "id": "import",
+        "label": "Import Statement",
+        "href": "/app/finance/bank-reconciliation"
+      }
+    ]
+  },
+  "table": {
+    "title": "Reconciliations",
+    "columns": [
+      "Account",
+      "Statement Date",
+      "Imported",
+      "Matched"
+    ],
+    "rows": [
+      [
+        "Main",
+        "2025-09-10",
+        "Yes",
+        "98%"
+      ],
+      [
+        "Ops",
+        "2025-09-09",
+        "Yes",
+        "96%"
+      ]
+    ]
+  }
+}

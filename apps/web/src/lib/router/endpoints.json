@@ -1,0 +1,111 @@
+{
+  "dashboard": { "_": "/api/dashboard/summary" },
+  "finance": {
+    "_": "/api/finance/summary",
+    "general-ledger": "/api/finance/gl/summary",
+    "accounts-payable": "/api/finance/ap/summary",
+    "accounts-receivable": "/api/finance/ar/summary",
+    "bank-and-cash": "/api/finance/bank-cash/summary",
+    "vat-mtd": "/api/finance/vat/summary",
+    "fixed-assets": "/api/finance/fixed-assets/summary",
+    "period-close": "/api/finance/period-close/summary",
+    "fx-revaluation": "/api/finance/fx-revaluation/summary",
+    "costing": "/api/finance/costing/summary"
+  },
+  "hr-and-payroll": {
+    "_": "/api/hr/summary",
+    "employees": "/api/hr/employees/summary",
+    "payroll": "/api/hr/payroll/summary"
+  },
+  "inventory-and-wms": {
+    "_": "/api/inventory/summary",
+    "items-and-lots": "/api/inventory/items/summary",
+    "warehouses": "/api/inventory/warehouses/summary",
+    "stock-movements": "/api/inventory/movements/summary",
+    "advanced-wms-asn-wave-3pl": "/api/inventory/wms/summary",
+    "cycle-counting": "/api/inventory/cycle-count/summary",
+    "quality-holds-capa": "/api/inventory/quality/summary"
+  },
+  "manufacturing": {
+    "_": "/api/manufacturing/summary",
+    "bom-and-routings": "/api/manufacturing/bom/summary",
+    "work-orders": "/api/manufacturing/work-orders/summary",
+    "mrp": "/api/manufacturing/mrp/summary",
+    "capacity-planning": "/api/manufacturing/capacity/summary",
+    "aps": "/api/manufacturing/aps/summary",
+    "maintenance": "/api/manufacturing/maintenance/summary",
+    "plm": "/api/manufacturing/plm/summary"
+  },
+  "sales-and-crm": {
+    "_": "/api/sales/summary",
+    "leads-and-opportunities": "/api/sales/leads/summary",
+    "quotations-and-sales-orders": "/api/sales/orders/summary",
+    "returns-rma": "/api/sales/returns/summary"
+  },
+  "purchasing": {
+    "_": "/api/purchasing/summary",
+    "requisitions": "/api/purchasing/requisitions/summary",
+    "purchase-orders": "/api/purchasing/orders/summary",
+    "supplier-invoices-and-payments": "/api/purchasing/supplier-invoices/summary"
+  },
+  "projects": {
+    "_": "/api/projects/summary",
+    "projects-and-tasks": "/api/projects/tasks/summary",
+    "costing-and-billing": "/api/projects/costing/summary"
+  },
+  "compliance-and-tax": {
+    "_": "/api/compliance/summary",
+    "gdpr-tools-and-audit": "/api/compliance/gdpr/summary",
+    "cis": "/api/compliance/cis/summary"
+  },
+  "banking-and-billing": {
+    "_": "/api/banking/summary",
+    "open-banking": "/api/banking/open-banking/summary",
+    "billing-and-metering": "/api/banking/billing/summary",
+    "stripe-payments": "/api/banking/stripe/summary"
+  },
+  "enterprise-and-analytics": {
+    "_": "/api/enterprise/summary",
+    "intercompany-and-consolidation": "/api/enterprise/intercompany/summary",
+    "multi-currency-and-multi-entity": "/api/enterprise/multi-entity/summary",
+    "analytics-and-dashboards": "/api/enterprise/analytics/summary",
+    "observability-and-siem": "/api/enterprise/siem/summary"
+  },
+  "ai-and-automation": {
+    "_": "/api/ai/summary",
+    "nexa-ai-assist": "/api/ai/assist/summary",
+    "ocr-and-document-ai": "/api/ai/ocr/summary",
+    "predictive-scenarios": "/api/ai/predictive/summary",
+    "workflows-and-jobs": "/api/ai/workflows/summary",
+    "notifications": "/api/ai/notifications/summary"
+  },
+  "pos": {
+    "_": "/api/pos/summary",
+    "stripe-terminal-checkout": "/api/pos/terminal/summary",
+    "receipts-html-pdf": "/api/pos/receipts/summary",
+    "offline-park-to-sync": "/api/pos/offline-sync/summary",
+    "reconciliation": "/api/pos/reconciliation/summary",
+    "postings": "/api/pos/postings/summary",
+    "xz-reports": "/api/pos/reports/summary"
+  },
+  "help": { "_": "/api/help/summary", "docs": "/api/help/docs/summary", "support": "/api/help/support/summary" },
+  "settings": {
+    "_": "/api/settings/summary",
+    "connectors": "/api/settings/connectors/summary",
+    "api-keys-and-rate-limits": "/api/settings/api-keys/summary",
+    "backups-and-dr": "/api/settings/backups/summary",
+    "appearance-theme": "/api/settings/theme/summary",
+    "byok-vault": "/api/settings/byok/summary",
+    "plans-and-quotas": "/api/settings/plans/summary",
+    "audit-logs": "/api/settings/audit/summary",
+    "tenants-and-settings": "/api/settings/tenants/summary",
+    "users-and-roles": "/api/settings/users/summary"
+  }
+}
+
+
+
+
+
+
+

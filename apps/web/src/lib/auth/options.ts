@@ -1,14 +1,16 @@
-import type { NextAuthConfig } from 'next-auth'
+// Support NextAuth v4 typings
+import type { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import AzureADProvider from 'next-auth/providers/azure-ad'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { authenticator } from 'otplib'
 import bcrypt from 'bcrypt'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export function buildAuthConfig(): NextAuthConfig {
-  const providers: NextAuthConfig['providers'] = []
+export function buildAuthConfig(): NextAuthOptions {
+  const providers: NextAuthOptions['providers'] = [] as any
 
   // Credentials provider is always available
   providers.push(
@@ -17,10 +19,12 @@ export function buildAuthConfig(): NextAuthConfig {
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
+        otp: { label: 'One-time code', type: 'text', placeholder: '123456' },
       },
       authorize: async (credentials) => {
         const email = credentials?.email as string | undefined
         const password = credentials?.password as string | undefined
+        const otp = credentials?.otp as string | undefined
         if (!email || !password) return null
 
         const user = await prisma.user.findUnique({ where: { email } }).catch(() => null)
@@ -31,6 +35,16 @@ export function buildAuthConfig(): NextAuthConfig {
 
         const ok = await bcrypt.compare(password, passwordHash)
         if (!ok) return null
+
+        // Enforce MFA for credential sign-in when enabled
+        const mfaEnabled = (user as any).mfaEnabled === true
+        const mfaSecret = (user as any).mfaSecret as string | undefined
+        if (mfaEnabled) {
+          if (!mfaSecret || !otp || !authenticator.verify({ token: otp, secret: mfaSecret })) {
+            // Signal error to NextAuth
+            throw new Error('mfa_required')
+          }
+        }
 
         return {
           id: String((user as any).id ?? email),
@@ -63,7 +77,7 @@ export function buildAuthConfig(): NextAuthConfig {
     )
   }
 
-  const config: NextAuthConfig = {
+  const config: NextAuthOptions = {
     providers,
     pages: {
       signIn: '/login',

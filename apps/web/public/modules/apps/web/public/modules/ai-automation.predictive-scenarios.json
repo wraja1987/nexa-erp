@@ -1,0 +1,28 @@
+{
+  "module": "ai-automation/predictive-scenarios",
+  "title": "Predictive Scenarios",
+  "breadcrumbs": ["AI & Automation", "Predictive Scenarios"],
+  "layout": {
+    "grid": [
+      { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+      { "area": "content", "row": 2, "col": 1, "colSpan": 12 }
+    ]
+  },
+  "kpis": [
+    { "id": "scenarios", "label": "Saved Scenarios", "value": 12 },
+    { "id": "forecast-horizon", "label": "Forecast Horizon (months)", "value": 6 }
+  ],
+  "content": {
+    "type": "table",
+    "columns": ["Scenario", "Area", "Assumption", "Impact"],
+    "rows": [
+      ["Price +3%", "Sales", "Increase list price by 3%", "GP +£48k"],
+      ["Lead time +5d", "Inventory", "Supplier delay", "Stockout risk ↑"]
+    ],
+    "actions": [
+      { "label": "New Scenario", "href": "/app/ai-automation/predictive-scenarios" }
+    ]
+  }
+}
+
+

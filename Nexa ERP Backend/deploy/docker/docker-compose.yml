@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  api:
+    image: node:20-alpine
+    working_dir: /srv/app
+    volumes:
+      - ../../..:/src:ro
+    command: sh -lc "cd /src/apps/web && pnpm -w install && pnpm -w build && node .next/standalone/apps/web/server.js"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    env_file:
+      - ../.env
+    depends_on:
+      - db
+      - redis
+    networks: [nexa]
+    expose:
+      - "3001"
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=nexa
+      - POSTGRES_USER=nexa
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-nexa}
+    volumes:
+      - nexa_pg:/var/lib/postgresql/data
+    networks: [nexa]
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server","--appendonly","yes"]
+    volumes:
+      - nexa_redis:/data
+    networks: [nexa]
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - api
+    networks: [nexa]
+
+networks:
+  nexa: {}
+
+volumes:
+  nexa_pg: {}
+  nexa_redis: {}

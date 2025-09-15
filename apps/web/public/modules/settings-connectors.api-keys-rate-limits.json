@@ -1,0 +1,111 @@
+{
+  "module": "settings-connectors/api-keys-rate-limits",
+  "title": "API Keys & Rate Limits",
+  "breadcrumbs": [
+    "Settings & Connectors",
+    "API Keys & Rate Limits"
+  ],
+  "layout": {
+    "grid": [
+      {
+        "area": "kpis",
+        "row": 1,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "insights",
+        "row": 2,
+        "col": 1,
+        "colSpan": 8
+      },
+      {
+        "area": "quickLinks",
+        "row": 2,
+        "col": 9,
+        "colSpan": 4
+      },
+      {
+        "area": "data",
+        "row": 3,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "aiEngine",
+        "row": 4,
+        "col": 1,
+        "colSpan": 12
+      }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Ask about API Keys & Rate Limits…",
+    "endpoint": "/api/ai/engine"
+  },
+  "kpis": [
+    {
+      "id": "keys",
+      "label": "Active Keys",
+      "value": 8
+    },
+    {
+      "id": "limits",
+      "label": "Rate Limits",
+      "value": 1200
+    },
+    {
+      "id": "calls",
+      "label": "Calls (24h)",
+      "value": 1842
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "insight-1",
+        "icon": "Lightbulb",
+        "message": "Consider reviewing api keys & rate limits KPIs this week.",
+        "tags": [
+          "API"
+        ],
+        "severity": "info"
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      {
+        "id": "new-key",
+        "label": "New Key",
+        "href": "/app/settings-connectors/api-keys-rate-limits"
+      }
+    ]
+  },
+  "table": {
+    "title": "Keys",
+    "columns": [
+      "Key",
+      "Scope",
+      "Created",
+      "Limit"
+    ],
+    "rows": [
+      [
+        "sk_live_***",
+        "read",
+        "2024-01-01",
+        "1200"
+      ],
+      [
+        "sk_live_***",
+        "write",
+        "2024-05-12",
+        "600"
+      ]
+    ]
+  }
+}

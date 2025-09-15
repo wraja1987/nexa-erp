@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS tenant_keys (
+  tenant_id TEXT PRIMARY KEY,
+  enc_key BYTEA NOT NULL,
+  alg TEXT NOT NULL DEFAULT 'AES-256-GCM',
+  version INTEGER NOT NULL DEFAULT 1,
+  rotated_at TIMESTAMPTZ DEFAULT NOW(),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+
+

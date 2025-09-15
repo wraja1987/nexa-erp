@@ -1,0 +1,37 @@
+name: Nexa CI
+on:
+  push:
+  pull_request:
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with: { version: 9 }
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -w lint
+      - run: pnpm -w typecheck
+      - run: pnpm --filter web build
+      - name: Start web
+        run: pnpm --filter web start &
+      - name: Wait for server
+        run: |
+          for i in {1..60}; do curl -sSf http://localhost:3000 >/dev/null && exit 0; sleep 1; done; exit 1
+      - name: Previews + axe
+        run: |
+          pnpm -w make:previews
+          pnpm -w snap:a11y
+          node -e 'const fs=require("fs"),path=require("path");const roots=["apps/web/public/previews/desktop","apps/web/public/previews/tablet","apps/web/public/previews/mobile"];let total=0;for(const r of roots){if(!fs.existsSync(r))continue;for(const f of fs.readdirSync(r).filter(n=>n.endsWith(".axe.json"))){const j=JSON.parse(fs.readFileSync(path.join(r,f),"utf8"));total+=(j.violations||[]).length;}}if(total>0){console.error("AXE violations:",total);process.exit(1);}console.log("AXE OK");'
+      - name: Lighthouse budgets
+        run: node scripts/lighthouse.cjs
+      - name: Playwright E2E
+        run: |
+          pnpm -w add -D @playwright/test
+          npx -y playwright install --with-deps
+          npx -y playwright test tests/e2e/smoke.spec.ts

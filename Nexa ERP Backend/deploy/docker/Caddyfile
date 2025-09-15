@@ -1,0 +1,13 @@
+{
+  email admin@nexaai.co.uk
+}
+nexaai.co.uk, www.nexaai.co.uk {
+  root * /var/www/html
+  file_server
+}
+app.nexaai.co.uk {
+  reverse_proxy api:3001
+}
+api.nexaai.co.uk {
+  reverse_proxy api:3001
+}

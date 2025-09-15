@@ -1,13 +1,31 @@
 {
   "expo": {
-    "name": "Nexa ERP",
-    "slug": "nexa-erp",
-    "version": "1.0.0",
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "name": "Nexa",
+    "slug": "nexa",
+    "scheme": "nexa",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F7F9FC"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "uk.co.nexa.app"
+    },
+    "android": {
+      "package": "uk.co.nexa.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "extra": {
+      "API_BASE_URL": "${API_BASE_URL}",
+      "API_TOKEN": "${API_TOKEN}",
+      "SIMULATE": "${SIMULATE}"
+    },
+    "plugins": []
   }
 }
-
-
-

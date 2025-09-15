@@ -3,7 +3,7 @@ import { ensureRoleAllowed, getRoleFromRequest } from '../../../../../lib/rbac'
 import { audit } from '../../../../../lib/log/mask'
 import { withCorrelation } from '../../../../../lib/logger'
 
-export async function GET(req?: Request) {
+export async function GET(req: Request) {
   const corr = withCorrelation()
   try {
     const role = req ? getRoleFromRequest(req) : 'user'
@@ -20,5 +20,9 @@ export async function GET(req?: Request) {
     return NextResponse.json({ ok: false, code: 'bad_request', message, ...corr }, { status: 400 })
   }
 }
+
+
+
+
 
 

@@ -1,0 +1,11 @@
+{
+  "title": "Nexa SLO Overview",
+  "panels": [
+    { "type": "graph", "title": "Uptime Probe (api)", "targets": [{ "expr": "probe_success{job='blackbox',target='api'}" }] },
+    { "type": "graph", "title": "Latency p95 (s)", "targets": [{ "expr": "job:http_request_duration_seconds:p95" }] },
+    { "type": "graph", "title": "API 5xx Rate", "targets": [{ "expr": "job:http_5xx_rate5m" }] },
+    { "type": "graph", "title": "5xx Logs Count", "targets": [{ "expr": "sum(rate({job='loki'} |= ' 5xx ')[5m])" }] },
+    { "type": "graph", "title": "DB/Redis Health", "targets": [{ "expr": "up{job=~'postgres|redis'}" }] }
+  ]
+}
+

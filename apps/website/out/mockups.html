@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexa ERP — Website Mock-ups Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0F2747;--blue:#2E6BFF;--violet:#7A4DFF;--bg:#F7F9FC;--text:#0B1424}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--text);background:var(--bg);}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    header{position:sticky;top:0;z-index:50;background:#fffccccc;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #e5e7eb}
+    header .bar{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    nav a{margin:0 10px;text-decoration:none;color:var(--navy);font-weight:600}
+    .login{border:1px solid #d1d5db;padding:8px 14px;border-radius:999px}
+    .hero{background:linear-gradient(135deg,var(--navy),var(--violet));color:#fff;padding:96px 0 72px;position:relative;overflow:hidden}
+    .hero h1{font-size:48px;line-height:1.1;margin:0 0 12px}
+    .hero p{font-size:18px;opacity:.95;margin:0 0 20px;max-width:900px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:600}
+    .btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 24px rgba(46,107,255,.35)}
+    .btn-secondary{border:1px solid rgba(46,107,255,.45);color:var(--blue);background:#fff}
+    .band{padding:72px 0}
+    h2{font-size:32px;margin:0 0 8px} .sub{color:#475569;margin-top:0}
+    .grid{display:grid;gap:24px}
+    .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(16,24,40,.06)}
+    .muted{color:#475569}
+    .footer{border-top:1px solid #e5e7eb;background:#fff;padding:48px 0;margin-top:72px}
+    .cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .pill{display:inline-block;background:rgba(46,107,255,.1);color:var(--blue);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:600}
+    .gradient-band{background:linear-gradient(135deg,var(--navy),var(--violet));color:#fff}
+    .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .focus-outline:focus{outline:3px solid #111827;outline-offset:2px}
+    .small{font-size:14px}
+    .cookie{position:fixed;right:16px;bottom:16px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:16px;max-width:360px;z-index:100}
+    .cookie .actions{display:flex;gap:8px;margin-top:10px}
+    @media (max-width:980px){.cols-3,.cols-4{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container bar">
+      <div style="display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:800;letter-spacing:.2px">
+        <span class="pill">N</span> NEXA
+      </div>
+      <nav aria-label="Main">
+        <a href="#home" class="focus-outline">Home</a>
+        <a href="#solutions" class="focus-outline">Solutions</a>
+        <a href="#industries" class="focus-outline">Industries</a>
+        <a href="#features" class="focus-outline">Features</a>
+        <a href="#docs" class="focus-outline">Docs</a>
+        <a href="#contact" class="focus-outline">Contact</a>
+        <a href="#legal" class="focus-outline">Legal</a>
+      </nav>
+      <a href="/login" class="login focus-outline">Login</a>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Smarter. Faster. More Secure.</h1>
+      <p>Nexa is an AI‑powered ERP that brings finance, operations, and manufacturing together so you can run a tighter, more predictable business.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="/contact#demo" class="btn btn-primary focus-outline">Get a demo</a>
+        <a href="/solutions" class="btn btn-secondary focus-outline">Explore solutions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <h2>Core Features</h2>
+      <p class="sub muted">Six illuminated cards linking to key areas.</p>
+      <div class="grid cols-3">
+        <div class="card"><h3>Finance</h3><p class="muted small">GL, AP/AR, VAT (MTD), Bank Reconciliation, Fixed Assets, Costing, Period Close.</p><a href="/solutions#finance" class="btn btn-secondary small" style="margin-top:8px">View Finance</a></div>
+        <div class="card"><h3>Inventory & WMS</h3><p class="muted small">Items & lots, multi‑warehouse, ASN/Wave/3PL, cycle count, quality.</p><a href="/solutions#inventory-wms" class="btn btn-secondary small" style="margin-top:8px">View Inventory</a></div>
+        <div class="card"><h3>Manufacturing</h3><p class="muted small">BOMs, Routings, Work Orders, MRP, APS, Capacity, Maintenance, PLM.</p><a href="/solutions#manufacturing" class="btn btn-secondary small" style="margin-top:8px">View Manufacturing</a></div>
+        <div class="card"><h3>AI Assist</h3><p class="muted small">In‑app help, OCR & Document AI, predictions, workflows, notifications.</p><a href="/features#ai" class="btn btn-secondary small" style="margin-top:8px">See AI</a></div>
+        <div class="card"><h3>Analytics</h3><p class="muted small">Dashboards, KPIs, forecasting, exports, self‑serve.</p><a href="/features#analytics" class="btn btn-secondary small" style="margin-top:8px">Analytics</a></div>
+        <div class="card"><h3>Connectors</h3><p class="muted small">Microsoft 365, Google Workspace, Stripe, TrueLayer, HMRC VAT, Twilio, Shopify/Amazon/eBay.</p><a href="/features#integrations" class="btn btn-secondary small" style="margin-top:8px">Integrations</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="band gradient-band">
+    <div class="container">
+      <h2>AI Engine</h2>
+      <p class="sub" style="color:#e7eaf3">Layered rings: Core Nexa AI → ERP modules → Industries.</p>
+      <a href="/features#ai" class="btn btn-primary focus-outline">See how it connects</a>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <h2>Why choose Nexa</h2>
+      <ul class="muted">
+        <li>AI in every module; faster close; fewer manual steps</li>
+        <li>RBAC/SoD and audit; GDPR‑ready</li>
+        <li>Clear dashboards; reliable integrations</li>
+      </ul>
+      <a href="/features" class="btn btn-secondary" style="margin-top:12px">Compare modules</a>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <h2>Capabilities & KPIs</h2>
+      <p class="muted sub">Donut: 60% AI Automation, 20% ERP, 10% Analytics, 5% Security, 5% Scalability.</p>
+      <div class="kpis">
+        <div class="card"><strong>DSO</strong><div class="muted small">Sparkline preview</div></div>
+        <div class="card"><strong>Pick accuracy</strong><div class="muted small">Sparkline preview</div></div>
+        <div class="card"><strong>On‑time close</strong><div class="muted small">Sparkline preview</div></div>
+      </div>
+      <a href="/features#analytics" class="btn btn-secondary" style="margin-top:12px">View analytics features</a>
+    </div>
+  </section>
+
+  <section id="solutions" class="band gradient-band">
+    <div class="container">
+      <h2>Solutions catalogue</h2>
+      <p>All modules grouped: Core, Finance, HR & Payroll, Inventory & WMS, Manufacturing, Sales & CRM, Purchasing, Projects, Compliance & Tax, Banking & Billing, Enterprise & Analytics, AI & Automation, Mobile & PWA, Settings & Connectors.</p>
+      <a href="/solutions" class="btn btn-primary">Browse modules</a>
+    </div>
+  </section>
+
+  <section id="industries" class="band">
+    <div class="container">
+      <h2>Built for every industry</h2>
+      <div class="grid cols-3">
+        <div class="card"><h3>Wholesale & Distribution</h3><p class="muted small">Inventory & WMS, Purchasing, Sales, Open Banking, Analytics.</p><a href="/contact#demo" class="btn btn-secondary small" style="margin-top:8px">Book a demo</a></div>
+        <div class="card"><h3>Manufacturing & Supply Chain</h3><p class="muted small">BOM, Work Orders, MRP, APS, Quality, Maintenance.</p><a href="/contact#demo" class="btn btn-secondary small" style="margin-top:8px">Book a demo</a></div>
+        <div class="card"><h3>Retail & eCommerce</h3><p class="muted small">Marketplace, Orders, Returns, WMS, Billing.</p><a href="/contact#demo" class="btn btn-secondary small" style="margin-top:8px">Book a demo</a></div>
+      </div>
+      <p class="muted" style="margin-top:12px">Plus: Construction, Healthcare suppliers, F&B distribution, Automotive parts, Pharma/Life Sciences, Non‑profits, Education suppliers, Energy & Utilities services, Professional services boutiques, Government suppliers.</p>
+      <a href="/contact#demo" class="btn btn-secondary" style="margin-top:12px">Talk to an expert</a>
+    </div>
+  </section>
+
+  <section id="docs" class="band gradient-band">
+    <div class="container">
+      <h2>Docs hub</h2>
+      <p>Finance, WMS, Manufacturing, Open Banking, Billing & Metering, Analytics, AI Assist, Observability, Mobile, Connectors, Getting Started, API Keys, Backups/DR.</p>
+      <a href="/contact#support" class="btn btn-primary">Need help?</a>
+    </div>
+  </section>
+
+  <section id="contact" class="band">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="muted">Email <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> • Phone <a href="tel:+447398975374">+44 7398 975374</a></p>
+      <a href="/contact#demo" class="btn btn-primary">Book a demo</a>
+    </div>
+  </section>
+
+  <section id="legal" class="band">
+    <div class="container">
+      <h2>Legal</h2>
+      <div class="grid cols-4">
+        <a class="card" href="/compliance/privacy"><strong>Privacy</strong><div class="muted small">UK GDPR</div></a>
+        <a class="card" href="/compliance/cookies"><strong>Cookies</strong><div class="muted small">PECR + UK GDPR</div></a>
+        <a class="card" href="/compliance/accessibility"><strong>Accessibility</strong><div class="muted small">WCAG 2.2 AA</div></a>
+        <a class="card" href="/compliance/security"><strong>Security & Compliance</strong><div class="muted small">Controls & disclosure</div></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container grid cols-4">
+      <div>
+        <h4>About Nexa</h4>
+        <p class="muted small">Nexa ERP helps organisations automate operations, reduce risk, and decide with confidence.</p>
+        <p class="small">Chief A.A Ltd<br>info@chiefaa.com<br>+44 7398 975374</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="small">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#docs">Docs</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="/contact#demo">Book a demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul class="small">
+          <li>Inventory Management</li>
+          <li>Finance</li>
+          <li>Manufacturing</li>
+          <li>Projects</li>
+          <li>Payroll</li>
+          <li>AI Assistants</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter & Socials</h4>
+        <input aria-label="Email" placeholder="your@email" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;width:100%;max-width:260px" />
+        <p class="muted small" style="margin-top:8px">Socials coming soon — icons disabled.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie" id="cookie">
+    <div class="small">We use essential cookies and optional analytics (only if you consent).</div>
+    <div class="actions">
+      <button class="btn btn-secondary small" onclick="setChoice('reject')">Reject non‑essential</button>
+      <button class="btn btn-primary small" onclick="setChoice('accept')">Accept all</button>
+    </div>
+  </div>
+  <script>
+    function setChoice(v){try{localStorage.setItem('nexa_cookie_choice',v);}catch(e){}document.getElementById('cookie').style.display='none';}
+    (function(){try{var c=localStorage.getItem('nexa_cookie_choice'); if(c){document.getElementById('cookie').style.display='none';}}catch(e){}})();
+    window.NexaReopenCookieBanner=function(){try{localStorage.removeItem('nexa_cookie_choice');location.reload();}catch(e){}}
+  </script>
+</body>
+</html>

@@ -5,8 +5,6 @@ import type { Module } from "@nexa/registry/src/catalog";
 
 const statusStyles: Record<Module["status"], string> = {
   Active: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20",
-  "Coming Soon": "bg-amber-50 text-amber-800 ring-1 ring-amber-700/20",
-  Beta: "bg-indigo-50 text-indigo-700 ring-1 ring-indigo-600/20",
 };
 
 export default function ModuleCard({ mod }: { mod: Module }) {
@@ -19,7 +17,7 @@ export default function ModuleCard({ mod }: { mod: Module }) {
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <h3 className="truncate text-lg font-semibold">{mod.name}</h3>
-            <span className={clsx("inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium", statusStyles[mod.status])}>{mod.status}</span>
+            <span className={clsx("inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium", statusStyles[mod.status])}>Active</span>
           </div>
           <p className="mt-1 line-clamp-2 text-sm text-zinc-600">{mod.blurb}</p>
           <p className="mt-2 text-xs text-zinc-500">{mod.category}</p>

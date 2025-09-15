@@ -1,0 +1,24 @@
+groups:
+  - name: nexa-sli-slo
+    interval: 30s
+    rules:
+      # Uptime SLI from blackbox probe
+      - record: job:probe_success:ratio_rate5m
+        expr: sum(rate(probe_success{job="blackbox"}[5m])) by (target) / sum(rate(probe_success{job="blackbox"}[5m])) by (target)
+
+      # API request duration quantiles
+      - record: job:http_request_duration_seconds:p95
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job="nexa-api"}[5m])) by (le))
+
+      # Error rate (5xx) over 5m and 1h
+      - record: job:http_5xx_rate5m
+        expr: sum(rate(http_requests_total{job="nexa-api",status=~"5.."}[5m])) / sum(rate(http_requests_total{job="nexa-api"}[5m]))
+      - record: job:http_5xx_rate1h
+        expr: sum(rate(http_requests_total{job="nexa-api",status=~"5.."}[1h])) / sum(rate(http_requests_total{job="nexa-api"}[1h]))
+
+      # SLO error budget burn (assuming 99.9% objective => error budget 0.1%)
+      - record: slo:error_budget_ratio:fast
+        expr: (1 - job:probe_success:ratio_rate5m{target="api"}) / 0.001
+      - record: slo:error_budget_ratio:slow
+        expr: (1 - job:probe_success:ratio_rate5m{target="api"}) / 0.001
+

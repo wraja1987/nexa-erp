@@ -1,0 +1,117 @@
+{
+  "module": "finance",
+  "title": "Finance",
+  "breadcrumbs": [
+    "Finance"
+  ],
+  "layout": {
+    "grid": [
+      {
+        "area": "kpis",
+        "row": 1,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "insights",
+        "row": 2,
+        "col": 1,
+        "colSpan": 8
+      },
+      {
+        "area": "quickLinks",
+        "row": 2,
+        "col": 9,
+        "colSpan": 4
+      },
+      {
+        "area": "data",
+        "row": 3,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "aiEngine",
+        "row": 4,
+        "col": 1,
+        "colSpan": 12
+      }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Ask about Finance…",
+    "endpoint": "/api/ai/engine"
+  },
+  "kpis": [
+    {
+      "id": "period",
+      "label": "Current Period",
+      "value": 9
+    },
+    {
+      "id": "trial-balance",
+      "label": "Trial Balance",
+      "value": 0,
+      "currency": "GBP"
+    },
+    {
+      "id": "open-items",
+      "label": "Open Items",
+      "value": 112
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "fin1",
+        "icon": "FileChart",
+        "message": "AP due in 7 days exceeds typical cash inflow.",
+        "tags": [
+          "AP",
+          "Cash"
+        ],
+        "severity": "warning"
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      {
+        "id": "close",
+        "label": "Open Close",
+        "href": "/app/finance/period-close"
+      },
+      {
+        "id": "reports",
+        "label": "Reports",
+        "href": "/app/enterprise-analytics/analytics-dashboards"
+      }
+    ]
+  },
+  "table": {
+    "title": "Period Close Checklist",
+    "columns": [
+      "Task",
+      "Owner",
+      "Status",
+      "Due"
+    ],
+    "rows": [
+      [
+        "Accruals",
+        "Alex",
+        "Open",
+        "2025-09-15"
+      ],
+      [
+        "Reconciliations",
+        "Mona",
+        "In Progress",
+        "2025-09-16"
+      ]
+    ]
+  }
+}

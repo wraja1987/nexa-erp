@@ -19,3 +19,7 @@ Store expected screenshots under `apps/web/public/_screenshots/phase7/` with the
 
 Notes:
 - Replace with real screenshots later; these placeholders document the intended views.
+
+
+
+

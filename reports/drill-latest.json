@@ -1,0 +1,6 @@
+{
+  "drillDb": "nexa_drill",
+  "source": "reports/backup-20250914-211443.sql",
+  "restoreSeconds": 0.212,
+  "at": "2025-09-14T20:14:43.964Z"
+}

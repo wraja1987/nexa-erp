@@ -1,0 +1,9 @@
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  transpilePackages: ["@nexa/registry"],
+  // Use static export for Hostinger
+  output: 'export',
+  experimental: { externalDir: true },
+};
+export default nextConfig;

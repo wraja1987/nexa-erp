@@ -5,3 +5,7 @@
 - Shows last sync timestamp and counters.
 - AI helper: highlights accounts for outreach (heuristic).
 - Mobile parity: Sync contacts/deals buttons.
+
+
+
+

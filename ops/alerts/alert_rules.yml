@@ -1,0 +1,107 @@
+groups:
+  - name: nexa-infra-alerts
+    interval: 30s
+    rules:
+      - alert: HighCPUUsage
+        expr: (100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage (>85%)"
+          description: "Instance {{ $labels.instance }} CPU usage is above 85% for 5m."
+
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage (>85%)"
+          description: "Instance {{ $labels.instance }} memory usage is above 85% for 5m."
+
+      - alert: HighDiskUsage
+        expr: (node_filesystem_size_bytes{fstype!~"tmpfs|overlay"} - node_filesystem_free_bytes{fstype!~"tmpfs|overlay"}) / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"} * 100 > 85
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High disk usage (>85%)"
+          description: "Instance {{ $labels.instance }} has disk usage above 85%."
+
+      - alert: ContainerRestarts
+        expr: increase(kube_pod_container_status_restarts_total[5m]) > 3 or increase(container_restart_count_total[5m]) > 3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container restarts spike"
+          description: "Container {{ $labels.container }} restarted more than 3 times in 5m."
+
+      - alert: APIFiveXXRateHigh
+        expr: job:http_5xx_rate5m > 0.05
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API 5xx error rate high"
+          description: ">5% 5xx responses for 10m on job nexa-api."
+
+      - alert: BlackboxProbeFailure
+        expr: probe_success{job="blackbox", target=~"api|portal|website"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Blackbox probe failed"
+          description: "Target {{ $labels.target }} at {{ $labels.instance }} is failing blackbox probe."
+
+  - name: nexa-slo-burn
+    interval: 30s
+    rules:
+      - alert: SLOErrorBudgetBurnFast
+        expr: slo:error_budget_ratio:fast > 14
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Fast burn of error budget"
+          description: "Fast (5m/1h) error budget burn > 14x for uptime SLO."
+
+      - alert: SLOErrorBudgetBurnSlow
+        expr: slo:error_budget_ratio:slow > 6
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow burn of error budget"
+          description: "Slow (1h/6h) error budget burn > 6x for uptime SLO."
+
+      - alert: SLOLatencyP95Breach
+        expr: job:http_request_duration_seconds:p95 > 0.9
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Latency p95 above 900ms"
+          description: "API latency p95 above 900ms for 15m."
+
+# Disabled test alert group
+# BEGIN AlwaysFiring
+# groups:
+#   - name: always-firing
+#     rules:
+#       - alert: AlwaysFiring
+#         expr: vector(1)
+#         for: 1m
+#         labels:
+#           severity: info
+#         annotations:
+#           summary: "This alert always fires (test)"
+#
+# To enable for 60s then revert:
+#   sed -n '/# BEGIN AlwaysFiring/,/# To enable for 60s/{/^[^#]/p;}' ops/alerts/alert_rules.yml | sed 's/^# \(.*\)$/\1/' > /tmp/always.rules \
+#   && cat /tmp/always.rules >> ops/alerts/alert_rules.yml && sleep 60 \
+#   && git checkout -- ops/alerts/alert_rules.yml
+# END AlwaysFiring
+

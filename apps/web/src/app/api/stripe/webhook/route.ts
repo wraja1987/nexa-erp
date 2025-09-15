@@ -1,48 +1,39 @@
-import { NextResponse } from 'next/server'
-import crypto from 'node:crypto'
-import { PrismaClient } from '@prisma/client'
-import { audit } from '../../../../lib/log/mask'
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import Stripe from "stripe";
 
-const prisma = new PrismaClient()
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-function verifySignature(rawBody: string, signature: string, secret: string): boolean {
-  const hmac = crypto.createHmac('sha256', secret).update(rawBody).digest('hex')
-  try {
-    return crypto.timingSafeEqual(Buffer.from(hmac), Buffer.from(signature))
-  } catch {
-    return false
-  }
-}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2024-06-20" });
 
 export async function POST(req: Request) {
-  const secret = process.env.STRIPE_WEBHOOK_SECRET || ''
-  if (!secret) {
-    audit({ route: '/api/stripe/webhook', status: 'not_configured' })
-    return NextResponse.json({ ok: false, status: 'not_configured' })
+  const sig = (await headers()).get("stripe-signature") || "";
+  const whSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const rawBody = await req.text();
+
+  if (!whSecret) {
+    return NextResponse.json({ ok: false, error: "Webhook not configured" }, { status: 500 });
   }
-  const raw = await req.text()
-  const sig = req.headers.get('stripe-signature') || ''
-  const ok = verifySignature(raw, sig, secret)
-  if (!ok) return NextResponse.json({ ok: false, status: 'invalid_signature' }, { status: 400 })
-  const evt = JSON.parse(raw)
-  const type = evt?.type || 'unknown'
-  const id = evt?.id || 'unknown'
-  await prisma.webhookEvent.create({
-    data: {
-      source: 'stripe',
-      eventId: id,
-      eventType: type,
-      receivedAt: new Date(),
-      endpointId: 'stripe_webhook',
-      status: 'received',
-      payload: evt,
-    },
-  })
-  audit({ route: '/api/stripe/webhook', eventType: type, hasMasked: true })
-  return NextResponse.json({ ok: true, status: 'active' })
+
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(rawBody, sig, whSecret);
+  } catch (err: any) {
+    return NextResponse.json({ ok: false, error: `Signature verification failed: ${err.message}` }, { status: 400 });
+  }
+
+  switch (event.type) {
+    case "payment_intent.succeeded":
+    case "payment_intent.payment_failed":
+    case "charge.refunded":
+    case "terminal.reader.action_succeeded":
+    case "terminal.reader.action_failed":
+    case "terminal.connection_token.created":
+      break;
+    default:
+      break;
+  }
+
+  return NextResponse.json({ ok: true });
 }
-
-export const runtime = 'nodejs'
-
-export const dynamic = 'force-dynamic'
-

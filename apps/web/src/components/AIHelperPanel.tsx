@@ -32,3 +32,7 @@ export function AIHelperPanel({ open, onClose, hints, context }: { open: boolean
 }
 
 
+
+
+
+

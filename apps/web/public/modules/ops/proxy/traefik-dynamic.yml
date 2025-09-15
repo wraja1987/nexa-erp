@@ -1,0 +1,23 @@
+http:
+  middlewares:
+    api-cors:
+      headers:
+        accessControlAllowMethods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"]
+        accessControlAllowHeaders: ["Content-Type","Authorization"]
+        accessControlAllowOriginList:
+          - https://nexaai.co.uk
+          - https://www.nexaai.co.uk
+        addVaryHeader: true
+    html-cache:
+      headers:
+        customResponseHeaders:
+          Cache-Control: "s-maxage=60, stale-while-revalidate=300"
+    api-nostore:
+      headers:
+        customResponseHeaders:
+          Cache-Control: "no-store"
+    static-immutable:
+      headers:
+        customResponseHeaders:
+          Cache-Control: "public, max-age=31536000, immutable"
+

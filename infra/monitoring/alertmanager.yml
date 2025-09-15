@@ -1,0 +1,23 @@
+route:
+  receiver: 'gmail'
+  group_wait: 30s
+  group_interval: 2m
+  repeat_interval: 2h
+
+receivers:
+  - name: 'gmail'
+    email_configs:
+      - to: "nexaaierp@gmail.com"
+        from: "${SMTP_FROM}"
+        smarthost: "smtp.gmail.com:587"
+        auth_username: "${SMTP_USER}"
+        auth_identity: "${SMTP_USER}"
+        auth_password: "${SMTP_PASS}"
+        require_tls: true
+
+# Test alert group (disabled by default)
+# To enable for 60s then disable:
+#   sed -n '/# BEGIN AlwaysFiring/,/# END AlwaysFiring/p' infra/monitoring/alertmanager.yml | sed 's/^# \(.*\)$/\1/' > /tmp/always.yml \
+#   && cat /tmp/always.yml >> ops/alerts/alert_rules.yml && sleep 60 \
+#   && git checkout -- ops/alerts/alert_rules.yml
+

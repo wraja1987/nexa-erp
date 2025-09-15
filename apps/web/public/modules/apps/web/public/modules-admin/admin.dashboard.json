@@ -1,0 +1,43 @@
+{
+  "module": "admin/dashboard",
+  "title": "Admin Dashboard",
+  "breadcrumbs": ["Admin", "Dashboard"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "tenants", "label": "Active Tenants", "value": 18 },
+    { "id": "alerts", "label": "Open Alerts", "value": 5 },
+    { "id": "backups", "label": "Last Backup (hrs)", "value": 2 },
+    { "id": "keys", "label": "API Keys", "value": 42 },
+    { "id": "jobs", "label": "Queued Jobs", "value": 3 }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "quota", "icon": "TrendingUp", "message": "2 tenants are trending toward quota limits.", "tags": ["Quota"], "severity": "warning" },
+    { "id": "security", "icon": "Shield", "message": "No new SoD breaches detected in the last 24h.", "tags": ["RBAC"], "severity": "info" }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "manage-tenants", "label": "Manage Tenants", "icon": "Building2", "href": "/admin/tenants" },
+    { "id": "audit-logs", "label": "View Audit Logs", "icon": "FileText", "href": "/admin/audit-logs" },
+    { "id": "backups", "label": "Check Backups", "icon": "Database", "href": "/admin/backups" }
+  ]},
+  "table": {
+    "title": "Recent Jobs & Alerts",
+    "columns": ["Time","Type","Message","Status"],
+    "rows": [
+      ["2025-09-14 10:41","Job","ocr-invoices-24h completed","OK"],
+      ["2025-09-14 10:30","Alert","API key sk_****9TZ near rate limit","Warning"],
+      ["2025-09-14 09:45","Job","bank-feed-hourly sync","OK"],
+      ["2025-09-14 09:30","Alert","Login failures spiked 24%","Warning"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about Admin overview…", "endpoint": "/api/ai/engine" }
+}
+
+
+
+

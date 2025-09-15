@@ -1,0 +1,81 @@
+{
+  "module": "dashboard",
+  "title": "Dashboard",
+  "breadcrumbs": ["Dashboard"],
+  "layout": {
+    "grid": [
+      { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+      { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+      { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+      { "area": "aiEngine", "row": 3, "col": 1, "colSpan": 12 }
+    ]
+  },
+  "kpis": [
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "value": 405280,
+      "currency": "GBP",
+      "changePct": 12.5,
+      "changeDirection": "up",
+      "sparkline": [320,330,335,340,342,350,360,362,370,372,380,398,402,405],
+      "format": { "style": "currency", "currency": "GBP", "minimumFractionDigits": 0 }
+    },
+    {
+      "id": "invoices",
+      "label": "Invoices",
+      "value": 168,
+      "changePct": 14.2,
+      "changeDirection": "up",
+      "sparkline": [120,122,125,130,132,138,140,144,150,152,158,160,165,168],
+      "format": { "style": "number", "minimumFractionDigits": 0 }
+    },
+    {
+      "id": "inventory",
+      "label": "Inventory",
+      "value": 23450,
+      "changePct": null,
+      "changeDirection": null,
+      "sparkline": [21000,21200,21350,21500,21750,21900,22050,22400,22650,22800,23000,23200,23300,23450],
+      "format": { "style": "number", "minimumFractionDigits": 0 }
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "labour-costs",
+        "icon": "Lightbulb",
+        "message": "Optimising labour costs could enhance your profit margins for the current quarter.",
+        "tags": ["Finance", "Inventory", "Manufacturing"],
+        "severity": "info",
+        "actions": []
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      { "id": "new-invoice", "label": "New Invoice", "icon": "FilePlus2", "href": "/finance/invoicing/new" },
+      { "id": "add-order", "label": "Add Order", "icon": "SquarePlus", "href": "/sales/orders/new" },
+      { "id": "run-report", "label": "Run Report", "icon": "BarChart3", "href": "/enterprise/reports" },
+      { "id": "create-task", "label": "Create Task", "icon": "CheckSquare", "href": "/projects/tasks/new" }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Send a message...",
+    "inputHint": "Ask about revenue, invoices, stock, or get a quick forecast.",
+    "endpoint": "/api/ai/engine"
+  },
+  "footer": {
+    "links": [
+      { "label": "Privacy", "href": "/legal/privacy" },
+      { "label": "Cookies", "href": "/legal/cookies" },
+      { "label": "Accessibility", "href": "/legal/accessibility" },
+      { "label": "Security", "href": "/legal/security" }
+    ]
+  }
+}
+
+

@@ -1,0 +1,103 @@
+{
+  "module": "finance/period-close",
+  "title": "Period Close",
+  "breadcrumbs": [
+    "Finance",
+    "Period Close"
+  ],
+  "layout": {
+    "grid": [
+      {
+        "area": "kpis",
+        "row": 1,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "insights",
+        "row": 2,
+        "col": 1,
+        "colSpan": 8
+      },
+      {
+        "area": "quickLinks",
+        "row": 2,
+        "col": 9,
+        "colSpan": 4
+      },
+      {
+        "area": "data",
+        "row": 3,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "aiEngine",
+        "row": 4,
+        "col": 1,
+        "colSpan": 12
+      }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Ask about Period Close…",
+    "endpoint": "/api/ai/engine"
+  },
+  "kpis": [
+    {
+      "id": "tasks",
+      "label": "Tasks",
+      "value": 18
+    },
+    {
+      "id": "completed",
+      "label": "Completed %",
+      "value": 67,
+      "suffix": "%"
+    },
+    {
+      "id": "overdue",
+      "label": "Overdue",
+      "value": 2
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "insight-1",
+        "icon": "Lightbulb",
+        "message": "Consider reviewing period close KPIs this week.",
+        "tags": [
+          "Period"
+        ],
+        "severity": "info"
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      {
+        "id": "open-close",
+        "label": "Open Close",
+        "href": "/app/finance/period-close"
+      }
+    ]
+  },
+  "list": {
+    "title": "Close Tasks",
+    "items": [
+      "Accruals",
+      "Prepayments",
+      "Reconciliations"
+    ],
+    "actions": [
+      {
+        "label": "Checklist",
+        "href": "/app/finance/period-close"
+      }
+    ]
+  }
+}

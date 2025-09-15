@@ -1,4 +1,4 @@
-export type ModuleStatus = "Active" | "Coming Soon" | "Beta";
+export type ModuleStatus = "Active";
 export type ModuleCategory =
   | "Finance"
   | "Operations"
@@ -47,7 +47,7 @@ export const MODULES: Module[] = [
     slug: "mrp",
     name: "MRP",
     category: "Manufacturing",
-    status: "Coming Soon",
+    status: "Active",
     blurb: "Plan materials and capacity with AI-assisted scheduling.",
     icon: "Factory",
   },
@@ -55,7 +55,7 @@ export const MODULES: Module[] = [
     slug: "hr",
     name: "HR",
     category: "HR",
-    status: "Beta",
+    status: "Active",
     blurb: "Employee profiles, leave, and basic payroll exports.",
     icon: "UserRound",
   },

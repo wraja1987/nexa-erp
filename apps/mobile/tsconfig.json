@@ -8,15 +8,25 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "types": ["jest", "react", "react-native", "node"],
+    "types": [
+      "jest",
+      "react",
+      "react-native",
+      "node"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@nexa/registry": ["../../packages/registry/src"],
-      "@nexa/registry/*": ["../../packages/registry/src/*"]
+      "@nexa/registry": [
+        "../../packages/registry/src"
+      ],
+      "@nexa/registry/*": [
+        "../../packages/registry/src/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "extends": "expo/tsconfig.base"
 }
-
-
-

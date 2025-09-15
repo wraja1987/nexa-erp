@@ -1,0 +1,22 @@
+{
+  "module": "ai-automation/ocr-document-ai",
+  "title": "OCR & Document AI",
+  "breadcrumbs": ["AI & Automation", "OCR & Document AI"],
+  "layout": {
+    "grid": [
+      { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+      { "area": "uploader", "row": 2, "col": 1, "colSpan": 12 }
+    ]
+  },
+  "kpis": [
+    { "id": "docs-processed", "label": "Docs Processed (30d)", "value": 914, "changePct": 12.1, "changeDirection": "up" },
+    { "id": "auto-extract", "label": "Auto-Extract Rate", "value": 93, "suffix": "%", "changePct": 1.2, "changeDirection": "up" }
+  ],
+  "uploader": {
+    "accept": [".pdf", ".png", ".jpg"],
+    "maxSizeMB": 20,
+    "help": "Drop invoices, POs, delivery notes, or statements to auto-extract fields."
+  }
+}
+
+

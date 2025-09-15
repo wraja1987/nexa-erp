@@ -1,0 +1,9 @@
+Flag --print-json has been deprecated, Please use `--format JSON` instead and use `jq` if you need to process the JSON in the terminal.
+You have not configured API keys yet. Running `stripe login`...
+Your pairing code is: cheer-best-zest-goood
+This pairing code verifies your authentication with Stripe.
+Press Enter to open the browser or visit https://dashboard.stripe.com/stripecli/confirm_auth?t=hS3208oQoLMlA6B9dGuWsdntwTioPpzp (^C to quit)Waiting for confirmation...
+
+> Done! The Stripe CLI is configured for Chief A.A Ltd with account id acct_1RothFALQ69KgJcY
+
+Please note: this key will expire after 90 days, at which point you'll need to re-authenticate.

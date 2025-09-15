@@ -5,3 +5,7 @@
 - RBAC: `getRoleFromRequest(req)`, `ensureRoleAllowed(module, role)`; respond 403 when denied
 - Errors: return `{ ok: false, code, message }` with masked details
 - Headers: `x-role` and optional `x-tenant-id`
+
+
+
+

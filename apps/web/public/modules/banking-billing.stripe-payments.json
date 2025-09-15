@@ -1,0 +1,123 @@
+{
+  "module": "banking-billing/stripe-payments",
+  "title": "Stripe Payments",
+  "breadcrumbs": [
+    "Banking & Billing",
+    "Stripe Payments"
+  ],
+  "layout": {
+    "grid": [
+      {
+        "area": "kpis",
+        "row": 1,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "insights",
+        "row": 2,
+        "col": 1,
+        "colSpan": 8
+      },
+      {
+        "area": "quickLinks",
+        "row": 2,
+        "col": 9,
+        "colSpan": 4
+      },
+      {
+        "area": "data",
+        "row": 3,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "aiEngine",
+        "row": 4,
+        "col": 1,
+        "colSpan": 12
+      }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Ask about Stripe Payments…",
+    "endpoint": "/api/ai/engine"
+  },
+  "kpis": [
+    {
+      "id": "pay-7d",
+      "label": "Payments (7d)",
+      "value": 214
+    },
+    {
+      "id": "refunds-7d",
+      "label": "Refunds (7d)",
+      "value": 6
+    },
+    {
+      "id": "auth-rate",
+      "label": "Auth Rate %",
+      "value": 96,
+      "suffix": "%"
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "insight-1",
+        "icon": "Lightbulb",
+        "message": "Consider reviewing stripe payments KPIs this week.",
+        "tags": [
+          "Stripe"
+        ],
+        "severity": "info"
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      {
+        "id": "create",
+        "label": "Create Payment",
+        "href": "/app/banking-billing/stripe-payments"
+      },
+      {
+        "id": "reconcile",
+        "label": "Reconcile",
+        "href": "/app/banking-billing/stripe-payments"
+      }
+    ]
+  },
+  "table": {
+    "title": "Recent Payments",
+    "columns": [
+      "ID",
+      "Customer",
+      "Amount",
+      "Status",
+      "Method",
+      "Created"
+    ],
+    "rows": [
+      [
+        "pi_123",
+        "Acme",
+        "£120",
+        "succeeded",
+        "card",
+        "10:12"
+      ],
+      [
+        "pi_456",
+        "Globex",
+        "£49",
+        "succeeded",
+        "card",
+        "10:14"
+      ]
+    ]
+  }
+}

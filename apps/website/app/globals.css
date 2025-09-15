@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --nexa-bg: #ffffff;
-  --nexa-fg: #0f172a; /* slate-900 */
-  --nexa-muted: #475569; /* slate-600 */
-  /* Tuned primary to better match the Nexa logo */
-  --nexa-primary: #1f6feb; /* brand blue */
-  --nexa-primary-700: #1756c9; /* hover state */
-  --nexa-accent: #0ea5e9; /* sky-500 */
+  /* Nexa brand palette (consistent across pages) */
+  --nexa-bg: #F7F9FC;      /* background */
+  --nexa-fg: #0B1424;      /* text */
+  --nexa-muted: #4b5563;   /* muted text */
+  --nexa-primary: #2E6BFF; /* blue */
+  --nexa-primary-700: #224FCC; /* hover */
+  --nexa-accent: #7A4DFF;  /* violet accent */
 }
 
 html, body { height: 100%; }
@@ -25,13 +25,13 @@ body {
 }
 
 .btn-primary {
-  @apply inline-flex items-center rounded-md px-4 py-2 text-white font-medium shadow transition-colors;
-  background-color: var(--nexa-primary);
+  @apply inline-flex items-center rounded-full px-5 py-2.5 text-white font-medium shadow transition-colors;
+  background-image: linear-gradient(90deg, var(--nexa-primary) 0%, var(--nexa-accent) 100%);
 }
-.btn-primary:hover { background-color: var(--nexa-primary-700); }
+.btn-primary:hover { filter: brightness(1.05); }
 
 .btn-secondary {
-  @apply inline-flex items-center rounded-md border px-4 py-2 font-medium transition-colors;
+  @apply inline-flex items-center rounded-full border px-5 py-2.5 font-medium transition-colors;
   color: var(--nexa-primary);
   border-color: color-mix(in srgb, var(--nexa-primary) 60%, transparent);
 }
@@ -39,8 +39,16 @@ body {
   background-color: color-mix(in srgb, var(--nexa-primary) 10%, #ffffff);
 }
 
+/* Ghost button for dark surfaces */
+.btn-ghost {
+  @apply inline-flex items-center rounded-full px-5 py-2.5 font-medium transition-colors border;
+  color: white;
+  border-color: rgba(255,255,255,0.35);
+}
+.btn-ghost:hover { background-color: rgba(255,255,255,0.08); }
+
 .section {
-  @apply py-12 md:py-16;
+  @apply py-10 md:py-12; /* tighter vertical rhythm */
 }
 .section-title {
   @apply text-2xl md:text-3xl font-semibold tracking-tight;
@@ -50,4 +58,13 @@ body {
 }
 .card {
   @apply rounded-lg border bg-white shadow-sm;
+}
+
+/* Dark gradient hero band with subtle glow accents */
+.hero-band {
+  @apply rounded-2xl p-8 md:p-12 shadow-sm;
+  background:
+    radial-gradient(1200px 600px at 20% -20%, rgba(122,77,255,0.25), transparent),
+    linear-gradient(180deg, #0F2747 0%, #0B1424 100%);
+  color: white;
 }

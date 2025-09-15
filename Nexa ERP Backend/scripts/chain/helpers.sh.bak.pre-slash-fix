@@ -1,0 +1,190 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Resolve repo root relative to this script (scripts/chain -> repo)
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+REPORTS_DIR="$ROOT_DIR/reports"
+mkdir -p "$REPORTS_DIR"
+
+timestamp(){ date +"%Y-%m-%d %H:%M:%S %Z"; }
+ts_slug(){ date +"%Y%m%d%H%M%S"; }
+
+print_header(){
+  echo; echo "===================================================="
+  echo "== $1"
+  echo "===================================================="
+}
+
+ensure_env_file(){
+  local env="$1"
+  if [ ! -f "$env" ]; then
+    mkdir -p "$(dirname "$env")"
+    cat > "$env" << ENV
+# Created by Nexa chain at $(date)
+NODE_ENV=development
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/nexa
+REDIS_URL=redis://localhost:6379
+NEXTAUTH_URL=http://localhost:3001
+NEXTAUTH_SECRET=$(openssl rand -hex 32)
+
+# Stripe (cards + Terminal)
+STRIPE_PUBLISHABLE_KEY=pk_test_xxx
+STRIPE_SECRET_KEY=sk_test_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
+
+# POS
+POS_POSTING_ENABLED=true
+
+# Open Banking (TrueLayer)
+TRUELAYER_CLIENT_ID=tl-sandbox-client-id
+TRUELAYER_CLIENT_SECRET=tl-sandbox-secret
+TRUELAYER_REDIRECT_URI=http://localhost:3001/api/openbanking/callback
+
+# HMRC VAT (sandbox)
+HMRC_CLIENT_ID=hmrc-sandbox-client-id
+HMRC_CLIENT_SECRET=hmrc-sandbox-secret
+HMRC_BASE_URL=https://test-api.service.hmrc.gov.uk
+
+# OAuth providers (optional)
+GOOGLE_CLIENT_ID=google-id
+GOOGLE_CLIENT_SECRET=google-secret
+MICROSOFT_CLIENT_ID=ms-id
+MICROSOFT_CLIENT_SECRET=ms-secret
+MICROSOFT_TENANT_ID=common
+
+# Twilio (optional)
+TWILIO_ACCOUNT_SID=ACxxxx
+TWILIO_AUTH_TOKEN=xxxx
+
+# Admin/Domain
+COOKIE_DOMAIN=.nexaai.co.uk
+
+# Analytics (website; consent-gated)
+PLAUSIBLE_DOMAIN=nexaai.co.uk
+NEXT_PUBLIC_ANALYTICS_CONSENT=false
+
+# Security
+ENCRYPTION_KEY=$(openssl rand -base64 32)
+ENV
+  fi
+}
+
+audit_after_phase(){
+  mkdir -p "$REPORTS_DIR"
+  local phase_no="$1"; local phase_name="$2"
+  local t="$(ts_slug)"
+  local LOG="$REPORTS_DIR/phase-${phase_no}-${phase_name// /_}-${t}.log"
+  local MD="$REPORTS_DIR/phase-${phase_no}-${phase_name// /_}-${t}.md"
+
+  print_header "Audit: Phase ${phase_no} — ${phase_name} ($(timestamp))" | tee -a "$LOG"
+
+  echo "[step] workspace install" | tee -a "$LOG"
+  (pnpm -w install || true) 2>&1 | tee -a "$LOG"
+
+  echo "[step] lint" | tee -a "$LOG"
+  (pnpm -w lint || true) 2>&1 | tee -a "$LOG"
+
+  echo "[step] typecheck" | tee -a "$LOG"
+  (pnpm -w typecheck || true) 2>&1 | tee -a "$LOG"
+
+  echo "[step] unit tests" | tee -a "$LOG"
+  (pnpm -w test -- --run || true) 2>&1 | tee -a "$LOG"
+
+  echo "[step] smoke" | tee -a "$LOG"
+  (pnpm -w smoke:all || true) 2>&1 | tee -a "$LOG"
+
+  echo "[step] gates" | tee -a "$LOG"
+  (pnpm -w gates:all || true) 2>&1 | tee -a "$LOG"
+
+  echo "[step] build" | tee -a "$LOG"
+  (pnpm -w build || true) 2>&1 | tee -a "$LOG"
+
+  # Add-ons (if present)
+  if [ -x scripts/chain/addons-check.sh ]; then
+    echo "[step] addons-check" | tee -a "$LOG"
+    (scripts/chain/addons-check.sh || true) 2>&1 | tee -a "$LOG"
+  fi
+
+  {
+    echo "# Nexa ERP — Phase ${phase_no}: ${phase_name} — Audit Summary"
+    echo "- Time: $(timestamp)"
+    echo "- Root: $(pwd)"
+    echo ""
+    echo "## Tail of results"
+    tail -n 120 "$LOG"
+    echo ""
+    echo "> Full raw log: $LOG"
+  } > "$MD"
+
+  # Failure heuristics (only treat explicit failures as fatal)
+  # Consider a phase failed if:
+  #  - pnpm reported a non-zero exit in build/test/lint/typecheck sections
+  #  - Vitest summary reports failed files/tests
+  #  - Next.js build failed
+  if grep -E "(ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL|Command failed with exit code|Failed to compile\.|Test Files\s+[0-9]+ failed|Tests\s+[0-9]+ failed)" "$LOG" >/dev/null 2>&1; then
+    echo "[error] Failures detected in Phase ${phase_no} — ${phase_name}. See $LOG"
+    return 1
+  fi
+  echo "[ok] Phase ${phase_no} — ${phase_name} audit completed."
+}
+
+# Keys check & interactive pause
+require_keys(){
+  local env_file="$1"; shift
+  local phase="$1"; shift
+  local need=("$@")
+  local missing=()
+
+  # Skip interactive prompts in CI/non-interactive runs
+  if [ -n "${NONINTERACTIVE:-}" ] || [ -n "${CI:-}" ]; then
+    echo "[warn] Skipping key checks for ${phase} (non-interactive mode)."
+    return 0
+  fi
+
+  # Read ENV as text
+  local env_text="$(cat "$env_file" 2>/dev/null || true)"
+
+  # Simple placeholder heuristics
+  for k in "${need[@]}"; do
+    case "$k" in
+      STRIPE_PUBLISHABLE_KEY) patt="pk_live_" ;;
+      STRIPE_SECRET_KEY) patt="sk_live_" ;;
+      STRIPE_WEBHOOK_SECRET) patt="whsec_" ;;
+      TRUELAYER_CLIENT_ID) patt="_" ;; # any non-empty is fine; better than placeholder
+      TRUELAYER_CLIENT_SECRET) patt="_" ;;
+      HMRC_CLIENT_ID) patt="_" ;;
+      HMRC_CLIENT_SECRET) patt="_" ;;
+      GOOGLE_CLIENT_ID|GOOGLE_CLIENT_SECRET|MICROSOFT_CLIENT_ID|MICROSOFT_SECRET|MICROSOFT_TENANT_ID|TWILIO_ACCOUNT_SID|TWILIO_AUTH_TOKEN) patt="_" ;;
+      *) patt="_" ;;
+    esac
+
+    # Is value present & not a known placeholder?
+    local line="$(echo "$env_text" | grep -E "^${k}=" || true)"
+    if [ -z "$line" ]; then
+      missing+=("$k")
+      continue
+    fi
+    local val="${line#*=}"
+    if [[ "$val" == "" || "$val" == *"xxx"* || "$val" == *"-id"* || "$val" == *"-secret"* || "$val" == "common" ]]; then
+      missing+=("$k")
+      continue
+    fi
+    # For some keys we want pattern hints (Stripe live vs test)
+    if [[ "$k" =~ STRIPE_ ]] && [[ "$val" != pk_live_* && "$val" != sk_live_* && "$k" != "STRIPE_WEBHOOK_SECRET" ]]; then
+      # allow test too, but notify
+      :
+    fi
+  done
+
+  if [ "${#missing[@]}" -gt 0 ]; then
+    echo
+    echo "⚠️  Keys required before continuing Phase: ${phase}"
+    printf "   - %s\n" "${missing[@]}"
+    echo "Please open: $env_file, paste the saved keys, save the file,"
+    read -r -p "Press ENTER to re-check once keys are added... " _
+    # Re-run once (recursive check)
+    require_keys "$env_file" "$phase" "${need[@]}"
+  fi
+}
+

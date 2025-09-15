@@ -1,0 +1,101 @@
+{
+  "dashboard": [],
+  "finance": [
+    "general-ledger",
+    "accounts-payable",
+    "accounts-receivable",
+    "bank-and-cash",
+    "vat-mtd",
+    "fixed-assets",
+    "period-close",
+    "fx-revaluation",
+    "costing"
+  ],
+  "hr-and-payroll": [
+    "employees",
+    "payroll"
+  ],
+  "inventory-and-wms": [
+    "items-and-lots",
+    "warehouses",
+    "stock-movements",
+    "advanced-wms-asn-wave-3pl",
+    "cycle-counting",
+    "quality-holds-capa"
+  ],
+  "manufacturing": [
+    "bom-and-routings",
+    "work-orders",
+    "mrp",
+    "capacity-planning",
+    "aps",
+    "maintenance",
+    "plm"
+  ],
+  "sales-and-crm": [
+    "leads-and-opportunities",
+    "quotations-and-sales-orders",
+    "returns-rma"
+  ],
+  "purchasing": [
+    "requisitions",
+    "purchase-orders",
+    "supplier-invoices-and-payments"
+  ],
+  "projects": [
+    "projects-and-tasks",
+    "costing-and-billing"
+  ],
+  "compliance-and-tax": [
+    "gdpr-tools-and-audit",
+    "cis"
+  ],
+  "banking-and-billing": [
+    "open-banking",
+    "billing-and-metering",
+    "stripe-payments"
+  ],
+  "enterprise-and-analytics": [
+    "intercompany-and-consolidation",
+    "multi-currency-and-multi-entity",
+    "analytics-and-dashboards",
+    "observability-and-siem"
+  ],
+  "ai-and-automation": [
+    "nexa-ai-assist",
+    "ocr-and-document-ai",
+    "predictive-scenarios",
+    "workflows-and-jobs",
+    "notifications"
+  ],
+  "pos": [
+    "stripe-terminal-checkout",
+    "receipts-html-pdf",
+    "offline-park-to-sync",
+    "reconciliation",
+    "postings",
+    "xz-reports"
+  ],
+  "help": [
+    "docs",
+    "support"
+  ],
+  "settings": [
+    "connectors",
+    "api-keys-and-rate-limits",
+    "backups-and-dr",
+    "appearance-theme",
+    "byok-vault",
+    "plans-and-quotas",
+    "audit-logs",
+    "tenants-and-settings",
+    "users-and-roles"
+  ]
+}
+
+
+
+
+
+
+

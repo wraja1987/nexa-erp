@@ -32,3 +32,7 @@ export default function ModulePage({ params }: Props) {
     </main>
   );
 }
+
+export function generateStaticParams() {
+  return MODULES.map(m => ({ slug: m.slug }));
+}

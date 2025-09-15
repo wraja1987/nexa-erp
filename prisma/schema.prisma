@@ -19,10 +19,14 @@ model User {
   tenant_id String
   email     String   @unique
   role      String
+  active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  mfaEnabled Boolean  @default(false)
+  mfaSecret  String?
 
   @@index([tenant_id])
+  passwordHash String?
 }
 
 model Entity {
@@ -559,6 +563,81 @@ model Ledger {
   @@index([tenantId, account])
 }
 
+/// Period Close & COA Templates
+model PeriodClose {
+  id          String   @id @default(cuid())
+  tenantId    String
+  periodStart DateTime
+  periodEnd   DateTime
+  closedBy    String
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  @@index([tenantId, periodStart, periodEnd])
+}
+
+model CoaTemplate {
+  id        String           @id @default(cuid())
+  code      String           @unique
+  name      String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  lines     CoaTemplateLine[]
+}
+
+model CoaTemplateLine {
+  id          String      @id @default(cuid())
+  templateId  String
+  code        String
+  name        String
+  type        String
+  template    CoaTemplate @relation(fields: [templateId], references: [id])
+}
+
+/// Bank & Reconciliation
+model BankAccount {
+  id        String   @id @default(cuid())
+  tenantId  String
+  code      String
+  name      String
+  currency  String   @default("GBP")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  statements BankStatementLine[]
+
+  @@unique([tenantId, code])
+}
+
+model BankStatementLine {
+  id           String     @id @default(cuid())
+  tenantId     String
+  bankAccountId String
+  date         DateTime
+  description  String
+  amount       Decimal
+  reference    String?
+  reconciled   Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  bankAccount  BankAccount @relation(fields: [bankAccountId], references: [id])
+
+  @@index([tenantId, bankAccountId, date])
+}
+
+model BankReconciliation {
+  id            String   @id @default(cuid())
+  tenantId      String
+  bankAccountId String
+  fromDate      DateTime
+  toDate        DateTime
+  statementBal  Decimal
+  reconciledAt  DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([tenantId, bankAccountId, fromDate, toDate])
+}
+
 /// Phase C — Core Finance (minimal)
 model Account {
   id        String   @id @default(cuid())
@@ -651,6 +730,153 @@ model KpiSnapshot {
   updatedAt DateTime @updatedAt
 
   @@index([tenantId, name, asOf])
+}
+
+/// Fixed Assets
+model FixedAsset {
+  id          String   @id @default(cuid())
+  tenantId    String
+  assetCode   String
+  name        String
+  category    String
+  cost        Decimal
+  salvage     Decimal   @default(0)
+  usefulLifeM Int       // months
+  acquiredAt  DateTime
+  disposedAt  DateTime?
+  disposalProceeds Decimal?
+  disposalNotes String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  schedules   DepreciationSchedule[]
+  disposals   FixedAssetDisposal[]
+
+  @@index([tenantId, assetCode])
+}
+
+model DepreciationSchedule {
+  id         String     @id @default(cuid())
+  tenantId   String
+  assetId    String
+  period     DateTime
+  amount     Decimal
+  posted     Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  asset      FixedAsset @relation(fields: [assetId], references: [id])
+
+  @@index([tenantId, assetId, period])
+}
+
+/// Asset Disposal
+model FixedAssetDisposal {
+  id         String     @id @default(cuid())
+  tenantId   String
+  assetId    String
+  disposedAt DateTime
+  proceeds   Decimal    @default(0)
+  gainLoss   Decimal    @default(0)
+  notes      String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  asset      FixedAsset @relation(fields: [assetId], references: [id])
+
+  @@index([tenantId, assetId, disposedAt])
+}
+
+/// Costing — inventory lots for FIFO/WAV
+model InventoryLot {
+  id          String     @id @default(cuid())
+  tenantId    String
+  sku         String
+  qty         Decimal    @default(0)
+  unitCost    Decimal    @default(0)
+  receivedAt  DateTime   @default(now())
+  warehouseId String?
+  locationId  String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([tenantId, sku, receivedAt])
+}
+
+/// Quality Management
+enum QualityStatus {
+  open
+  accepted
+  rejected
+  released
+  in_progress
+  completed
+}
+
+model QualityInspection {
+  id        String        @id @default(cuid())
+  tenantId  String
+  docType   String        // e.g., ASN, PO, WO
+  docId     String
+  status    QualityStatus @default(open)
+  findings  Json?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([tenantId, docType, docId])
+}
+
+model QualityHold {
+  id        String        @id @default(cuid())
+  tenantId  String
+  sku       String?
+  lotId     String?
+  reason    String
+  status    QualityStatus @default(open)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([tenantId, sku])
+}
+
+model Capa {
+  id         String        @id @default(cuid())
+  tenantId   String
+  title      String
+  rootCause  String?
+  actions    Json?
+  ownerId    String?
+  status     QualityStatus @default(open)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([tenantId, status])
+}
+
+/// Payments (AR/AP)
+model CustomerPayment {
+  id           String   @id @default(cuid())
+  tenantId     String
+  invoiceId    String
+  amount       Decimal
+  paidAt       DateTime @default(now())
+  method       String
+  reference    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([tenantId, invoiceId])
+}
+
+model SupplierPayment {
+  id           String   @id @default(cuid())
+  tenantId     String
+  billId       String
+  amount       Decimal
+  paidAt       DateTime @default(now())
+  method       String
+  reference    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([tenantId, billId])
 }
 
 /// Phase 7 — Payroll
@@ -894,4 +1120,149 @@ model HubspotDeal {
   updatedAt  DateTime @updatedAt
 
   @@index([tenantId, hsId])
+}
+
+/// POS — Point of Sale
+enum TillShiftStatus {
+  open
+  closed
+}
+
+enum PosSaleStatus {
+  open
+  paid
+  refunded
+  void
+}
+
+enum PosPaymentMethod {
+  card
+  cash
+}
+
+model Store {
+  id        String   @id @default(cuid())
+  tenantId  String
+  name      String
+  code      String
+  address   String?
+  timezone  String   @default("Europe/London")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shifts    TillShift[]
+  sales     PosSale[]
+
+  @@index([tenantId])
+  @@unique([tenantId, code])
+}
+
+model TillShift {
+  id              String          @id @default(cuid())
+  tenantId        String
+  storeId         String
+  openedByUserId  String
+  closedByUserId  String?
+  openedAt        DateTime
+  closedAt        DateTime?
+  openingFloat    Decimal         @default(0)
+  closingFloat    Decimal?
+  status          TillShiftStatus @default(open)
+
+  store   Store   @relation(fields: [storeId], references: [id])
+  sales   PosSale[]
+  events  PosEvent[]
+
+  @@index([tenantId, storeId, openedAt])
+}
+
+model PosSale {
+  id             String         @id @default(cuid())
+  tenantId       String
+  storeId        String
+  shiftId        String?
+  cashierUserId  String
+  saleNumber     String
+  status         PosSaleStatus  @default(open)
+  subtotal       Decimal        @default(0)
+  tax            Decimal        @default(0)
+  total          Decimal        @default(0)
+  currency       String         @default("GBP")
+  createdAt      DateTime       @default(now())
+
+  store    Store      @relation(fields: [storeId], references: [id])
+  shift    TillShift? @relation(fields: [shiftId], references: [id])
+  lines    PosLine[]
+  payments PosPayment[]
+  refunds  PosRefund[]
+  events   PosEvent[]
+
+  @@index([tenantId, storeId, createdAt])
+  @@index([tenantId, shiftId])
+  @@unique([tenantId, saleNumber])
+}
+
+model PosLine {
+  id               String   @id @default(cuid())
+  tenantId         String
+  saleId           String
+  sku              String
+  name             String
+  qty              Decimal
+  unitPrice        Decimal
+  taxRate          Decimal @default(0)
+  lineTotal        Decimal
+  inventoryItemId  String?
+
+  sale   PosSale @relation(fields: [saleId], references: [id])
+
+  @@index([tenantId, saleId])
+}
+
+model PosPayment {
+  id                     String            @id @default(cuid())
+  tenantId               String
+  saleId                 String
+  method                 PosPaymentMethod
+  amount                 Decimal
+  tip                    Decimal?
+  stripePaymentIntentId  String?
+  stripeChargeId         String?
+  createdAt              DateTime          @default(now())
+
+  sale   PosSale @relation(fields: [saleId], references: [id])
+
+  @@index([tenantId, saleId])
+  @@index([tenantId, stripePaymentIntentId])
+}
+
+model PosRefund {
+  id              String   @id @default(cuid())
+  tenantId        String
+  saleId          String
+  amount          Decimal
+  reason          String?
+  stripeRefundId  String?
+  createdAt       DateTime @default(now())
+
+  sale  PosSale @relation(fields: [saleId], references: [id])
+
+  @@index([tenantId, saleId])
+  @@index([tenantId, stripeRefundId])
+}
+
+model PosEvent {
+  id        String   @id @default(cuid())
+  tenantId  String
+  saleId    String?
+  shiftId   String?
+  type      String
+  payload   Json
+  createdAt DateTime @default(now())
+
+  sale   PosSale?   @relation(fields: [saleId], references: [id])
+  shift  TillShift? @relation(fields: [shiftId], references: [id])
+
+  @@index([tenantId, saleId, createdAt])
+  @@index([tenantId, shiftId, createdAt])
 }

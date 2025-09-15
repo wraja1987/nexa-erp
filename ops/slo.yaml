@@ -1,0 +1,11 @@
+service: "nexa-api"
+targets:
+  - name: "uptime"
+    objective: 99.9
+    window: 30d
+    indicator: "probe_success{job='blackbox',target='api'}"
+  - name: "latency_p95_ms"
+    objective_ms: 900
+    window: 7d
+    indicator: "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job='nexa-api'}[5m])) by (le))"
+

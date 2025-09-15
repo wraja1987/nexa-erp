@@ -1,0 +1,39 @@
+{
+  "module": "admin/tenants",
+  "title": "Tenants",
+  "breadcrumbs": ["Admin", "Tenants"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "active-tenants", "label": "Active Tenants", "value": 18, "changePct": 5.9, "changeDirection": "up" },
+    { "id": "new-30d", "label": "New (30d)", "value": 3 },
+    { "id": "suspensions", "label": "Suspensions", "value": 0 }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "billing-alert", "icon": "Bell", "message": "2 tenants near prepaid credit threshold.", "tags": ["Billing","Quota"], "severity": "warning",
+      "actions": [{ "label": "Review balances", "href": "/admin/quotas" }] }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "new-tenant", "label": "Create Tenant", "icon": "Plus", "href": "/admin/tenants?new=1" },
+    { "id": "billing", "label": "Billing Settings", "icon": "PoundSterling", "href": "/admin/tenants?view=billing" }
+  ]},
+  "table": {
+    "title": "Tenants",
+    "columns": ["Tenant", "Owner", "Plan", "Status", "Created"],
+    "rows": [
+      ["Acme Ltd", "ops@acme.co.uk", "Pro", "Active", "2025-05-14"],
+      ["Globex EU", "it@globex.eu", "Enterprise", "Active", "2025-03-01"],
+      ["Umbrella Plc", "admin@umbrella.plc.uk", "Pro", "Active", "2024-11-22"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about Tenants…", "endpoint": "/api/ai/engine" }
+}
+
+
+
+

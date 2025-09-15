@@ -1,0 +1,112 @@
+{
+  "module": "finance/fx-revaluation",
+  "title": "FX Revaluation",
+  "breadcrumbs": [
+    "Finance",
+    "FX Revaluation"
+  ],
+  "layout": {
+    "grid": [
+      {
+        "area": "kpis",
+        "row": 1,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "insights",
+        "row": 2,
+        "col": 1,
+        "colSpan": 8
+      },
+      {
+        "area": "quickLinks",
+        "row": 2,
+        "col": 9,
+        "colSpan": 4
+      },
+      {
+        "area": "data",
+        "row": 3,
+        "col": 1,
+        "colSpan": 12
+      },
+      {
+        "area": "aiEngine",
+        "row": 4,
+        "col": 1,
+        "colSpan": 12
+      }
+    ]
+  },
+  "aiEngine": {
+    "title": "AI Engine",
+    "placeholder": "Ask about FX Revaluation…",
+    "endpoint": "/api/ai/engine"
+  },
+  "kpis": [
+    {
+      "id": "positions",
+      "label": "Positions",
+      "value": 8
+    },
+    {
+      "id": "next-reval",
+      "label": "Next Reval Date",
+      "value": 30
+    },
+    {
+      "id": "unrealised",
+      "label": "Unrealised",
+      "value": 23000,
+      "currency": "GBP"
+    }
+  ],
+  "insights": {
+    "title": "AI Insights",
+    "items": [
+      {
+        "id": "insight-1",
+        "icon": "Lightbulb",
+        "message": "Consider reviewing fx revaluation KPIs this week.",
+        "tags": [
+          "FX"
+        ],
+        "severity": "info"
+      }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "items": [
+      {
+        "id": "run-reval",
+        "label": "Run Revaluation",
+        "href": "/app/finance/fx-revaluation"
+      }
+    ]
+  },
+  "table": {
+    "title": "Positions",
+    "columns": [
+      "Currency",
+      "Exposure",
+      "Rate",
+      "Unrealised"
+    ],
+    "rows": [
+      [
+        "USD",
+        "$120k",
+        "1.27",
+        "£18k"
+      ],
+      [
+        "EUR",
+        "€85k",
+        "0.85",
+        "£5k"
+      ]
+    ]
+  }
+}

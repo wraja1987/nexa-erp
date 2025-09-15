@@ -1,21 +1,24 @@
-{
-  "modules": [
-    "Dashboard",
-    "Finance",
-    "HR & Payroll",
-    "Inventory & WMS",
-    "Manufacturing",
-    "Sales & CRM",
-    "Purchasing",
-    "Projects",
-    "Compliance & Tax",
-    "Banking & Billing",
-    "Enterprise & Analytics",
-    "AI & Automation",
-    "Mobile & PWA",
-    "Settings & Connectors",
-    "POS",
-    "Help",
-    "Settings"
-  ]
-}
+[
+  {
+    "category": "Core Modules",
+    "items": [
+      { "slug": "dashboard", "name": "Dashboard", "desc": "At-a-glance health and quick actions." },
+      { "slug": "finance", "name": "Finance", "desc": "GL, AP/AR, bank, VAT (MTD), fixed assets." },
+      { "slug": "hr-payroll", "name": "HR & Payroll", "desc": "Employees and payroll journals." },
+      { "slug": "inventory-wms", "name": "Inventory & WMS", "desc": "Items, lots, putaway, waves, counting." },
+      { "slug": "manufacturing", "name": "Manufacturing", "desc": "BOMs, MRP, capacity, work orders." },
+      { "slug": "sales-crm", "name": "Sales & CRM", "desc": "Leads, opportunities, quotes, orders." },
+      { "slug": "purchasing", "name": "Purchasing", "desc": "Requisitions, POs, three-way match." },
+      { "slug": "projects", "name": "Projects", "desc": "Tasks, time/expense, costing and billing." },
+      { "slug": "compliance-tax", "name": "Compliance & Tax", "desc": "GDPR tools and VAT workflows." },
+      { "slug": "banking-billing", "name": "Banking & Billing", "desc": "Open banking and subscriptions." },
+      { "slug": "enterprise-analytics", "name": "Enterprise & Analytics", "desc": "Intercompany, consolidation, BI." },
+      { "slug": "ai-automation", "name": "AI & Automation", "desc": "Assist, OCR, workflows, notifications." },
+      { "slug": "mobile-pwa", "name": "Mobile & PWA", "desc": "Installable PWA and offline queue." },
+      { "slug": "settings-connectors", "name": "Settings & Connectors", "desc": "Keys, rate limits, backups." },
+      { "slug": "pos", "name": "POS", "desc": "Checkout, receipts, reconciliation and reports." },
+      { "slug": "help", "name": "Help", "desc": "Built-in docs and guidance." },
+      { "slug": "settings", "name": "Settings", "desc": "Tenant, security, and entity settings." }
+    ]
+  }
+]

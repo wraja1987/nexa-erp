@@ -1,0 +1,488 @@
+[
+  {
+    "route": "/app/ai-automation",
+    "jsonFile": "ai-automation.json",
+    "title": "AI & Automation",
+    "area": "app"
+  },
+  {
+    "route": "/app/ai-automation/nexa-ai-assist",
+    "jsonFile": "ai-automation.nexa-ai-assist.json",
+    "title": "Nexa AI Assist",
+    "area": "app"
+  },
+  {
+    "route": "/app/ai-automation/notifications",
+    "jsonFile": "ai-automation.notifications.json",
+    "title": "Notifications",
+    "area": "app"
+  },
+  {
+    "route": "/app/ai-automation/ocr-document-ai",
+    "jsonFile": "ai-automation.ocr-document-ai.json",
+    "title": "OCR & Document AI",
+    "area": "app"
+  },
+  {
+    "route": "/app/ai-automation/predictive-scenarios",
+    "jsonFile": "ai-automation.predictive-scenarios.json",
+    "title": "Predictive Scenarios",
+    "area": "app"
+  },
+  {
+    "route": "/app/ai-automation/workflows-jobs",
+    "jsonFile": "ai-automation.workflows-jobs.json",
+    "title": "Workflows & Jobs",
+    "area": "app"
+  },
+  {
+    "route": "/app/banking-billing/billing-metering",
+    "jsonFile": "banking-billing.billing-metering.json",
+    "title": "Billing & Metering",
+    "area": "app"
+  },
+  {
+    "route": "/app/banking-billing",
+    "jsonFile": "banking-billing.json",
+    "title": "Banking & Billing",
+    "area": "app"
+  },
+  {
+    "route": "/app/banking-billing/open-banking",
+    "jsonFile": "banking-billing.open-banking.json",
+    "title": "Open Banking",
+    "area": "app"
+  },
+  {
+    "route": "/app/banking-billing/stripe-payments",
+    "jsonFile": "banking-billing.stripe-payments.json",
+    "title": "Stripe Payments",
+    "area": "app"
+  },
+  {
+    "route": "/app/compliance-tax/cis",
+    "jsonFile": "compliance-tax.cis.json",
+    "title": "CIS (Construction Industry Scheme)",
+    "area": "app"
+  },
+  {
+    "route": "/app/compliance-tax/gdpr-tools-audit",
+    "jsonFile": "compliance-tax.gdpr-tools-audit.json",
+    "title": "GDPR Tools & Audit",
+    "area": "app"
+  },
+  {
+    "route": "/app/compliance-tax",
+    "jsonFile": "compliance-tax.json",
+    "title": "Compliance & Tax",
+    "area": "app"
+  },
+  {
+    "route": "/app/core/dashboard",
+    "jsonFile": "core.dashboard.json",
+    "title": "Dashboard",
+    "area": "app"
+  },
+  {
+    "route": "/app/core/help-docs",
+    "jsonFile": "core.help-docs.json",
+    "title": "Help & Docs",
+    "area": "app"
+  },
+  {
+    "route": "/app/core",
+    "jsonFile": "core.json",
+    "title": "Core",
+    "area": "app"
+  },
+  {
+    "route": "/app/core/tenant-settings",
+    "jsonFile": "core.tenant-settings.json",
+    "title": "Tenant & Settings",
+    "area": "app"
+  },
+  {
+    "route": "/app/core/users-roles",
+    "jsonFile": "core.users-roles.json",
+    "title": "Users & Roles (RBAC / SoD)",
+    "area": "app"
+  },
+  {
+    "route": "/app/dashboard",
+    "jsonFile": "dashboard.json",
+    "title": "Dashboard",
+    "area": "app"
+  },
+  {
+    "route": "/app/enterprise-analytics/analytics-dashboards",
+    "jsonFile": "enterprise-analytics.analytics-dashboards.json",
+    "title": "Analytics & Dashboards",
+    "area": "app"
+  },
+  {
+    "route": "/app/enterprise-analytics/intercompany-consolidation",
+    "jsonFile": "enterprise-analytics.intercompany-consolidation.json",
+    "title": "Intercompany & Consolidation",
+    "area": "app"
+  },
+  {
+    "route": "/app/enterprise-analytics",
+    "jsonFile": "enterprise-analytics.json",
+    "title": "Enterprise & Analytics",
+    "area": "app"
+  },
+  {
+    "route": "/app/enterprise-analytics/multi-currency-entity",
+    "jsonFile": "enterprise-analytics.multi-currency-entity.json",
+    "title": "Multi-Currency & Multi-Entity",
+    "area": "app"
+  },
+  {
+    "route": "/app/enterprise-analytics/observability-siem",
+    "jsonFile": "enterprise-analytics.observability-siem.json",
+    "title": "Observability & SIEM",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/accounts-payable",
+    "jsonFile": "finance.accounts-payable.json",
+    "title": "Accounts Payable",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/accounts-receivable",
+    "jsonFile": "finance.accounts-receivable.json",
+    "title": "Accounts Receivable",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/bank-cash",
+    "jsonFile": "finance.bank-cash.json",
+    "title": "Bank & Cash",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/bank-reconciliation",
+    "jsonFile": "finance.bank-reconciliation.json",
+    "title": "Bank Reconciliation",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/costing",
+    "jsonFile": "finance.costing.json",
+    "title": "Costing",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/fixed-assets",
+    "jsonFile": "finance.fixed-assets.json",
+    "title": "Fixed Assets",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/fx-revaluation",
+    "jsonFile": "finance.fx-revaluation.json",
+    "title": "FX Revaluation",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/general-ledger",
+    "jsonFile": "finance.general-ledger.json",
+    "title": "General Ledger",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance",
+    "jsonFile": "finance.json",
+    "title": "Finance",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/period-close",
+    "jsonFile": "finance.period-close.json",
+    "title": "Period Close",
+    "area": "app"
+  },
+  {
+    "route": "/app/finance/vat-mtd",
+    "jsonFile": "finance.vat-mtd.json",
+    "title": "VAT (MTD)",
+    "area": "app"
+  },
+  {
+    "route": "/app/hr-payroll/employees",
+    "jsonFile": "hr-payroll.employees.json",
+    "title": "Employees",
+    "area": "app"
+  },
+  {
+    "route": "/app/hr-payroll",
+    "jsonFile": "hr-payroll.json",
+    "title": "HR & Payroll",
+    "area": "app"
+  },
+  {
+    "route": "/app/hr-payroll/payroll",
+    "jsonFile": "hr-payroll.payroll.json",
+    "title": "Payroll",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms/advanced-wms",
+    "jsonFile": "inventory-wms.advanced-wms.json",
+    "title": "Advanced WMS (ASN, Wave, 3PL)",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms/cycle-counting",
+    "jsonFile": "inventory-wms.cycle-counting.json",
+    "title": "Cycle Counting",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms/items-lots",
+    "jsonFile": "inventory-wms.items-lots.json",
+    "title": "Items & Lots",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms",
+    "jsonFile": "inventory-wms.json",
+    "title": "Inventory & WMS",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms/quality-capa",
+    "jsonFile": "inventory-wms.quality-capa.json",
+    "title": "Quality (Holds & CAPA)",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms/stock-movements",
+    "jsonFile": "inventory-wms.stock-movements.json",
+    "title": "Stock Movements",
+    "area": "app"
+  },
+  {
+    "route": "/app/inventory-wms/warehouses",
+    "jsonFile": "inventory-wms.warehouses.json",
+    "title": "Warehouses",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/aps",
+    "jsonFile": "manufacturing.aps.json",
+    "title": "APS",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/bom-routings",
+    "jsonFile": "manufacturing.bom-routings.json",
+    "title": "BOM & Routings",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/capacity-planning",
+    "jsonFile": "manufacturing.capacity-planning.json",
+    "title": "Capacity Planning",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing",
+    "jsonFile": "manufacturing.json",
+    "title": "Manufacturing",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/maintenance",
+    "jsonFile": "manufacturing.maintenance.json",
+    "title": "Maintenance",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/mrp",
+    "jsonFile": "manufacturing.mrp.json",
+    "title": "MRP",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/plm",
+    "jsonFile": "manufacturing.plm.json",
+    "title": "PLM",
+    "area": "app"
+  },
+  {
+    "route": "/app/manufacturing/work-orders",
+    "jsonFile": "manufacturing.work-orders.json",
+    "title": "Work Orders",
+    "area": "app"
+  },
+  {
+    "route": "/app/mobile-pwa/installable-pwa",
+    "jsonFile": "mobile-pwa.installable-pwa.json",
+    "title": "Installable PWA",
+    "area": "app"
+  },
+  {
+    "route": "/app/mobile-pwa/ios-android-app",
+    "jsonFile": "mobile-pwa.ios-android-app.json",
+    "title": "iOS & Android App",
+    "area": "app"
+  },
+  {
+    "route": "/app/mobile-pwa",
+    "jsonFile": "mobile-pwa.json",
+    "title": "Mobile & PWA",
+    "area": "app"
+  },
+  {
+    "route": "/app/pos",
+    "jsonFile": "pos.json",
+    "title": "POS",
+    "area": "app"
+  },
+  {
+    "route": "/app/pos/pos",
+    "jsonFile": "pos.pos.json",
+    "title": "Point of Sale (POS)",
+    "area": "app"
+  },
+  {
+    "route": "/app/projects/costing-billing",
+    "jsonFile": "projects.costing-billing.json",
+    "title": "Costing & Billing",
+    "area": "app"
+  },
+  {
+    "route": "/app/projects",
+    "jsonFile": "projects.json",
+    "title": "Projects",
+    "area": "app"
+  },
+  {
+    "route": "/app/projects/projects-tasks",
+    "jsonFile": "projects.projects-tasks.json",
+    "title": "Projects & Tasks",
+    "area": "app"
+  },
+  {
+    "route": "/app/purchasing",
+    "jsonFile": "purchasing.json",
+    "title": "Purchasing",
+    "area": "app"
+  },
+  {
+    "route": "/app/purchasing/purchase-orders",
+    "jsonFile": "purchasing.purchase-orders.json",
+    "title": "Purchase Orders",
+    "area": "app"
+  },
+  {
+    "route": "/app/purchasing/requisitions",
+    "jsonFile": "purchasing.requisitions.json",
+    "title": "Requisitions",
+    "area": "app"
+  },
+  {
+    "route": "/app/purchasing/supplier-invoices-payments",
+    "jsonFile": "purchasing.supplier-invoices-payments.json",
+    "title": "Supplier Invoices & Payments",
+    "area": "app"
+  },
+  {
+    "route": "/app/sales-crm",
+    "jsonFile": "sales-crm.json",
+    "title": "Sales & CRM",
+    "area": "app"
+  },
+  {
+    "route": "/app/sales-crm/leads-opportunities",
+    "jsonFile": "sales-crm.leads-opportunities.json",
+    "title": "Leads & Opportunities",
+    "area": "app"
+  },
+  {
+    "route": "/app/sales-crm/quotations-sales-orders",
+    "jsonFile": "sales-crm.quotations-sales-orders.json",
+    "title": "Quotations & Sales Orders",
+    "area": "app"
+  },
+  {
+    "route": "/app/sales-crm/returns-rma",
+    "jsonFile": "sales-crm.returns-rma.json",
+    "title": "Returns (RMA)",
+    "area": "app"
+  },
+  {
+    "route": "/app/settings-connectors/api-keys-rate-limits",
+    "jsonFile": "settings-connectors.api-keys-rate-limits.json",
+    "title": "API Keys & Rate Limits",
+    "area": "app"
+  },
+  {
+    "route": "/app/settings-connectors/backups-dr",
+    "jsonFile": "settings-connectors.backups-dr.json",
+    "title": "Backups & DR",
+    "area": "app"
+  },
+  {
+    "route": "/app/settings-connectors/connectors",
+    "jsonFile": "settings-connectors.connectors.json",
+    "title": "Connectors",
+    "area": "app"
+  },
+  {
+    "route": "/app/settings-connectors",
+    "jsonFile": "settings-connectors.json",
+    "title": "Settings & Connectors",
+    "area": "app"
+  },
+  {
+    "route": "/admin/audit",
+    "jsonFile": "admin.audit.json",
+    "title": "Audit Logs",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/backups",
+    "jsonFile": "admin.backups.json",
+    "title": "Backups & DR",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/dashboard",
+    "jsonFile": "admin.dashboard.json",
+    "title": "Admin Dashboard",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/jobs",
+    "jsonFile": "admin.jobs.json",
+    "title": "Jobs & Alerts",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/keys",
+    "jsonFile": "admin.keys.json",
+    "title": "API Keys & Rate Limits",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/quotas",
+    "jsonFile": "admin.quotas.json",
+    "title": "Quotas",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/rbac",
+    "jsonFile": "admin.rbac.json",
+    "title": "Users & Roles (RBAC / SoD)",
+    "area": "admin"
+  },
+  {
+    "route": "/admin/tenants",
+    "jsonFile": "admin.tenants.json",
+    "title": "Tenants",
+    "area": "admin"
+  }
+]

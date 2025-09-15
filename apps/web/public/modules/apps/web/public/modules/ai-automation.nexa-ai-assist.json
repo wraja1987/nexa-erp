@@ -1,0 +1,28 @@
+{
+  "module": "ai-automation/nexa-ai-assist",
+  "title": "Nexa AI Assist",
+  "breadcrumbs": ["AI & Automation", "Nexa AI Assist"],
+  "layout": {
+    "grid": [
+      { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+      { "area": "content", "row": 2, "col": 1, "colSpan": 12 }
+    ]
+  },
+  "kpis": [
+    { "id": "questions-today", "label": "Questions Today", "value": 86, "changePct": 6.0, "changeDirection": "up" },
+    { "id": "avg-response", "label": "Avg Response (s)", "value": 1.4, "changePct": -7.0, "changeDirection": "down" }
+  ],
+  "content": {
+    "type": "assist",
+    "panels": [
+      { "title": "Ask Nexa", "placeholder": "Ask about revenue, invoices, workflows, or stock…" },
+      { "title": "Suggested Prompts", "items": [
+        "Summarise this week’s invoices over £5,000",
+        "Draft an email to chase overdue invoices",
+        "Create a workflow to auto-tag purchase orders > £10k"
+      ]}
+    ]
+  }
+}
+
+

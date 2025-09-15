@@ -11,11 +11,16 @@ const sectors: Sector[] = [
 
 export default function IndustriesPage() {
   return (
-    <div className="space-y-6">
-      <header className="mt-8">
-        <h1 className="text-3xl font-semibold">Industries</h1>
-        <p className="text-slate-600 mt-2">Proven patterns that fit how your sector operates.</p>
-      </header>
+    <div className="space-y-8">
+      <section className="mt-8">
+        <div className="hero-band">
+          <h1 className="text-3xl md:text-4xl font-semibold">Industries</h1>
+          <p className="mt-2 opacity-90">Built for every industry: Wholesale & Distribution, Manufacturing & Supply Chain, Retail & eCommerce, Services & SaaS.</p>
+          <div className="mt-4">
+            <a href="/contact#demo" className="btn-primary">Book a discovery call</a>
+          </div>
+        </div>
+      </section>
       <div className="grid md:grid-cols-3 gap-6">
         {sectors.map((s)=> (
           <div key={s.name} className="card p-5">
@@ -25,6 +30,9 @@ export default function IndustriesPage() {
             </ul>
           </div>
         ))}
+      </div>
+      <div className="pt-2">
+        <a href="/contact#demo" className="btn-secondary">Talk to an expert</a>
       </div>
     </div>
   )

@@ -1,0 +1,1 @@
+import { test, expect } from "@playwright/test"; const routes = [ "/app/dashboard", "/admin", "/admin/tenants", "/admin/rbac", "/admin/audit-logs" ]; for (const r of routes) { test(`200 for ${r}`, async ({ page }) => { await page.goto(`http://localhost:3000${r}`); await expect(page).toHaveTitle(/Nexa|Admin|Dashboard/i); }); }

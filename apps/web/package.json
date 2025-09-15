@@ -9,22 +9,29 @@
     "lint": "next lint",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "seed:admin": "tsx scripts/createAdmin.ts",
-    "seed:employees": "tsx scripts/seedEmployees.ts"
+    "seed:employees": "tsx scripts/seedEmployees.ts",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",
     "bcrypt": "^6.0.0",
     "next": "15.4.6",
     "next-auth": "^4.24.11",
+    "nodemailer": "^6",
+    "otplib": "^12.0.1",
     "pdf-lib": "^1.17.1",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "stripe": "^14.25.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.55.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "16",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "typescript": "^5"

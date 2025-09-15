@@ -1,0 +1,39 @@
+{
+  "module": "admin/rbac",
+  "title": "Users & Roles (RBAC / SoD)",
+  "breadcrumbs": ["Admin", "Users & Roles"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "users", "label": "Users", "value": 214 },
+    { "id": "roles", "label": "Roles", "value": 34 },
+    { "id": "sod", "label": "SoD Breaches", "value": 1, "changePct": -50, "changeDirection": "down" }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "sod-review", "icon": "Shield", "message": "1 SoD breach pending review in Finance.", "tags": ["RBAC","SoD"], "severity": "info",
+      "actions": [{ "label": "Open SoD matrix", "href": "/admin/rbac?view=sod" }] }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "add-user", "label": "Add User", "icon": "UserPlus", "href": "/admin/rbac?new=user" },
+    { "id": "new-role", "label": "New Role", "icon": "Plus", "href": "/admin/rbac?new=role" }
+  ]},
+  "table": {
+    "title": "Roles & SoD",
+    "columns": ["Role", "Users", "SoD Issues", "Last Review"],
+    "rows": [
+      ["Finance AP Clerk", "7", "0", "2025-08-29"],
+      ["Finance Manager", "5", "1", "2025-09-10"],
+      ["Warehouse Picker", "24", "0", "2025-09-12"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about RBAC & SoD…", "endpoint": "/api/ai/engine" }
+}
+
+
+
+

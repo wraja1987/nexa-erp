@@ -1,0 +1,36 @@
+{
+  "module": "admin/jobs",
+  "title": "Jobs & Alerts",
+  "breadcrumbs": ["Admin", "Jobs & Alerts"],
+  "layout": { "grid": [
+    { "area": "kpis", "row": 1, "col": 1, "colSpan": 12 },
+    { "area": "insights", "row": 2, "col": 1, "colSpan": 8 },
+    { "area": "quickLinks", "row": 2, "col": 9, "colSpan": 4 },
+    { "area": "table", "row": 3, "col": 1, "colSpan": 12 },
+    { "area": "aiEngine", "row": 4, "col": 1, "colSpan": 12 }
+  ]},
+  "kpis": [
+    { "id": "failed-24h", "label": "Failed (24h)", "value": 1 },
+    { "id": "running", "label": "Running", "value": 12 },
+    { "id": "queued", "label": "Queued", "value": 3 }
+  ],
+  "insights": { "title": "AI Insights", "items": [
+    { "id": "retry", "icon": "RotateCcw", "message": "OCR batch exceeded time on 2 files; suggest 2x concurrency.", "tags": ["Jobs","Perf"], "severity": "info" }
+  ]},
+  "quickLinks": { "title": "Quick Links", "items": [
+    { "id": "new-job", "label": "New Job", "icon": "Plus", "href": "/admin/jobs?new=1" },
+    { "id": "view-alerts", "label": "Open Alerts", "icon": "Bell", "href": "/admin/jobs?view=alerts" }
+  ]},
+  "table": {
+    "title": "Recent Jobs",
+    "columns": ["Job", "Queue", "Started", "Duration", "Status"],
+    "rows": [
+      ["ocr-invoices-24h", "ocr", "2025-09-14 10:41", "04:12", "OK"],
+      ["bank-feed-hourly", "sync", "2025-09-14 10:00", "00:50", "OK"],
+      ["po-auto-tag", "workflow", "2025-09-14 09:30", "00:06", "OK"]
+    ]
+  },
+  "aiEngine": { "title": "AI Engine", "placeholder": "Ask about Jobs & Alerts…", "endpoint": "/api/ai/engine" }
+}
+
+
