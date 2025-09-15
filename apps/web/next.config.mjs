@@ -1,22 +1,15 @@
 /** @type {import("next").NextConfig} */
-const nextConfig = {  typescript: { ignoreBuildErrors: true },
+const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
-
+  typescript: { ignoreBuildErrors: true },
   async headers() {
     return [
-      {
-        source: '/_next/static/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
-      },
-      {
-        source: '/api/:path*',
-        headers: [{ key: 'Cache-Control', value: 'no-store' }],
-      },
-      {
-        // everything except _next/*
-        source: '/((?!(?:_next/)).*)',
-        headers: [{ key: 'Cache-Control', value: 's-maxage=60, stale-while-revalidate=300' }],
-      },
+      { source: "/api/:path*",
+        headers: [{ key: "Cache-Control", value: "no-store" }] },
+      { source: "/_next/static/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      // HTML catch-all is set by middleware (safer than regex sources here)
     ];
-  },};
+  },
+};
 export default nextConfig;
