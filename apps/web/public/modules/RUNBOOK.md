@@ -33,8 +33,9 @@ Grafana
 
 Headers & CORS (self-healing)
 -----------------------------
-- Next.js sets cache headers via `next.config.js` and strict API CORS via `middleware.ts`.
-- Run verifier: `bash ops/fix-and-verify.sh`.
-- To enable proxy path: set `HOST_SSH`/`HOST_WEB_ROOT`/`SUDO_CMD` and re-run the script.
-- Passing audit shows 200 for static/api/html and correct Cache-Control/CORS in the table.
+- Headers set in `apps/web/next.config.*`; strict API CORS in `apps/web/middleware.ts`.
+- Run: `bash ops/fix-and-verify.sh` to build locally, audit, try deploy, and optionally patch edge via SSH.
+- SSH envs (optional):
+  - `HOST_SSH="user@server"`  `HOST_WEB_ROOT="/var/www/nexa"`  `SUDO_CMD="sudo"`
+  - Remote Nginx path used: `$HOST_WEB_ROOT/nginx/nexa.conf`
 
