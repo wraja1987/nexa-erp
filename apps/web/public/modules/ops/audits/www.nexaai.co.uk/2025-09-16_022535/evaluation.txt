@@ -1,0 +1,14 @@
+=== Targets ===
+static.cache: public, max-age=31536000, immutable
+html.cache:   s-maxage=60, stale-while-revalidate=300
+api.cache:    no-store
+api.cors:     https://www.nexaai.co.uk
+
+=== Evaluation ===
+static status: 200
+static cache : public, max-age=0 -> FAIL
+html status  : 200
+html cache   : public, max-age=0 -> FAIL
+api status   : 200
+api cache    : <none> -> FAIL
+api cors     : <none> -> FAIL

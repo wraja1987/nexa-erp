@@ -1,0 +1,16 @@
+:root {
+  --color-blue: #2E6BFF;
+  --color-violet: #7A4DFF;
+  --color-navy: #0F2747;
+  --color-bg: #F7F9FC;
+  --color-text: #0B1424;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+
+  --radius-1: 8px;
+  --radius-2: 12px;
+}

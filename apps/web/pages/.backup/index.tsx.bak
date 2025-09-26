@@ -1,0 +1,67 @@
+import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { getSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
+type KPI = { label: string; value: string };
+type Section = { type?: string; items?: KPI[] };
+type Module = { title?: string; sections?: Section[] };
+
+export default function Dashboard() {
+  const [mod, setMod] = useState<Module|null>(null);
+  const [err, setErr] = useState<string|null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const r = await fetch("/modules/dashboard.json", { credentials: "same-origin" });
+        if (!r.ok) throw new Error("Failed to load dashboard.json");
+        const j: Module = await r.json();
+        if (alive) setMod(j);
+      } catch (e:any) {
+        console.error("dashboard.json error:", e?.message || e);
+        if (alive) { setErr("Could not load modules/dashboard.json"); setMod({ title:"Nexa ERP", sections: [] }); }
+      }
+    })();
+    return () => { alive = false; };
+  }, []);
+
+  if (!mod) return <main style={{ padding:24, fontFamily:"system-ui" }}>Loading dashboard…</main>;
+
+  return (
+    <main style={{ padding:24, fontFamily:"system-ui" }}>
+      <h1 style={{ marginBottom: 16 }}>{mod.title ?? "Nexa ERP Dashboard"}</h1>
+      {err && <p style={{ color:"#b00" }}>{err}</p>}
+      {mod.sections?.length ? (
+        mod.sections.map((s, i) => (
+          <section key={i} style={{ margin: "16px 0" }}>
+            {s.items?.length ? (
+              <ul style={{ listStyle:"none", padding:0, margin:0, display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(180px, 1fr))", gap:12 }}>
+                {s.items.map((k, j) => (
+                  <li key={j} style={{ border:"1px solid #ddd", borderRadius:8, padding:"12px 14px" }}>
+                    <div style={{ fontSize:12, color:"#666" }}>{k.label}</div>
+                    <div style={{ fontSize:20, fontWeight:600, marginTop:4 }}>{k.value}</div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <em style={{ color:"#666" }}>No items</em>
+            )}
+          </section>
+        ))
+      ) : (
+        <p style={{ color:"#666" }}>No sections configured.</p>
+      )}
+    </main>
+  );
+}
+
+export async function getServerSideProps(
+  ctx: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<{}>> {
+  const session = await getSession(ctx);
+  if (!session) {
+    return { redirect: { destination: "/login?callbackUrl=/dashboard", permanent: false } };
+  }
+  return { props: {} };
+}

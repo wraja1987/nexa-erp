@@ -1,0 +1,32 @@
+--- https://www.nexaai.co.uk/favicon.ico
+HTTP/2 200 
+access-control-allow-credentials: true
+alt-svc: h3=":443"; ma=2592000
+cache-control: public, max-age=0
+content-encoding: gzip
+content-type: text/html; charset=utf-8
+date: Tue, 16 Sep 2025 01:25:35 GMT
+etag: W/"74d4-19944cfdfd0"
+last-modified: Sat, 13 Sep 2025 20:41:38 GMT
+vary: Origin
+vary: Accept-Encoding
+via: 1.1 Caddy
+x-powered-by: Express
+content-length: 20
+
+
+--- https://www.nexaai.co.uk/
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: public, max-age=0
+content-encoding: gzip
+content-type: text/html; charset=utf-8
+date: Tue, 16 Sep 2025 01:25:35 GMT
+etag: W/"74d4-19944cfdfd0"
+last-modified: Sat, 13 Sep 2025 20:41:38 GMT
+vary: Accept-Encoding
+via: 1.1 Caddy
+x-powered-by: Express
+content-length: 20
+
+

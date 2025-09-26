@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa ERP — Resources</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header (same as other pages) */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
+.logo img{height:28px;width:auto;display:block}
+.brand-text{font-weight:800;color:var(--nexa-navy)}
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Hero */
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.lead{margin:6px 0 10px;color:#334155}
+
+/* Search + filters */
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 6px}
+input[type="search"]{flex:1;min-width:260px;padding:10px 12px;border:1px solid var(--border);border-radius:10px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border:1px solid var(--border);border-radius:999px;padding:8px 12px;background:#fff;color:#0F2747;cursor:pointer}
+.pill.active{border-color:rgba(46,107,255,.35);box-shadow:0 8px 22px rgba(46,107,255,.15)}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color;display:flex;flex-direction:column;gap:10px}
+.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.card h3{margin:0;color:var(--nexa-navy)}
+.card p{margin:0}
+.meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:4px 8px;background:#fff}
+.badge{font-size:12px;border-radius:999px;padding:4px 8px;color:#92400e;background:#fde68a;border:1px solid #f59e0b}
+
+/* Sections */
+.section{margin-top:18px}
+.section h2{color:var(--nexa-navy);margin:0 0 6px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.small{font-size:14px;color:#4b5563}
+
+@media (max-width:1024px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.footer .cols{grid-template-columns:1fr}}
+.wide-card{grid-column:1 / -1;padding:20px}
+.wide-card h3{font-size:22px}
+.wide-card ol li{margin:6px 0}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <img src="/logo-nexa.png" alt="Nexa logo"/>
+      <span class="brand-text">Nexa ERP</span>
+    </a>
+    <nav class="nav">
+  <a class="logo" href="/"><img src="/logo-nexa.png" alt="Nexa logo" style="height:28px"/></a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/modules/">Modules</a></li>
+    <li><a href="/integrations/">Integrations &amp; API</a></li>
+    <li><a href="/security/">Security &amp; Compliance</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/">Contact</a></li>
+    <li><a class="btn primary" href="https://app.nexaai.co.uk">Login</a></li>
+  </ul>
+</nav>
+    <div class="header-cta">
+      <a class="btn primary" href="https://app.nexaai.co.uk">Login</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Resources</h1>
+  <p class="lead">Guides and documentation to help you get started, set up, and use Nexa ERP day to day.</p>
+
+  <!-- Tools -->
+  <div class="tools">
+    <div class="pills" role="tablist">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="guides">Guides</button>
+      <button class="pill" data-cat="docs">Documentation</button>
+      <button class="pill" data-cat="faq">FAQ</button>
+    </div>
+  </div>
+
+  <!-- Guides section -->
+  <section class="section">
+    <h2>Guides</h2>
+    <div class="grid" id="grid-guides">
+      <article class="card wide-card" data-cat="guides">
+        <h3>Getting Started</h3>
+        <p><strong>Once your subscription package has been chosen</strong>, follow these steps to get set up quickly and safely:</p>
+        <ol>
+          <li><strong>Create your company profile</strong> — Enter legal name, address, default currency, tax settings and financial year. Set your document numbering (quotes, orders, invoices).</li>
+          <li><strong>Add users and roles</strong> — Invite your team, assign role‑based access control, and enforce two‑factor sign‑in for all users.</li>
+          <li><strong>Set your financial settings</strong> — Build your chart of accounts, tax codes, control accounts and posting rules. Choose bank accounts and starting balances.</li>
+          <li><strong>Import your data</strong> — Load customers, suppliers, products and opening balances using comma separated values templates. Validate results and correct any issues.</li>
+          <li><strong>Connect payments and banking</strong> (optional) — Use Stripe for card payments and TrueLayer for bank feeds. Live keys are required for production.</li>
+          <li><strong>Configure modules</strong> —
+            <ul>
+              <li><em>Finance</em>: sales and purchase invoice workflows, period close, fixed assets and depreciation.</li>
+              <li><em>Sales and Purchasing</em>: quotation and order types, approvals, price lists and terms.</li>
+              <li><em>Inventory and Warehouse</em>: warehouses, locations, units of measure, stock posting rules.</li>
+              <li><em>Projects</em>: templates, task boards, rates and approval steps.</li>
+              <li><em>Point of Sale</em> (if used): connect Stripe Terminal, set taxes and receipt templates, test a sale.</li>
+            </ul>
+          </li>
+          <li><strong>Compliance and audit</strong> — Enable audit trail, set retention rules, confirm General Data Protection Regulation tools, and connect HM Revenue and Customs Value Added Tax (when live keys are available).</li>
+          <li><strong>Run an end‑to‑end test</strong> — Quote → Order → Delivery → Invoice → Payment → Bank reconciliation → Reporting.</li>
+          <li><strong>Train and go‑live</strong> — Walk teams through their daily tasks, check access and approvals, and schedule your go‑live date.</li>
+        </ol>
+        <div class="meta">
+          <span class="tag">Guide</span>
+          <a class="btn secondary" href="/resources/guides/getting-started.html">Open</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- Docs section -->
+  <section class="section">
+    <h2>Documentation</h2>
+    <div class="grid" id="grid-docs">
+      <article class="card" data-cat="docs">
+        <h3>Finance</h3>
+        <p>Set up ledgers, taxes and posting rules. Learn how to raise and approve purchase invoices, post sales, reconcile banks, run period close and create accurate reports.</p>
+        <ul style="margin:0 0 10px 18px">
+          <li>Chart of accounts, tax codes and control accounts</li>
+          <li>Sales and purchase invoices, receipts and payments</li>
+          <li>Bank feeds and bank reconciliation</li>
+          <li>Fixed assets and depreciation</li>
+          <li>Period close and adjustments</li>
+          <li>Reporting and exports</li>
+        </ul>
+        <div class="meta">
+          <span class="tag">Docs</span>
+          <a class="btn secondary" href="/resources/">Open</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="docs">
+        <h3>Point of Sale</h3>
+        <p>Configure Stripe Terminal, set tax rules and receipt templates, and learn cashier workflows including offline sales, end‑of‑day reconciliation and General Ledger posting.</p>
+        <ul style="margin:0 0 10px 18px">
+          <li>Connect Stripe Terminal and test a sale</li>
+          <li>Products, prices and taxes</li>
+          <li>Receipts (on‑screen, email, Portable Document Format)</li>
+          <li>Offline park and synchronise</li>
+          <li>X and Z reports and reconciliation</li>
+          <li>Accounting integration and posting</li>
+        </ul>
+        <div class="meta">
+          <span class="tag">Docs</span>
+          <a class="btn secondary" href="/resources/">Open</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="docs">
+        <h3>Projects</h3>
+        <p>Plan your work, control costs and bill correctly. Create tasks, assign people, record time and expense, and generate invoices with a clear audit trail.</p>
+        <ul style="margin:0 0 10px 18px">
+          <li>Project templates and task boards</li>
+          <li>Assigning roles and rates</li>
+          <li>Time and expense capture</li>
+          <li>Budget tracking and approvals</li>
+          <li>Billing: fixed price and time &amp; materials</li>
+          <li>Project reporting</li>
+        </ul>
+        <div class="meta">
+          <span class="tag">Docs</span>
+          <a class="btn secondary" href="/resources/">Open</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="grid" id="grid-faq">
+      <article class="card" data-cat="faq">
+        <h3>How do I invite my team?</h3>
+        <p>Go to Settings → Users, select “Invite user”, choose a role and send the invite. We recommend enabling multi‑factor authentication for all users.</p>
+        <div class="meta"><span class="tag">FAQ</span><a class="btn secondary" href="/resources/faq#inviting-users">Read</a></div>
+      </article>
+      <article class="card" data-cat="faq">
+        <h3>How do I import my data?</h3>
+        <p>Use the import tools in each module to upload products, customers, suppliers and opening balances. Sample comma separated values templates are provided in each screen.</p>
+        <div class="meta"><span class="tag">FAQ</span><a class="btn secondary" href="/resources/faq#data-import">Read</a></div>
+      </article>
+      <article class="card" data-cat="faq">
+        <h3>Can I connect payments and bank feeds?</h3>
+        <p>Yes. Stripe handles card payments, and TrueLayer provides bank feeds. Live keys are required for production.</p>
+        <div class="meta"><span class="tag">FAQ</span><a class="btn secondary" href="/resources/faq#payments-banking">Read</a></div>
+      </article>
+      <article class="card" data-cat="faq">
+        <h3>How is access controlled?</h3>
+        <p>Use role‑based access control and Segregation of Duties rules to keep responsibilities separate. You can enforce two‑factor sign‑in for all users.</p>
+        <div class="meta"><span class="tag">FAQ</span><a class="btn secondary" href="/resources/faq#access-control">Read</a></div>
+      </article>
+      <article class="card" data-cat="faq">
+        <h3>Where do I find audit logs?</h3>
+        <p>Each module includes an activity view. You can export logs for your auditors and set retention periods to match your policy.</p>
+        <div class="meta"><span class="tag">FAQ</span><a class="btn secondary" href="/resources/faq#audit-logs">Read</a></div>
+      </article>
+      <article class="card" data-cat="faq">
+        <h3>How do I get help?</h3>
+        <p>Email <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> and we will respond quickly. You can also book a demonstration for tailored guidance.</p>
+        <div class="meta"><span class="tag">FAQ</span><a class="btn secondary" href="/contact#book-demo">Read</a></div>
+      </article>
+    </div>
+  </section>
+
+
+  
+</main>
+
+<footer>
+  <div class="grid">
+    <section>
+      <strong>Nexa ERP</strong>
+      <p>AI-powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance. Contact: info@chiefaa.com</p>
+    </section>
+    <nav>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="/modules/">Modules</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const pills = Array.from(document.querySelectorAll('.pill'));
+const cards = Array.from(document.querySelectorAll('.card'));
+let active = 'all';
+function applyFilters(){
+  cards.forEach(c => {
+    const cat = c.dataset.cat || 'all';
+    const matchCat = (active === 'all') || (cat === active);
+    c.style.display = matchCat ? '' : 'none';
+  });
+}
+pills.forEach(p => p.addEventListener('click', () => {
+  pills.forEach(x => x.classList.remove('active'));
+  p.classList.add('active'); active = p.dataset.cat; applyFilters();
+}));
+applyFilters();
+</script>
+</body>
+</html>

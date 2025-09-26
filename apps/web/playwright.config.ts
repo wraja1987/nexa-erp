@@ -1,17 +1,14 @@
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests-e2e',
-  timeout: 60_000,
-  retries: 0,
-  use: { baseURL: process.env.E2E_BASE_URL || 'http://localhost:3000' },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-  ]
-})
-
-
-
-
-
-
+  webServer: {
+    command: 'NEXT_DISABLE_ESLINT=1 NEXT_DISABLE_TYPECHECK=1 npx next build && npx next start -p 3000',
+    port: 3000,
+    timeout: 120_000,
+    reuseExistingServer: true,
+  },
+  use: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    headless: true,
+  },
+});

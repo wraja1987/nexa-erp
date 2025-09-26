@@ -1,0 +1,7 @@
+/* minimal fallback so the import is valid; replace with your Nexa CSS */
+html,body,#__next{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto}
+
+@import "./theme.css";
+html, body, #__next { min-height: 100%; }
+body { background: var(--color-bg); color: var(--color-text); }

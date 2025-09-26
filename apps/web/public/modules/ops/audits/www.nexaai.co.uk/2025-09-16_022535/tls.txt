@@ -1,0 +1,7 @@
+# Subject / SAN
+\n# Issuer / Validity
+issuer= /C=US/O=Let's Encrypt/CN=E7
+notBefore=Sep 13 22:38:56 2025 GMT
+notAfter=Dec 12 22:38:55 2025 GMT
+\n# Fingerprint
+SHA256 Fingerprint=98:86:E2:9D:A8:33:84:85:E3:8B:8A:2A:F7:64:3E:D0:45:BB:65:74:BF:1B:35:78:1D:9E:E8:4D:0F:B0:D1:53

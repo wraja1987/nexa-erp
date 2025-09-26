@@ -1,0 +1,6 @@
+{
+  "free":          { "users": 1,   "aiTokens":  50000,   "carryOverMonths": 1, "alerts": [0.8, 1.0] },
+  "standard":      { "users": 10,  "aiTokens":  250000,  "carryOverMonths": 2, "alerts": [0.8, 1.0] },
+  "professional":  { "users": 50,  "aiTokens":  1500000, "carryOverMonths": 3, "alerts": [0.8, 1.0] },
+  "enterprise":    { "users": 9999,"aiTokens":  99999999,"carryOverMonths": 3, "alerts": [0.8, 1.0] }
+}

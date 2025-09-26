@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "installCommand": "npm i -g npm@9 && (npm ci --no-audit --no-fund || npm i --no-audit --no-fund)",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next"
+}

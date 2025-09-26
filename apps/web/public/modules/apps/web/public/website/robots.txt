@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.nexaai.co.uk/website/sitemap.xml

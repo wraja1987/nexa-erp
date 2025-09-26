@@ -19,6 +19,13 @@ html,body{background:var(--nf-bg); color:var(--nf-text);}
   background-size: 200% 200%;
   animation: fluidGradient 8s ease infinite;
 }
+/* Keep nav row stable and aligned across pages */
+.site-nav-fixed {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+/* Hide scrollbars for horizontal nav on supported browsers */
+.site-nav-fixed::-webkit-scrollbar { display: none; }
 @keyframes fluidGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

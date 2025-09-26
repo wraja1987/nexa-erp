@@ -1,1 +1,0 @@
-"use client"; export default function GlobalError({ error }: { error: Error }) { return ( <html lang="en-GB"><body> <div style={{padding:"2rem"}}> <h1>Something went wrong</h1> <p>{error.message}</p> <a href="/app/dashboard">Back to Dashboard</a> </div> </body></html> ); }

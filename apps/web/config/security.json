@@ -1,0 +1,19 @@
+{
+  "passwordPolicy": {
+    "minLength": 12,
+    "requireUpper": true,
+    "requireLower": true,
+    "requireNumber": true,
+    "requireSymbol": true,
+    "maxAgeDays": 90,
+    "historyDisallow": 3
+  },
+  "session": {
+    "idleTimeoutMinutes": 30,
+    "maxConcurrentSessions": 3
+  },
+  "auth": {
+    "emailVerificationRequired": true,
+    "mfaRequired": true
+  }
+}

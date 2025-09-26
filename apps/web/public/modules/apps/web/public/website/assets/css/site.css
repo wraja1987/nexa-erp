@@ -1,0 +1,46 @@
+:root{--bg:#0b1d33;--fg:#e8f0ff;--ink:#0b1d33;--ink-2:#22446e;--link:#3aa0ff;--muted:#6b829f;--max:1120px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
+a{color:var(--link);text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+
+.site-header{position:sticky;top:0;background:#fff;border-bottom:1px solid #e6eef8;z-index:20}
+.site-header .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:var(--max);margin:0 auto;padding:10px 16px}
+.site-header .logo img{height:28px}
+.site-header .nav-toggle{display:none;position:relative;width:40px;height:40px;border:1px solid #d9e6f5;border-radius:8px;background:#fff}
+.site-header .nav-toggle span{position:absolute;left:10px;right:10px;height:2px;background:#22446e;transition:transform .2s ease,opacity .2s ease}
+.site-header .nav-toggle span:nth-child(1){top:12px}
+.site-header .nav-toggle span:nth-child(2){top:19px}
+.site-header .nav-toggle span:nth-child(3){top:26px}
+.primary-nav a{margin-left:16px;color:var(--ink)}
+.primary-nav a:first-child{margin-left:0}
+.header-cta .btn{display:inline-block;padding:8px 12px;border:1px solid #d9e6f5;border-radius:8px;color:#22446e}
+
+/* Responsive nav */
+@media (max-width:768px){
+  .site-header .nav-toggle{display:inline-block}
+  .site-header .header-cta{display:none}
+  .primary-nav{position:fixed;inset:56px 0 auto 0;background:#fff;border-bottom:1px solid #e6eef8;display:none;flex-direction:column;max-width:var(--max);margin:0 auto;padding:8px 16px}
+  .nav-open .primary-nav{display:flex}
+  .primary-nav a{margin:8px 0;font-size:15px}
+  .site-header .logo img{height:24px}
+}
+
+main{max-width:var(--max);margin:24px auto;padding:0 16px}
+
+.site-footer{border-top:1px solid #e6eef8;margin-top:40px}
+.footer-inner{max-width:var(--max);margin:0 auto;padding:24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.footer-brand .logo img{height:24px}
+.footer-links{display:flex;gap:24px}
+.footer-links .col{min-width:140px}
+.footer-links .col h4{margin:0 0 8px 0;font-size:14px;color:#6b829f}
+.footer-links .col a{display:block;margin:6px 0;color:#22446e}
+
+@media (max-width:768px){
+  .footer-inner{flex-direction:column;gap:12px}
+  .footer-links{flex-direction:column;gap:8px}
+}
+
+/* Utility */
+.hidden{display:none!important}

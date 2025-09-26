@@ -1,0 +1,18 @@
+/** @type {import(next).NextConfig} */
+const nextConfig = {
+  reactStrictMode: false,
+  // DO NOT set experimental.appDir here (we are on Pages Router for stability)
+  experimental: {},
+  webpack: (config) => {
+    // wipe any aliases that might shadow React during the prerender worker
+    if (config.resolve && config.resolve.alias) {
+      delete config.resolve.alias.react;
+      delete config.resolve.alias["react"];
+      delete config.resolve.alias["react-dom"];
+      delete config.resolve.alias["react/jsx-runtime"];
+      delete config.resolve.alias["react/jsx-dev-runtime"];
+    }
+    return config;
+  },
+};
+module.exports = nextConfig;

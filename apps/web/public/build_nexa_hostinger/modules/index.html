@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa ERP — Modules</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+/* Header (same as homepage) */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy);font-weight:800}
+.logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--nexa-blue),var(--nexa-violet))}
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Page heading + CTA band */
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.cta{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0}
+
+/* Controls */
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.search{flex:1;min-width:240px}
+.search input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;outline:none}
+.search input:focus{border-color:var(--nexa-blue)}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.pill{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color}
+.pill.active,.pill:hover,.pill:focus{box-shadow:0 10px 24px rgba(46,107,255,.15);transform:translateY(-1px);border-color:rgba(46,107,255,.35)}
+
+/* Grid + cards (same hover glow as homepage) */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color}
+.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.card h3{margin:6px 0 6px;color:var(--nexa-navy);font-size:18px}
+.card p{margin:0}
+.meta{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.tag{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:4px 8px;background:#fff}
+.badge{font-size:12px;border-radius:999px;padding:4px 8px;color:#fff;background:linear-gradient(135deg,var(--nexa-blue),var(--nexa-violet))}
+
+/* Footer (same as homepage) */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.small{font-size:14px;color:#4b5563}
+
+@media (max-width:1024px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.footer .cols{grid-template-columns:1fr}.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="/"><img src="/logo-nexa.png" alt="Nexa logo" style="height:28px;width:auto"/><span class="brand-text">Nexa ERP</span></a>
+    <nav class="nav">
+  <a class="logo" href="/"><img src="/logo-nexa.png" alt="Nexa logo" style="height:28px"/></a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/modules/">Modules</a></li>
+    <li><a href="/integrations/">Integrations &amp; API</a></li>
+    <li><a href="/security/">Security &amp; Compliance</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/">Contact</a></li>
+    <li><a class="btn primary" href="https://app.nexaai.co.uk">Login</a></li>
+  </ul>
+</nav>
+    <div class="header-cta">
+      <a class="btn primary" href="https://app.nexaai.co.uk">Login</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Modules</h1>
+  <p style="margin:6px 0 10px;color:#334155">Discover what is possible — explore every area, from Finance and Human Resources to Warehouse and Manufacturing, configured for your industry.</p>
+  <p style="margin:4px 0 10px">Search and filter to explore Nexa’s live modules.</p>
+
+  <div class="cta">
+    <div>
+      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">See Nexa in action</h3>
+      <p style="margin:0">Tell us about your goals and workflows. We will arrange a tailored demonstration of the modules you care about and answer your questions.</p>
+    </div>
+    <a class="btn primary" href="/contact/">Book a Demo</a>
+  </div>
+
+  <div class="controls">
+    <div class="search">
+      <input id="search" type="search" placeholder="Search modules and features…">
+    </div>
+    <div class="filters" id="filters">
+      <span class="pill active" data-cat="all">All</span>
+      <span class="pill" data-cat="core">Core</span>
+      <span class="pill" data-cat="finance">Finance</span>
+      <span class="pill" data-cat="hr">Human Resources &amp; Payroll</span>
+      <span class="pill" data-cat="inventory">Inventory &amp; Warehouse Management</span>
+      <span class="pill" data-cat="manufacturing">Manufacturing</span>
+      <span class="pill" data-cat="sales">Sales &amp; Customer Relationship Management</span>
+      <span class="pill" data-cat="purchasing">Purchasing</span>
+      <span class="pill" data-cat="projects">Projects</span>
+      <span class="pill" data-cat="compliance">Compliance &amp; Tax</span>
+      <span class="pill" data-cat="banking">Banking &amp; Billing</span>
+      <span class="pill" data-cat="ai">Artificial Intelligence &amp; Automation</span>
+      <span class="pill" data-cat="pos">Point of Sale</span>
+      <span class="pill" data-cat="enterprise">Enterprise &amp; Analytics</span>
+      <span class="pill" data-cat="mobile">Mobile &amp; Progressive Web App</span>
+    </div>
+  </div>
+
+  <section class="grid" id="grid">
+    <!-- Core -->
+    <article class="card" data-cat="core"><h3>Dashboard</h3><p>Key performance indicators, recent activity and quick links with Artificial Intelligence insights.</p><div class="meta"><span class="tag">Core</span></div></article>
+    <article class="card" data-cat="core"><h3>Users & Roles</h3><p>Role‑based access, segregation of duties, multi‑factor authentication and activity logs.</p><div class="meta"><span class="tag">Core</span></div></article>
+    <article class="card" data-cat="core"><h3>Tenants & Settings</h3><p>Multi‑entity, time zones and regions, backup and restore.</p><div class="meta"><span class="tag">Core</span></div></article>
+
+    <!-- Finance -->
+    <article class="card" data-cat="finance"><h3>General Ledger</h3><p>Chart of accounts, journals and period close with full audit history.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>Accounts Payable</h3><p>Supplier invoices, approvals and payments with reconciliation.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>Accounts Receivable</h3><p>Customer invoices, credit control and receipts posted automatically.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>Bank & Cash</h3><p>Bank accounts, feeds and settlements in one place.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>Bank Reconciliation</h3><p>Match, post and reconcile quickly with clear exceptions.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>VAT (Making Tax Digital)</h3><p>Prepare and submit United Kingdom VAT digitally with evidence.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>Fixed Assets</h3><p>Register, depreciation methods and journals posted to the ledger.</p><div class="meta"><span class="tag">Finance</span></div></article>
+    <article class="card" data-cat="finance"><h3>FX Revaluation</h3><p>Revalue foreign currency balances with transparent postings.</p><div class="meta"><span class="tag">Finance</span></div></article>
+
+    <!-- HR & Payroll -->
+    <article class="card" data-cat="hr"><h3>Employees</h3><p>Employee records, roles and documents in one secure place.</p><div class="meta"><span class="tag">Human Resources & Payroll</span></div></article>
+    <article class="card" data-cat="hr"><h3>Payroll</h3><p>Pay As You Earn and National Insurance with journals to the general ledger.</p><div class="meta"><span class="tag">Human Resources & Payroll</span></div></article>
+
+    <!-- Inventory & WMS -->
+    <article class="card" data-cat="inventory"><h3>Items & Lots</h3><p>Stock items with lot and serial tracking for full traceability.</p><div class="meta"><span class="tag">Inventory & Warehouse Management</span></div></article>
+    <article class="card" data-cat="inventory"><h3>Warehouses</h3><p>Bins, transfers, replenishment and location control.</p><div class="meta"><span class="tag">Inventory & Warehouse Management</span></div></article>
+    <article class="card" data-cat="inventory"><h3>Stock Movements</h3><p>Receipts, picks and adjustments with a complete history.</p><div class="meta"><span class="tag">Inventory & Warehouse Management</span></div></article>
+    <article class="card" data-cat="inventory"><h3>Advanced Warehouse Management</h3><p>Advanced shipping notices, wave planning, third‑party logistics and quality holds with corrective/preventive actions.</p><div class="meta"><span class="tag">Inventory & Warehouse Management</span></div></article>
+
+    <!-- Manufacturing -->
+    <article class="card" data-cat="manufacturing"><h3>Bills of Materials</h3><p>Define components and versions with approvals.</p><div class="meta"><span class="tag">Manufacturing</span></div></article>
+    <article class="card" data-cat="manufacturing"><h3>Work Orders</h3><p>Plan, issue and complete production jobs.</p><div class="meta"><span class="tag">Manufacturing</span></div></article>
+    <article class="card" data-cat="manufacturing"><h3>Material Requirements Planning</h3><p>Plan material requirements and avoid shortages.</p><div class="meta"><span class="tag">Manufacturing</span></div></article>
+    <article class="card" data-cat="manufacturing"><h3>Capacity Planning</h3><p>Balance load across work centres and shifts.</p><div class="meta"><span class="tag">Manufacturing</span></div></article>
+    <article class="card" data-cat="manufacturing"><h3>Maintenance</h3><p>Preventive and corrective tasks for equipment.</p><div class="meta"><span class="tag">Manufacturing</span></div></article>
+    <article class="card" data-cat="manufacturing"><h3>Product Lifecycle Management</h3><p>Manage product changes with a full record.</p><div class="meta"><span class="tag">Manufacturing</span></div></article>
+
+    <!-- Sales & CRM -->
+    <article class="card" data-cat="sales"><h3>Leads & Opportunities</h3><p>Track pipeline, activities and conversion.</p><div class="meta"><span class="tag">Sales & Customer Relationship Management</span></div></article>
+    <article class="card" data-cat="sales"><h3>Quotations & Sales Orders</h3><p>Create quotes and convert to orders with one click.</p><div class="meta"><span class="tag">Sales & Customer Relationship Management</span></div></article>
+    <article class="card" data-cat="sales"><h3>Returns (RMA)</h3><p>Manage returns with replacement or credit options.</p><div class="meta"><span class="tag">Sales & Customer Relationship Management</span></div></article>
+
+    <!-- Purchasing -->
+    <article class="card" data-cat="purchasing"><h3>Requisitions</h3><p>Request items and services with approvals.</p><div class="meta"><span class="tag">Purchasing</span></div></article>
+    <article class="card" data-cat="purchasing"><h3>Purchase Orders</h3><p>Raise and approve orders with delivery tracking.</p><div class="meta"><span class="tag">Purchasing</span></div></article>
+    <article class="card" data-cat="purchasing"><h3>Supplier Invoices & Payments</h3><p>Match invoices to orders and pay suppliers on time.</p><div class="meta"><span class="tag">Purchasing</span></div></article>
+
+    <!-- Projects -->
+    <article class="card" data-cat="projects"><h3>Projects & Tasks</h3><p>Milestones, time, expenses and budgets in one view.</p><div class="meta"><span class="tag">Projects</span></div></article>
+    <article class="card" data-cat="projects"><h3>Costing & Billing</h3><p>Bill clients accurately based on approved time and costs.</p><div class="meta"><span class="tag">Projects</span></div></article>
+
+    <!-- Compliance & Tax -->
+    <article class="card" data-cat="compliance"><h3>GDPR Tools & Audit</h3><p>Data requests, retention and complete audit trails.</p><div class="meta"><span class="tag">Compliance & Tax</span></div></article>
+    <article class="card" data-cat="compliance"><h3>Construction Industry Scheme</h3><p>Handle Construction Industry Scheme deductions and statements.</p><div class="meta"><span class="tag">Compliance & Tax</span></div></article>
+
+    <!-- Banking & Billing -->
+    <article class="card" data-cat="banking"><h3>Open Banking</h3><p>Secure bank feeds and balances through TrueLayer.</p><div class="meta"><span class="tag">Banking & Billing</span></div></article>
+    <article class="card" data-cat="banking"><h3>Billing & Metering</h3><p>Subscriptions and usage‑based billing with invoices.</p><div class="meta"><span class="tag">Banking & Billing</span></div></article>
+    <article class="card" data-cat="banking"><h3>Stripe Payments</h3><p>Take payments online and in person with Stripe.</p><div class="meta"><span class="tag">Banking & Billing</span></div></article>
+
+    <!-- AI & Automation -->
+    <article class="card" data-cat="ai"><h3>AI Assist</h3><p>Built‑in assistant for guidance, answers and actions.</p><div class="meta"><span class="tag">Artificial Intelligence & Automation</span></div></article>
+    <article class="card" data-cat="ai"><h3>OCR & Document AI</h3><p>Capture, read and post documents automatically.</p><div class="meta"><span class="tag">Artificial Intelligence & Automation</span></div></article>
+    <article class="card" data-cat="ai"><h3>Predictive Scenarios</h3><p>Run what‑if analysis and plan ahead.</p><div class="meta"><span class="tag">Artificial Intelligence & Automation</span></div></article>
+    <article class="card" data-cat="ai"><h3>Workflows & Jobs</h3><p>Automate approvals and scheduled tasks.</p><div class="meta"><span class="tag">Artificial Intelligence & Automation</span></div></article>
+
+    <!-- POS -->
+    <article class="card" data-cat="pos"><h3>Point of Sale</h3><p>Stripe Terminal, receipts, offline park/sync and X/Z reports.</p><div class="meta"><span class="tag">Point of Sale</span></div></article>
+
+    <!-- Enterprise & Analytics -->
+    <article class="card" data-cat="enterprise"><h3>Intercompany & Consolidation</h3><p>Group reporting across multiple entities and currencies.</p><div class="meta"><span class="tag">Enterprise & Analytics</span></div></article>
+    <article class="card" data-cat="enterprise"><h3>Analytics & Dashboards</h3><p>Interactive dashboards with export and drill‑through.</p><div class="meta"><span class="tag">Enterprise & Analytics</span></div></article>
+    <article class="card" data-cat="enterprise"><h3>Observability & Security Information and Event Management</h3><p>Forward logs and events to your security tools.</p><div class="meta"><span class="tag">Enterprise & Analytics</span></div></article>
+
+    <!-- Mobile & PWA -->
+    <article class="card" data-cat="mobile">
+      <h3>Progressive Web App</h3>
+      <p>Install Nexa on desktop and mobile from your browser.</p>
+      <div class="meta"><span class="tag">Mobile & Progressive Web App</span><span class="badge" title="Coming soon">Coming soon</span></div>
+    </article>
+    <article class="card" data-cat="mobile">
+      <h3>iOS & Android Native Apps</h3>
+      <p>Native mobile applications with offline‑first features.</p>
+      <div class="meta"><span class="tag">Mobile & Progressive Web App</span><span class="badge" title="Coming soon">Coming soon</span></div>
+    </article>
+  </section>
+
+  <div class="cta">
+    <div>
+      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">Ready to get started?</h3>
+      <p style="margin:0">Tell us about your business and goals. We will arrange a tailored demonstration that focuses on your priority modules and outcomes.</p>
+    </div>
+    <a class="btn primary" href="/contact/">Book a Demo</a>
+  </div>
+</main>
+
+<footer>
+  <div class="grid">
+    <section>
+      <strong>Nexa ERP</strong>
+      <p>AI-powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance. Contact: info@chiefaa.com</p>
+    </section>
+    <nav>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="/modules/">Modules</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// Simple filtering and search (client-side)
+const searchInput = document.getElementById('search');
+const pills = document.querySelectorAll('.pill');
+const cards = document.querySelectorAll('.card');
+
+let activeCat = 'all';
+
+function applyFilters(){
+  const q = (searchInput.value || '').toLowerCase();
+  cards.forEach(card => {
+    const cat = card.getAttribute('data-cat');
+    const text = card.innerText.toLowerCase();
+    const matchCat = (activeCat === 'all' || cat === activeCat);
+    const matchText = (!q || text.includes(q));
+    card.style.display = (matchCat && matchText) ? '' : 'none';
+  });
+}
+
+pills.forEach(p => {
+  p.addEventListener('click', () => {
+    pills.forEach(x => x.classList.remove('active'));
+    p.classList.add('active');
+    activeCat = p.getAttribute('data-cat');
+    applyFilters();
+  });
+});
+
+searchInput.addEventListener('input', applyFilters);
+
+// Keyword to category map
+const keywordMap = new Map([
+  ['core','core'],
+  ['finance','finance'],
+  ['hr','hr'], ['human resources','hr'], ['payroll','hr'],
+  ['inventory','inventory'], ['wms','inventory'], ['warehouse','inventory'],
+  ['manufacturing','manufacturing'],
+  ['sales','sales'], ['crm','sales'], ['customer relationship','sales'],
+  ['purchasing','purchasing'], ['procurement','purchasing'],
+  ['projects','projects'], ['project','projects'],
+  ['compliance','compliance'], ['tax','compliance'], ['cis','compliance'], ['gdpr','compliance'],
+  ['banking','banking'], ['billing','banking'], ['payments','banking'],
+  ['ai','ai'], ['automation','ai'], ['artificial intelligence','ai'],
+  ['pos','pos'], ['point of sale','pos'],
+  ['enterprise','enterprise'], ['analytics','enterprise'],
+  ['mobile','mobile'], ['pwa','mobile'], ['progressive web app','mobile']
+]);
+
+function selectCategory(cat){
+  const pill = document.querySelector(`.pill[data-cat="${cat}"]`);
+  if(!pill) return;
+  pills.forEach(x => x.classList.remove('active'));
+  pill.classList.add('active');
+  activeCat = cat;
+  applyFilters();
+  // Scroll to grid for visibility
+  document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// Enter key behaviour
+searchInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){
+    const q = (searchInput.value || '').toLowerCase().trim();
+    for (const [k, v] of keywordMap.entries()){
+      if(q.includes(k)){ selectCategory(v); return; }
+    }
+    // No keyword match: just apply text filter
+    applyFilters();
+  }
+});
+
+// URL param ?cat=finance etc.
+const params = new URLSearchParams(window.location.search);
+const initialCat = params.get('cat');
+if(initialCat && document.querySelector(`.pill[data-cat="${initialCat}"]`)){
+  selectCategory(initialCat);
+} else {
+  applyFilters(); // initial render
+}
+
+</script>
+</body>
+</html>

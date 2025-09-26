@@ -1,0 +1,8 @@
+# Ignore disabled snapshots
+app.disabled*/
+src/app.disabled*/
+**/*.disabled.*
+# Build output
+.next
+# Node noise
+node_modules
