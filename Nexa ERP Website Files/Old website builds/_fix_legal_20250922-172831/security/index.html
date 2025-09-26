@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Nexa ERP — Security &amp; Compliance</title>
+<style>
+    :root{
+      --blue:#2E6BFF;
+      --violet:#7A4DFF;
+      --navy:#0F2747;
+      --bg:#F7F9FC;
+      --text:#0B1424;
+      --border:#e6ecf5;
+      --ring-soft:0 3px 8px rgba(0,0,0,.05);
+      --glow-active:0 6px 16px rgba(46,107,255,.25),0 3px 10px rgba(122,77,255,.15);
+    }
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+    .container{max-width:1180px;margin:0 auto;padding:0 18px}
+    h1{font-size:32px;margin:20px 0 10px}
+    h2{font-size:22px;margin:20px 0 10px}
+    p{margin:0 0 14px}
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-bottom:30px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--ring-soft);transition:all .25s ease}
+    .card:hover{box-shadow:var(--glow-active);transform:translateY(-2px)}
+    .btn{display:inline-block;padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#2E6BFF,#7A4DFF);color:#fff;font-weight:bold;text-decoration:none}
+    .btn:hover{opacity:.9}
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+    nav a{color:var(--navy);font-weight:600;text-decoration:none}
+    nav a:hover{text-decoration:underline}
+    header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+    header .row{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+    .brand svg{width:28px;height:28px}
+    .login-btn{background:#fff;color:var(--navy);border:1px solid #d7e0ee;box-shadow:var(--ring-soft);padding:9px 16px;border-radius:999px;font-weight:800;text-decoration:none}
+    footer{margin-top:28px;background:#0b1424;color:#c9d3e6}
+    footer .grid{display:grid;gap:12px;grid-template-columns:1.4fr 1fr 1fr}
+    footer a{color:#dbe4f8;text-decoration:none}
+    .small{font-size:12px;color:#96a3be;margin:8px 0 0}
+  
+  /* Mobile nav fix */
+  nav ul{flex-wrap:wrap;overflow-x:hidden} body{overflow-x:hidden}
+
+  /* unified-nav */
+  nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+  @media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+  body{overflow-x:hidden}
+</style>
+<style>
+/* unified header */
+:root{--navy:#0F2747;--border:#e7ecf5}
+.header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+.header .row{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+.brand svg{width:28px;height:28px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+nav a{color:var(--navy);font-weight:600;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #d7e0ee;background:#fff;color:var(--navy);font-weight:800;padding:10px 16px;text-decoration:none}
+.btn.login{border-radius:9999px}
+@media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+</style>
+<style>
+/* Unified illuminated CTA for Nexa (blue→violet with soft glow) */
+.nexa-cta-btn {
+  display:inline-block;
+  background: linear-gradient(90deg, #2E6BFF 0%, #7A4DFF 100%);
+  color:#fff !important;
+  border:none;
+  border-radius:16px;
+  padding:14px 28px;
+  font-weight:700;
+  text-decoration:none;
+  line-height:1.1;
+  box-shadow: 0 12px 30px rgba(46,107,255,0.35), 0 18px 44px rgba(122,77,255,0.28);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.nexa-cta-btn:hover, .nexa-cta-btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(46,107,255,0.40), 0 24px 56px rgba(122,77,255,0.32);
+  outline: none;
+}
+/* Optional container "card" glow for the CTA blocks */
+.nexa-cta-card {
+  background:#fff;
+  border:1px solid rgba(15,39,71,0.08);
+  border-radius:18px;
+  padding:18px;
+  box-shadow: 0 8px 28px rgba(46,107,255,0.12), 0 16px 40px rgba(122,77,255,0.08);
+}
+</style>
+<style>
+/* === Nexa Mobile: replace header exactly as mockup (<=768px) === */
+#nexa-mobile-header { display:none; }
+@media (max-width:768px){
+  /* hide any existing desktop header blocks */
+  header, .header, .site-header, .topbar, #topbar, .nav-bar, .navbar { display:none !important; }
+
+  /* show our new header */
+  #nexa-mobile-header { 
+    display:block !important; 
+    background:#fff;
+    border-bottom:1px solid #E6ECF5;
+  }
+  #nexa-mobile-header .nmh-top{
+    padding:10px 14px 2px;
+  }
+  #nexa-mobile-header .nmh-logo{
+    height:28px; width:auto; display:inline-block; vertical-align:middle;
+  }
+  #nexa-mobile-header .nmh-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px 18px;
+    padding:12px 12px 14px;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    font-size:16px; font-weight:700; line-height:1.2; color:#0B1424; text-decoration:none;
+    white-space:nowrap;
+  }
+
+  /* general mobile hardening */
+  html, body { width:100%; overflow-x:hidden; }
+  img, svg, video, iframe { max-width:100%; height:auto; }
+  .container, .wrap, .wrapper, .content, main, section { max-width:100%; box-sizing:border-box; }
+}
+</style>
+<style>
+/* === Nexa: MOBILE-ONLY adjustments (<=768px) === */
+@media (max-width:768px){
+  /* Even spacing for the mobile header tabs */
+  #nexa-mobile-header .nmh-grid{
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    column-gap:22px !important;
+    row-gap:12px !important;
+    padding:12px 16px 14px !important;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    display:block !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:16px !important;
+    font-weight:700 !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+    text-align:left !important;
+  }
+  /* Ensure AI Engine image always renders on mobile */
+  img[src*="nexa-ai-engine"]{
+    display:block !important;
+    max-width:100% !important;
+    height:auto !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="/website/system/consent.css"><!-- NexaConsent -->
+</head>
+<body><header class="header" role="banner">
+<div class="container">
+<div class="row">
+<a aria-label="Nexa home" class="brand" href="/homepage">
+<svg aria-hidden="true" viewbox="0 0 32 32">
+<defs><lineargradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</a>
+<nav aria-label="Primary">
+<ul>
+<li><a href="/homepage">Home</a></li>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</nav>
+<div class="cta"><a aria-label="Login" class="btn" href="https://app.nexaai.co.uk/login">Login</a></div>
+</div>
+</div>
+<nav class="nexa-legal-nav" aria-label="Legal"><a href="/website/legal/privacy/" class="nav-link" style="margin-left:12px">Legal</a></nav>
+</header>
+<!-- Nexa: Mobile-only Header (injected) -->
+<div aria-label="Nexa mobile navigation" id="nexa-mobile-header" role="banner">
+<div class="nmh-top">
+<img alt="Nexa" class="nmh-logo" src="/logo-nexa.png"/>
+</div>
+<nav aria-label="Primary" class="nmh-grid">
+<a href="/homepage">Home</a>
+<a href="/modules">Modules</a>
+<a href="/integrations">Integrations</a>
+<a href="/security">Security</a>
+<a href="/pricing">Pricing</a>
+<a href="/resources">Resources</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+</nav>
+</div>
+<!-- Approved Header -->
+<main class="container">
+<h1>Security &amp; Compliance you can trust</h1>
+<p>Nexa protects your data with strong access controls, encryption, complete audit history, and clear compliance. Everything is designed for daily use — simple to set up, simple to prove.</p>
+<h2>Access &amp; identity</h2>
+<div class="grid">
+<div class="card"><b>Role-based access control</b><br/>Give people only what they need with roles you control. Keep teams, sites and job functions separate.</div>
+<div class="card"><b>Multi-factor authentication</b><br/>Add a second step at sign-in to reduce account takeovers.</div>
+<div class="card"><b>Segregation of duties</b><br/>Stop risky combinations of access — for example the same person raising and approving a payment.</div>
+</div>
+<h2>Data protection</h2>
+<div class="grid">
+<div class="card"><b>Encryption</b><br/>TLS protects data in transit. Databases and file storage are encrypted at rest.</div>
+<div class="card"><b>Backups</b><br/>Automatic daily backups, encrypted at rest, with restore tests to prove recovery.</div>
+<div class="card"><b>Field-level protection</b><br/>Sensitive fields such as payroll or bank details are restricted to authorised roles.</div>
+</div>
+<h2>Audit &amp; evidence</h2>
+<div class="grid">
+<div class="card"><b>Full audit trail</b><br/>Every important action is recorded — who did what, when, and from where.</div>
+<div class="card"><b>AI prompt history</b><br/>When you use Nexa’s AI features, prompts and system actions are logged for review.</div>
+<div class="card"><b>Exportable evidence</b><br/>Export logs and reports for auditors and keep a clear record of decisions.</div>
+</div>
+<h2>Compliance</h2>
+<div class="grid">
+<div class="card"><b>UK GDPR / EU GDPR</b><br/>Tools to locate data, handle access requests, and set retention rules with audit trails.</div>
+<div class="card"><b>Making Tax Digital</b><br/>Prepare and submit VAT returns digitally when live HMRC keys are connected.</div>
+<div class="card"><b>Construction Industry Scheme</b><br/>Calculate deductions and produce statements for CIS suppliers.</div>
+</div>
+<h2>Platform security &amp; resilience</h2>
+<div class="grid">
+<div class="card"><b>Secure development</b><br/>Code reviews, dependency checks and security testing before release.</div>
+<div class="card"><b>Vulnerability management</b><br/>Regular scanning and patching of systems and libraries.</div>
+<div class="card"><b>API security</b><br/>API keys, rate limits, IP allow‑listing (optional) and signed webhooks.</div>
+</div>
+<div class="glow nexa-cta-card section">
+<p><b>Ready to see how Nexa protects your data?</b></p>
+<p>Book a demonstration and tell us about your priorities. We will show the controls that matter to you.</p>
+<a class="btn nexa-cta-btn" href="/contact#demo">Book a Demo</a>
+</div>
+</main>
+<!-- Approved Footer -->
+<footer role="contentinfo">
+<div class="container">
+<div class="grid">
+<div>
+<div aria-label="Nexa" class="brand" style="display:flex;align-items:center;gap:10px;font-weight:800">
+<svg aria-hidden="true" style="width:28px;height:28px" viewbox="0 0 32 32">
+<defs><lineargradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g2)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</div>
+<p class="small">AI‑powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance.</p>
+</div>
+<div>
+<h4>Product</h4>
+<ul>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4>Company</h4>
+<ul>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</div>
+</div>
+<p class="small">Made with privacy in mind • Cookies by consent • London, United Kingdom • © <span id="year"></span> Nexa</p>
+</div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="/website/system/consent.js"></script><!-- NexaConsent -->
+</body>
+</html>

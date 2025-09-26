@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa ERP — Integrations</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header (same as homepage) */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
+.logo img{height:28px;width:auto;display:block}
+.brand-text{font-weight:800;color:var(--nexa-navy)}
+.logo-mark{display:none} /* keep structure consistency */
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Hero */
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.lead{margin:6px 0 10px;color:#334155}
+
+/* Grid + cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color;display:flex;flex-direction:column;gap:10px}
+.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.logo-wrap{height:44px;display:flex;align-items:center;gap:10px}
+.logo-wrap img{max-height:36px;max-width:100%;object-fit:contain}
+.card h3{margin:0;color:var(--nexa-navy)}
+.card p{margin:0}
+.meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:4px 8px;background:#fff}
+.badge-live{font-size:12px;border-radius:999px;padding:4px 8px;color:#065f46;background:#bbf7d0;border:1px solid #34d399}
+.badge-scf{font-size:12px;border-radius:999px;padding:4px 8px;color:#92400e;background:#fde68a;border:1px solid #f59e0b}
+
+/* CTA band */
+.cta{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.small{font-size:14px;color:#4b5563}
+
+@media (max-width:1024px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.footer .cols{grid-template-columns:1fr}.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <!-- Use your real logo asset in /public when available -->
+    <a class="logo" href="/">
+      <img src="/logo-nexa.png" alt="Nexa logo"/>
+      <span class="brand-text">Nexa ERP</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/modules">Modules</a>
+      <a href="/integrations">Integrations &amp; API</a>
+      <a href="/security">Security &amp; Compliance</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="/login">Login</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Seamless Integrations</h1>
+  <p class="lead">Nexa ERP connects securely with your payment gateway, bank feeds and government services to reduce manual work and keep you compliant.</p>
+
+  <section class="grid">
+    <!-- Stripe -->
+    <article class="card">
+      <div class="logo-wrap">
+        <img src="/assets/stripe.png" alt="Stripe logo"/>
+      </div>
+      <h3>Stripe</h3>
+      <p>Secure payment processing for card‑present and online transactions. Sales and settlements are posted to Finance and reconciled automatically.</p>
+      <div class="meta">
+        <span class="tag">Payments</span>
+        <span class="badge-live" title="Active in production">Live</span>
+      </div>
+    </article>
+
+    <!-- TrueLayer -->
+    <article class="card">
+      <div class="logo-wrap">
+        <img src="/assets/truelayer.png" alt="TrueLayer logo"/>
+      </div>
+      <h3>TrueLayer (Open Banking)</h3>
+      <p>Real‑time bank balances and transactions through Open Banking. Feed statements directly into Bank Reconciliation to improve accuracy and speed.</p>
+      <div class="meta">
+        <span class="tag">Open Banking</span>
+        <span class="badge-scf" title="Configured in Nexa; live keys required">Live keys required</span>
+      </div>
+    </article>
+
+    <!-- HMRC -->
+    <article class="card">
+      <div class="logo-wrap">
+        <img src="/assets/hmrc.png" alt="HMRC logo"/>
+      </div>
+      <h3>HMRC (Making Tax Digital)</h3>
+      <p>Submit United Kingdom VAT returns digitally under Making Tax Digital. Connect your HM Revenue &amp; Customs account to file directly from Finance.</p>
+      <div class="meta">
+        <span class="tag">Compliance</span>
+        <span class="badge-scf" title="Configured in Nexa; live keys required">Live keys required</span>
+      </div>
+    </article>
+  </section>
+
+  <div class="cta">
+    <div>
+      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">Connect Nexa ERP to your stack</h3>
+      <p style="margin:0">Book a demonstration and we will show you how Stripe, TrueLayer and HMRC work end‑to‑end with your Finance processes.</p>
+    </div>
+    <a class="btn primary" href="/contact#book-demo">Book a Demo</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>Nexa ERP</h4>
+        <p class="small">AI-powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance. Contact: info@chiefaa.com</p>
+        <p class="small">Contact: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> · </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <p><a href="/modules">Modules</a><br><a href="/pricing">Pricing</a><br><a href=""</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <p><a href="/about">About</a><br><a href="/about#partners">Partners</a></p>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <p><a href="/resources/guides">Guides</a><br><a href="/resources/release-notes">Release Notes</a><br><a href="/resources/faq">Frequently Asked Questions</a><br><a href="/security">Legal &amp; Compliance</a></p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:16px">© Nexa ERP — All rights reserved · <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/cookies">Cookies</a> · <a href="/legal/accessibility">Accessibility</a></p>
+  </div>
+</footer>
+</body>
+</html>

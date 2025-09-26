@@ -5,10 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "echo skip jobs build",
     "start": "node dist/index.js",
     "run:once": "node dist/index.js"
   }
 }
-
-

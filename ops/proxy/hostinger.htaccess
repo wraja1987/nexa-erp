@@ -1,0 +1,40 @@
+# Nexa ERP — Hostinger .htaccess for caching + security
+
+<IfModule mod_headers.c>
+  # -------------------------------------------------------------------
+  # Caching rules
+  # -------------------------------------------------------------------
+  # Long cache for static assets (1 year + immutable)
+  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|avif|woff|woff2|ttf|eot|pdf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Edge-cache HTML with stale-while-revalidate
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "s-maxage=60, stale-while-revalidate=300"
+  </FilesMatch>
+
+  # -------------------------------------------------------------------
+  # Security headers
+  # -------------------------------------------------------------------
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# -------------------------------------------------------------------
+# API status endpoint: no-store + CORS restricted to site origin
+# -------------------------------------------------------------------
+SetEnvIf Request_URI "^/api/public/status$" IS_API_STATUS=1
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-store" env=IS_API_STATUS
+  Header set Access-Control-Allow-Origin "https://www.nexaai.co.uk" env=IS_API_STATUS
+  Header set Access-Control-Allow-Methods "GET,OPTIONS" env=IS_API_STATUS
+  Header set Access-Control-Allow-Headers "Content-Type, Authorization" env=IS_API_STATUS
+</IfModule>
+
+# Handle OPTIONS preflight for the status path
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^api/public/status$ - [R=204,L]

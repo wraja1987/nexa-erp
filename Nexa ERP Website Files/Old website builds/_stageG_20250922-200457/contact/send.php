@@ -1,0 +1,21 @@
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/smtp_helper_debug.php';
+$first=trim($_POST['first']??'');$last=trim($_POST['last']??'');
+$name=trim($_POST['name']??($first.($last?" $last":'')));
+$email=trim($_POST['email']??($_POST['your-email']??''));
+$phone=trim($_POST['phone']??($_POST['your-phone']??''));
+$company=trim($_POST['company']??'');
+$message=trim($_POST['message']??($_POST['your-message']??''));
+if($name===''||$email===''||$message===''){http_response_code(400);echo 'Missing required fields.';exit;}
+if(!filter_var($email,FILTER_VALIDATE_EMAIL)){http_response_code(400);echo 'Invalid email address.';exit;}
+$ip=$_SERVER['REMOTE_ADDR']??'unknown';
+$owner_subj="Nexa Website Enquiry — $name";
+$owner_body="Name: $name\nEmail: $email\nPhone: $phone\nCompany: $company\nIP: $ip\n\nMessage:\n$message\n";
+list($ok1,$log1)=nexa_smtp_send_debug(constant('SMTP_HOST'),constant('SMTP_PORT'),constant('SMTP_SECURE'),constant('SMTP_USERNAME'),constant('SMTP_PASSWORD'),constant('MAIL_FROM_EMAIL'),constant('MAIL_TO'),$owner_subj,$owner_body,constant('MAIL_FROM_NAME'));
+$visitor_subj='Thanks — we\'ve received your message';
+$visitor_body="Hi $name,\n\nThanks for contacting Nexa. We've received your message and will reply shortly.\n\nYou sent:\n$message\n\n— ".constant('MAIL_FROM_NAME');
+list($ok2,$log2)=nexa_smtp_send_debug(constant('SMTP_HOST'),constant('SMTP_PORT'),constant('SMTP_SECURE'),constant('SMTP_USERNAME'),constant('SMTP_PASSWORD'),constant('MAIL_FROM_EMAIL'),$email,$visitor_subj,$visitor_body,constant('MAIL_FROM_NAME'));
+if($ok1&&$ok2){header('Content-Type: application/json');header('Location: /contact/sent.html'); exit;exit;}
+http_response_code(500);echo "Send failed. Logs: ".basename($log1)." ".basename($log2);
+?>

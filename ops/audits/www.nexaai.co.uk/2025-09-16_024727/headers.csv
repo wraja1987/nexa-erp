@@ -1,0 +1,4 @@
+name|status|cache|cors|content-type|server
+static|200| public, max-age=0||text/html; charset=utf-8|
+api|200| ||application/json; charset=utf-8|
+html|200| public, max-age=0||text/html; charset=utf-8|

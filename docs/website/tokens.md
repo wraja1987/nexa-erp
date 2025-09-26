@@ -1,0 +1,3 @@
+- Colours, spacing, type scale
+- Header: mobile = 2 rows, no login, no gap under logo
+- Footer: consistent layout across all pages on mobile

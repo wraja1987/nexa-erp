@@ -1,0 +1,43 @@
+Nexa Website Link Fix Report
+Target login URL: https://app.nexaai.co.uk/login
+HTML files scanned: 20
+Files modified: 19
+
+[HTML] index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] contact/contact.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] contact/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] homepage/homepage.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] homepage/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] security/security.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] security/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] resources/resources.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] resources/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] about/about.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] about/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] integrations/integrations.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] integrations/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] errors/500.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] errors/404.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] modules/modules.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] modules/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] pricing/pricing.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"
+[HTML] pricing/index.html:
+  - a[href]: "https://app.nexaai.co/login" -> "https://app.nexaai.co.uk/login"

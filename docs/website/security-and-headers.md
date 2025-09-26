@@ -1,0 +1,3 @@
+- .htaccess policies: HTTPS+www, HSTS, X-Content-Type-Options, Referrer-Policy, X-Frame-Options
+- CSP: start in Report-Only; how to move to Enforce
+- Cache-Control: static 1yr immutable; HTML s-maxage=60, SWR=300

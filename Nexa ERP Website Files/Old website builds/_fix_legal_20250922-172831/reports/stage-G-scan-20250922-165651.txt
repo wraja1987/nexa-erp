@@ -1,0 +1,18 @@
+Nexa Stage G Scan — 20250922-165651
+Root considered: /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP Website Files/_work_20250922-162341
+
+[1] Legal pages present:
+  - /legal/privacy/index.html: OK
+  - /legal/terms/index.html: OK
+  - /legal/cookies/index.html: OK
+
+[2] Consent banner presence on homepage (index/homepage):
+  - index.html: OK
+  - homepage/homepage.html: OK
+  Summary: found=2, missing=0
+
+[3] Header/Footer include legal links (homepage check):
+  - Links: OK
+
+[4] Broken internal links (simple):
+  Total broken: 0

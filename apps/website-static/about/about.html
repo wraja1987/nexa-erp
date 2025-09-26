@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa ERP — About Us</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
+.logo img{height:28px;width:auto;display:block}
+.brand-text{font-weight:800;color:var(--nexa-navy)}
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Hero (single column) */
+.hero{margin-top:8px}
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.lead{margin:6px 0 10px;color:#334155}
+
+/* Sections */
+.section{margin-top:18px}
+.section h2{color:var(--nexa-navy);margin:0 0 8px}
+
+/* Grid cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color}
+.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.card h3{margin:6px 0 6px;color:var(--nexa-navy)}
+
+/* Leadership expanded */
+.leadership{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px}
+.leadership p{font-size:16px;margin:8px 0}
+
+/* Values redesigned */
+.values-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
+.values-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.value-tile{border:1px dashed #DDE3F0;border-radius:12px;padding:14px;position:relative;overflow:hidden;background:linear-gradient(180deg,#fff, #fafcff)}
+.value-tile:before{content:"";position:absolute;top:-16px;right:-16px;width:64px;height:64px;border-radius:50%;background:rgba(46,107,255,.08)}
+.value-title{font-weight:700;color:var(--nexa-navy);margin-bottom:6px}
+.value-text{margin:0}
+
+/* CTA band */
+.cta{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.small{font-size:14px;color:#4b5563}
+
+@media (max-width:1024px){
+  .grid{grid-template-columns:1fr 1fr}
+  .values-grid{grid-template-columns:1fr 1fr 1fr}
+}
+@media (max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+  .cta{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <img src="/logo-nexa.png" alt="Nexa logo"/>
+      <span class="brand-text">Nexa ERP</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/modules">Modules</a>
+      <a href="/integrations">Integrations</a>
+      <a href="/security">Security &amp; Compliance</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="/login">Login</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>About Nexa ERP</h1>
+    <p class="lead">Nexa ERP is built by <strong>Chief A.A Ltd</strong> to make enterprise planning simpler, smarter and more secure for every business.</p>
+    <p>We serve startups, growing companies and large organisations. Our approach is to remove complexity, improve compliance, and give you a system that adapts to the way you work. Nexa brings finance, operations and projects into one place, with Artificial Intelligence assistance where it helps most.</p>
+  </section>
+
+  <section class="section">
+    <h2>Our story</h2>
+    <p>Chief A.A Ltd is a UK-based company working across technology, consulting, property and investment. Our team has supported businesses across many sectors and sizes. We saw the same problems again and again: systems were expensive, hard to use, and too rigid. Nexa was created to change that.</p>
+    <p>We created Nexa ERP to give <strong>all businesses</strong> the tools normally reserved for large enterprises — without the cost and complexity. Whether you are laying foundations, scaling production or managing complex services, Nexa adapts to your needs.</p>
+    <ul>
+      <li>Fair monthly pricing and plans that grow with your team.</li>
+      <li>Built-in Artificial Intelligence to cut manual work and surface insight.</li>
+      <li>Compliance and security as standard, with clear audit trails.</li>
+      <li>Flexible modules you can switch on as you need them.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>What makes us different</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Artificial Intelligence at the core</h3>
+        <p>Insight panels, prompts and automation help your team work faster without losing control. You decide where Artificial Intelligence is used.</p>
+      </article>
+      <article class="card">
+        <h3>Compliance first</h3>
+        <p>Tools for General Data Protection Regulation, audit logging and HM Revenue and Customs Making Tax Digital keep you ready for inspections.</p>
+      </article>
+      <article class="card">
+        <h3>Adaptable to every industry</h3>
+        <p>Finance, projects, retail, distribution, manufacturing — Nexa fits each sector by switching on the modules you need.</p>
+      </article>
+      <article class="card">
+        <h3>Secure by design</h3>
+        <p>Role-based access control, segregation of duties, encryption and full audit history are built into the platform.</p>
+      </article>
+      <article class="card">
+        <h3>Transparent pricing</h3>
+        <p>Plans start from £99 per month. Add users and modules as you grow.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Leadership &amp; values</h2>
+    <div class="leadership">
+      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">Leadership</h3>
+      <p>Nexa ERP is led by the founders of Chief A.A Ltd, with a strong background across <strong>IT Services, risk management, investments across multiple sectors, and property development and management</strong>. This mix of skills helps us combine technical depth with practical business understanding.</p>
+      <p>Our leadership team guides the product roadmap, ensuring new features are tested carefully, released safely, and aligned to customer needs. We invest in long-term partnerships and keep communication clear and honest.</p>
+    </div>
+
+    <div class="values-wrap" style="margin-top:16px">
+      <h3 style="margin:0 0 8px;color:var(--nexa-navy)">Our values</h3>
+      <div class="values-grid">
+        <div class="value-tile">
+          <div class="value-title">Clarity</div>
+          <p class="value-text">We make complex systems easy to use and information easy to understand.</p>
+        </div>
+        <div class="value-tile">
+          <div class="value-title">Trust</div>
+          <p class="value-text">Reliability, security and compliance are built into every decision.</p>
+        </div>
+        <div class="value-tile">
+          <div class="value-title">Adaptability</div>
+          <p class="value-text">Nexa grows and adjusts with your industry, workloads and customers.</p>
+        </div>
+        <div class="value-tile">
+          <div class="value-title">Innovation</div>
+          <p class="value-text">We ship improvements regularly, guided by real customer feedback.</p>
+        </div>
+        <div class="value-tile">
+          <div class="value-title">Partnership</div>
+          <p class="value-text">We work alongside you with training, updates and responsive support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div>
+      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">Speak to our team</h3>
+      <p style="margin:0">Tell us about your business and goals. We will show how Nexa can help.</p>
+    </div>
+    <a class="btn primary" href="/contact#book-demo">Book a demo</a>
+  </div>
+
+  <section class="section">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> · Phone: +44 7398 975374</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>Nexa ERP</h4>
+        <p class="small">Enterprise planning with clear controls and a full audit trail.</p>
+        <p class="small">Contact: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> · +44 7398 975374</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <p><a href="/modules">Modules</a><br><a href="/pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <p><a href="/about">About</a><br><a href="/about#partners">Partners</a></p>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <p><a href="/resources/guides">Guides</a><br><a href="/resources/release-notes">Release Notes</a><br><a href="/resources/faq">Frequently Asked Questions</a></p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:16px">© Nexa ERP — All rights reserved · <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/cookies">Cookies</a> · <a href="/legal/accessibility">Accessibility</a></p>
+  </div>
+</footer>
+</body>
+</html>

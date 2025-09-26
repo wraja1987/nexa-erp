@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Nexa ERP — Resources</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header (same as other pages) */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
+.logo img{height:28px;width:auto;display:block}
+.brand-text{font-weight:700;color:var(--nexa-navy)}
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Hero */
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.lead{margin:6px 0 10px;color:#334155}
+
+/* Search + filters */
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 6px}
+input[type="search"]{flex:1;min-width:260px;padding:10px 12px;border:1px solid var(--border);border-radius:10px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border:1px solid var(--border);border-radius:999px;padding:8px 12px;background:#fff;color:#0F2747;cursor:pointer}
+.pill.active{border-color:rgba(46,107,255,.35);box-shadow:0 8px 22px rgba(46,107,255,.15)}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color;display:flex;flex-direction:column;gap:10px}
+.card:hover{box-shadow:0 12px 40px rgba(46,107,255,.25),0 2px 8px rgba(122,77,255,.18); transform: translateY(-2px);}
+.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.card h3{margin:0;color:var(--nexa-navy)}
+.card p{margin:0}
+.meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:4px 8px;background:#fff}
+.badge{font-size:12px;border-radius:999px;padding:4px 8px;color:#92400e;background:#fde68a;border:1px solid #f59e0b}
+
+/* Sections */
+.section{margin-top:18px}
+.section h2{color:var(--nexa-navy);margin:0 0 6px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.small{font-size:14px;color:#4b5563}
+
+@media (max-width:1024px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.footer .cols{grid-template-columns:1fr}}
+.wide-card{grid-column:1 / -1;padding:20px}
+.wide-card h3{font-size:22px}
+.wide-card ol li{margin:6px 0}
+
+footer a{color:#fff !important;text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+  /* Mobile nav fix */
+  nav ul{flex-wrap:wrap;overflow-x:hidden} body{overflow-x:hidden}
+
+  /* unified-nav */
+  nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+  @media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+  body{overflow-x:hidden}
+</style>
+<link href="../assets/site.css" rel="stylesheet"/>
+<script defer="" src="../assets/site.js"></script>
+<style>
+/* unified header */
+:root{--navy:#0F2747;--border:#e7ecf5}
+.header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+.header .row{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+.brand svg{width:28px;height:28px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+nav a{color:var(--navy);font-weight:600;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #d7e0ee;background:#fff;color:var(--navy);font-weight:800;padding:10px 16px;text-decoration:none}
+.btn.login{border-radius:9999px}
+@media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+</style>
+<style>
+/* === Nexa Mobile: replace header exactly as mockup (<=768px) === */
+#nexa-mobile-header { display:none; }
+@media (max-width:768px){
+  /* hide any existing desktop header blocks */
+  header, .header, .site-header, .topbar, #topbar, .nav-bar, .navbar { display:none !important; }
+
+  /* show our new header */
+  #nexa-mobile-header { 
+    display:block !important; 
+    background:#fff;
+    border-bottom:1px solid #E6ECF5;
+  }
+  #nexa-mobile-header .nmh-top{
+    padding:10px 14px 2px;
+  }
+  #nexa-mobile-header .nmh-logo{
+    height:28px; width:auto; display:inline-block; vertical-align:middle;
+  }
+  #nexa-mobile-header .nmh-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px 18px;
+    padding:12px 12px 14px;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    font-size:16px; font-weight:700; line-height:1.2; color:#0B1424; text-decoration:none;
+    white-space:nowrap;
+  }
+
+  /* general mobile hardening */
+  html, body { width:100%; overflow-x:hidden; }
+  img, svg, video, iframe { max-width:100%; height:auto; }
+  .container, .wrap, .wrapper, .content, main, section { max-width:100%; box-sizing:border-box; }
+}
+</style>
+<style>
+/* === Nexa: MOBILE-ONLY adjustments (<=768px) === */
+@media (max-width:768px){
+  /* Even spacing for the mobile header tabs */
+  #nexa-mobile-header .nmh-grid{
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    column-gap:22px !important;
+    row-gap:12px !important;
+    padding:12px 16px 14px !important;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    display:block !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:16px !important;
+    font-weight:700 !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+    text-align:left !important;
+  }
+  /* Ensure AI Engine image always renders on mobile */
+  img[src*="nexa-ai-engine"]{
+    display:block !important;
+    max-width:100% !important;
+    height:auto !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="/website/system/consent.css"><!-- NexaConsent -->
+</head>
+<body><header class="header" role="banner">
+<div class="container">
+<div class="row">
+<a aria-label="Nexa home" class="brand" href="/homepage">
+<svg aria-hidden="true" viewbox="0 0 32 32">
+<defs><lineargradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</a>
+<nav aria-label="Primary">
+<ul>
+<li><a href="/homepage">Home</a></li>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</nav>
+<div class="cta"><a aria-label="Login" class="btn" href="https://app.nexaai.co.uk/login">Login</a></div>
+</div>
+</div>
+<nav class="nexa-legal-nav" aria-label="Legal"><a href="/website/legal/privacy/" class="nav-link" style="margin-left:12px">Legal</a></nav>
+</header>
+<!-- Nexa: Mobile-only Header (injected) -->
+<div aria-label="Nexa mobile navigation" id="nexa-mobile-header" role="banner">
+<div class="nmh-top">
+<img alt="Nexa" class="nmh-logo" src="/logo-nexa.png"/>
+</div>
+<nav aria-label="Primary" class="nmh-grid">
+<a href="/homepage">Home</a>
+<a href="/modules">Modules</a>
+<a href="/integrations">Integrations</a>
+<a href="/security">Security</a>
+<a href="/pricing">Pricing</a>
+<a href="/resources">Resources</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+</nav>
+</div>
+<script>window.NEXA_REL="..";</script>
+<!-- Nexa — Approved Header -->
+<main class="container">
+<h1>Resources</h1>
+<p class="lead">Guides and documentation to help you get started, set up, and use Nexa ERP day to day.</p>
+<!-- Tools -->
+<div class="tools">
+<div class="pills" role="tablist">
+<button class="pill active" data-cat="all">All</button>
+<button class="pill" data-cat="guides">Guides</button>
+<button class="pill" data-cat="docs">Documentation</button>
+<button class="pill" data-cat="faq">FAQ</button>
+</div>
+</div>
+<!-- Guides section -->
+<section class="section">
+<h2>Guides</h2>
+<div class="grid" id="grid-guides">
+<article class="card wide-card" data-cat="guides">
+<h3>Getting Started</h3>
+<p><strong>Once your subscription package has been chosen</strong>, follow these steps to get set up quickly and safely:</p>
+<ol>
+<li><strong>Create your company profile</strong> — Enter legal name, address, default currency, tax settings and financial year. Set your document numbering (quotes, orders, invoices).</li>
+<li><strong>Add users and roles</strong> — Invite your team, assign role‑based access control, and enforce two‑factor sign‑in for all users.</li>
+<li><strong>Set your financial settings</strong> — Build your chart of accounts, tax codes, control accounts and posting rules. Choose bank accounts and starting balances.</li>
+<li><strong>Import your data</strong> — Load customers, suppliers, products and opening balances using comma separated values templates. Validate results and correct any issues.</li>
+<li><strong>Connect payments and banking</strong> (optional) — Use Stripe for card payments and TrueLayer for bank feeds. Live keys are required for production.</li>
+<li><strong>Configure modules</strong> —
+            <ul>
+<li><em>Finance</em>: sales and purchase invoice workflows, period close, fixed assets and depreciation.</li>
+<li><em>Sales and Purchasing</em>: quotation and order types, approvals, price lists and terms.</li>
+<li><em>Inventory and Warehouse</em>: warehouses, locations, units of measure, stock posting rules.</li>
+<li><em>Projects</em>: templates, task boards, rates and approval steps.</li>
+<li><em>Point of Sale</em> (if used): connect Stripe Terminal, set taxes and receipt templates, test a sale.</li>
+</ul>
+</li>
+<li><strong>Compliance and audit</strong> — Enable audit trail, set retention rules, confirm General Data Protection Regulation tools, and connect HM Revenue and Customs Value Added Tax (when live keys are available).</li>
+<li><strong>Run an end‑to‑end test</strong> — Quote → Order → Delivery → Invoice → Payment → Bank reconciliation → Reporting.</li>
+<li><strong>Train and go‑live</strong> — Walk teams through their daily tasks, check access and approvals, and schedule your go‑live date.</li>
+</ol>
+<div class="meta">
+<span class="tag">Guide</span>
+</div>
+</article>
+</div>
+</section>
+<!-- Docs section -->
+<section class="section">
+<h2>Documentation</h2>
+<div class="grid" id="grid-docs">
+<article class="card" data-cat="docs">
+<h3>Finance</h3>
+<p>Set up ledgers, taxes and posting rules. Learn how to raise and approve purchase invoices, post sales, reconcile banks, run period close and create accurate reports.</p>
+<ul style="margin:0 0 10px 18px">
+<li>Chart of accounts, tax codes and control accounts</li>
+<li>Sales and purchase invoices, receipts and payments</li>
+<li>Bank feeds and bank reconciliation</li>
+<li>Fixed assets and depreciation</li>
+<li>Period close and adjustments</li>
+<li>Reporting and exports</li>
+</ul>
+<div class="meta">
+<span class="tag">Docs</span>
+</div>
+</article>
+<article class="card" data-cat="docs">
+<h3>Point of Sale</h3>
+<p>Configure Stripe Terminal, set tax rules and receipt templates, and learn cashier workflows including offline sales, end‑of‑day reconciliation and General Ledger posting.</p>
+<ul style="margin:0 0 10px 18px">
+<li>Connect Stripe Terminal and test a sale</li>
+<li>Products, prices and taxes</li>
+<li>Receipts (on‑screen, email, Portable Document Format)</li>
+<li>Offline park and synchronise</li>
+<li>X and Z reports and reconciliation</li>
+<li>Accounting integration and posting</li>
+</ul>
+<div class="meta">
+<span class="tag">Docs</span>
+</div>
+</article>
+<article class="card" data-cat="docs">
+<h3>Projects</h3>
+<p>Plan your work, control costs and bill correctly. Create tasks, assign people, record time and expense, and generate invoices with a clear audit trail.</p>
+<ul style="margin:0 0 10px 18px">
+<li>Project templates and task boards</li>
+<li>Assigning roles and rates</li>
+<li>Time and expense capture</li>
+<li>Budget tracking and approvals</li>
+<li>Billing: fixed price and time &amp; materials</li>
+<li>Project reporting</li>
+</ul>
+<div class="meta">
+<span class="tag">Docs</span>
+</div>
+</article>
+</div>
+</section>
+<!-- FAQ -->
+<section class="section">
+<h2>Frequently Asked Questions</h2>
+<div class="grid" id="grid-faq">
+<article class="card" data-cat="faq">
+<h3>How do I invite my team?</h3>
+<p>Go to Settings → Users, select “Invite user”, choose a role and send the invite. We recommend enabling multi‑factor authentication for all users.</p>
+<div class="meta"><span class="tag">FAQ</span></div>
+</article>
+<article class="card" data-cat="faq">
+<h3>How do I import my data?</h3>
+<p>Use the import tools in each module to upload products, customers, suppliers and opening balances. Sample comma separated values templates are provided in each screen.</p>
+<div class="meta"><span class="tag">FAQ</span></div>
+</article>
+<article class="card" data-cat="faq">
+<h3>Can I connect payments and bank feeds?</h3>
+<p>Yes. Stripe handles card payments, and TrueLayer provides bank feeds. Live keys are required for production.</p>
+<div class="meta"><span class="tag">FAQ</span></div>
+</article>
+<article class="card" data-cat="faq">
+<h3>How is access controlled?</h3>
+<p>Use role‑based access control and Segregation of Duties rules to keep responsibilities separate. You can enforce two‑factor sign‑in for all users.</p>
+<div class="meta"><span class="tag">FAQ</span></div>
+</article>
+<article class="card" data-cat="faq">
+<h3>Where do I find audit logs?</h3>
+<p>Each module includes an activity view. You can export logs for your auditors and set retention periods to match your policy.</p>
+<div class="meta"><span class="tag">FAQ</span></div>
+</article>
+<article class="card" data-cat="faq">
+<h3>How do I get help?</h3>
+<p>Please contact us via the Contact page and we will respond as soon as possible, typically within one working day.</p>
+<div class="meta"><span class="tag">FAQ</span></div>
+</article>
+</div>
+</section>
+</main>
+<!-- Nexa — Approved Footer -->
+<footer role="contentinfo" style="background:#0b1424;color:#fff;margin-top:28px">
+<div class="container" style="max-width:1180px;margin:0 auto;padding:24px 18px">
+<div class="grid" style="display:grid;gap:12px;grid-template-columns:1.4fr 1fr 1fr">
+<div>
+<div aria-label="Nexa" class="brand" style="display:flex;align-items:center;gap:10px;font-weight:700">
+<svg aria-hidden="true" style="width:28px;height:28px" viewbox="0 0 32 32">
+<defs><lineargradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g2)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</div>
+<p class="small" style="font-size:12px;margin:8px 0 0">AI‑powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance.</p>
+</div>
+<div>
+<h4 style="margin:0 0 8px">Product</h4>
+<ul>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 style="margin:0 0 8px">Company</h4>
+<ul>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</div>
+</div>
+<p class="small" style="font-size:12px;margin:8px 0 0">Made with privacy in mind • Cookies by consent • London, United Kingdom • © <span id="year"></span> Nexa</p>
+</div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+const pills = Array.from(document.querySelectorAll('.pill'));
+const cards = Array.from(document.querySelectorAll('.card'));
+let active = 'all';
+function applyFilters(){
+  cards.forEach(c => {
+    const cat = c.dataset.cat || 'all';
+    const matchCat = (active === 'all') || (cat === active);
+    c.style.display = matchCat ? '' : 'none';
+  });
+}
+pills.forEach(p => p.addEventListener('click', () => {
+  pills.forEach(x => x.classList.remove('active'));
+  p.classList.add('active'); active = p.dataset.cat; applyFilters();
+}));
+applyFilters();
+</script>
+<script src="/website/system/consent.js"></script><!-- NexaConsent -->
+</body>
+</html>

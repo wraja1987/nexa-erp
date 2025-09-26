@@ -1,0 +1,4 @@
+--- http://www.nexaai.co.uk
+HTTPS://https://www.nexaai.co.uk/  200
+--- https://www.nexaai.co.uk
+HTTPS://https://www.nexaai.co.uk/  200

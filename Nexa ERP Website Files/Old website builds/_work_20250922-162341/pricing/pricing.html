@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Nexa ERP — Pricing</title>
+<meta content="Clear pricing that grows with your business. Plans from £99/month with optional add-ons. Compare Starter, Standard, Professional and Enterprise." name="description"/>
+<style>
+    :root{
+      --blue:#2E6BFF;
+      --violet:#7A4DFF;
+      --navy:#0F2747;
+      --bg:#F7F9FC;
+      --text:#0B1424;
+      --muted:#5d6b86;
+      --border:#e6ecf5;
+      --ring-soft: 0 8px 20px rgba(15,39,71,.10);
+      --glow-active: 0 12px 40px rgba(46,107,255,.25), 0 2px 8px rgba(122,77,255,.18);
+      --green:#1c7c43;
+      --red:#c23b3b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.5}
+    a{color:var(--blue);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1180px;margin:0 auto;padding:0 18px}
+    .row{display:flex;align-items:center;gap:14px}
+
+    /* Header (approved) */
+    .header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+    .header .row{justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+    .brand svg{width:28px;height:28px}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+    nav a{color:var(--navy);font-weight:600}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:999px;border:1px solid #d7e0ee;background:#fff;color:#0B1424;font-weight:800;box-shadow:var(--ring-soft);transition:all .22s ease}
+    .btn:hover{transform:translateY(-1px);box-shadow:var(--glow-active)}
+    .btn-primary{background:linear-gradient(90deg,#2E6BFF,#7A4DFF);border:none;color:#fff}
+
+    /* Page */
+    .section{padding:28px 0}
+    h1{font-size:32px;margin:8px 0}
+    h2{font-size:24px;margin:8px 0}
+    .lead{color:var(--muted);margin:6px 0 16px}
+
+    /* Plan cards */
+    .plans{display:grid;gap:14px;grid-template-columns:repeat(4,1fr)}
+    .plan{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--ring-soft);transition:all .22s ease;display:flex;flex-direction:column;gap:12px;position:relative;min-height:360px}
+    .plan:hover{box-shadow:var(--glow-active);transform:translateY(-2px)}
+    .label-badge{position:absolute;top:12px;left:12px;background:#eef2ff;border:1px solid #d7e0ee;border-radius:999px;padding:10px 16px;font-weight:900;font-size:16px;color:#0F2747;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+    .price{font-weight:900;font-size:28px;margin-top:40px}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px dashed #d7e0ee;border-radius:999px;padding:8px 12px;font-weight:700;color:#0F2747}
+    .muted{color:var(--muted)}
+
+    /* Compare table */
+    .table-wrap{overflow-x:auto;margin-top:10px}
+    table.table{width:100%;border-collapse:separate;border-spacing:0 8px;table-layout:fixed}
+    .table th, .table td{background:#fff;border:1px solid var(--border);padding:10px;border-left:none;border-right:none}
+    .table th:first-child, .table td:first-child{border-left:1px solid var(--border);border-top-left-radius:10px;border-bottom-left-radius:10px;text-align:left;width:42%}
+    .table th:not(:first-child), .table td:not(:first-child){text-align:center;width:14.5%}
+    .table th:last-child, .table td:last-child{border-right:1px solid var(--border);border-top-right-radius:10px;border-bottom-right-radius:10px}
+    .tick{color:var(--green);font-weight:900}
+    .cross{color:var(--red);font-weight:900}
+
+    /* Add-on packs (smaller cards) */
+    .addons{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start;margin-top:16px}
+    .addon-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--ring-soft);transition:all .22s ease;flex:1 1 360px;max-width:420px}
+    .addon-card:hover{box-shadow:var(--glow-active);transform:translateY(-2px)}
+
+    /* Footer */
+    footer{margin-top:28px;background:#0b1424;color:#c9d3e6}
+    footer .container{padding:20px 18px}
+    footer .grid{display:grid;gap:12px;grid-template-columns:1.4fr 1fr 1fr}
+    footer a{color:#dbe4f8}
+    .small{font-size:12px;color:#96a3be;margin:8px 0 0}
+
+    @media (max-width:1100px){ .plans{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:640px){ .plans{grid-template-columns:1fr} }
+  
+  /* Mobile nav fix */
+  nav ul{flex-wrap:wrap;overflow-x:hidden} body{overflow-x:hidden}
+
+  /* unified-nav */
+  nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+  @media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+  body{overflow-x:hidden}
+</style>
+<style>
+/* unified header */
+:root{--navy:#0F2747;--border:#e7ecf5}
+.header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+.header .row{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+.brand svg{width:28px;height:28px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+nav a{color:var(--navy);font-weight:600;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #d7e0ee;background:#fff;color:var(--navy);font-weight:800;padding:10px 16px;text-decoration:none}
+.btn.login{border-radius:9999px}
+@media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+</style>
+<style>
+/* Unified illuminated CTA for Nexa (blue→violet with soft glow) */
+.nexa-cta-btn {
+  display:inline-block;
+  background: linear-gradient(90deg, #2E6BFF 0%, #7A4DFF 100%);
+  color:#fff !important;
+  border:none;
+  border-radius:16px;
+  padding:14px 28px;
+  font-weight:700;
+  text-decoration:none;
+  line-height:1.1;
+  box-shadow: 0 12px 30px rgba(46,107,255,0.35), 0 18px 44px rgba(122,77,255,0.28);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.nexa-cta-btn:hover, .nexa-cta-btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(46,107,255,0.40), 0 24px 56px rgba(122,77,255,0.32);
+  outline: none;
+}
+/* Optional container "card" glow for the CTA blocks */
+.nexa-cta-card {
+  background:#fff;
+  border:1px solid rgba(15,39,71,0.08);
+  border-radius:18px;
+  padding:18px;
+  box-shadow: 0 8px 28px rgba(46,107,255,0.12), 0 16px 40px rgba(122,77,255,0.08);
+}
+</style>
+<style>
+/* === Nexa Mobile: replace header exactly as mockup (<=768px) === */
+#nexa-mobile-header { display:none; }
+@media (max-width:768px){
+  /* hide any existing desktop header blocks */
+  header, .header, .site-header, .topbar, #topbar, .nav-bar, .navbar { display:none !important; }
+
+  /* show our new header */
+  #nexa-mobile-header { 
+    display:block !important; 
+    background:#fff;
+    border-bottom:1px solid #E6ECF5;
+  }
+  #nexa-mobile-header .nmh-top{
+    padding:10px 14px 2px;
+  }
+  #nexa-mobile-header .nmh-logo{
+    height:28px; width:auto; display:inline-block; vertical-align:middle;
+  }
+  #nexa-mobile-header .nmh-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px 18px;
+    padding:12px 12px 14px;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    font-size:16px; font-weight:700; line-height:1.2; color:#0B1424; text-decoration:none;
+    white-space:nowrap;
+  }
+
+  /* general mobile hardening */
+  html, body { width:100%; overflow-x:hidden; }
+  img, svg, video, iframe { max-width:100%; height:auto; }
+  .container, .wrap, .wrapper, .content, main, section { max-width:100%; box-sizing:border-box; }
+}
+</style>
+<style>
+/* === Nexa: MOBILE-ONLY adjustments (<=768px) === */
+@media (max-width:768px){
+  /* Even spacing for the mobile header tabs */
+  #nexa-mobile-header .nmh-grid{
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    column-gap:22px !important;
+    row-gap:12px !important;
+    padding:12px 16px 14px !important;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    display:block !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:16px !important;
+    font-weight:700 !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+    text-align:left !important;
+  }
+  /* Ensure AI Engine image always renders on mobile */
+  img[src*="nexa-ai-engine"]{
+    display:block !important;
+    max-width:100% !important;
+    height:auto !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="/website/system/consent.css"><!-- NexaConsent -->
+</head>
+<body><header class="header" role="banner">
+<div class="container">
+<div class="row">
+<a aria-label="Nexa home" class="brand" href="/homepage">
+<svg aria-hidden="true" viewbox="0 0 32 32">
+<defs><lineargradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</a>
+<nav aria-label="Primary">
+<ul>
+<li><a href="/homepage">Home</a></li>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</nav>
+<div class="cta"><a aria-label="Login" class="btn" href="https://app.nexaai.co.uk/login">Login</a></div>
+</div>
+</div>
+<nav class="nexa-legal-nav" aria-label="Legal"><a href="/website/legal/privacy/" class="nav-link" style="margin-left:12px">Legal</a></nav>
+</header>
+<!-- Nexa: Mobile-only Header (injected) -->
+<div aria-label="Nexa mobile navigation" id="nexa-mobile-header" role="banner">
+<div class="nmh-top">
+<img alt="Nexa" class="nmh-logo" src="/logo-nexa.png"/>
+</div>
+<nav aria-label="Primary" class="nmh-grid">
+<a href="/homepage">Home</a>
+<a href="/modules">Modules</a>
+<a href="/integrations">Integrations</a>
+<a href="/security">Security</a>
+<a href="/pricing">Pricing</a>
+<a href="/resources">Resources</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+</nav>
+</div>
+<!-- Header -->
+<main>
+<section class="section glow">
+<div class="container">
+<h1>Clear pricing that grows with your business</h1>
+<p class="lead">Simple monthly pricing. Plans start from £99 per month. Choose the plan that fits your team and modules. Add‑ons can be purchased any time.</p>
+<!-- Plan cards -->
+<div class="plans">
+<!-- Starter -->
+<div class="plan">
+<span class="label-badge">Starter package</span>
+<div class="price">£99 <span class="muted">/ month</span></div>
+<div class="pill">👥 Users: 2 included</div>
+<div class="pill">⭐ AI Tokens: 25,000 / month</div>
+<div class="pill">🔗 API Calls: 2,000 / month</div>
+<ul class="muted">
+<li><b>Core Platform:</b> Dashboard, AI Assist (basic prompts), basic reporting &amp; CSV exports, GDPR tools and audit.</li>
+<li><b>Finance:</b> GL, AP, AR, Bank &amp; Cash.</li>
+<li><b>Inventory:</b> Items &amp; stock movements (single warehouse).</li>
+<li><b>Sales &amp; Purchasing:</b> Quotes, sales orders, POs.</li>
+<li><b>Projects:</b> Basic task tracking.</li>
+<li><b>Access:</b> Mobile &amp; installable PWA.</li>
+</ul>
+</div>
+<!-- Standard -->
+<div class="plan">
+<span class="label-badge">Standard package</span>
+<div class="price">£249 <span class="muted">/ month</span></div>
+<div class="pill">👥 Users: 5 included</div>
+<div class="pill">⭐ AI Tokens: 100,000 / month</div>
+<div class="pill">🔗 API Calls: 10,000 / month</div>
+<ul class="muted">
+<li><b>Core Platform:</b> RBAC, dashboards, CSV export.</li>
+<li><b>Finance:</b> GL, AP, AR, Bank &amp; Cash, VAT (MTD with HMRC keys), Fixed Assets, Period Close, FX.</li>
+<li><b>Inventory &amp; WMS:</b> Items, lots, warehouses, stock movements.</li>
+<li><b>Sales &amp; Purchasing:</b> Quotes, Sales Orders, Purchase Orders.</li>
+<li><b>Projects:</b> Core tasks &amp; costing.</li>
+<li><b>Banking &amp; Billing:</b> Stripe &amp; TrueLayer (keys required).</li>
+<li><b>Access:</b> PWA (installable).</li>
+</ul>
+</div>
+<!-- Professional -->
+<div class="plan">
+<span class="label-badge">Professional package</span>
+<div class="price">£799 <span class="muted">/ month</span></div>
+<div class="pill">👥 Users: 20 included</div>
+<div class="pill">⭐ AI Tokens: 500,000 / month</div>
+<div class="pill">🔗 API Calls: 50,000 / month</div>
+<ul class="muted">
+<li><b>Everything in Standard</b> plus:</li>
+<li><b>Advanced WMS:</b> ASNs, wave planning, 3PL, cycle counting, quality (holds &amp; CAPA).</li>
+<li><b>Manufacturing:</b> BOMs &amp; Routings, Work Orders, MRP, Capacity Planning, Maintenance, PLM.</li>
+<li><b>Projects:</b> Costing &amp; billing.</li>
+<li><b>Analytics:</b> Drill‑downs &amp; dashboards.</li>
+<li><b>Resilience:</b> Automated Backups &amp; DR.</li>
+<li><b>Point of Sale:</b> Stripe Terminal, receipts, offline sync, GL postings, X/Z reports.</li>
+<li><b>AI Assist:</b> Insights panel and Quick Links.</li>
+</ul>
+</div>
+<!-- Enterprise -->
+<div class="plan">
+<span class="label-badge">Enterprise package</span>
+<div class="price"><span class="muted">Contact us for a tailored quotation</span></div>
+<div class="pill">👥 Users: Unlimited</div>
+<div class="pill">⭐ AI Tokens: 2,000,000 / month</div>
+<div class="nexa-cta-card pill">🔗 API Calls: 250,000 / month</div>
+<ul class="muted">
+<li><b>Everything in Professional</b> plus:</li>
+<li><b>Advanced Planning &amp; Scheduling</b></li>
+<li><b>Group Finance:</b> Intercompany, consolidation, multi‑currency.</li>
+<li><b>Analytics:</b> Enterprise dashboards &amp; ad‑hoc.</li>
+<li><b>Security &amp; Observability:</b> SIEM export, strict SoD, enforced MFA.</li>
+<li><b>AI &amp; Automation:</b> OCR, predictive scenarios, workflows.</li>
+<li><b>Admin:</b> Quotas &amp; usage with alerts; priority support.</li>
+</ul>
+<a class="btn btn-primary nexa-cta-btn" href="/contact#quote">Request a quote</a>
+</div>
+</div>
+<!-- Add‑On Packs (Optional) directly under plans; smaller cards -->
+<h2 style="margin-top:16px">Add‑On Packs (Optional)</h2>
+<div class="addons">
+<div class="addon-card">
+<h3>AI Tokens</h3>
+<ul>
+<li>+100,000 tokens → £10</li>
+<li>+500,000 tokens → £40</li>
+<li>+1,000,000 tokens → £70</li>
+</ul>
+</div>
+<div class="addon-card">
+<h3>API Calls</h3>
+<ul>
+<li>+10,000 calls → £15</li>
+<li>+50,000 calls → £60</li>
+<li>+100,000 calls → £100</li>
+</ul>
+</div>
+</div>
+<p class="muted" style="margin-top:8px">Add‑ons do not expire until used. They carry over month to month. Purchases are made through Stripe Billing and appear in the Admin usage panel.</p>
+<!-- Compare table -->
+<h2 style="margin-top:20px">Feature comparison</h2>
+<div class="table-wrap">
+<table aria-label="Plan comparison" class="table" role="table">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Starter</th>
+<th>Standard</th>
+<th>Professional</th>
+<th>Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>General Ledger / AR / AP / Bank</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+<tr><td>VAT MTD (HMRC keys)</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+<tr><td>Inventory &amp; WMS</td><td>Basic</td><td>Core</td><td>Advanced</td><td>Advanced+</td></tr>
+<tr><td>Manufacturing</td><td class="cross">—</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+<tr><td>Projects</td><td>Basic</td><td>Core</td><td>Costing &amp; billing</td><td>Costing &amp; billing</td></tr>
+<tr><td>Analytics &amp; Dashboards</td><td>Basic</td><td>Core</td><td>Advanced</td><td>Enterprise</td></tr>
+<tr><td>AI Assist</td><td>Basic</td><td>Core</td><td>Insights</td><td>Insights + Scenarios</td></tr>
+<tr><td>Off‑line POS / Stripe Terminal</td><td class="cross">—</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+</tbody>
+</table>
+</div>
+<!-- FAQ -->
+<h2 style="margin-top:22px">Frequently asked questions</h2>
+<div class="container" style="padding:0">
+<details open=""><summary><b>How is pricing calculated?</b></summary><p>We tailor your price based on users, modules and usage. Starter plans begin at £99 per month.</p></details>
+<details><summary><b>Can I add modules later?</b></summary><p>Yes. You can add modules or increase users as you grow.</p></details>
+<details><summary><b>How do payments work?</b></summary><p>Invoices are raised and can be paid by card through Stripe. Bank transfer is available on request.</p></details>
+<details><summary><b>Can I change plans?</b></summary><p>Yes — you can upgrade or add add‑on packs at any time. We’ll pro‑rate fairly.</p></details>
+<details><summary><b>Do prices include VAT?</b></summary><p>Prices shown exclude VAT. VAT is added where applicable.</p></details>
+<details><summary><b>Need a formal quote?</b></summary><p>Use the Contact page to request a formal quote and we’ll respond quickly.</p></details>
+</div>
+<!-- CTA -->
+<div style="margin-top:18px;border:1px solid var(--border);border-radius:14px;background:#fff;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--ring-soft)">
+<div>
+<b>Not sure which plan fits?</b>
+<p class="muted" style="margin:6px 0 0">Tell us about your goals and team size. We will recommend a plan and give a clear quote without surprises.</p>
+</div>
+<a class="btn btn-primary nexa-cta-btn" href="/contact#quote">Request a quote</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (approved) -->
+<footer role="contentinfo">
+<div class="container">
+<div class="grid" style="display:grid;gap:12px;grid-template-columns:1.4fr 1fr 1fr">
+<div>
+<div aria-label="Nexa" class="brand" style="display:flex;align-items:center;gap:10px;font-weight:800">
+<svg aria-hidden="true" style="width:28px;height:28px" viewbox="0 0 32 32">
+<defs><lineargradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g2)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</div>
+<p class="small">AI‑powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance.</p>
+</div>
+<div>
+<h4>Product</h4>
+<ul>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a aria-current="page" href="/pricing">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4>Company</h4>
+<ul>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</div>
+</div>
+<p class="small">Made with privacy in mind • Cookies by consent • London, United Kingdom • © <span id="year"></span> Nexa</p>
+</div>
+</footer>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+<script src="/website/system/consent.js"></script><!-- NexaConsent -->
+</body>
+</html>

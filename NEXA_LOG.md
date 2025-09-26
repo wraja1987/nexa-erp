@@ -1,0 +1,2 @@
+- 2025-09-23T07:16:24Z — Stripe keys added + verification (ok). See /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/reports/Stripe-Verify-2025-09-23T07:16:24Z.md
+- 2025-09-23T13:05:49Z — Web standalone build. Build=fail Smoke=fail. Report: /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/reports/Web-Standalone-Build-2025-09-23T13:05:49Z.md

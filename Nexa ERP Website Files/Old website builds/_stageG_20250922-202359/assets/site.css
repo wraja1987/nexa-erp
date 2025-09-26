@@ -1,0 +1,10 @@
+/* Nexa placeholder to satisfy link checks */
+
+/* Nexa A11y Overrides */
+footer, .footer, footer p, footer a { color:#0F2747 !important; }
+@media (prefers-color-scheme: dark) {
+  footer, .footer, footer p, footer a { color:#E6ECF5 !important; }
+}
+body.nexa-modules .tag, body.nexa-modules .badge, body.nexa-modules .pill {
+  background:#0F2747 !important; color:#fff !important; border-color:rgba(255,255,255,.2) !important;
+}

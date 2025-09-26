@@ -1,0 +1,6 @@
+Nexa Legal Fix Scan — 20250922-172931
+  - /legal/privacy/index.html: OK
+  - /legal/terms/index.html: OK
+  - /legal/cookies/index.html: OK
+  - Consent: OK
+  - Legal links: OK

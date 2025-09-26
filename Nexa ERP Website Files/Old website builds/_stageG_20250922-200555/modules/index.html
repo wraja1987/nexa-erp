@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Nexa ERP — Modules</title>
+<meta content="Explore all Nexa ERP modules—finance, inventory, manufacturing, sales, HR and more. Filter, search and expand to see how each module works in practice." name="description"/>
+<style>
+    :root{
+      --blue:#2E6BFF;
+      --violet:#7A4DFF;
+      --navy:#0F2747;
+      --bg:#F7F9FC;
+      --text:#0B1424;
+      --muted:#5d6b86;
+      --border:#e6ecf5;
+      --ring-soft: 0 8px 20px rgba(15,39,71,.10);
+      --glow-active: 0 12px 40px rgba(46,107,255,.25), 0 2px 8px rgba(122,77,255,.18);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.5}
+    a{color:var(--blue);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1180px;margin:0 auto;padding:0 18px}
+    .row{display:flex;align-items:center;gap:14px}
+
+    /* Approved HEADER */
+    .header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+    .header .row{justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+    .brand svg{width:28px;height:28px}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+    nav a{color:var(--navy);font-weight:600}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:999px;border:1px solid #d7e0ee;background:#fff;color:var(--navy);font-weight:700;box-shadow:var(--ring-soft);transition:all .22s ease}
+    .btn:hover{transform:translateY(-1px);box-shadow:var(--glow-active)}
+
+    /* Page spacing */
+    .section{padding:28px 0}
+    h1{font-size:32px;margin:8px 0}
+    h2{font-size:24px;margin:8px 0}
+    .lead{color:var(--muted);margin:6px 0 14px}
+
+    /* Filters */
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+    .chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;user-select:none;box-shadow:var(--ring-soft);transition:all .2s ease;font-weight:700;color:var(--navy)}
+    .chip.active,.chip:hover{box-shadow:var(--glow-active);transform:translateY(-1px)}
+    .search{flex:1;min-width:220px}
+    .search input{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--ring-soft)}
+
+    /* Module grid */
+    .grid{display:grid;gap:12px}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .mod{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--ring-soft);overflow:hidden;transition:box-shadow .22s ease, transform .22s ease}
+    .mod:hover{box-shadow:var(--glow-active);transform:translateY(-2px)}
+    .mod-head{display:flex;gap:12px;align-items:center;padding:14px;cursor:pointer}
+    .mod-icon{width:36px;height:36px;border-radius:10px;background:#eef3ff;display:grid;place-items:center;flex:0 0 auto}
+    .mod-title{font-weight:900}
+    .mod-tag{margin-left:auto;font-size:12px;color:#2E6BFF;font-weight:800;background:#ecf2ff;border-radius:999px;padding:4px 8px}
+    .mod-desc{color:var(--muted);padding:0 14px 14px}
+    .mod-body{display:none;border-top:1px dashed var(--border);padding:12px 14px;background:#fcfdff}
+    .mod-body.open{display:block}
+    .mod-body .cols{display:grid;grid-template-columns:1.1fr 0.9fr;gap:12px;align-items:start}
+    .mod-body ul{margin:0 0 8px 18px}
+    .mini-screen{border:1px solid var(--border);border-radius:12px;box-shadow:var(--ring-soft);overflow:hidden;background:#fff}
+
+    /* Footer approved */
+    footer{margin-top:28px;background:#0b1424;color:#c9d3e6}
+    footer .container{padding:20px 18px}
+    footer .grid{display:grid;gap:12px;grid-template-columns:1.4fr 1fr 1fr}
+    footer a{color:#dbe4f8}
+    .small{font-size:12px;color:#96a3be;margin:8px 0 0}
+
+    /* Responsive */
+    @media (max-width:1100px){
+      .grid.cols-3{grid-template-columns:repeat(2,1fr)}
+      .mod-body .cols{grid-template-columns:1fr}
+      footer .grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:640px){
+      .grid.cols-3{grid-template-columns:1fr}
+      .filters{flex-direction:column;align-items:stretch}
+    }
+  
+  /* Mobile nav fix */
+  nav ul{flex-wrap:wrap;overflow-x:hidden} body{overflow-x:hidden}
+
+  /* unified-nav */
+  nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+  @media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+  body{overflow-x:hidden}
+</style>
+<style>
+/* unified header */
+:root{--navy:#0F2747;--border:#e7ecf5}
+.header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+.header .row{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+.brand svg{width:28px;height:28px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap;overflow-x:auto}
+nav a{color:var(--navy);font-weight:600;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #d7e0ee;background:#fff;color:var(--navy);font-weight:800;padding:10px 16px;text-decoration:none}
+.btn.login{border-radius:9999px}
+@media(max-width:900px){nav ul{flex-wrap:wrap;overflow-x:hidden}}
+</style>
+<style>
+/* === Nexa Mobile: replace header exactly as mockup (<=768px) === */
+#nexa-mobile-header { display:none; }
+@media (max-width:768px){
+  /* hide any existing desktop header blocks */
+  header, .header, .site-header, .topbar, #topbar, .nav-bar, .navbar { display:none !important; }
+
+  /* show our new header */
+  #nexa-mobile-header { 
+    display:block !important; 
+    background:#fff;
+    border-bottom:1px solid #E6ECF5;
+  }
+  #nexa-mobile-header .nmh-top{
+    padding:10px 14px 2px;
+  }
+  #nexa-mobile-header .nmh-logo{
+    height:28px; width:auto; display:inline-block; vertical-align:middle;
+  }
+  #nexa-mobile-header .nmh-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px 18px;
+    padding:12px 12px 14px;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    font-size:16px; font-weight:700; line-height:1.2; color:#0B1424; text-decoration:none;
+    white-space:nowrap;
+  }
+
+  /* general mobile hardening */
+  html, body { width:100%; overflow-x:hidden; }
+  img, svg, video, iframe { max-width:100%; height:auto; }
+  .container, .wrap, .wrapper, .content, main, section { max-width:100%; box-sizing:border-box; }
+}
+</style>
+<style>
+/* === Nexa: MOBILE-ONLY adjustments (<=768px) === */
+@media (max-width:768px){
+  /* Even spacing for the mobile header tabs */
+  #nexa-mobile-header .nmh-grid{
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    column-gap:22px !important;
+    row-gap:12px !important;
+    padding:12px 16px 14px !important;
+  }
+  #nexa-mobile-header .nmh-grid a{
+    display:block !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:16px !important;
+    font-weight:700 !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+    text-align:left !important;
+  }
+  /* Ensure AI Engine image always renders on mobile */
+  img[src*="nexa-ai-engine"]{
+    display:block !important;
+    max-width:100% !important;
+    height:auto !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+</style>
+</head>
+<body class="nexa-modules"><header class="header" role="banner">
+<div class="container">
+<div class="row">
+<a aria-label="Nexa home" class="brand" href="/homepage">
+<svg aria-hidden="true" viewbox="0 0 32 32">
+<defs><lineargradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</a>
+<nav aria-label="Primary">
+<ul>
+<li><a href="/homepage">Home</a></li>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</nav>
+<div class="cta"><a aria-label="Login" class="btn" href="https://app.nexaai.co.uk/login">Login</a></div>
+</div>
+</div>
+</header>
+<!-- Nexa: Mobile-only Header (injected) -->
+<div aria-label="Nexa mobile navigation" id="nexa-mobile-header" role="banner">
+<div class="nmh-top">
+<img alt="Nexa" class="nmh-logo" src="/logo-nexa.png"/>
+</div>
+<nav aria-label="Primary" class="nmh-grid">
+<a href="/homepage">Home</a>
+<a href="/modules">Modules</a>
+<a href="/integrations">Integrations</a>
+<a href="/security">Security</a>
+<a href="/pricing">Pricing</a>
+<a href="/resources">Resources</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+</nav>
+</div>
+<!-- Header (approved) -->
+<main>
+<section class="section">
+<div class="container">
+<h1>Modules</h1>
+<p class="lead">Pick only what you need. Use filters to find modules faster, then click any module to expand details and see how it works in practice.</p>
+<!-- Filters -->
+<div aria-label="Module filters" class="filters" role="group">
+<div class="chip active" data-filter="all">All</div>
+<div class="chip" data-filter="finance">Finance</div>
+<div class="chip" data-filter="operations">Operations</div>
+<div class="chip" data-filter="sales">Sales</div>
+<div class="chip" data-filter="manufacturing">Manufacturing</div>
+<div class="chip" data-filter="hr">HR</div>
+<div class="chip" data-filter="compliance">Compliance</div>
+<div class="chip" data-filter="platform">Platform</div>
+<div class="search"><input aria-label="Search modules" id="searchBox" placeholder="Search modules (e.g. Inventory, VAT, MRP)" type="search"/></div>
+</div>
+<!-- Modules grid -->
+<div class="grid cols-3" id="mods">
+<!-- Finance (key) -->
+<article class="mod" data-tags="finance,compliance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 7h16v10H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><circle cx="8" cy="12" fill="#2E6BFF" r="2"></circle></svg></div>
+<div class="mod-title">Finance</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">General ledger with journals, multi‑currency, budgets and audit history.</p>
+<div aria-hidden="true" class="mod-body">
+<div class="cols">
+<div>
+<ul>
+<li>Chart of accounts, journals and approvals</li>
+<li>Multi‑currency with daily rates</li>
+<li>Budgeting, accruals and allocations</li>
+<li>Audit trail and export to CSV/PDF</li>
+</ul>
+</div>
+<div aria-label="Finance example" class="mini-screen">
+<!-- Inline SVG mini UI -->
+<svg height="auto" viewbox="0 0 420 240" width="100%">
+<rect fill="#fff" height="240" width="420" x="0" y="0"></rect>
+<rect fill="#f4f7ff" height="30" width="420" x="0" y="0"></rect>
+<rect fill="#f7f9fc" height="32" rx="8" stroke="#e6ecf5" width="396" x="12" y="50"></rect>
+<rect fill="#f7f9fc" height="32" rx="8" stroke="#e6ecf5" width="396" x="12" y="94"></rect>
+<rect fill="#f7f9fc" height="32" rx="8" stroke="#e6ecf5" width="396" x="12" y="138"></rect>
+<text fill="#5d6b86" font-size="12" x="20" y="72">Post journal: Debits = Credits ✓</text>
+<text fill="#5d6b86" font-size="12" x="20" y="116">Budget variance: 3.2% under</text>
+<text fill="#5d6b86" font-size="12" x="20" y="160">Export to CSV • PDF</text>
+</svg>
+</div>
+</div>
+</div>
+</article>
+<!-- Bank & Cash -->
+<article class="mod" data-tags="finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M3 9l9-5 9 5v9H3z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M7 15h10" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Bank &amp; Cash</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Open Banking feeds, rules‑based categorisation and fast reconciliations.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Bank feeds and statement import</li>
+<li>Smart reconciliation with AI suggestions</li>
+<li>Payment runs and approvals</li>
+</ul>
+</div>
+</article>
+<!-- Accounts Receivable -->
+<article class="mod" data-tags="finance,sales">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 6h16v8H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M4 14l4 4h8l4-4" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Accounts Receivable</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Quotes to invoices, credit control and customer statements.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Recurring invoices and reminders</li>
+<li>Customer statements and ageing</li>
+<li>Credit limits and dunning workflows</li>
+</ul>
+</div>
+</article>
+<!-- Accounts Payable -->
+<article class="mod" data-tags="finance,operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><circle cx="9" cy="7" fill="#2E6BFF" r="3"></circle><path d="M3 21h18l-3-9H6z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Accounts Payable</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Supplier bills, approvals and payments with full audit trail.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Multi‑step approvals and limits</li>
+<li>Import PDFs and line‑level capture</li>
+<li>Batch payments and remittances</li>
+</ul>
+</div>
+</article>
+<!-- Inventory & WMS (key) -->
+<article class="mod" data-tags="operations,manufacturing">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M3 8l9-5 9 5v8l-9 5-9-5z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M3 8l9 5 9-5" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Inventory &amp; WMS</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Real‑time stock, bins, serials, barcodes and fulfilment.</p>
+<div aria-hidden="true" class="mod-body">
+<div class="cols">
+<div>
+<ul>
+<li>Multi‑warehouse, bins &amp; locations</li>
+<li>Serials, lots and expiry dates</li>
+<li>Pick/pack/ship with labels</li>
+</ul>
+</div>
+<div aria-label="Inventory example" class="mini-screen">
+<svg height="auto" viewbox="0 0 420 240" width="100%">
+<rect fill="#fff" height="240" width="420"></rect>
+<rect fill="#f4f7ff" height="30" width="420" x="0" y="0"></rect>
+<rect fill="#f7f9fc" height="160" rx="10" stroke="#e6ecf5" width="120" x="15" y="50"></rect>
+<rect fill="#fff" height="160" rx="10" stroke="#e6ecf5" width="250" x="155" y="50"></rect>
+<text fill="#5d6b86" font-size="12" x="30" y="75">Bins</text>
+<text fill="#5d6b86" font-size="12" x="180" y="75">Stock by location</text>
+<rect fill="#dfe8ff" height="90" width="60" x="175" y="95"></rect>
+<rect fill="#bfd6ff" height="120" width="60" x="245" y="95"></rect>
+<rect fill="#cfe0ff" height="70" width="60" x="315" y="95"></rect>
+</svg>
+</div>
+</div>
+</div>
+</article>
+<!-- Manufacturing (key) -->
+<article class="mod" data-tags="manufacturing,operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M3 16h18v5H3z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M6 16V7h4l2 3h6v6" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Manufacturing</div>
+<span class="mod-tag">Manufacturing</span>
+</div>
+<p class="mod-desc">BOMs, routes, work orders and MRP with capacity planning.</p>
+<div aria-hidden="true" class="mod-body">
+<div class="cols">
+<div>
+<ul>
+<li>Multi‑level BOMs and alternates</li>
+<li>Operations, work centres and labour</li>
+<li>MRP, shortages and capacity</li>
+</ul>
+</div>
+<div aria-label="Manufacturing example" class="mini-screen">
+<svg height="auto" viewbox="0 0 420 240" width="100%">
+<rect fill="#fff" height="240" width="420"></rect>
+<rect fill="#f4f7ff" height="30" width="420" x="0" y="0"></rect>
+<circle cx="90" cy="120" fill="#dfe8ff" r="34"></circle>
+<circle cx="200" cy="120" fill="#cfe0ff" r="34"></circle>
+<circle cx="310" cy="120" fill="#bfd6ff" r="34"></circle>
+<line stroke="#aecdff" stroke-width="4" x1="124" x2="166" y1="120" y2="120"></line>
+<line stroke="#aecdff" stroke-width="4" x1="234" x2="276" y1="120" y2="120"></line>
+<text fill="#5d6b86" font-size="12" x="70" y="170">BOM</text>
+<text fill="#5d6b86" font-size="12" x="180" y="170">Routing</text>
+<text fill="#5d6b86" font-size="12" x="290" y="170">WO</text>
+</svg>
+</div>
+</div>
+</div>
+</article>
+<!-- Sales & CRM (key) -->
+<article class="mod" data-tags="sales,finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 6h16v8H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M4 14l4 4h8l4-4" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Sales &amp; CRM</div>
+<span class="mod-tag">Sales</span>
+</div>
+<p class="mod-desc">Leads to quotes to orders, pipelines and email logging.</p>
+<div aria-hidden="true" class="mod-body">
+<div class="cols">
+<div>
+<ul>
+<li>Kanban pipelines and forecasts</li>
+<li>Quote templates and e‑sign</li>
+<li>Order fulfilment &amp; invoicing</li>
+</ul>
+</div>
+<div aria-label="Sales example" class="mini-screen">
+<svg height="auto" viewbox="0 0 420 240" width="100%">
+<rect fill="#fff" height="240" width="420"></rect>
+<rect fill="#f4f7ff" height="30" width="420" x="0" y="0"></rect>
+<rect fill="#f7f9fc" height="150" rx="10" stroke="#e6ecf5" width="110" x="18" y="60"></rect>
+<rect fill="#f7f9fc" height="150" rx="10" stroke="#e6ecf5" width="110" x="155" y="60"></rect>
+<rect fill="#f7f9fc" height="150" rx="10" stroke="#e6ecf5" width="110" x="292" y="60"></rect>
+<text fill="#5d6b86" font-size="12" x="40" y="80">Leads</text>
+<text fill="#5d6b86" font-size="12" x="172" y="80">Quotes</text>
+<text fill="#5d6b86" font-size="12" x="306" y="80">Orders</text>
+</svg>
+</div>
+</div>
+</div>
+</article>
+<!-- Purchasing -->
+<article class="mod" data-tags="operations,finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><circle cx="9" cy="7" fill="#2E6BFF" r="3"></circle><path d="M3 21h18l-3-9H6z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Purchasing</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Suppliers, POs, receipts and returns with pricing rules.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Supplier price lists and terms</li>
+<li>PO approvals and partial receipts</li>
+<li>Returns and debit notes</li>
+</ul>
+</div>
+</article>
+<!-- Projects (key) -->
+<article class="mod" data-tags="operations,finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v10h-4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Projects</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Tasks, timesheets, costs and project billing in one place.</p>
+<div aria-hidden="true" class="mod-body">
+<div class="cols">
+<div>
+<ul>
+<li>Tasks, milestones and boards</li>
+<li>Timesheets and approvals</li>
+<li>Costing and progress billing</li>
+</ul>
+</div>
+<div aria-label="Projects example" class="mini-screen">
+<svg height="auto" viewbox="0 0 420 240" width="100%">
+<rect fill="#fff" height="240" width="420"></rect>
+<rect fill="#f4f7ff" height="30" width="420" x="0" y="0"></rect>
+<rect fill="#f7f9fc" height="30" rx="8" stroke="#e6ecf5" width="380" x="20" y="60"></rect>
+<rect fill="#f7f9fc" height="30" rx="8" stroke="#e6ecf5" width="260" x="20" y="100"></rect>
+<rect fill="#f7f9fc" height="30" rx="8" stroke="#e6ecf5" width="320" x="20" y="140"></rect>
+<text fill="#5d6b86" font-size="12" x="28" y="80">Sprint board</text>
+<text fill="#5d6b86" font-size="12" x="28" y="120">Timesheet</text>
+<text fill="#5d6b86" font-size="12" x="28" y="160">Progress bill</text>
+</svg>
+</div>
+</div>
+</div>
+</article>
+<!-- HR & Payroll (key) -->
+<article class="mod" data-tags="hr,compliance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><circle cx="12" cy="8" fill="#2E6BFF" r="3.5"></circle><path d="M4 20c.7-3.8 4.2-6 8-6s7.3 2.2 8 6" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">HR &amp; Payroll</div>
+<span class="mod-tag">HR</span>
+</div>
+<p class="mod-desc">People, leave, payslips and HMRC‑ready submissions.</p>
+<div aria-hidden="true" class="mod-body">
+<div class="cols">
+<div>
+<ul>
+<li>Employee profiles and docs</li>
+<li>Leave, overtime and calendars</li>
+<li>Payslips &amp; RTI submissions</li>
+</ul>
+</div>
+<div aria-label="HR example" class="mini-screen">
+<svg height="auto" viewbox="0 0 420 240" width="100%">
+<rect fill="#fff" height="240" width="420"></rect>
+<rect fill="#f4f7ff" height="30" width="420" x="0" y="0"></rect>
+<rect fill="#dfe8ff" height="120" rx="8" width="120" x="20" y="60"></rect>
+<rect fill="#f7f9fc" height="30" rx="8" stroke="#e6ecf5" width="240" x="160" y="60"></rect>
+<rect fill="#f7f9fc" height="30" rx="8" stroke="#e6ecf5" width="240" x="160" y="100"></rect>
+<rect fill="#f7f9fc" height="30" rx="8" stroke="#e6ecf5" width="240" x="160" y="140"></rect>
+</svg>
+</div>
+</div>
+</div>
+</article>
+<!-- Compliance & Tax -->
+<article class="mod" data-tags="compliance,finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M12 2l9 5v10l-9 5-9-5V7z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M8 12l2 2 6-6" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Compliance &amp; Tax</div>
+<span class="mod-tag">Compliance</span>
+</div>
+<p class="mod-desc">GDPR controls, MTD VAT and audit‑ready logs across modules.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Permission sets &amp; approvals</li>
+<li>Digital VAT returns (MTD)</li>
+<li>Complete audit logs</li>
+</ul>
+</div>
+</article>
+<!-- Banking & Billing -->
+<article class="mod" data-tags="finance,sales">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M3 9l9-5 9 5v9H3z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M7 15h10" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Banking &amp; Billing</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Bank connections, invoices, statements and payments.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Open Banking connections</li>
+<li>Invoice templates &amp; reminders</li>
+<li>Customer statements</li>
+</ul>
+</div>
+</article>
+<!-- AI & Automation -->
+<article class="mod" data-tags="operations,hr,sales,finance,manufacturing,compliance,platform">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" fill="#2E6BFF" r="5"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.5 4.5l2.8 2.8M16.7 16.7l2.8 2.8M19.5 4.5l-2.8 2.8M6.3 16.7l-2.8 2.8" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">AI &amp; Automation</div>
+<span class="mod-tag">Platform</span>
+</div>
+<p class="mod-desc">Assistants in every module plus workflows and scheduled jobs.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Contextual AI suggestions</li>
+<li>No‑code workflows</li>
+<li>Scheduled jobs and alerts</li>
+</ul>
+</div>
+</article>
+<!-- POS -->
+<article class="mod" data-tags="sales,operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><rect fill="none" height="12" rx="2" ry="2" stroke="#2E6BFF" stroke-width="2" width="18" x="3" y="6"></rect><path d="M6 10h8M6 14h5" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">POS</div>
+<span class="mod-tag">Sales</span>
+</div>
+<p class="mod-desc">Retail &amp; counter sales with barcodes and receipts.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Barcode scanning</li>
+<li>Discounts &amp; receipts</li>
+<li>Cash drawer control</li>
+</ul>
+</div>
+</article>
+<!-- Enterprise & Analytics -->
+<article class="mod" data-tags="platform,finance,operations,sales,hr">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 20V10m6 10V6m6 14v-8m4 8V4" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Enterprise &amp; Analytics</div>
+<span class="mod-tag">Platform</span>
+</div>
+<p class="mod-desc">Dashboards, BI and enterprise features including SSO.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Custom dashboards and KPIs</li>
+<li>SSO/SAML and SCIM</li>
+<li>Data export &amp; API access</li>
+</ul>
+</div>
+</article>
+<!-- Warehousing -->
+<article class="mod" data-tags="operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M6 3h12v4H6zM4 9h16v12H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Warehousing</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Putaway, replenishment and stock counts.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Cycle counts &amp; ABC</li>
+<li>Replenishment rules</li>
+<li>Location capacity</li>
+</ul>
+</div>
+</article>
+<!-- Quoting -->
+<article class="mod" data-tags="sales">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 5h16v10H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path><path d="M8 19h8" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Quoting</div>
+<span class="mod-tag">Sales</span>
+</div>
+<p class="mod-desc">Quote templates, price rules and approvals.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Tiered pricing</li>
+<li>e‑sign links</li>
+<li>Approvals</li>
+</ul>
+</div>
+</article>
+<!-- MRP -->
+<article class="mod" data-tags="operations,manufacturing">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" fill="#2E6BFF" r="3"></circle><path d="M3 12h6M15 12h6" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">MRP</div>
+<span class="mod-tag">Manufacturing</span>
+</div>
+<p class="mod-desc">Plan material and capacity needs.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Shortage analysis</li>
+<li>Planner workbench</li>
+<li>What‑if runs</li>
+</ul>
+</div>
+</article>
+<!-- Costing -->
+<article class="mod" data-tags="operations,finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 4h16v8H4zM4 12h10v8H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Costing</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Standard, average and FIFO costing with variances.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>BOM &amp; routing roll‑ups</li>
+<li>Purchase price variances</li>
+<li>Cost history</li>
+</ul>
+</div>
+</article>
+<!-- Scheduling -->
+<article class="mod" data-tags="operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 4h16v4H4zM4 10h16v10H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Scheduling</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Plan production and delivery dates.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Gantt views</li>
+<li>Capacity buckets</li>
+<li>Constraints</li>
+</ul>
+</div>
+</article>
+<!-- Order Management -->
+<article class="mod" data-tags="operations,sales">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Order Management</div>
+<span class="mod-tag">Sales</span>
+</div>
+<p class="mod-desc">Sales orders, backorders and shipping.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Allocations &amp; reservations</li>
+<li>Backorder handling</li>
+<li>Shipments &amp; tracking</li>
+</ul>
+</div>
+</article>
+<!-- Invoicing -->
+<article class="mod" data-tags="operations,finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><rect fill="none" height="12" rx="2" stroke="#2E6BFF" stroke-width="2" width="16" x="4" y="6"></rect></svg></div>
+<div class="mod-title">Invoicing</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Sales &amp; project invoices with templates.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Mileage &amp; expenses</li>
+<li>Project billing</li>
+<li>Payment links</li>
+</ul>
+</div>
+</article>
+<!-- Timesheets -->
+<article class="mod" data-tags="hr">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M12 7a3 3 0 110 6 3 3 0 010-6z" fill="#2E6BFF"></path><path d="M4 20c.7-3.8 4.2-6 8-6s7.3 2.2 8 6" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Timesheets</div>
+<span class="mod-tag">HR</span>
+</div>
+<p class="mod-desc">Time capture, approvals and cost rates.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Weekly &amp; daily views</li>
+<li>Approvals and locks</li>
+<li>Cost rates</li>
+</ul>
+</div>
+</article>
+<!-- Permissions -->
+<article class="mod" data-tags="compliance,platform">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" fill="#2E6BFF" r="6"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Permissions</div>
+<span class="mod-tag">Compliance</span>
+</div>
+<p class="mod-desc">Role‑based access with audit logs.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Granular roles</li>
+<li>Approvals &amp; overrides</li>
+<li>Full audit trail</li>
+</ul>
+</div>
+</article>
+<!-- API & Integrations -->
+<article class="mod" data-tags="platform">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 4h16v8H4zM4 12h12v8H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">API &amp; Integrations</div>
+<span class="mod-tag">Platform</span>
+</div>
+<p class="mod-desc">REST API, webhooks and pre‑built connectors.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Open API docs</li>
+<li>Webhooks</li>
+<li>SSO &amp; SCIM</li>
+</ul>
+</div>
+</article>
+<!-- Returns & RMA -->
+<article class="mod" data-tags="operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M4 5h16v4H4zM4 11h16v8H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Returns &amp; RMA</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Returns, replacements and credits.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>RMA labels</li>
+<li>Quality checks</li>
+<li>Refunds</li>
+</ul>
+</div>
+</article>
+<!-- Quality -->
+<article class="mod" data-tags="operations,manufacturing">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M3 12h18M12 3v18" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Quality</div>
+<span class="mod-tag">Operations</span>
+</div>
+<p class="mod-desc">Inspections, NCRs and CAPA workflows.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Inspection plans</li>
+<li>Non‑conformance</li>
+<li>Corrective actions</li>
+</ul>
+</div>
+</article>
+<!-- Fixed Assets -->
+<article class="mod" data-tags="finance">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><path d="M6 4h12v6H6zM4 12h16v8H4z" fill="none" stroke="#2E6BFF" stroke-width="2"></path></svg></div>
+<div class="mod-title">Fixed Assets</div>
+<span class="mod-tag">Finance</span>
+</div>
+<p class="mod-desc">Assets, depreciation and disposals.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Straight‑line &amp; reducing balance</li>
+<li>Asset registers</li>
+<li>Impairments</li>
+</ul>
+</div>
+</article>
+<!-- Customer Portal -->
+<article class="mod" data-tags="sales,operations">
+<div aria-expanded="false" class="mod-head" role="button" tabindex="0">
+<div aria-hidden="true" class="mod-icon"><svg height="22" viewbox="0 0 24 24" width="22"><rect fill="none" height="14" rx="2" stroke="#2E6BFF" stroke-width="2" width="16" x="4" y="5"></rect></svg></div>
+<div class="mod-title">Customer Portal</div>
+<span class="mod-tag">Sales</span>
+</div>
+<p class="mod-desc">Self‑service orders, invoices and support.</p>
+<div aria-hidden="true" class="mod-body">
+<ul>
+<li>Order tracking</li>
+<li>Invoice payments</li>
+<li>Knowledge base</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (approved) -->
+<footer role="contentinfo">
+<div class="container">
+<div class="grid">
+<div>
+<div aria-label="Nexa" class="brand">
+<svg aria-hidden="true" viewbox="0 0 32 32">
+<defs><lineargradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g2)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</div>
+<p class="small">AI‑powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance.</p>
+</div>
+<div>
+<h4>Product</h4>
+<ul>
+<li><a aria-current="page" href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4>Company</h4>
+<ul>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</div>
+</div>
+<p class="small">Made with privacy in mind • Cookies by consent • London, United Kingdom • © <span id="year"></span> Nexa</p>
+</div>
+</footer>
+<script>
+    // Collapsible logic + accessible state
+    document.querySelectorAll('.mod').forEach(m => {
+      const head = m.querySelector('.mod-head');
+      const body = m.querySelector('.mod-body');
+      head.addEventListener('click', () => {
+        body.classList.toggle('open');
+        const expanded = head.getAttribute('aria-expanded') === 'true';
+        head.setAttribute('aria-expanded', String(!expanded));
+        body.setAttribute('aria-hidden', String(expanded));
+      });
+      head.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          head.click();
+        }
+      });
+    });
+
+    // Filtering + search
+    const chips = document.querySelectorAll('.chip');
+    const search = document.getElementById('searchBox');
+    let active = 'all';
+    function applyFilter(){
+      const q = search.value.toLowerCase().trim();
+      document.querySelectorAll('#mods .mod').forEach(card => {
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+        const tagMatch = active === 'all' || tags.includes(active);
+        const textMatch = !q || text.includes(q);
+        card.style.display = (tagMatch && textMatch) ? '' : 'none';
+      });
+    }
+    chips.forEach(c => c.addEventListener('click', () => {
+      chips.forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+      active = c.getAttribute('data-filter');
+      applyFilter();
+    }));
+    search.addEventListener('input', applyFilter);
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

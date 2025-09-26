@@ -1,0 +1,56 @@
+/* Nexa global theme */
+:root {
+  --nexa-primary: #2563eb;
+  --nexa-primary-hover: #1d4ed8;
+  --nexa-primary-ring: rgba(37,99,235,.35);
+  --nexa-bg: #0b0f1a;
+  --nexa-panel: #121826;
+  --nexa-surface: #0f172a;
+  --nexa-text: #e5e7eb;
+  --nexa-text-muted: #9ca3af;
+  --nexa-border: #1f2937;
+  --nexa-success: #10b981;
+  --nexa-warning: #f59e0b;
+  --nexa-danger: #ef4444;
+  --nexa-radius-lg: 14px;
+  --nexa-radius-xl: 20px;
+  --nexa-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+html, body {
+  background: var(--nexa-bg);
+  color: var(--nexa-text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+.nexa-card {
+  background: var(--nexa-panel);
+  border: 1px solid var(--nexa-border);
+  border-radius: var(--nexa-radius-xl);
+  box-shadow: var(--nexa-shadow);
+}
+
+.nexa-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.625rem 1rem; border-radius: var(--nexa-radius-lg);
+  background: var(--nexa-primary); color: #fff; border: 1px solid transparent;
+  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.nexa-btn:hover { background: var(--nexa-primary-hover); }
+.nexa-btn:focus { outline: none; box-shadow: 0 0 0 4px var(--nexa-primary-ring); }
+.nexa-input {
+  width: 100%; padding: 0.625rem 0.75rem; border-radius: 12px;
+  background: var(--nexa-surface); color: var(--nexa-text);
+  border: 1px solid var(--nexa-border);
+}
+.nexa-input::placeholder { color: var(--nexa-text-muted); }
+.nexa-muted { color: var(--nexa-text-muted); }
+
+.nexa-login-wrap {
+  min-height: 100dvh; display: grid; place-items: center; padding: 2rem;
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(37,99,235,.15), transparent 60%),
+              radial-gradient(800px 400px at 0% 100%, rgba(16,185,129,.12), transparent 60%),
+              var(--nexa-bg);
+}
+.nexa-login-card { width: 100%; max-width: 480px; padding: 1.75rem; }
+.nexa-logo { font-weight: 800; letter-spacing: 0.5px; }

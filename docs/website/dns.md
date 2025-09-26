@@ -1,0 +1,3 @@
+- Domain: GoDaddy (unchanged)
+- Hosting: Hostinger static (unchanged)
+- How to confirm DNS pointing and purge caches/CDN if used

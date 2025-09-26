@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa ERP — Pricing</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
+.logo img{height:28px;width:auto;display:block}
+.brand-text{font-weight:800;color:var(--nexa-navy)}
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s ease box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Hero */
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.lead{margin:6px 0 10px;color:#334155}
+
+/* Pricing grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden}
+.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.card h3{margin:6px 0 6px;color:var(--nexa-navy);font-size:20px}
+.card p,.card li{font-size:15px}
+.price{font-size:28px;font-weight:800;margin:6px 0 8px;color:var(--nexa-navy)}
+.meta{font-size:14px;color:#475569;margin:0 0 8px}
+ul{margin:0 0 10px 18px;padding:0}
+.meta-row{display:flex;gap:10px;align-items:center;margin:8px 0;color:#0F2747;flex-wrap:wrap}
+.badge-kv{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:#fff;font-size:14px;line-height:1.2}
+.badge-kv svg{flex:0 0 auto}
+.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.add-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px}
+.add-card h3{margin:0 0 6px;color:var(--nexa-navy)}
+.add-card ul{margin-left:18px}
+li{margin:4px 0}
+.card .spacer{flex:1}
+.card .actions{display:flex;gap:10px;flex-wrap:wrap}
+.tip{font-size:13px;color:#334155;background:#F3F6FF;border:1px solid #DFE7FF;border-radius:8px;padding:8px;margin-top:6px}
+
+/* Expand/collapse behaviour */
+.details{max-height:0;overflow:hidden;transition:max-height .35s ease;margin-top:8px;padding-top:4px;border-top:1px dashed #E6EAF2}
+.card.expanded .details{max-height:5000px}
+.togglebar{margin-top:8px;display:flex;justify-content:flex-start}
+.toggle-btn{font-size:14px;color:#2E6BFF;background:#fff;border:1px solid #2E6BFF;padding:10px 12px;border-radius:10px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:.2s ease background,.2s ease transform,.2s ease box-shadow}
+.toggle-btn:hover,.toggle-btn:focus{background:#F3F6FF;transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.15)}
+
+/* CTA band */
+.cta{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0}
+
+/* Add-ons */
+.addons{margin-top:8px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
+.addons h2{color:var(--nexa-navy);margin:0 0 10px}
+.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.add-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color}
+.add-card:hover{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+.add-card ul{margin-left:18px}
+
+/* FAQ */
+.faq{margin-top:14px}
+.faq h2{color:var(--nexa-navy);margin:0 0 8px}
+.faq h3{color:var(--nexa-navy);margin:10px 0 6px}
+.faq p{margin:0 0 8px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.small{font-size:14px;color:#4b5563}
+
+@media (max-width:1200px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.footer .cols{grid-template-columns:1fr}.cta{flex-direction:column;align-items:flex-start}.more{display:none}}
+</style>
+<style id="nexa-pricing-expand">.card{cursor:pointer;overflow:hidden}.card .features{max-height:220px;overflow:hidden;transition:max-height .28s ease}.card.expanded .features{max-height:2000px}.card .hint{display:none}.card.expanded .hint{display:block}</style></head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <img src="/logo-nexa.png" alt="Nexa logo"/>
+      <span class="brand-text">Nexa ERP</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/modules">Modules</a>
+      <a href="/integrations">Integrations</a>
+      <a href="/security">Security &amp; Compliance</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="/login">Login</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Clear pricing that grows with your business</h1>
+  <p class="lead">Simple monthly pricing. Plans start from £99 per month. Choose the plan that fits your team and modules. Add-ons can be purchased any time.</p>
+
+  <section class="grid" id="plans">
+    <!-- Starter -->
+    <article class="card" tabindex="0">
+      <h3>Starter plan</h3>
+      <div class="price">£99<span style="font-weight:500;font-size:16px"> / month</span></div>
+      
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong>Users:</strong> 2 included</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5 .7-3.7 3.6.9 5.2L12 15.8 6.3 17.5l.9-5.2L3.5 8.7 8.5 8 12 3z" stroke="currentColor" stroke-width="2" fill="none"/></svg><strong>AI Tokens:</strong> 25,000 per month</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="2"/><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg><strong>API Calls:</strong> 2,000 per month</span></div>
+
+      <div class="details">
+        <ul>
+          <li>Core Dashboard and Artificial Intelligence Assist (basic prompts only)</li>
+          <li>Finance: General Ledger; Accounts Payable; Accounts Receivable; Bank and Cash</li>
+          <li>Inventory: Items and Stock Movements (single warehouse)</li>
+          <li>Sales: Basic quotations and sales orders</li>
+          <li>Purchasing: Simple purchase orders</li>
+          <li>Projects: Task tracking (basic)</li>
+          <li>Connectors: Microsoft 365 (live keys required), Google Workspace (live keys required)</li>
+          <li>Mobile and Progressive Web App access (installable)</li>
+          <li>Basic reporting and comma separated values exports</li>
+          <li>General Data Protection Regulation Tools and Audit (essential)</li>
+          <li><strong>Not included:</strong> Value Added Tax Making Tax Digital, Point of Sale, Manufacturing, Advanced Warehouse Management System, Predictive analytics, Automated Backups and Disaster Recovery</li>
+        </ul>
+      </div>
+      <div class="spacer"></div>
+      <div class="togglebar"><button type="button" class="toggle-btn">View details</button></div>
+    </article>
+
+    <!-- Standard -->
+    <article class="card" tabindex="0">
+      <h3>Standard plan</h3>
+      <div class="price">£249<span style="font-weight:500;font-size:16px"> / month</span></div>
+      
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong>Users:</strong> 5 included</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5 .7-3.7 3.6.9 5.2L12 15.8 6.3 17.5l.9-5.2L3.5 8.7 8.5 8 12 3z" stroke="currentColor" stroke-width="2" fill="none"/></svg><strong>AI Tokens:</strong> 100,000 per month</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="2"/><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg><strong>API Calls:</strong> 10,000 per month</span></div>
+
+      <div class="details">
+        <ul>
+          <li>Role-based access control and Segregation of Duties, multi-entity</li>
+          <li>Finance: General Ledger, Accounts Payable, Accounts Receivable, Bank and Cash, Bank Reconciliation, Value Added Tax (Making Tax Digital — live with HM Revenue and Customs keys), Fixed Assets, Period Close, Foreign Exchange Revaluation</li>
+          <li>Inventory and Warehouse Management: Items and Lots, Warehouses, Stock Movements</li>
+          <li>Sales and Purchasing: Quotations, Sales Orders, Purchase Orders</li>
+          <li>Projects: core tasks and costing</li>
+          <li>Banking: Stripe Payments and Billing live; Open Banking (TrueLayer keys)</li>
+          <li>Dashboards and comma separated values export</li>
+          <li>Mobile Progressive Web App (installable, offline synchronisation, coming soon)</li>
+          <li>Connectors: Microsoft 365 (Single Sign-On and basic), Google Workspace (Single Sign-On and basic), Stripe, HM Revenue and Customs Value Added Tax</li>
+        </ul>
+        <div class="tip">Best for small and medium sized enterprises needing finance with stock control, and sales and purchasing basics.</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="togglebar"><button type="button" class="toggle-btn">View details</button></div>
+    </article>
+
+    <!-- Professional -->
+    <article class="card" tabindex="0">
+      <h3>Professional plan</h3>
+      <div class="price">£799<span style="font-weight:500;font-size:16px"> / month</span></div>
+      
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong>Users:</strong> 20 included</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5 .7-3.7 3.6.9 5.2L12 15.8 6.3 17.5l.9-5.2L3.5 8.7 8.5 8 12 3z" stroke="currentColor" stroke-width="2" fill="none"/></svg><strong>AI Tokens:</strong> 500,000 per month</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="2"/><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg><strong>API Calls:</strong> 50,000 per month</span></div>
+
+      <div class="details">
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Advanced Warehouse Management System: Advanced Shipping Notices, Wave Planning, Third Party Logistics, Cycle Counting, Quality (Holds and Corrective and Preventive Actions)</li>
+          <li>Manufacturing: Bills of Materials and Routings, Work Orders, Material Requirements Planning, Capacity Planning, Maintenance, Product Lifecycle Management</li>
+          <li>Projects: costing and billing</li>
+          <li>Analytics with drill-downs</li>
+          <li>Backups and Disaster Recovery</li>
+          <li>Point of Sale: Stripe Terminal checkout, receipts (HyperText Markup Language and Portable Document Format), offline park then synchronise, reconciliation, General Ledger postings, X and Z reports</li>
+          <li>Artificial Intelligence Assist basics (Artificial Intelligence Insights panel, Quick Links)</li>
+        </ul>
+        <div class="tip">Best for growing distributors and manufacturers needing production and point of sale.</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="togglebar"><button type="button" class="toggle-btn">View details</button></div>
+    </article>
+
+    <!-- Enterprise -->
+    <article class="card" tabindex="0">
+      <h3>Enterprise plan</h3>
+      <div class="price">£1,999<span style="font-weight:500;font-size:16px"> / month</span></div>
+      
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong>Users:</strong> Unlimited</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5 .7-3.7 3.6.9 5.2L12 15.8 6.3 17.5l.9-5.2L3.5 8.7 8.5 8 12 3z" stroke="currentColor" stroke-width="2" fill="none"/></svg><strong>AI Tokens:</strong> 2,000,000 per month</span></div>
+      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="2"/><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg><strong>API Calls:</strong> 250,000 per month</span></div>
+
+      <div class="details">
+        <ul>
+          <li>Everything in Professional</li>
+          <li>Advanced Planning and Scheduling</li>
+          <li>Intercompany and Consolidation</li>
+          <li>Multi-Currency and Multi-Entity</li>
+          <li>Enterprise dashboards and ad hoc analysis</li>
+          <li>Observability and Security Information and Event Management export</li>
+          <li>Strict Segregation of Duties and Multi-Factor Authentication enforced</li>
+          <li>Artificial Intelligence and Automation: Optical Character Recognition and Document Artificial Intelligence, Predictive Scenarios, Workflows</li>
+          <li>Admin dashboard with quotas and usage monitoring</li>
+          <li>Priority support and onboarding workshops</li>
+        </ul>
+        <div class="tip">Best for multi-entity enterprises needing deep compliance, analytics and Artificial Intelligence.</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="togglebar"><button type="button" class="toggle-btn">View details</button></div>
+    </article>
+  </section>
+
+  <!-- Add‑On Packs -->
+  <section class="addons">
+    <h2>Add-On Packs (Optional)</h2>
+    <div class="add-grid">
+      <div class="add-card">
+        <h3>AI Tokens</h3>
+        <ul>
+          <li>+100,000 tokens → £10</li>
+          <li>+500,000 tokens → £40</li>
+          <li>+1,000,000 tokens → £70</li>
+        </ul>
+      </div>
+      <div class="add-card">
+        <h3>API Calls</h3>
+        <ul>
+          <li>+10,000 calls → £15</li>
+          <li>+50,000 calls → £60</li>
+          <li>+100,000 calls → £100</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin:6px 0 0">Add-ons do not expire until used. They carry over month to month. Purchases are made through Stripe Billing and appear in the Admin usage panel.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <h3>How is pricing calculated?</h3>
+    <p>We tailor your price based on users, modules and usage. Starter plans begin at £99 per month.</p>
+    <h3>Can I add modules later?</h3>
+    <p>Yes. You can add modules or increase users as you grow.</p>
+    <h3>How do payments work?</h3>
+    <p>Invoices are raised and can be paid by card through Stripe. Bank transfer is available on request.</p>
+    <h3>Need a formal quote?</h3>
+    <p>Email <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> or use the form on our Contact page.</p>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div>
+      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">Not sure which plan fits?</h3>
+      <p style="margin:0">Tell us about your goals and team size. We will recommend a plan and give a clear quote without surprises.</p>
+    </div>
+    <a class="btn primary" href="/contact#pricing">Request a quote</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="add-grid">
+      <div>
+        <h4>Nexa ERP</h4>
+        <p class="small">AI-powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance. Contact: info@chiefaa.com</p>
+        <p class="small">Contact: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> · </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <p><a href="/modules">Modules</a><br><a href="/pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <p><a href="/about">About</a><br><a href="/about#partners">Partners</a></p>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <p><a href="/resources/guides">Guides</a><br><a href="/resources/release-notes">Release Notes</a><br><a href="/resources/faq">Frequently Asked Questions</a></p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:16px">© Nexa ERP — All rights reserved · <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/cookies">Cookies</a> · <a href="/legal/accessibility">Accessibility</a></p>
+  </div>
+</footer>
+
+<script>
+
+// Expand on click/keyboard; only one open at a time
+const cards = Array.from(document.querySelectorAll('.card'));
+function toggleCard(card){
+  const isOpen = card.classList.contains('expanded');
+  cards.forEach(c => { c.classList.remove('expanded'); c.setAttribute('aria-expanded','false'); });
+  if(!isOpen){ card.classList.add('expanded'); card.setAttribute('aria-expanded','true'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+}
+
+cards.forEach(card => {
+  card.setAttribute('role','button');
+  card.setAttribute('aria-expanded','false');
+  card.setAttribute('aria-controls','details');
+  card.addEventListener('click', (e) => {
+    // Allow inner button clicks to work without toggling
+    if((e.target as HTMLElement).closest('.actions')) return;
+    toggleCard(card);
+  });
+  card.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggleCard(card);
+    }
+  });
+});
+
+// Expand on click/keyboard for accessibility (mobile support)
+
+// Also toggle when clicking the 'View details' button
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const card = (e.target as HTMLElement).closest('.card');
+    if(card){
+      const isOpen = card.classList.contains('expanded');
+      cards.forEach(c => { c.classList.remove('expanded'); c.setAttribute('aria-expanded','false'); });
+      if(!isOpen){ card.classList.add('expanded'); card.setAttribute('aria-expanded','true'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+    }
+  });
+});
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('expanded'));
+  card.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('expanded'); }
+  });
+});
+</script>
+<script id="nexa-pricing-expand-js">(function(){try{var cs=[].slice.call(document.querySelectorAll(".card"));cs.forEach(function(c){c.addEventListener("click",function(e){var t=e.target;if(t.closest("a,button,input,textarea,select"))return;c.classList.toggle("expanded")})})}catch(e){console&&console.warn&&console.warn("pricing expand",e)}})();</script></body>
+</html>

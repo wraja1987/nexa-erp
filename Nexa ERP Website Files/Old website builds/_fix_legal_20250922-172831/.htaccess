@@ -1,0 +1,156 @@
+# Compression
+<IfModule mod_deflate.c>
+ AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+# --- Nexa clean URL canonical redirects (modules etc) ---
+RewriteRule ^modules/modules\.html$ /modules/ [R=301,L]
+RewriteRule ^modules/index\.html$ /modules/ [R=301,L]
+RewriteRule ^modules\.html$ /modules/ [R=301,L]
+RewriteRule ^integrations/integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations/index\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^security/security\.html$ /security/ [R=301,L]
+RewriteRule ^security/index\.html$ /security/ [R=301,L]
+RewriteRule ^security\.html$ /security/ [R=301,L]
+RewriteRule ^pricing/pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing/index\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^resources/resources\.html$ /resources/ [R=301,L]
+RewriteRule ^resources/index\.html$ /resources/ [R=301,L]
+RewriteRule ^resources\.html$ /resources/ [R=301,L]
+RewriteRule ^about/about\.html$ /about/ [R=301,L]
+RewriteRule ^about/index\.html$ /about/ [R=301,L]
+RewriteRule ^about\.html$ /about/ [R=301,L]
+RewriteRule ^contact/contact\.html$ /contact/ [R=301,L]
+RewriteRule ^contact/index\.html$ /contact/ [R=301,L]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+# --- End Nexa clean URL canonical redirects ---
+</IfModule>
+# Caching
+<IfModule mod_expires.c>
+ ExpiresActive On
+ ExpiresByType text/html "access plus 60 seconds"
+ ExpiresByType text/css "access plus 1 year"
+ ExpiresByType application/javascript "access plus 1 year"
+ ExpiresByType image/avif "access plus 1 year"
+ ExpiresByType image/webp "access plus 1 year"
+ ExpiresByType image/png "access plus 1 year"
+ ExpiresByType image/jpeg "access plus 1 year"
+ ExpiresDefault "access plus 1 month"
+# --- Nexa clean URL canonical redirects (modules etc) ---
+RewriteRule ^modules/modules\.html$ /modules/ [R=301,L]
+RewriteRule ^modules/index\.html$ /modules/ [R=301,L]
+RewriteRule ^modules\.html$ /modules/ [R=301,L]
+RewriteRule ^integrations/integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations/index\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^security/security\.html$ /security/ [R=301,L]
+RewriteRule ^security/index\.html$ /security/ [R=301,L]
+RewriteRule ^security\.html$ /security/ [R=301,L]
+RewriteRule ^pricing/pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing/index\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^resources/resources\.html$ /resources/ [R=301,L]
+RewriteRule ^resources/index\.html$ /resources/ [R=301,L]
+RewriteRule ^resources\.html$ /resources/ [R=301,L]
+RewriteRule ^about/about\.html$ /about/ [R=301,L]
+RewriteRule ^about/index\.html$ /about/ [R=301,L]
+RewriteRule ^about\.html$ /about/ [R=301,L]
+RewriteRule ^contact/contact\.html$ /contact/ [R=301,L]
+RewriteRule ^contact/index\.html$ /contact/ [R=301,L]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+# --- End Nexa clean URL canonical redirects ---
+</IfModule>
+# Security headers
+<IfModule mod_headers.c>
+ Header set X-Content-Type-Options "nosniff"
+ Header set X-Frame-Options "SAMEORIGIN"
+ Header set Referrer-Policy "strict-origin-when-cross-origin"
+ Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+ Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+ Header set Content-Security-Policy "default-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+# --- Nexa clean URL canonical redirects (modules etc) ---
+RewriteRule ^modules/modules\.html$ /modules/ [R=301,L]
+RewriteRule ^modules/index\.html$ /modules/ [R=301,L]
+RewriteRule ^modules\.html$ /modules/ [R=301,L]
+RewriteRule ^integrations/integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations/index\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^security/security\.html$ /security/ [R=301,L]
+RewriteRule ^security/index\.html$ /security/ [R=301,L]
+RewriteRule ^security\.html$ /security/ [R=301,L]
+RewriteRule ^pricing/pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing/index\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^resources/resources\.html$ /resources/ [R=301,L]
+RewriteRule ^resources/index\.html$ /resources/ [R=301,L]
+RewriteRule ^resources\.html$ /resources/ [R=301,L]
+RewriteRule ^about/about\.html$ /about/ [R=301,L]
+RewriteRule ^about/index\.html$ /about/ [R=301,L]
+RewriteRule ^about\.html$ /about/ [R=301,L]
+RewriteRule ^contact/contact\.html$ /contact/ [R=301,L]
+RewriteRule ^contact/index\.html$ /contact/ [R=301,L]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+# --- End Nexa clean URL canonical redirects ---
+</IfModule>
+# HTTPS redirect
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+ErrorDocument 404 /errors/404.html
+ErrorDocument 500 /errors/500.html
+RedirectMatch 301 ^/about.html$ /about/about.html
+RedirectMatch 301 ^/resources.html$ /resources/resources.html
+RedirectMatch 301 ^/modules.html$ /modules/modules.html
+RedirectMatch 301 ^/pricing.html$ /pricing/pricing.html
+RedirectMatch 301 ^/security.html$ /security/security.html
+RedirectMatch 301 ^/contact.html$ /contact/contact.html
+
+
+# --- Nexa clean URLs & homepage mapping (2025-09-21) ---
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Send site root to /homepage/ (single source of truth)
+RewriteRule ^$ homepage/ [R=302,L]
+
+# Prefer directory index if it exists (e.g., /homepage -> /homepage/index.html)
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.+?)/?$ $1/index.html [L]
+
+# Support extensionless .html (e.g., /about -> /about.html)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Canonicalise /homepage/homepage.html -> /homepage/
+RewriteRule ^homepage/homepage\.html$ /homepage/ [R=301,L]
+# --- Nexa clean URL canonical redirects (modules etc) ---
+RewriteRule ^modules/modules\.html$ /modules/ [R=301,L]
+RewriteRule ^modules/index\.html$ /modules/ [R=301,L]
+RewriteRule ^modules\.html$ /modules/ [R=301,L]
+RewriteRule ^integrations/integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations/index\.html$ /integrations/ [R=301,L]
+RewriteRule ^integrations\.html$ /integrations/ [R=301,L]
+RewriteRule ^security/security\.html$ /security/ [R=301,L]
+RewriteRule ^security/index\.html$ /security/ [R=301,L]
+RewriteRule ^security\.html$ /security/ [R=301,L]
+RewriteRule ^pricing/pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing/index\.html$ /pricing/ [R=301,L]
+RewriteRule ^pricing\.html$ /pricing/ [R=301,L]
+RewriteRule ^resources/resources\.html$ /resources/ [R=301,L]
+RewriteRule ^resources/index\.html$ /resources/ [R=301,L]
+RewriteRule ^resources\.html$ /resources/ [R=301,L]
+RewriteRule ^about/about\.html$ /about/ [R=301,L]
+RewriteRule ^about/index\.html$ /about/ [R=301,L]
+RewriteRule ^about\.html$ /about/ [R=301,L]
+RewriteRule ^contact/contact\.html$ /contact/ [R=301,L]
+RewriteRule ^contact/index\.html$ /contact/ [R=301,L]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+# --- End Nexa clean URL canonical redirects ---
+</IfModule>
+# --- End Nexa rules ---

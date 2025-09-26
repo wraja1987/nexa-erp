@@ -1,0 +1,10 @@
+{
+  "id": "settings-connectors.api-integrations",
+  "title": "API & Integrations",
+  "order": 131,
+  "actions": [
+    { "label": "Create API Key" },
+    { "label": "Create Webhook" }
+  ],
+  "icon": null
+}

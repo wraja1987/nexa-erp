@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa ERP — Contact Us</title>
+<style>
+:root{
+  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
+  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+
+/* Header */
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
+.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
+.logo img{height:28px;width:auto;display:block}
+.brand-text{font-weight:800;color:var(--nexa-navy)}
+.nav{display:flex;gap:16px;flex-wrap:wrap}
+.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
+.header-cta{margin-left:auto;display:flex;gap:10px}
+.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s box-shadow}
+.btn.primary{background:var(--nexa-blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--nexa-blue)}
+.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
+
+/* Hero */
+h1{color:var(--nexa-navy);margin:8px 0 0}
+.lead{margin:6px 0 10px;color:#334155}
+
+/* Layout */
+.wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:12px}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color}
+.card:hover{box-shadow:0 14px 38px rgba(46,107,255,.16);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
+
+/* Form */
+label{display:block;font-weight:600;margin:8px 0 4px;color:var(--nexa-navy)}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(46,107,255,.45);box-shadow:0 0 0 3px rgba(46,107,255,.15)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.actions{display:flex;gap:10px;margin-top:12px}
+.notice{font-size:14px;color:#475569;margin-top:6px}
+.small{font-size:13px;color:#64748b}
+.required{color:#ef4444}
+
+/* Info */
+.info h3{margin:6px 0 8px;color:var(--nexa-navy)}
+.info p{margin:0 0 6px}
+.info-list{margin:0;padding-left:18px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
+.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.footer a{color:var(--nexa-navy);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+/* Responsive */
+@media (max-width:980px){.wrap{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <img src="/logo-nexa.png" alt="Nexa logo"/>
+      <span class="brand-text">Nexa ERP</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/modules">Modules</a>
+      <a href="/integrations">Integrations</a>
+      <a href="/security">Security &amp; Compliance</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+      <a href="/about">About</a>
+      <a href="/contact" aria-current="page">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn primary" href="/login">Login</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Contact Us</h1>
+  <p class="lead">Tell us about your business and what you want to achieve. We will reply quickly with next steps.</p>
+
+  <div class="wrap">
+    <!-- Form -->
+    <section class="card" aria-labelledby="contact-form-title">
+      <h2 id="contact-form-title" style="margin:0 0 8px;color:var(--nexa-navy)">Book a demo or ask a question</h2>
+      <form id="contact-form" novalidate>
+        <div class="grid">
+          <div>
+            <label for="firstName">First name <span class="required">*</span></label>
+            <input id="firstName" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div>
+            <label for="lastName">Last name <span class="required">*</span></label>
+            <input id="lastName" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="email">Email <span class="required">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="company">Company <span class="required">*</span></label>
+            <input id="company" name="company" autocomplete="organization" required>
+          </div>
+          <div>
+            <label for="employees">Company size</label>
+            <select id="employees" name="employees">
+              <option value="">Please select</option>
+              <option>1–10</option>
+              <option>11–50</option>
+              <option>51–200</option>
+              <option>201–500</option>
+              <option>501–2000</option>
+              <option>2000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="topic">What would you like help with?</label>
+            <select id="topic" name="topic">
+              <option>Book a demo</option>
+              <option>Pricing</option>
+              <option>Modules</option>
+              <option>Integrations</option>
+              <option>General question</option>
+            </select>
+          </div>
+          <div>
+            <label for="timeline">Expected timeline</label>
+            <select id="timeline" name="timeline">
+              <option>Just researching</option>
+              <option>This quarter</option>
+              <option>Within 6 months</option>
+              <option>Urgent</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="message">How can we help? <span class="required">*</span></label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+
+        <div style="margin-top:6px">
+          <label class="small"><input type="checkbox" id="consent" required> I agree to be contacted about my enquiry.</label>
+          <div class="notice">We keep your data safe and only use it to handle your enquiry.</div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" type="submit">Send message</button>
+          </div>
+        </form>
+    </section>
+
+    <!-- Info panel -->
+    <aside class="card info" aria-labelledby="info-title">
+      <h3 id="info-title">How we work</h3>
+      <p>We respond quickly with next steps and, if useful, offer a short discovery call.</p>
+      <ul class="info-list">
+        <li>Understand your goals and current systems.</li>
+        <li>Suggest a plan and modules to start with.</li>
+        <li>Show a tailored demonstration of Nexa ERP.</li>
+        <li>Send a clear quote that matches your needs.</li>
+      </ul>
+
+      <h3 style="margin-top:14px">Contact details</h3>
+      <p>Email: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a></p>
+      </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>Nexa ERP</h4>
+        <p class="small">AI-powered finance, operations and manufacturing — with clear access controls, full audit history, and practical compliance. Contact: info@chiefaa.com</p>
+        <p class="small">Contact: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> · </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <p><a href="/modules">Modules</a><br><a href="/pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <p><a href="/about">About</a><br><a href="/about#partners">Partners</a></p>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <p><a href="/resources/guides">Guides</a><br><a href="/resources/release-notes">Release Notes</a><br><a href="/resources/faq">Frequently Asked Questions</a></p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:16px">© Nexa ERP — All rights reserved · <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/cookies">Cookies</a> · <a href="/legal/accessibility">Accessibility</a></p>
+  </div>
+</footer>
+
+<script>
+// Simple client-side validation + success message (no backend wired)
+const form = document.getElementById('contact-form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const required = ['firstName','lastName','email','company','message','consent'];
+  let ok = true;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if((el.type === 'checkbox' && !el.checked) || (!el.value)){
+      el.focus(); ok = false;
+    }
+  });
+  if(!ok) return;
+  form.innerHTML = '<h3 style="color:var(--nexa-navy)">Thank you — your message has been sent.</h3><p>We will get back to you shortly. If this is urgent, email <a href="mailto:info@chiefaa.com">info@chiefaa.com</a>.</p>';
+});
+</script>
+</body>
+</html>

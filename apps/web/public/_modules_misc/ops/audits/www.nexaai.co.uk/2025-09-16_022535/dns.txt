@@ -1,0 +1,13 @@
+# A
+nexaai.co.uk.
+148.230.120.100
+# AAAA
+nexaai.co.uk.
+# CNAME
+nexaai.co.uk.
+# NS
+nexaai.co.uk.
+ns38.domaincontrol.com.
+ns37.domaincontrol.com.
+# TXT
+nexaai.co.uk.

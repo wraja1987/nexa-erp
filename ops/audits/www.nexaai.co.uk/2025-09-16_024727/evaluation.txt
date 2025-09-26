@@ -1,0 +1,5 @@
+=== Evaluation (targets)
+  static.cache: public, max-age=31536000, immutable   -> FAIL
+  html.cache:   s-maxage=60, stale-while-revalidate=300     -> FAIL
+  api.cache:    no-store -> FAIL
+  api.cors:     https://www.nexaai.co.uk  -> FAIL

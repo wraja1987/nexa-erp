@@ -66,7 +66,7 @@
     "jobs:run:once": "pnpm -C packages/jobs build && pnpm -C packages/jobs run:once",
     "backup:run": "tsx packages/jobs/backup.ts",
     "dr:drill": "tsx packages/jobs/restore-check.ts",
-    "dr:backup": "tsx tools/drill.ts backup",
+    "dr:backup": "bash ops/dr/backup.sh",
     "dr:restore": "tsx tools/drill.ts restore",
     "seed:phase7": "tsx scripts/seeds/seed-phase7.ts",
     "make:previews": "tsx scripts/make_previews.ts",
@@ -84,7 +84,13 @@
     "audit:tail": "tsx apps/api/src/lib/audit/tail.ts",
     "gdpr:check": "tsx tools/gdpr_pecr_check.ts",
     "sec:verify": "tsx tools/sec_verify.ts",
-    "payments:e2e": "tsx scripts/e2e/stripe-pos-e2e.ts"
+    "payments:e2e": "tsx scripts/e2e/stripe-pos-e2e.ts",
+    "h:provision": "tsx ops/users/provision.ts",
+    "h:reset-demo": "tsx ops/users/reset_demo.ts",
+    "h:quotas-sim": "tsx ops/users/quotas_check.ts",
+    "h:rbac": "tsx ops/users/rbac_verify.ts",
+    "h:audit": "tsx scripts/audit-stage-h.ts",
+    "dr:restore:demo": "bash ops/dr/restore_demo.sh"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
@@ -151,9 +157,16 @@
   "dependencies": {
     "@prisma/client": "^6.14.0",
     "bcryptjs": "^3.0.2",
+    "next": "^15.5.3",
     "nodemailer": "^6",
     "pg": "^8.16.3",
     "redis": "^5.8.1",
     "stripe": "^16.12.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "18.3.1",
+      "react-dom": "18.3.1"
+    }
   }
 }

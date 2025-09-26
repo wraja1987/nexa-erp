@@ -1,0 +1,8 @@
+flowchart LR
+Browser-->Proxy-->Web(Next.js)
+Web-->API(Node)
+API-->DB[(Postgres)]
+API-->Cache[(Redis)]
+API-->Stripe
+API-->OpenBanking
+API-->HMRC

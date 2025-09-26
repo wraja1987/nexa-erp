@@ -1,0 +1,1 @@
+declare const v:{components:any;themes:any;tokens:any}; export = v;

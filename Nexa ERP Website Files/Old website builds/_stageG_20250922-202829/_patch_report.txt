@@ -1,0 +1,9 @@
+Nexa ZIP patch run: Sun Sep 21 02:23:46 BST 2025
+• created assets/site.css (placeholder)
+• created assets/site.js (placeholder)
+• appended small a11y/contrast overrides to assets/site.css
+• index.html: duplicate id fix applied (if needed)
+• modules/modules.html: added body.nexa-modules
+• added status/ping.txt
+• .htaccess: added safe 301 redirects for legacy flat URLs
+• contact/send.php: ensured We've copy
