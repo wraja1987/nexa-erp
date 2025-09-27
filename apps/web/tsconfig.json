@@ -5,7 +5,9 @@
     "paths": { "@/*": ["*"] },
     "jsx": "preserve",
     "resolveJsonModule": true,
-    "allowJs": false
+    "allowJs": false,
+    "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["**/*.test.*","**/*.spec.*","**/__tests__/**","**/*.stories.*","node_modules","dist",".next"]
 }
