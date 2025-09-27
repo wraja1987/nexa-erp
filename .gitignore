@@ -16,3 +16,15 @@ node_modules/
 .env.local
 *.env.local
 apps/web/.env.local
+# === build artifacts & caches ===
+**/.next/
+.next/
+**/dist/
+**/build/
+**/out/
+**/.turbo/
+**/.cache/
+# === zips & deploy bundles ===
+artifacts/
+ops/site-backups/
+*.zip
