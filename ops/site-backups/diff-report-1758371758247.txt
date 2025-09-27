@@ -1,0 +1,58 @@
+ADDED	.DS_Store
+ADDED	.htaccess
+ADDED	Old Files/.DS_Store
+ADDED	Old Files/Wrong designs/nexa-website-mobile-compact-header-PATCHED.zip
+ADDED	Old Files/Wrong designs/nexa-website-mobile-compact-header.zip
+ADDED	Old Files/Wrong designs/nexa-website-mobile-header-fixed.zip
+ADDED	Old Files/nexa-mobile-header-patch.zip
+ADDED	Old Files/nexa-website-header-fixed.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250919.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250919c.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250919d.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250919e.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-cta-unified.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-DESKTOP-RESTORED-v7.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-DESKTOPFIX.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-FLUSH.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-GAP-GONE.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-GAP-REMOVED.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-STRICT.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-TIGHT.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-final.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-v2.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header-v3.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-header.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-logo-added.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-logo-ai-ENFORCED.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-only-v5.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-only-v6.zip
+ADDED	Old Files/nexa-website-hostinger-UPDATED-20250920-mobile-spacing-ai-FIX.zip
+ADDED	Old Files/nexa_mobile_header_mockup.avif
+ADDED	Old Files/nexa_mobile_header_mockup.png
+ADDED	Old Files/nexa_mobile_header_mockup.webp
+ADDED	about/about.html
+ADDED	contact/.DS_Store
+ADDED	contact/contact.html
+ADDED	contact/send.php
+ADDED	contact/sent.html
+ADDED	homepage/.DS_Store
+ADDED	homepage/homepage.html
+ADDED	homepage/nexa-ai-engine.avif
+ADDED	homepage/nexa-ai-engine.png
+ADDED	homepage/nexa-ai-engine.webp
+ADDED	homepage/nexa-erp-image.avif
+ADDED	homepage/nexa-erp-image.png
+ADDED	homepage/nexa-erp-image.png.avif
+ADDED	homepage/nexa-erp-image.png.jpg
+ADDED	homepage/nexa-erp-image.png.webp
+ADDED	homepage/nexa-erp-image.webp
+ADDED	integrations/integrations.html
+ADDED	modules/.DS_Store
+ADDED	modules/modules.html
+ADDED	nexa-website-hostinger-UPDATED-20250920-mobile-header-COMPACT.zip
+ADDED	pricing/.DS_Store
+ADDED	pricing/pricing.html
+ADDED	resources/.DS_Store
+ADDED	resources/resources.html
+ADDED	security/.DS_Store
+ADDED	security/security.html

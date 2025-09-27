@@ -1,0 +1,23 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/compliance/cookies/page": "app/compliance/cookies/page.js",
+  "/compliance/accessibility/page": "app/compliance/accessibility/page.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/compliance/security/page": "app/compliance/security/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/compliance/privacy/page": "app/compliance/privacy/page.js",
+  "/docs/page": "app/docs/page.js",
+  "/legal/cookies/page": "app/legal/cookies/page.js",
+  "/features/page": "app/features/page.js",
+  "/legal/page": "app/legal/page.js",
+  "/industries/page": "app/industries/page.js",
+  "/legal/privacy/page": "app/legal/privacy/page.js",
+  "/legal/terms/page": "app/legal/terms/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/solutions/page": "app/solutions/page.js",
+  "/solutions/[slug]/page": "app/solutions/[slug]/page.js",
+  "/pricing/page": "app/pricing/page.js"
+}
