@@ -16,3 +16,15 @@ node_modules/
 .env.local
 *.env.local
 apps/web/.env.local
+# Hostinger website zips and other bundles
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+# Large media not intended for git history
+*.mp4
+*.mov
+*.avi
+*.mkv
