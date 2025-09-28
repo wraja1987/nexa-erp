@@ -1,1 +1,15 @@
-{ "title": "Inventory & WMS", "order": 20, "actions": [{ "label": "Add Item" }, { "label": "Reorder" }] }
+{
+  "title": "Inventory & WMS",
+  "order": 20,
+  "actions": [
+    {
+      "label": "Add Item"
+    },
+    {
+      "label": "Reorder"
+    }
+  ],
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
+}

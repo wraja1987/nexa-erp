@@ -62,30 +62,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing cycle counting KPIs this week.",
-        "tags": [
-          "Cycle"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "start-count",
-        "label": "Start Count",
-        "href": "/app/inventory-wms/cycle-counting"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Cycle Counts",
     "columns": [

@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing installable pwa KPIs this week.",
-        "tags": [
-          "Installable"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Installable PWA",
-        "href": "/app/mobile-pwa/installable-pwa"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "content": {
     "type": "list",
     "title": "Install",

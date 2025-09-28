@@ -62,30 +62,8 @@
       "value": 2
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing period close KPIs this week.",
-        "tags": [
-          "Period"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-close",
-        "label": "Open Close",
-        "href": "/app/finance/period-close"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Close Tasks",
     "items": [

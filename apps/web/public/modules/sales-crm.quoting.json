@@ -1,8 +1,6 @@
 {
-  "title": ,
-  "order": 36,
-  "actions": [
-    { "label":  },
-    { "label":  }
-  ]
+  "title": "Sales / Crm.quoting",
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

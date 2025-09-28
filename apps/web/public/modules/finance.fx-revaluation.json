@@ -62,30 +62,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing fx revaluation KPIs this week.",
-        "tags": [
-          "FX"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "run-reval",
-        "label": "Run Revaluation",
-        "href": "/app/finance/fx-revaluation"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Positions",
     "columns": [

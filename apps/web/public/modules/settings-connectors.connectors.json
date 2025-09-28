@@ -61,30 +61,8 @@
       "value": 38
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing connectors KPIs this week.",
-        "tags": [
-          "Connectors"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "add-conn",
-        "label": "Add Connector",
-        "href": "/app/settings-connectors/connectors"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Connectors",
     "columns": [

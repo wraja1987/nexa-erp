@@ -60,30 +60,8 @@
       "value": 3
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "mo1",
-        "icon": "Mobile",
-        "message": "Crash rate decreased 12% week-over-week.",
-        "tags": [
-          "Mobile"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "docs",
-        "label": "Open Docs",
-        "href": "/app/mobile-pwa/ios-android-app"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Packaging Notes",
     "items": [

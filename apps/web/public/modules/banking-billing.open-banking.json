@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing open banking KPIs this week.",
-        "tags": [
-          "Open"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Open Banking",
-        "href": "/app/banking-billing/open-banking"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "columns": [
       "Account",

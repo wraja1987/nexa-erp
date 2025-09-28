@@ -62,35 +62,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing stripe payments KPIs this week.",
-        "tags": [
-          "Stripe"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "create",
-        "label": "Create Payment",
-        "href": "/app/banking-billing/stripe-payments"
-      },
-      {
-        "id": "reconcile",
-        "label": "Reconcile",
-        "href": "/app/banking-billing/stripe-payments"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Recent Payments",
     "columns": [

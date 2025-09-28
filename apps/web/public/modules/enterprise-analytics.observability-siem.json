@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing observability & siem KPIs this week.",
-        "tags": [
-          "Observability"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Observability & SIEM",
-        "href": "/app/enterprise-analytics/observability-siem"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "columns": [
       "Time",

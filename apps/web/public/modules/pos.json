@@ -62,30 +62,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "ps1",
-        "icon": "ShoppingCart",
-        "message": "Afternoon footfall up 9% vs. yesterday.",
-        "tags": [
-          "POS"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-term",
-        "label": "Open Terminal",
-        "href": "/app/pos"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Receipts",
     "columns": [

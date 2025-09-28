@@ -61,30 +61,8 @@
       "value": 28
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing supplier invoices & payments KPIs this week.",
-        "tags": [
-          "Supplier"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-bill",
-        "label": "New Bill",
-        "href": "/app/purchasing/supplier-invoices-payments"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Supplier Invoices",
     "columns": [

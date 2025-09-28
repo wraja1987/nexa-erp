@@ -1,8 +1,6 @@
 {
-  "title": ,
-  "order": 83,
-  "actions": [
-    { "label":  },
-    { "label":  }
-  ]
+  "title": "Hr / Payroll.timesheets",
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

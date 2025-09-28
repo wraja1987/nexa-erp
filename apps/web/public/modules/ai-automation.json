@@ -60,45 +60,8 @@
       "value": 37
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "ai1",
-        "message": "Enable OCR for invoice capture",
-        "tags": [
-          "OCR",
-          "Finance"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "assist",
-        "label": "Open Nexa AI Assist",
-        "href": "/app/ai-automation/nexa-ai-assist"
-      },
-      {
-        "id": "wf",
-        "label": "Create Workflow",
-        "href": "/app/ai-automation/workflows-jobs"
-      },
-      {
-        "id": "ocr",
-        "label": "Upload Document",
-        "href": "/app/ai-automation/ocr-document-ai"
-      },
-      {
-        "id": "notif",
-        "label": "Notification Rules",
-        "href": "/app/ai-automation/notifications"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "AI & Automation Data",
     "columns": [

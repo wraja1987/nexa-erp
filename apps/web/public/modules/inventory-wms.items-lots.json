@@ -61,30 +61,8 @@
       "value": 6
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing items & lots KPIs this week.",
-        "tags": [
-          "Items"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-item",
-        "label": "New Item",
-        "href": "/app/inventory-wms/items-lots"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Item Master",
     "columns": [

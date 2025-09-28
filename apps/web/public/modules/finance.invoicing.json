@@ -1,8 +1,6 @@
 {
-  "title": ,
-  "order": 17,
-  "actions": [
-    { "label":  },
-    { "label":  }
-  ]
+  "title": "Finance.invoicing",
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

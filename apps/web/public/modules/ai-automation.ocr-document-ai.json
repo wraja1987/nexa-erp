@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing ocr & document ai KPIs this week.",
-        "tags": [
-          "OCR"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open OCR & Document AI",
-        "href": "/app/ai-automation/ocr-document-ai"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "uploader": {
     "accept": [
       ".pdf",

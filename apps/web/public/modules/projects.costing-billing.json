@@ -62,30 +62,8 @@
       "value": 4
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing costing & billing KPIs this week.",
-        "tags": [
-          "Costing"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "create-inv",
-        "label": "Create Invoice",
-        "href": "/app/projects/costing-billing"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "To Bill",
     "columns": [

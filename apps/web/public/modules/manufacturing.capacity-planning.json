@@ -62,30 +62,8 @@
       "value": 6
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing capacity planning KPIs this week.",
-        "tags": [
-          "Capacity"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "plan",
-        "label": "Capacity Plan",
-        "href": "/app/manufacturing/capacity-planning"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Resources",
     "columns": [

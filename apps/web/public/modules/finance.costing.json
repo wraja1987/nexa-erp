@@ -63,30 +63,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing costing KPIs this week.",
-        "tags": [
-          "Costing"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-std",
-        "label": "Standard Costs",
-        "href": "/app/finance/costing"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Variances",
     "columns": [

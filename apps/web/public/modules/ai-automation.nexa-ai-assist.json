@@ -62,35 +62,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing nexa ai assist KPIs this week.",
-        "tags": [
-          "Nexa"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "prompt-lib",
-        "label": "Prompt Library",
-        "href": "/app/ai-automation/nexa-ai-assist"
-      },
-      {
-        "id": "open-chat",
-        "label": "Open Chat",
-        "href": "/app/ai-automation/nexa-ai-assist"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "content": {
     "type": "assist",
     "panels": [

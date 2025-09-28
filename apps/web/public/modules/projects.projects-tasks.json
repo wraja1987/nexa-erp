@@ -62,30 +62,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing projects & tasks KPIs this week.",
-        "tags": [
-          "Projects"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-task",
-        "label": "New Task",
-        "href": "/app/projects/projects-tasks"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Tasks",
     "columns": [

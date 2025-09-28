@@ -61,30 +61,8 @@
       "value": 2
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing notifications KPIs this week.",
-        "tags": [
-          "Notifications"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Notifications",
-        "href": "/app/ai-automation/notifications"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Example Rules",
     "items": [

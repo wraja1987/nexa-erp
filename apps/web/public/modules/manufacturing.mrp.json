@@ -61,30 +61,8 @@
       "value": 24
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing mrp KPIs this week.",
-        "tags": [
-          "MRP"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "run-mrp",
-        "label": "Run MRP",
-        "href": "/app/manufacturing/mrp"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Planned Supply",
     "columns": [

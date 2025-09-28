@@ -62,30 +62,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing multi-currency & multi-entity KPIs this week.",
-        "tags": [
-          "Multi-Currency"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Multi-Currency & Multi-Entity",
-        "href": "/app/enterprise-analytics/multi-currency-entity"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Entities & Currencies",
     "columns": [

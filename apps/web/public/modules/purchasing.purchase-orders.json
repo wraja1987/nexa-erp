@@ -62,30 +62,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing purchase orders KPIs this week.",
-        "tags": [
-          "Purchase"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-po",
-        "label": "New PO",
-        "href": "/app/purchasing/purchase-orders"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Purchase Orders",
     "columns": [

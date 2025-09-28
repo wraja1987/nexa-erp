@@ -60,35 +60,8 @@
       "value": 14
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "cr1",
-        "icon": "UserCheck",
-        "message": "Consider enabling MFA for all admins.",
-        "tags": [
-          "Security"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "tenant-settings",
-        "label": "Tenant Settings",
-        "href": "/app/core/tenant-settings"
-      },
-      {
-        "id": "user-directory",
-        "label": "User Directory",
-        "href": "/app/core/users-roles"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Recent Activity",
     "columns": [

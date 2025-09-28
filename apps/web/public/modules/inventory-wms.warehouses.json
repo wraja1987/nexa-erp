@@ -62,35 +62,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing warehouses KPIs this week.",
-        "tags": [
-          "Warehouses"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-wh",
-        "label": "New Warehouse",
-        "href": "/app/inventory-wms/warehouses"
-      },
-      {
-        "id": "bin-list",
-        "label": "Bin List",
-        "href": "/app/inventory-wms/warehouses"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Warehouses",
     "columns": [

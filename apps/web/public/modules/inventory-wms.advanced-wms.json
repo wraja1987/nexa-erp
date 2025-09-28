@@ -61,35 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing advanced wms (asn, wave, 3pl) KPIs this week.",
-        "tags": [
-          "Advanced"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "cfg-asn",
-        "label": "Configure ASN",
-        "href": "/app/inventory-wms/advanced-wms"
-      },
-      {
-        "id": "wave-plans",
-        "label": "Wave Plans",
-        "href": "/app/inventory-wms/advanced-wms"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Advanced WMS",
     "items": [

@@ -1,1 +1,15 @@
-{ "title": "Finance", "order": 10, "actions": [{ "label": "New Invoice" }, { "label": "Run Report" }] }
+{
+  "title": "Finance",
+  "order": 10,
+  "actions": [
+    {
+      "label": "New Invoice"
+    },
+    {
+      "label": "Run Report"
+    }
+  ],
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
+}

@@ -61,30 +61,8 @@
       "value": 1842
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing api keys & rate limits KPIs this week.",
-        "tags": [
-          "API"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-key",
-        "label": "New Key",
-        "href": "/app/settings-connectors/api-keys-rate-limits"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Keys",
     "columns": [

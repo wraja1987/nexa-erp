@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing accounts receivable KPIs this week.",
-        "tags": [
-          "Accounts"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Accounts Receivable",
-        "href": "/app/finance/accounts-receivable"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "columns": [
       "Customer",

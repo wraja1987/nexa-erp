@@ -61,30 +61,8 @@
       "value": 12
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing tenant & settings KPIs this week.",
-        "tags": [
-          "Tenant"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-settings",
-        "label": "Open Settings",
-        "href": "/app/core/tenant-settings"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Settings",
     "items": [

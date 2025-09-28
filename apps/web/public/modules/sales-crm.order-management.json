@@ -1,8 +1,6 @@
 {
-  "title": ,
-  "order": 32,
-  "actions": [
-    { "label":  },
-    { "label":  }
-  ]
+  "title": "Sales / Crm.order / Management",
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

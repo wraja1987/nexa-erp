@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing vat (mtd) KPIs this week.",
-        "tags": [
-          "VAT"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open VAT (MTD)",
-        "href": "/app/finance/vat-mtd"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "content": {
     "type": "list",
     "title": "MTD Submissions",

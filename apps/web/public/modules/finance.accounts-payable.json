@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing accounts payable KPIs this week.",
-        "tags": [
-          "Accounts"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Accounts Payable",
-        "href": "/app/finance/accounts-payable"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "columns": [
       "Vendor",

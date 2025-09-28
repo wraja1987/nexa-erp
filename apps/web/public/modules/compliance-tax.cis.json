@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing cis (construction industry scheme) KPIs this week.",
-        "tags": [
-          "CIS"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open CIS (Construction Industry Scheme)",
-        "href": "/app/compliance-tax/cis"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "columns": [
       "Period",

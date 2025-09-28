@@ -61,30 +61,8 @@
       "value": 21
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing ios & android app KPIs this week.",
-        "tags": [
-          "iOS"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open iOS & Android App",
-        "href": "/app/mobile-pwa/ios-android-app"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "content": {
     "type": "list",
     "title": "Packaging",
