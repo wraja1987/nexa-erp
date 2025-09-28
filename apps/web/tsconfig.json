@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "*"
@@ -21,23 +21,17 @@
     ]
   },
   "include": [
+    ".next/types/**/*.ts",
     "src",
-    ".next/types/**/*.ts"
+    ".next-build/types/**/*.ts"
   ],
   "exclude": [
-    "**/*.spec.*",
-    "**/*.stories.*",
     "**/*.test.*",
+    "**/*.spec.*",
     "**/__tests__/**",
-    "**/_disabled/**",
-    "**/_excess/**",
-    ".nexa_*",
-    ".nexa_*/*",
-    ".next",
-    ".vercel",
-    "_disabled",
-    "_excess",
+    "**/*.stories.*",
+    "node_modules",
     "dist",
-    "node_modules"
+    ".next"
   ]
 }

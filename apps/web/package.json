@@ -15,7 +15,9 @@
     "postinstall": "node scripts/create-nexa-registry-stub.js",
     "test:e2e": "playwright test",
     "snap:a11y": "echo a11y-scan-placeholder",
-    "verify:modules": "node scripts/verify-modules-shape.mjs"
+    "verify:modules": "node scripts/verify-modules-shape.mjs",
+    "verify:ui": "node scripts/verify-ui.js",
+    "wire:ctas": "tsx scripts/cta-wire.ts"
   },
   "dependencies": {
     "@nexa/registry": "file:../../stubs/registry",
