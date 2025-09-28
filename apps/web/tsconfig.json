@@ -25,12 +25,19 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "**/*.test.*",
     "**/*.spec.*",
-    "**/__tests__/**",
     "**/*.stories.*",
-    "node_modules",
+    "**/*.test.*",
+    "**/__tests__/**",
+    "**/_disabled/**",
+    "**/_excess/**",
+    ".nexa_*",
+    ".nexa_*/*",
+    ".next",
+    ".vercel",
+    "_disabled",
+    "_excess",
     "dist",
-    ".next"
+    "node_modules"
   ]
 }

@@ -14,7 +14,8 @@
     "e2e:ui": "playwright test --ui",
     "postinstall": "node scripts/create-nexa-registry-stub.js",
     "test:e2e": "playwright test",
-    "snap:a11y": "echo a11y-scan-placeholder"
+    "snap:a11y": "echo a11y-scan-placeholder",
+    "verify:modules": "node scripts/verify-modules-shape.mjs"
   },
   "dependencies": {
     "@nexa/registry": "file:../../stubs/registry",
