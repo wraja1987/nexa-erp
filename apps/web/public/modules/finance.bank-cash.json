@@ -62,30 +62,8 @@
       "value": 2
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing bank & cash KPIs this week.",
-        "tags": [
-          "Bank"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-recon",
-        "label": "Open Reconciliation",
-        "href": "/app/finance/bank-reconciliation"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Bank Accounts",
     "columns": [

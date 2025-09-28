@@ -61,35 +61,8 @@
       "value": 82
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing gdpr tools & audit KPIs this week.",
-        "tags": [
-          "GDPR"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "export",
-        "label": "Export",
-        "href": "/app/compliance-tax/gdpr-tools-audit"
-      },
-      {
-        "id": "filters",
-        "label": "Filters",
-        "href": "/app/compliance-tax/gdpr-tools-audit"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Audit Log",
     "columns": [

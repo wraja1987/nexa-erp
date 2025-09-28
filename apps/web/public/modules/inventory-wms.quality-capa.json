@@ -61,30 +61,8 @@
       "value": 3
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing quality (holds & capa) KPIs this week.",
-        "tags": [
-          "Quality"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-case",
-        "label": "New Case",
-        "href": "/app/inventory-wms/quality-capa"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Quality Cases",
     "columns": [

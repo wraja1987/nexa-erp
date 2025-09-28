@@ -61,30 +61,8 @@
       "value": 30
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing backups & dr KPIs this week.",
-        "tags": [
-          "Backups"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "run-backup",
-        "label": "Run Backup",
-        "href": "/app/settings-connectors/backups-dr"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Backups",
     "columns": [

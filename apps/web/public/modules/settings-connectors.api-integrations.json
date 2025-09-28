@@ -3,8 +3,15 @@
   "title": "API & Integrations",
   "order": 131,
   "actions": [
-    { "label": "Create API Key" },
-    { "label": "Create Webhook" }
+    {
+      "label": "Create API Key"
+    },
+    {
+      "label": "Create Webhook"
+    }
   ],
-  "icon": null
+  "icon": null,
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

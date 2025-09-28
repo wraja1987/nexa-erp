@@ -61,30 +61,8 @@
       "value": 5
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "a1",
-        "icon": "BarChart3",
-        "message": "Create KPI drilldowns for revenue.",
-        "tags": [
-          "Analytics"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-dash",
-        "label": "New Dashboard",
-        "href": "/app/enterprise-analytics/analytics-dashboards"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Dashboards",
     "columns": [

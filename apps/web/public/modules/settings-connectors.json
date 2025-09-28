@@ -60,30 +60,8 @@
       "value": 14
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "st1",
-        "icon": "Cog",
-        "message": "Enable email domain allowlist for improved security.",
-        "tags": [
-          "Security"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-settings",
-        "label": "Open Settings",
-        "href": "/app/core/tenant-settings"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Settings",
     "items": [

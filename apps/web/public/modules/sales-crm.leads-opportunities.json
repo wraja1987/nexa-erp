@@ -62,35 +62,8 @@
       "value": 18
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing leads & opportunities KPIs this week.",
-        "tags": [
-          "Leads"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-lead",
-        "label": "New Lead",
-        "href": "/app/sales-crm/leads-opportunities"
-      },
-      {
-        "id": "new-opp",
-        "label": "New Opp",
-        "href": "/app/sales-crm/leads-opportunities"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Pipeline",
     "columns": [

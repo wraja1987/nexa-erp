@@ -1,1 +1,15 @@
-{ "title": "Sales & CRM", "order": 30, "actions": [{ "label": "New Quote" }, { "label": "Create Task" }] }
+{
+  "title": "Sales & CRM",
+  "order": 30,
+  "actions": [
+    {
+      "label": "New Quote"
+    },
+    {
+      "label": "Create Task"
+    }
+  ],
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
+}

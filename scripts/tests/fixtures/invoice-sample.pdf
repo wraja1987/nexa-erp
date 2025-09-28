@@ -1,17 +1,3 @@
-%PDF-1.4
-% Fake minimal PDF for golden hashing
-1 0 obj
-<< /Type /Catalog >>
-endobj
-xref
-0 2
-0000000000 65535 f 
-0000000010 00000 n 
-trailer
-<< /Root 1 0 R >>
-startxref
-42
-%%EOF
-
-
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:665b5c9318702d0962f26e29e139db3ff11a64b0632ac1f0fa8b61cf4998dc2b
+size 180

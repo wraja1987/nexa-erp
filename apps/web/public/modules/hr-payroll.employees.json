@@ -61,30 +61,8 @@
       "value": 12
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing employees KPIs this week.",
-        "tags": [
-          "Employees"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "add-emp",
-        "label": "Add Employee",
-        "href": "/app/hr-payroll/employees"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Employees",
     "columns": [

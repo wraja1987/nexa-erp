@@ -1,0 +1,117 @@
+"use client";
+import { useMemo, useState } from "react";
+
+type Module = { name:string; area:string; description:string };
+
+const MODULES: Module[] = [
+  {name:"Dashboard", area:"Core", description:"A clear overview of KPIs, recent activity and quick links with AI insights."},
+  {name:"Users & Roles (RBAC/SoD)", area:"Core", description:"Granular access, segregation of duties, MFA and full audit trails."},
+  {name:"Tenants & Settings", area:"Core", description:"Multi-entity setup, regions/timezones, backups and restore."},
+  {name:"Help & Docs", area:"Core", description:"Built-in documentation and guided tours."},
+
+  {name:"General Ledger", area:"Finance", description:"Your central ledger for all postings and period close."},
+  {name:"Accounts Payable", area:"Finance", description:"Record bills, approve and pay suppliers on time."},
+  {name:"Accounts Receivable", area:"Finance", description:"Create invoices and track customer payments."},
+  {name:"Bank & Cash", area:"Finance", description:"Manage bank accounts, cashbook and transfers."},
+  {name:"Bank Reconciliation", area:"Finance", description:"Reconcile statements quickly with clear matches."},
+  {name:"VAT (MTD)", area:"Finance", description:"HMRC MTD VAT: authorise, view obligations and submit returns."},
+  {name:"Fixed Assets", area:"Finance", description:"Track assets, depreciation and disposals."},
+  {name:"Period Close", area:"Finance", description:"Checklists and automated postings for month‑end."},
+  {name:"FX Revaluation", area:"Finance", description:"Revalue foreign balances to period rates."},
+  {name:"Costing", area:"Finance", description:"Standard and actual costs with GL impact."},
+
+  {name:"Payroll", area:"HR & Payroll", description:"Run payroll with PAYE/NI and journals to GL."},
+  {name:"Employees", area:"HR & Payroll", description:"Employee master data and HR basics."},
+
+  {name:"Items & Lots", area:"Inventory & WMS", description:"Products with lots/serials and full traceability."},
+  {name:"Warehouses", area:"Inventory & WMS", description:"Bins, locations, transfers and replenishment."},
+  {name:"Stock Movements", area:"Inventory & WMS", description:"Issues, receipts, adjustments and transfers."},
+  {name:"Advanced WMS (ASN, Wave, 3PL)", area:"Inventory & WMS", description:"ASN receiving, wave picking and 3PL."},
+  {name:"Cycle Counting", area:"Inventory & WMS", description:"Schedules, variance analysis and approvals."},
+  {name:"Quality (Holds & CAPA)", area:"Inventory & WMS", description:"Inspections, holds and corrective actions."},
+
+  {name:"BOM & Routings", area:"Manufacturing", description:"Multi-level BOMs, alternates and routings."},
+  {name:"Work Orders", area:"Manufacturing", description:"Plan, release and complete production orders."},
+  {name:"MRP", area:"Manufacturing", description:"Net requirements, proposals and exceptions."},
+  {name:"Capacity Planning", area:"Manufacturing", description:"See bottlenecks and balance resources."},
+  {name:"APS", area:"Manufacturing", description:"Advanced planning and scheduling with constraints."},
+  {name:"Maintenance", area:"Manufacturing", description:"Plan preventive and corrective maintenance."},
+  {name:"PLM", area:"Manufacturing", description:"Revisions and change control."},
+
+  {name:"Leads & Opportunities", area:"Sales & CRM", description:"Capture, score and progress opportunities."},
+  {name:"Quotations & Sales Orders", area:"Sales & CRM", description:"Quote, convert, fulfil and invoice."},
+  {name:"Returns (RMA)", area:"Sales & CRM", description:"Receive and credit returns with disposition."},
+
+  {name:"Requisitions", area:"Purchasing", description:"Raise and approve requests before ordering."},
+  {name:"Purchase Orders", area:"Purchasing", description:"Place POs, receive, three-way match and post to AP."},
+  {name:"Supplier Invoices & Payments", area:"Purchasing", description:"Invoice capture, approvals and payments."},
+
+  {name:"Projects & Tasks", area:"Projects", description:"Milestones, tasks, time/expense and budgets."},
+  {name:"Costing & Billing", area:"Projects", description:"Track costs and bill project work."},
+
+  {name:"GDPR Tools & Audit", area:"Compliance & Tax", description:"Data subject tools, retention and audit."},
+  {name:"CIS", area:"Compliance & Tax", description:"Construction Industry Scheme reporting."},
+
+  {name:"Open Banking", area:"Banking & Billing", description:"TrueLayer feeds and authorisations."},
+  {name:"Billing & Metering", area:"Banking & Billing", description:"Plans, subscriptions and usage-based billing."},
+  {name:"Stripe Payments", area:"Banking & Billing", description:"Card payments and customer portal."},
+
+  {name:"Intercompany & Consolidation", area:"Enterprise & Analytics", description:"Post across entities and consolidate easily."},
+  {name:"Multi-Currency & Multi-Entity", area:"Enterprise & Analytics", description:"Operate globally with confidence."},
+  {name:"Analytics & Dashboards", area:"Enterprise & Analytics", description:"Prebuilt and ad-hoc analysis."},
+  {name:"Observability & SIEM", area:"Enterprise & Analytics", description:"Metrics, logs and SIEM export."},
+
+  {name:"Nexa AI Assist", area:"AI & Automation", description:"AI helper in every module."},
+  {name:"OCR & Document AI", area:"AI & Automation", description:"Read invoices, POs and receipts."},
+  {name:"Predictive Scenarios", area:"AI & Automation", description:"Forecasts and risk alerts."},
+  {name:"Workflows & Jobs", area:"AI & Automation", description:"Automate checks and postings."},
+  {name:"Notifications", area:"AI & Automation", description:"Email notifications (SMS disabled)."},
+
+  {name:"Installable PWA", area:"Mobile & PWA", description:"Works offline; add to Home Screen."},
+  {name:"iOS & Android App", area:"Mobile & PWA", description:"Native apps planned; PWA live."},
+
+  {name:"Connectors", area:"Settings & Connectors", description:"Keys for Microsoft 365, Google, Stripe, TrueLayer, HMRC VAT."},
+  {name:"API Keys & Rate Limits", area:"Settings & Connectors", description:"Manage keys, quotas and access."},
+  {name:"Backups & DR", area:"Settings & Connectors", description:"Automated backups and disaster recovery drills."},
+
+  {name:"Point of Sale (POS)", area:"POS", description:"Stripe Terminal, receipts, offline park→sync, reconciliation, GL postings, X/Z reports."}
+];
+
+const AREAS = ["All", ...Array.from(new Set(MODULES.map(m=>m.area))).sort()];
+
+export default function Products(){
+  const [q,setQ] = useState("");
+  const [area,setArea] = useState<string>("All");
+
+  const shown = useMemo(()=> MODULES.filter(m=>{
+    const okArea = area === "All" || m.area === area;
+    const text = (m.name+" "+m.area+" "+m.description).toLowerCase();
+    return okArea && (q.trim()==="" || text.includes(q.toLowerCase()));
+  }), [q, area]);
+
+  return (
+    <main className="container">
+      <h1>Products & Services</h1>
+      <p>Explore every Nexa module. Use search or filter by area.</p>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 240px",gap:"12px",margin:"12px 0 16px"}}>
+        <input aria-label="Search modules" value={q} onChange={e=>setQ(e.target.value)} placeholder="Search modules…" style={{padding:"10px 12px",borderRadius:"10px",border:"1px solid #d9deea"}}/>
+        <select aria-label="Filter by area" value={area} onChange={e=>setArea(e.target.value)} style={{padding:"10px 12px",borderRadius:"10px",border:"1px solid #d9deea"}}>
+          {AREAS.map(a=> <option key={a} value={a}>{a}</option>)}
+        </select>
+      </div>
+
+      <div className="grid grid-3">
+        {shown.map(m=> (
+          <div className="card nexa-illuminate" key={m.name}>
+            <h3>{m.name}</h3>
+            <p className="small" style={{margin:0}}>{m.description}</p>
+            <small style={{opacity:.7}}>Area: {m.area}</small>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+

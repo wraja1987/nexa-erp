@@ -60,30 +60,8 @@
       "value": 3
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "pu1",
-        "icon": "ShoppingBag",
-        "message": "Supplier ABC lead time increased by 5 days.",
-        "tags": [
-          "Purchasing"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-req",
-        "label": "New Requisition",
-        "href": "/app/purchasing/requisitions"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Requisitions",
     "columns": [

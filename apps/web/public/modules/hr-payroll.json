@@ -60,35 +60,8 @@
       "value": 1
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "hr1",
-        "icon": "Users",
-        "message": "Onboarding tasks pending for 2 new starters.",
-        "tags": [
-          "HR"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-emp",
-        "label": "Add Employee",
-        "href": "/app/hr-payroll/employees"
-      },
-      {
-        "id": "run-pay",
-        "label": "Run Payroll",
-        "href": "/app/hr-payroll/payroll"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "People",
     "columns": [

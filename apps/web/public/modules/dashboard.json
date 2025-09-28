@@ -1,11 +1,73 @@
 {
+  "title": "Dashboard",
+  "subtitle": "Overview & KPIs",
   "cards": [
-    { "id": "revenue", "title": "Revenue", "value": "£405,280", "hint": "↑ 12.5%" },
-    { "id": "invoices", "title": "Invoices", "value": "168", "hint": "↑ 14.2%" }
+    {
+      "id": "revenue",
+      "title": "Revenue (MTD)",
+      "value": "£405,280",
+      "hint": "↑ 12.5%",
+      "kpi": true
+    },
+    {
+      "id": "gross-margin",
+      "title": "Gross Margin",
+      "value": "38.2%",
+      "hint": "± 0.4%",
+      "kpi": true
+    },
+    {
+      "id": "invoices",
+      "title": "Open Invoices",
+      "value": "168",
+      "hint": "↑ 14.2%",
+      "kpi": true
+    },
+    {
+      "id": "orders",
+      "title": "Orders in WIP",
+      "value": "47",
+      "hint": "↓ 3.1%",
+      "kpi": true
+    }
   ],
   "links": [
-    { "label": "New Invoice", "href": "/modules/finance" },
-    { "label": "Add Order", "href": "/modules/sales-crm" }
+    {
+      "label": "New Invoice",
+      "href": "/modules/finance"
+    },
+    {
+      "label": "Create PO",
+      "href": "/modules/purchasing.purchase-orders"
+    },
+    {
+      "label": "Add Item",
+      "href": "/modules/inventory-wms.items-lots"
+    },
+    {
+      "label": "New Quote",
+      "href": "/modules/sales-crm.quotations-sales-orders"
+    }
   ],
-  "insights": ["Optimising labour costs could enhance profit margins this quarter"]
+  "insights": [
+    "AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~£12k/quarter.",
+    "Predicted cash gap in 21 days if AR > 45d persists; recommend AP smoothing.",
+    "Anomaly: WMS cycle-count delta +2.1% vs baseline in Aisle C."
+  ],
+  "activity": [
+    {
+      "when": "2m",
+      "text": "PO #PO-10422 approved by Ops."
+    },
+    {
+      "when": "18m",
+      "text": "Invoice #INV-88214 sent to Acme Ltd."
+    },
+    {
+      "when": "1h",
+      "text": "WO #WO-557 entered picking."
+    }
+  ],
+  "kpis": [],
+  "quickLinks": []
 }

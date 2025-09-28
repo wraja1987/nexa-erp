@@ -60,31 +60,8 @@
       "value": 18
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "co1",
-        "icon": "Shield",
-        "message": "Audit scope suggests expanding user access reviews.",
-        "tags": [
-          "Security",
-          "Audit"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "export",
-        "label": "Export Report",
-        "href": "/app/compliance-tax/gdpr-tools-audit"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Compliance Items",
     "columns": [

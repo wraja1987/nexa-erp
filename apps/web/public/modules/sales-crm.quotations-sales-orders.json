@@ -62,30 +62,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing quotations & sales orders KPIs this week.",
-        "tags": [
-          "Quotations"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-so",
-        "label": "New Sales Order",
-        "href": "/app/sales-crm/quotations-sales-orders"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Sales Orders",
     "columns": [

@@ -62,30 +62,8 @@
       "value": 4
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing bank reconciliation KPIs this week.",
-        "tags": [
-          "Bank"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "import",
-        "label": "Import Statement",
-        "href": "/app/finance/bank-reconciliation"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Reconciliations",
     "columns": [

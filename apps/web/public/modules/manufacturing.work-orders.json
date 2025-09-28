@@ -61,30 +61,8 @@
       "value": 2
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing work orders KPIs this week.",
-        "tags": [
-          "Work"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-wo",
-        "label": "New Work Order",
-        "href": "/app/manufacturing/work-orders"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Work Orders",
     "columns": [

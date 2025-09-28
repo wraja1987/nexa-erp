@@ -1,8 +1,6 @@
 {
-  "title": ,
-  "order": 68,
-  "actions": [
-    { "label":  },
-    { "label":  }
-  ]
+  "title": "Operations.scheduling",
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

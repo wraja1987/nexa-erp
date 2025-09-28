@@ -62,30 +62,8 @@
       "suffix": "%"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "mf1",
-        "icon": "Factory",
-        "message": "Line 2 OEE trending down 3%.",
-        "tags": [
-          "Manufacturing"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-wo",
-        "label": "New Work Order",
-        "href": "/app/manufacturing/work-orders"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "KPIs by line",
     "columns": [

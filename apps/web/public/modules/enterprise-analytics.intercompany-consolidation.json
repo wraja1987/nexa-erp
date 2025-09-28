@@ -61,30 +61,8 @@
       "value": 2
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing intercompany & consolidation KPIs this week.",
-        "tags": [
-          "Intercompany"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Intercompany & Consolidation",
-        "href": "/app/enterprise-analytics/intercompany-consolidation"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Elimination Entries",
     "columns": [

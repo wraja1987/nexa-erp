@@ -61,35 +61,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "bb1",
-        "icon": "RefreshCw",
-        "message": "Two bank feeds are stale (last synced > 24h).",
-        "tags": [
-          "Banking"
-        ],
-        "severity": "warning"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "connect",
-        "label": "Connect Account",
-        "href": "/app/banking-billing/open-banking"
-      },
-      {
-        "id": "refresh",
-        "label": "Refresh Feeds",
-        "href": "/app/banking-billing/open-banking"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Bank Feeds",
     "columns": [

@@ -61,30 +61,8 @@
       "value": 5
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing requisitions KPIs this week.",
-        "tags": [
-          "Requisitions"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-req",
-        "label": "New Requisition",
-        "href": "/app/purchasing/requisitions"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Requisitions",
     "columns": [

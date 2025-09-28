@@ -61,35 +61,8 @@
       "value": 18
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing help & docs KPIs this week.",
-        "tags": [
-          "Help"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open-docs",
-        "label": "Open Docs",
-        "href": "/app/core/help-docs"
-      },
-      {
-        "id": "support",
-        "label": "Contact Support",
-        "href": "/app/core/help-docs"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "list": {
     "title": "Docs",
     "items": [

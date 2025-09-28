@@ -1,8 +1,6 @@
 {
-  "title": ,
-  "order": 35,
-  "actions": [
-    { "label":  },
-    { "label":  }
-  ]
+  "title": "Sales / Crm.customer / Portal",
+  "kpis": [],
+  "quickLinks": [],
+  "insights": []
 }

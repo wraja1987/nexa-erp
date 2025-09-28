@@ -62,34 +62,8 @@
       "value": 23450
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "i1",
-        "message": "System healthy",
-        "tags": [
-          "Core"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "help",
-        "label": "Help",
-        "href": "/app/core/help-docs"
-      },
-      {
-        "id": "reports",
-        "label": "Run Report",
-        "href": "/app/enterprise-analytics/analytics-dashboards"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Recent Activity",
     "columns": [

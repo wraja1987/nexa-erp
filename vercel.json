@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "apps/web/package.json", "use": "@vercel/next" }
+  ],
+  "installCommand": "corepack enable && pnpm -v && pnpm install --no-frozen-lockfile",
+  "buildCommand": "corepack enable && pnpm -v && npx next build",
+  "outputDirectory": "apps/web/.next"
+}

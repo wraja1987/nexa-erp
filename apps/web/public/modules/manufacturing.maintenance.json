@@ -61,30 +61,8 @@
       "value": 3.2
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "insight-1",
-        "icon": "Lightbulb",
-        "message": "Consider reviewing maintenance KPIs this week.",
-        "tags": [
-          "Maintenance"
-        ],
-        "severity": "info"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "open",
-        "label": "Open Maintenance",
-        "href": "/app/manufacturing/maintenance"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Work Requests",
     "columns": [

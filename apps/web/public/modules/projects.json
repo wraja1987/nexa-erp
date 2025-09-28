@@ -61,30 +61,8 @@
       "currency": "GBP"
     }
   ],
-  "insights": {
-    "title": "AI Insights",
-    "items": [
-      {
-        "id": "pj1",
-        "icon": "ClipboardList",
-        "message": "3 tasks overdue in ERP project.",
-        "tags": [
-          "Projects"
-        ],
-        "severity": "warning"
-      }
-    ]
-  },
-  "quickLinks": {
-    "title": "Quick Links",
-    "items": [
-      {
-        "id": "new-proj",
-        "label": "New Project",
-        "href": "/app/projects/projects-tasks"
-      }
-    ]
-  },
+  "insights": [],
+  "quickLinks": [],
   "table": {
     "title": "Projects",
     "columns": [
