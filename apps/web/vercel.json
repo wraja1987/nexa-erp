@@ -1,7 +1,9 @@
 {
   "version": 2,
-  "framework": "nextjs",
-  "installCommand": "npm i -g npm@9 && (npm ci --no-audit --no-fund || npm i --no-audit --no-fund)",
-  "buildCommand": "npm run build",
+  "builds": [
+    { "src": "package.json", "use": "@vercel/next" }
+  ],
+  "installCommand": "corepack enable && pnpm -v && pnpm install --no-frozen-lockfile",
+  "buildCommand": "corepack enable && pnpm -v && npx next build",
   "outputDirectory": ".next"
 }
