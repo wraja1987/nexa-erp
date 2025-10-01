@@ -4,5 +4,5 @@ export async function safeJson<T=any>(res: Response): Promise<T> {
 }
 export async function getJSON<T=any>(url: string, fallback?: T): Promise<T> {
   try { return await safeJson<T>(await fetch(url, { cache: "no-store" })); }
-  catch { if (fallback) return fallback; throw; }
+  catch (e) { if (fallback !== undefined) return fallback as T; throw e; }
 }

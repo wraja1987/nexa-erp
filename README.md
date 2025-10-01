@@ -28,3 +28,20 @@ Commands:
 
 - pnpm -w lint && pnpm -w typecheck && pnpm -w test && pnpm -w cov && pnpm -w a11y && pnpm -w gate:phase0
 
+## Performance & Ops Baseline (Nexa)
+- **Lighthouse gates**: performance ≥ 0.85, accessibility ≥ 0.90  
+  ```bash
+  cd apps/web
+  pnpm verify:lh
+  ```
+- **Sentry smoke**  
+  ```bash
+  cd apps/web
+  pnpm sentry:smoke
+  ```
+- **Env check**  
+  ```bash
+  cd apps/web
+  pnpm verify:envs
+  ```
+

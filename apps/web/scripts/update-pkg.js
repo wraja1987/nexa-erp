@@ -1,0 +1,10 @@
+const fs=require("fs");
+const p="package.json";
+const j=JSON.parse(fs.readFileSync(p,"utf8"));
+j.scripts=j.scripts||{};
+j.scripts["verify:data"]="node scripts/verify-data.js";
+j.scripts["test:kpi"]="playwright test tests/api/kpi.spec.ts -c ./playwright.config.ts || npx playwright test tests/api/kpi.spec.ts";
+j.devDependencies=j.devDependencies||{};
+if(!j.devDependencies["@playwright/test"]) j.devDependencies["@playwright/test"]="^1.46.0";
+fs.writeFileSync(p, JSON.stringify(j,null,2));
+console.log("package.json updated");

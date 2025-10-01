@@ -1,0 +1,76 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - main [ref=e3]:
+    - complementary "Sidebar" [ref=e4]:
+      - navigation "Sidebar" [ref=e5]:
+        - list [ref=e6]:
+          - listitem [ref=e7]: Sales
+          - listitem [ref=e8]: Inventory
+    - generic [ref=e9]:
+      - heading "Nexa — E2E Dashboard" [level=1] [ref=e10]
+      - generic [ref=e11]:
+        - article [ref=e12]:
+          - generic [ref=e13]: Total Revenue
+          - strong [ref=e14]: "100"
+        - article [ref=e15]:
+          - generic [ref=e16]: Accounts Receivable
+          - strong [ref=e17]: "50"
+        - article [ref=e18]:
+          - generic [ref=e19]: Accounts Payable
+          - strong [ref=e20]: "25"
+        - article [ref=e21]:
+          - generic [ref=e22]: Orders Today
+          - strong [ref=e23]: "5"
+  - generic [active] [ref=e24]:
+    - generic [ref=e29] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e30] [cursor=pointer]:
+        - img [ref=e31] [cursor=pointer]
+      - generic [ref=e34] [cursor=pointer]:
+        - button "Open issues overlay" [ref=e35] [cursor=pointer]:
+          - generic [ref=e36] [cursor=pointer]:
+            - generic [ref=e37] [cursor=pointer]: "2"
+            - generic [ref=e38] [cursor=pointer]: "3"
+          - generic [ref=e39] [cursor=pointer]:
+            - text: Issue
+            - generic [ref=e40] [cursor=pointer]: s
+        - button "Collapse issues badge" [ref=e41] [cursor=pointer]:
+          - img [ref=e42] [cursor=pointer]
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - navigation [ref=e49]:
+            - button "previous" [disabled] [ref=e50]:
+              - img "previous" [ref=e51]
+            - generic [ref=e53]:
+              - generic [ref=e54]: 1/
+              - generic [ref=e55]: "3"
+            - button "next" [ref=e56] [cursor=pointer]:
+              - img "next" [ref=e57] [cursor=pointer]
+          - img
+        - generic [ref=e59]:
+          - link "Next.js 15.4.6 (stale) Webpack" [ref=e60] [cursor=pointer]:
+            - /url: https://nextjs.org/docs/messages/version-staleness
+            - img [ref=e61] [cursor=pointer]
+            - generic "There is a newer version (15.5.4) available, upgrade recommended!" [ref=e63] [cursor=pointer]: Next.js 15.4.6 (stale)
+            - generic [ref=e64] [cursor=pointer]: Webpack
+          - img
+      - dialog "Recoverable Error" [ref=e66]:
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e73]: Recoverable Error
+            - generic [ref=e74]:
+              - button "Copy Stack Trace" [ref=e75] [cursor=pointer]:
+                - img [ref=e76] [cursor=pointer]
+              - button "No related documentation found" [disabled] [ref=e78]:
+                - img [ref=e79]
+              - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools" [ref=e81] [cursor=pointer]:
+                - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
+                - img [ref=e82] [cursor=pointer]
+          - paragraph [ref=e91]: Text content does not match server-rendered HTML.
+        - generic [ref=e93]:
+          - generic [ref=e94]: "1"
+          - generic [ref=e95]: "2"
+  - alert [ref=e96]
+```

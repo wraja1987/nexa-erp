@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-export default function AsyncBlock({ load, children }: { load: () => Promise<any>, children: (data:any)=>JSX.Element }) {
+import { useEffect, useState, type ReactNode } from "react";
+export default function AsyncBlock({ load, children }: { load: () => Promise<any>, children: (data:any)=>ReactNode }) {
   const [state, setState] = useState<{loading:boolean; error?:string; data?:any}>({loading:true});
   useEffect(()=>{ load().then(d=>setState({loading:false,data:d})).catch(e=>setState({loading:false,error:String(e)})); },[load]);
   if (state.loading) return <div className="rounded-xl border border-slate-200 p-6">Loading…</div>;

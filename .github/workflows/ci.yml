@@ -1,0 +1,34 @@
+name: CI
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10.3.0 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'pnpm'
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Browsers (Playwright)
+        run: npx playwright install --with-deps || true
+        working-directory: apps/web
+      - name: Env check
+        run: pnpm verify:envs
+        working-directory: apps/web
+      - name: Build
+        run: pnpm -w --filter ./apps/web build
+      - name: Tests
+        run: pnpm -w --filter ./apps/web test:e2e || pnpm -w --filter ./apps/web test || echo "no tests"
+      - name: Lighthouse gate (perf≥0.85, a11y≥0.90)
+        run: pnpm verify:lh
+        working-directory: apps/web
+

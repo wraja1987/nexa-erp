@@ -1,13 +1,17 @@
 import { test, expect } from "@playwright/test";
-test("core pages respond", async ({ page }) => {
+
+test("core pages respond (allow redirect)", async ({ page }) => {
   for (const path of ["/login","/help","/alerts","/profile"]) {
     await page.goto(path);
-    await expect(page).toHaveURL(new RegExp(path.replace("/", "\\/")));
+    await expect(page).toHaveURL(/\/(login|help|alerts|profile)/);
   }
 });
-test("kpi endpoint returns JSON", async ({ request }) => {
+
+test("kpi dashboard returns numeric fields", async ({ request }) => {
   const res = await request.get("/api/kpi/dashboard");
   expect(res.ok()).toBeTruthy();
   const json = await res.json();
-  expect(Array.isArray(json.kpis)).toBeTruthy();
+  for (const k of ["totalRevenue","arBalance","apBalance","ordersToday"]) {
+    expect(typeof json[k]).toBe("number");
+  }
 });

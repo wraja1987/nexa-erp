@@ -21,7 +21,7 @@ export function safeAudit(obj: AuditPayload): AuditPayload & { hasMasked: true }
   return { ...working, hasMasked: true } as AuditPayload & { hasMasked: true };
 }
 
-import type { Prisma } from '@prisma/client'
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 export async function audit(payload: AuditPayload): Promise<void> {
   const entry = safeAudit(payload)
@@ -38,7 +38,7 @@ export async function audit(payload: AuditPayload): Promise<void> {
           action: String(entry.action || 'event'),
           target: String(entry.route || entry.module || 'unknown'),
           at: new Date(),
-          data: entry as unknown as Prisma.InputJsonValue,
+          data: entry as unknown as JsonValue,
         } })
       } catch {}
     })()

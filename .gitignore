@@ -28,3 +28,10 @@ apps/web/.env.local
 *.mov
 *.avi
 *.mkv
+
+# Ignore env files but keep example
+.env
+!.env.example
+
+# allow template env
+!/.env.example

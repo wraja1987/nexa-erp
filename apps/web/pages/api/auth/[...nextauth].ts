@@ -1,32 +1,44 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import NextAuth, { type NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import AzureADProvider from "next-auth/providers/azure-ad";
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: { signIn: "/login" },
-  debug: true,
-  session: { strategy: "jwt" },
   providers: [
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(creds) {
-        const allow = process.env.DEV_ALLOW_STATIC_LOGIN === "true";
-        const email = process.env.DEMO_EMAIL ?? "demo@example.com";
-        const pass  = process.env.DEMO_PASS  ?? "demo-password";
-        if (allow && creds?.email === email && creds?.password === pass) {
-          return { id: "demo", name: "Nexa Demo", email };
-        }
-        return null;
-      },
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+    }),
+    AzureADProvider({
+      clientId: process.env.AZURE_AD_CLIENT_ID ?? "",
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET ?? "",
+      tenantId: process.env.AZURE_AD_TENANT_ID || "common",
     }),
   ],
+  pages: { signIn: "/login" },
+  session: { strategy: "jwt", maxAge: 60 * 60 * 8 },
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NEXTAUTH_DEBUG === "true",
   callbacks: {
-    async jwt({ token, user }) { if (user) token.user = user as any; return token; },
-    async session({ session, token }) { if (token?.user) (session as any).user = token.user; return session; },
+    async signIn({ profile }) {
+      const domain = process.env.ALLOWED_EMAIL_DOMAIN?.trim().toLowerCase();
+      if (!domain) return true;
+      const email = (profile?.email||"").toLowerCase();
+      return email.endsWith("@"+domain);
+    },
+  },
+  logger: {
+    error(code, ...message) {
+      // eslint-disable-next-line no-console
+      console.error("[next-auth][error]", code, ...message);
+    },
+    warn(code, ...message) {
+      // eslint-disable-next-line no-console
+      console.warn("[next-auth][warn]", code, ...message);
+    },
+    debug(code, ...message) {
+      // eslint-disable-next-line no-console
+      console.log("[next-auth][debug]", code, ...message);
+    },
   },
 };
 export default NextAuth(authOptions);
