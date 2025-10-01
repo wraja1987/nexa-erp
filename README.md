@@ -45,3 +45,14 @@ Commands:
   pnpm verify:envs
   ```
 
+
+
+## Documentation
+
+- [Nexa ERP Documents](./Nexa%20ERP%20Documents)
+- [Runbook (Operations)](./Nexa%20ERP%20Documents/RUNBOOK.md)
+- [Docs index](./docs/README.md)
+
+### Quick checks
+- Dev: http://localhost:3001
+- Verify modules: \n- UI smoke: \n- E2E: \n- Probes: \, \, \n
