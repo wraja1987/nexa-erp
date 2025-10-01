@@ -1,0 +1,11 @@
+[
+  {
+    "id": "finance",
+    "name": "Finance",
+    "path": "/modules/finance",
+    "children": [
+      { "id": "payables", "name": "Payables", "path": "/modules/finance/payables" },
+      { "id": "receivables", "name": "Receivables", "path": "/modules/finance/receivables" }
+    ]
+  }
+]

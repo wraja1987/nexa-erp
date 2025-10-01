@@ -14,6 +14,8 @@ export default function NexaLayout({ children }: { children?: React.ReactNode })
   const router = useRouter();
   const [tree, setTree] = React.useState<ModuleNode[]>([]);
   const [open, setOpen] = React.useState<Record<string, boolean>>({});
+  const [authed, setAuthed] = React.useState(false);
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   React.useEffect(() => {
     (async () => {
@@ -25,6 +27,13 @@ export default function NexaLayout({ children }: { children?: React.ReactNode })
     })();
   }, []);
 
+  React.useEffect(() => {
+    fetch("/api/auth/session", { cache: "no-store" })
+      .then(r => r.ok ? r.json() : null)
+      .then(j => setAuthed(!!(j && j.user)))
+      .catch(() => setAuthed(false));
+  }, []);
+
   const isActive = (href: string) =>
     router.pathname === href || router.asPath === href;
 
@@ -32,9 +41,10 @@ export default function NexaLayout({ children }: { children?: React.ReactNode })
     setOpen((s) => ({ ...s, [id]: !s[id] }));
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "var(--color-bg,#F7F9FC)", color: "var(--color-text,#0B1424)" }}>
-      {/* Sidebar */}
-      <aside
+    <div className="nexa-layout" style={{ display: "flex", minHeight: "100vh", background: "var(--color-bg,#F7F9FC)", color: "var(--color-text,#0B1424)" }}>
+      {/* Sidebar (hidden before login) */}
+      {authed && (
+      <aside className={`nexa-aside ${sidebarOpen ? 'open' : ''}`}
         style={{
           width: 260,
           background: "linear-gradient(180deg,#2E6BFF 0%,#7A4DFF 100%)",
@@ -94,21 +104,35 @@ export default function NexaLayout({ children }: { children?: React.ReactNode })
           <FooterLink href="#" label="Security" />
         </footer>
       </aside>
+      )}
+      {authed && (<div className={`nexa-backdrop ${sidebarOpen ? 'show' : ''}`} onClick={() => setSidebarOpen(false)} />)}
 
       {/* Main */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <header style={{
           height: 56, background: "#fff", borderBottom: "1px solid #E5EAF1",
-          display: "flex", alignItems: "center", padding: "0 16px", gap: 12
+          display: "flex", alignItems: "center", padding: "0 16px", gap: 12,
+          justifyContent: "space-between"
         }}>
-          <input placeholder="Search"
-            style={{ flex: 1, height: 34, border: "1px solid #D3DBE6", borderRadius: 8, padding: "0 12px" }} />
-          <TopButton label="Help" />
-          <TopButton label="Alerts" />
-          <div style={{
-            width: 32, height: 32, borderRadius: 16, background: "#2E6BFF",
-            display: "grid", placeItems: "center", color: "#fff", fontWeight: 700
-          }}>U</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {authed && (
+              <button className="nexa-toggle" aria-label="Toggle sidebar" onClick={() => setSidebarOpen(s => !s)}
+                style={{ height: 34, padding: "0 10px", border: "1px solid #D3DBE6", background: "#fff", borderRadius: 8 }}>
+                ☰
+              </button>
+            )}
+            <a href="https://nexaai.co.uk">
+              <img src="/logo-nexa.png" alt="Nexa" style={{ height: 24 }} />
+            </a>
+            {!authed && (<a href="/login" style={{ textDecoration: "none", fontWeight: 600 }}>Sign in</a>)}
+          </div>
+          <nav style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Link href="/help" className="nexa-btn">Help</Link>
+            <Link href="/alerts" className="nexa-btn">Alerts</Link>
+            <Link href="/profile" className="nexa-btn" aria-label="Profile">
+              <span style={{ display:"inline-block", width:18, height:18, borderRadius:"50%", border:"2px solid currentColor" }} />
+            </Link>
+          </nav>
         </header>
 
         <main style={{ padding: 16 }}>{children}</main>

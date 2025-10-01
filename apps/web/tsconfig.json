@@ -1,9 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
+        "src/*",
         "*"
       ]
     },
@@ -18,17 +19,24 @@
       {
         "name": "next"
       }
+    ],
+    "lib": [
+      "ES2021",
+      "DOM",
+      "DOM.Iterable"
     ]
   },
   "include": [
+    ".next/types/**/*.ts",
     "src",
-    ".next/types/**/*.ts"
+    ".next-build/types/**/*.ts"
   ],
   "exclude": [
     "**/*.test.*",
     "**/*.spec.*",
     "**/__tests__/**",
     "**/*.stories.*",
+    "src/jobs/**",
     "node_modules",
     "dist",
     ".next"

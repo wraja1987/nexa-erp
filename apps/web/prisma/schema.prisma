@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invoice {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  customerId String
+  currency  String   @default("GBP")
+  status    String   @default("DRAFT")
+  total     Decimal  @db.Decimal(14,2) @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lines     InvoiceLine[]
+}
+
+model InvoiceLine {
+  id        String   @id @default(cuid())
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id])
+  invoiceId String
+  sku       String
+  qty       Int
+  price     Decimal  @db.Decimal(14,2)
+  createdAt DateTime @default(now())
+}
+
+model PurchaseOrder {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  supplierId String
+  currency  String   @default("GBP")
+  status    String   @default("DRAFT")
+  total     Decimal  @db.Decimal(14,2) @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lines     POLine[]
+}
+
+model POLine {
+  id        String   @id @default(cuid())
+  po        PurchaseOrder @relation(fields: [poId], references: [id])
+  poId      String
+  sku       String
+  qty       Int
+  price     Decimal  @db.Decimal(14,2)
+  createdAt DateTime @default(now())
+}
+
+model ModuleNode {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  path      String
+  parentId  String?
+  icon      String?
+  status    String?
+  sortKey   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent    ModuleNode? @relation("ParentChildren", fields: [parentId], references: [id])
+  children  ModuleNode[] @relation("ParentChildren")
+}

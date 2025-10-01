@@ -1,91 +1,52 @@
 "use client";
-import * as React from "react";
-import Link from "next/link";
-
-type Node = { id: string; title: string; path: string; children?: Node[] };
-
-function flatten(nodes: Node[]): Node[] {
-  const out: Node[] = [];
-  const visit = (n: Node) => { out.push(n); (n.children||[]).forEach(visit); };
-  nodes.forEach(visit); return out;
-}
-
-export default function Sidebar(){
-  const [tree, setTree] = React.useState<Node[]>([]);
-  const [open, setOpen] = React.useState<Record<string, boolean>>({});
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(()=>{ (async()=>{
-    try{
-      const res = await fetch('/api/modules?tree=1', { cache: 'no-store' });
-      const data = await res.json();
-      if(Array.isArray(data)) setTree(data);
-    }catch{}
-  })(); },[]);
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const items = Array.from(containerRef.current?.querySelectorAll('[role="treeitem"]') || []) as HTMLElement[];
-    const currentIndex = items.findIndex(el => el === document.activeElement);
-    if (e.key === 'ArrowDown') { e.preventDefault(); items[Math.min(items.length-1, currentIndex+1)]?.focus(); }
-    if (e.key === 'ArrowUp') { e.preventDefault(); items[Math.max(0, currentIndex-1)]?.focus(); }
-    if (e.key === 'Home') { e.preventDefault(); items[0]?.focus(); }
-    if (e.key === 'End') { e.preventDefault(); items[items.length-1]?.focus(); }
-    if (e.key === 'ArrowRight' && document.activeElement) {
-      const id = (document.activeElement as HTMLElement).dataset.id;
-      if (id && (open[id] !== true)) setOpen(s=>({ ...s, [id]: true }));
+import { useEffect, useState, useRef } from "react";
+import { loadExpanded, saveExpanded } from "@/src/lib/sidebarState";
+type Node = { id: string; label: string; href?: string; children?: Node[] };
+const demoTree: Node[] = [
+  { id: "finance", label: "Finance", children: [
+    { id: "invoices", label: "Invoices", href: "/modules/finance/invoices" },
+    { id: "bills", label: "Bills", href: "/modules/finance/bills" },
+  ]},
+  { id: "sales", label: "Sales & CRM", children: [
+    { id: "orders", label: "Orders", href: "/modules/sales-crm/sales-orders" },
+  ]},
+];
+export default function Sidebar({ userId = "demo-user", tree = demoTree }: { userId?: string; tree?: Node[] }) {
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const listRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { setExpanded(loadExpanded(userId)); }, [userId]);
+  useEffect(() => { saveExpanded(userId, expanded); }, [userId, expanded]);
+  function toggle(id: string) { setExpanded(x => x.includes(id) ? x.filter(y => y!==id) : [...x, id]); }
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      const items = listRef.current?.querySelectorAll<HTMLElement>("[data-node-id]") || [];
+      if (items.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      const idx = active ? Array.from(items).indexOf(active) : -1;
+      if (e.key === "ArrowDown") { e.preventDefault(); const n = items[Math.min(items.length-1, Math.max(0, idx+1))]; n?.focus(); return; }
+      if (e.key === "ArrowUp") { e.preventDefault(); const n = items[Math.max(0, idx-1)]; n?.focus(); return; }
+      if (e.key === "ArrowRight") { const cur = active?.dataset.nodeId; if (!cur) return; if (!expanded.includes(cur)) setExpanded(x => [...x, cur]); return; }
+      if (e.key === "ArrowLeft") { const cur = active?.dataset.nodeId; if (!cur) return; if (expanded.includes(cur)) setExpanded(x => x.filter(y => y!==cur)); return; }
+      if (e.key === "Enter") { const a = active?.querySelector("a") as HTMLAnchorElement | null; if (a) { e.preventDefault(); a.click(); } }
     }
-    if (e.key === 'ArrowLeft' && document.activeElement) {
-      const id = (document.activeElement as HTMLElement).dataset.id;
-      if (id && (open[id] === true)) setOpen(s=>({ ...s, [id]: false }));
-    }
-  };
-
-  return (
-    <nav aria-label="Primary" style={{padding:10, overflowY:'auto', flex:1}}>
-      <div style={{ margin: '8px 0', fontSize: 12, opacity: .85 }}>Dashboard</div>
-      <Link href="/dashboard" className="nexa-link" style={{ display:'block', padding:'6px 10px' }}>Dashboard</Link>
-
-      <div style={{ margin: '12px 0 6px', fontSize: 12, opacity: .85 }}>Modules</div>
-      <div role="tree" aria-label="Modules" ref={containerRef} onKeyDown={onKeyDown}>
-        {tree.map((n)=> (
-          <TreeNode key={n.id} node={n} open={!!open[n.id]} setOpen={(v)=>setOpen(s=>({ ...s, [n.id]: v }))} depth={0} />
-        ))}
-      </div>
-    </nav>
-  );
-}
-
-function TreeNode({ node, open, setOpen, depth }:{ node: Node; open: boolean; setOpen:(v:boolean)=>void; depth:number }){
-  const hasChildren = (node.children?.length || 0) > 0;
-  return (
-    <div style={{ marginBottom: 4, marginLeft: depth ? 12 : 0 }}>
-      <button
-        role="treeitem"
-        aria-expanded={hasChildren ? open : undefined}
-        aria-label={node.title}
-        data-id={node.id}
-        onClick={()=> hasChildren ? setOpen(!open) : undefined}
-        onDoubleClick={()=> { if(!hasChildren) window.location.href = node.path; }}
-        tabIndex={0}
-        style={{
-          width:'100%', textAlign:'left', display:'flex', alignItems:'center', gap:8,
-          padding:'6px 10px', borderRadius:8, border:0, background:'transparent', color:'#fff', cursor:'pointer'
-        }}
-      >
-        {hasChildren ? <Caret open={open}/> : <span style={{width:10}}/>}
-        <Link href={node.path} style={{ color:'#fff', textDecoration:'none' }}>{node.title}</Link>
-      </button>
-      {hasChildren && open && (
-        <div>
-          {node.children!.map(c=> (
-            <TreeNode key={c.id} node={c} open={false} setOpen={()=>{}} depth={depth+1} />
-          ))}
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [expanded]);
+  function NodeItem({ node, depth=0 }: { node: Node; depth?: number }) {
+    const hasChildren = (node.children?.length || 0) > 0;
+    const isOpen = expanded.includes(node.id);
+    return (
+      <div className="select-none">
+        <div tabIndex={0} data-node-id={node.id} className="flex items-center justify-between rounded-lg px-3 py-2" style={{ paddingLeft: 8 + depth*12 }}>
+          <div className="flex items-center gap-2">
+            {hasChildren && (<button onClick={() => toggle(node.id)} aria-label={isOpen? "Collapse" : "Expand"}>{isOpen ? "▾" : "▸"}</button>)}
+            {node.href ? <a href={node.href} className="hover:underline">{node.label}</a> : <span>{node.label}</span>}
+          </div>
+          {!hasChildren ? null : <span className="text-xs text-slate-400">{isOpen? "Open" : "Closed"}</span>}
         </div>
-      )}
-    </div>
-  );
-}
-
-function Caret({ open }:{ open:boolean }){
-  return (<span aria-hidden style={{display:'inline-block', width:10, transform: open ? 'rotate(90deg)' : 'none', transition:'transform .12s'}}>▶</span>);
+        {hasChildren && isOpen && (<div className="ml-3">{node.children!.map(c => <NodeItem key={c.id} node={c} depth={depth+1} />)}</div>)}
+      </div>
+    );
+  }
+  return (<aside className="w-full" aria-label="Sidebar"><div ref={listRef} className="space-y-1">{tree.map(n => <NodeItem key={n.id} node={n} />)}</div></aside>);
 }

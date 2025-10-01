@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexa ERP Web — Data & APIs
 
-## Getting Started
+Last updated: 2025-09-30
 
-First, run the development server:
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm api:dev   # starts dev server
+pnpm verify:data  # runs verifier script
+pnpm test:kpi     # runs Playwright smoke (uses playwright.config.ts)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Do not paste real secrets here.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- DATABASE_URL — Postgres connection string
+- REDIS_URL — Redis connection (optional; defaults to redis://127.0.0.1:6379)
+- KPI_TTL_SEC — TTL for KPI cache headers (default 120–300)
+- KPI_COGS_ENABLED — set "1" to enable GM calculation if COGS available
 
-## Learn More
+See `.env.example` for placeholders.
 
-To learn more about Next.js, take a look at the following resources:
+## Modules API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Source of truth: `public/modules/_tree.json`
+- Endpoint: `/api/modules?tree=1` — serves JSON with ETag/304
+- Schema docs: `docs/api/modules-tree.md`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## KPIs & Actions
 
-## Deploy on Vercel
+- KPIs: `/api/kpi/revenue`, `/api/kpi/gm`, `/api/kpi/invoices`, `/api/kpi/wip`
+- Quick actions: `/api/actions/invoice`, `/api/actions/po`
+- Caching: in-process with Redis tag invalidation; TTL via `KPI_TTL_SEC`
+- Idempotency: pass `Idempotency-Key` header (60s window)
+- Rate limiting: Redis token bucket
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Prisma & DB
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Prisma schema in `prisma/schema.prisma` should match SQL tables:
+  - Invoice, InvoiceLine, PurchaseOrder, POLine
+- Generate client:
+
+```bash
+pnpm db:gen
+```
+
+- Migration note: run SQL in `db/migrations/000-bootstrap.sql` on new envs to create extensions and tables.
+
+## CI
+
+Recommended steps in your workflow:
+
+```bash
+pnpm verify:data
+npx playwright test -c ./playwright.config.ts
+```
+
+Fail the build if any step fails.

@@ -1,0 +1,12 @@
+{
+  "ci": {
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.85 }],
+        "categories:accessibility": ["error", { "minScore": 0.90 }],
+        "modern-image-formats": "warn",
+        "font-display": "warn"
+      }
+    }
+  }
+}

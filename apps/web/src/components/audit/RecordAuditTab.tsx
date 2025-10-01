@@ -16,7 +16,10 @@ export default function RecordAuditTab({ entity, entityId, events }: { entity: s
   }
   const exportCsv = () => {
     const header = 'at,who,action,details\n'
-    const body = demo.map(e=>`${e.at},${e.who},${e.action},${(e.details||'').replaceAll(',', ';')}`).join('\n')
+    const body = demo.map(e=>{
+      const safeDetails = String(e.details||'').split(',').join(';')
+      return `${e.at},${e.who},${e.action},${safeDetails}`
+    }).join('\n')
     const blob = new Blob([header+body], { type:'text/csv' })
     const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`audit-${entity}-${entityId}.csv`; a.click(); URL.revokeObjectURL(url)
   }
