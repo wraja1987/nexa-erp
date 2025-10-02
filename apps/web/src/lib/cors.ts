@@ -1,26 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ALLOW = new Set<string>([
-  process.env.NEXT_PUBLIC_APP_ORIGIN || "https://app.nexaai.co.uk",
-  process.env.API_HOST || "https://api.nexaai.co.uk",
-]);
+// Exact allow-list (edit as needed)
+const ALLOW = new Set<string>(["https://app.nexaai.co.uk","https://api.nexaai.co.uk"]);
+
+export function originAllowed(origin: string | null) {
+  return !!origin && ALLOW.has(origin);
+}
 
 export function withCors(req: NextRequest, res: NextResponse = NextResponse.next()) {
   const origin = req.headers.get("origin") ?? "";
   const method = req.method.toUpperCase();
 
-  // Preflight
+  // CORS preflight
   if (method === "OPTIONS") {
-    if (origin && ALLOW.has(origin)) {
+    if (originAllowed(origin)) {
       const pre = new NextResponse(null, { status: 204 });
       pre.headers.set("Access-Control-Allow-Origin", origin);
       pre.headers.set("Vary", "Origin");
       pre.headers.set("Access-Control-Allow-Credentials", "true");
       pre.headers.set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,PATCH,OPTIONS");
-      pre.headers.set(
-        "Access-Control-Allow-Headers",
-        req.headers.get("access-control-request-headers") ?? "Content-Type, Authorization, X-Requested-With"
-      );
+      pre.headers.set("Access-Control-Allow-Headers", req.headers.get("access-control-request-headers") ?? "Content-Type, Authorization, X-Requested-With");
       pre.headers.set("Access-Control-Max-Age", "600");
       return pre;
     }
@@ -28,14 +27,10 @@ export function withCors(req: NextRequest, res: NextResponse = NextResponse.next
   }
 
   // Simple requests
-  if (origin && ALLOW.has(origin)) {
+  if (originAllowed(origin)) {
     res.headers.set("Access-Control-Allow-Origin", origin);
     res.headers.set("Vary", "Origin");
     res.headers.set("Access-Control-Allow-Credentials", "true");
   }
   return res;
-}
-
-export function originAllowed(origin: string | null) {
-  return !!origin && ALLOW.has(origin);
 }
