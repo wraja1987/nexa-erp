@@ -40,5 +40,16 @@ export const authOptions: NextAuthOptions = {
       console.log("[next-auth][debug]", code, ...message);
     },
   },
+  cookies: {
+    sessionToken: {
+      name: "nexa_session",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: true,
+        domain: (process.env.NEXT_PUBLIC_APP_ORIGIN ? new URL(process.env.NEXT_PUBLIC_APP_ORIGIN).hostname : undefined) as any,
+      },
+    },
+  },
 };
 export default NextAuth(authOptions);
