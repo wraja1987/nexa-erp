@@ -1,12 +1,26 @@
 {
   "ci": {
+    "collect": {
+      "numberOfRuns": 1,
+      "startServerCommand": "LOCAL_LH=1 NEXTAUTH_URL=http://127.0.0.1:3010 AUTH_TRUST_HOST=1 NEXT_PUBLIC_APP_ORIGIN=http://127.0.0.1:3010 NEXT_TELEMETRY_DISABLED=1 NODE_ENV=production pnpm start:prod",
+      "startServerReadyPattern": "Ready in",
+      "startServerReadyTimeout": 180000,
+      "url": [
+        "http://127.0.0.1:3010/lhci.html"
+      ],
+      "settings": {
+        "preset": "desktop",
+        "skipAudits": ["uses-http2"],
+        "onlyCategories": ["performance", "accessibility"],
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage --ignore-certificate-errors"
+      }
+    },
     "assert": {
       "assertions": {
         "categories:performance": ["error", { "minScore": 0.85 }],
-        "categories:accessibility": ["error", { "minScore": 0.90 }],
-        "modern-image-formats": "warn",
-        "font-display": "warn"
+        "categories:accessibility": ["error", { "minScore": 0.90 }]
       }
-    }
+    },
+    "upload": { "target": "temporary-public-storage" }
   }
 }

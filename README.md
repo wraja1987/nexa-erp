@@ -22,6 +22,8 @@
 
 # V5 Ultra ERP
 
+![Lighthouse CI](https://img.shields.io/github/actions/workflow/status/wraja1987/nexa-erp/lighthouse-ci.yml?branch=main&label=Lighthouse%20budgets)
+
 Phase 0 scaffold for the Final Patched+++ benchmark.
 
 Commands:
