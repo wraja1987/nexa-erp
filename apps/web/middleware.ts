@@ -25,6 +25,12 @@ export default function middleware(req: NextRequest) {
   const nonce = genNonce();
   const url = new URL(req.url);
   const self = `${url.protocol}//${url.host}`;
+  const origin = req.headers.get("origin") || "";
+
+  const allowList = new Set([
+    process.env.NEXT_PUBLIC_APP_ORIGIN || "",
+    process.env.API_HOST || "",
+  ].filter(Boolean));
 
   const csp = [
     "default-src 'self'",
@@ -41,6 +47,21 @@ export default function middleware(req: NextRequest) {
     "upgrade-insecure-requests"
   ].join("; ");
 
+  // CORS allowlist + preflight for API routes
+  if (url.pathname.startsWith("/api/")) {
+    if (req.method === "OPTIONS") {
+      const preflight = new NextResponse(null, { status: 204 });
+      preflight.headers.set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+      preflight.headers.set("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization");
+      if (origin && allowList.has(origin)) preflight.headers.set("Access-Control-Allow-Origin", origin);
+      preflight.headers.set("Access-Control-Allow-Credentials", "true");
+      return preflight;
+    }
+    if (origin && allowList.size > 0 && !allowList.has(origin)) {
+      return new NextResponse("Blocked by CORS policy", { status: 403 });
+    }
+  }
+
   const res = NextResponse.next();
   res.headers.set("Content-Security-Policy", csp);
   res.headers.set("Strict-Transport-Security", "max-age=15552000; includeSubDomains");
@@ -50,7 +71,11 @@ export default function middleware(req: NextRequest) {
   res.headers.set("Permissions-Policy", process.env.NEXT_PERMISSIONS_POLICY || "accelerometer=(), autoplay=(), camera=(), clipboard-read=(), clipboard-write=(), display-capture=(), document-domain=(), encrypted-media=(), fullscreen=*, geolocation=(), gyroscope=(), hid=(), idle-detection=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), usb=(), web-share=(), xr-spatial-tracking=()");
   res.headers.set("X-Nexa-Nonce", nonce);
 
-  if (url.pathname.startsWith("/api/")) res.headers.set("Cache-Control", "no-store");
+  if (url.pathname.startsWith("/api/")) {
+    res.headers.set("Cache-Control", "no-store");
+    if (origin && allowList.has(origin)) res.headers.set("Access-Control-Allow-Origin", origin);
+    res.headers.set("Access-Control-Allow-Credentials", "true");
+  }
   else if (url.pathname.endsWith(".html") || !/\.[a-zA-Z0-9]+$/.test(url.pathname))
     res.headers.set("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
 
