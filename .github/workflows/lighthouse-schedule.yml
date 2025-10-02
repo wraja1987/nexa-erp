@@ -1,0 +1,35 @@
+name: Lighthouse CI (Weekly)
+on:
+  schedule:
+    - cron: "0 2 * * 0"   # Sundays 02:00 UTC
+  workflow_dispatch:
+jobs:
+  lhci-weekly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+      - name: Install deps
+        working-directory: apps/web
+        run: pnpm install --frozen-lockfile
+      - name: Build + Lighthouse (budgets enforced)
+        working-directory: apps/web
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NODE_ENV: production
+          PORT: "3010"
+          LOCAL_LH: "1"
+        run: pnpm lh:ci
+      - name: Upload LHCI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouseci-weekly
+          path: apps/web/.lighthouseci

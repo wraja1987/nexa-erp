@@ -48,7 +48,8 @@
     "lh:run": "lhci autorun --config=.lighthouserc.json",
     "lh:assert": "lhci assert --config=.lighthouserc.json",
     "lh:urls": "echo [\"http://localhost:3010/login\",\"http://localhost:3010/dashboard\"]",
-    "opt:images": "node --experimental-modules ./scripts/optimise-images.mjs || node ./scripts/optimise-images.mjs"
+    "opt:images": "node --experimental-modules ./scripts/optimise-images.mjs || node ./scripts/optimise-images.mjs",
+    "verify:budgets": "bash ./scripts/verify-budgets.sh"
   },
   "dependencies": {
     "@nexa/registry": "file:../../stubs/registry",
