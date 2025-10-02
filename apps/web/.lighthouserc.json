@@ -13,7 +13,7 @@
         "preset": "desktop",
         "skipAudits": ["uses-http2"],
         "onlyCategories": ["performance", "accessibility"],
-        "chromeFlags": "--no-sandbox --disable-dev-shm-usage --ignore-certificate-errors"
+        "chromeFlags": "--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --ignore-certificate-errors --allow-insecure-localhost --disable-features=BlockInsecurePrivateNetworkRequests"
       }
     },
     "assert": {
