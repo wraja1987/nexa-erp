@@ -1,3 +1,5 @@
+// Tip: wrap handler with withSentry for richer traces
+import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 export default function handler(_req: NextApiRequest, res: NextApiResponse){
   res.status(200).json({ ok: true, service: "nexa-web", ts: new Date().toISOString() });

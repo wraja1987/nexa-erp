@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -24,7 +23,13 @@
       "ES2021",
       "DOM",
       "DOM.Iterable"
-    ]
+    ],
+    "target": "ES2017",
+    "strict": false,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strictNullChecks": true
   },
   "include": [
     ".next/types/**/*.ts",

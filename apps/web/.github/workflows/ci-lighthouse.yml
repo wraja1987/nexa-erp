@@ -1,0 +1,53 @@
+name: Lighthouse Budgets Gate
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lhci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - uses: pnpm/action-setup@v3
+        with: { version: 9 }
+      - uses: browser-actions/setup-chrome@v1
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Build (production, safe env)
+        working-directory: ./apps/web
+        env:
+          SENTRY_ORG: ""
+          SENTRY_PROJECT: ""
+          SENTRY_AUTH_TOKEN: ""
+          NEXT_PRIVATE_TEST_PROXY: "1"
+          TURBOPACK: "false"
+          LHCI_DISABLE_E2E: "1"
+        run: pnpm exec next build
+      - name: Start server
+        working-directory: ./apps/web
+        env:
+          NEXT_PRIVATE_TEST_PROXY: "1"
+          TURBOPACK: "false"
+          LHCI_DISABLE_E2E: "1"
+        run: |
+          nohup pnpm exec next start -p 3010 > .next/serve.log 2>&1 &
+          echo $! > .next/serve.pid
+      - name: Wait for server
+        working-directory: ./apps/web
+        run: npx wait-on http://localhost:3010/login
+      - name: Lighthouse CI (assert budgets)
+        working-directory: ./apps/web
+        env:
+          PORT: 3010
+        run: npx -y @lhci/cli@0.13.x autorun --config=.lighthouserc.json --budgetsPath=./lighthouse.budgets.json
+      - name: Stop server
+        if: always()
+        working-directory: ./apps/web
+        run: |
+          if [ -f .next/serve.pid ]; then kill -9 $(cat .next/serve.pid) || true; fi
+          sleep 1

@@ -9,6 +9,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en-GB">
         <Head>
+          <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin/>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <body>
@@ -20,4 +21,7 @@ class MyDocument extends Document {
   }
 }
 export default MyDocument;
+
+
+
 

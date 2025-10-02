@@ -1,3 +1,5 @@
+// Tip: wrap handler with withSentry for richer traces
+import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { redisLimiter } from "@/src/lib/rate-limit";
 const limit = redisLimiter({ windowMs: 60_000, max: 20, keyPrefix: "status" });

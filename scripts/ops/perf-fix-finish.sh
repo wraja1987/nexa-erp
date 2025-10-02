@@ -223,3 +223,6 @@ pnpm sentry:smoke || true
 echo "== CI reminder =="
 echo "Push to GitHub. Ensure repo secrets exist (NEXTAUTH_URL, NEXTAUTH_SECRET, DATABASE_URL, SENTRY_DSN, SENTRY_ENVIRONMENT). Enable branch protection to block merges on CI failure."
 
+
+
+

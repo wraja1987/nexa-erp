@@ -1,0 +1,65 @@
+name: Web Release
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      SENTRY_ENV: production
+      SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: corepack enable
+      - run: pnpm i --frozen-lockfile
+      - name: Compute release
+        run: echo "SENTRY_RELEASE=nexa-$(git rev-parse --short HEAD)-$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+      - name: Build with release
+        run: pnpm run build:release
+      - name: Finalise release + deploy
+        run: |
+          npx sentry-cli releases finalize "$SENTRY_RELEASE"
+          npx sentry-cli releases deploys "$SENTRY_RELEASE" new -e production
+name: Web Release
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      SENTRY_ENV: production
+      SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: corepack enable
+      - run: pnpm i --frozen-lockfile
+      - name: Compute release
+        run: echo "SENTRY_RELEASE=nexa-$(git rev-parse --short HEAD)-$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+      - name: Build with release
+        run: pnpm run build:release
+      - name: Finalise release + deploy
+        run: |
+          npx sentry-cli releases finalize "$SENTRY_RELEASE"
+          npx sentry-cli releases deploys "$SENTRY_RELEASE" new -e production
+

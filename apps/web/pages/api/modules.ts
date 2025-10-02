@@ -1,3 +1,5 @@
+// Tip: wrap handler with withSentry for richer traces
+import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
 import tree from "../../public/modules/_tree.json";

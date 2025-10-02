@@ -53,3 +53,6 @@ CREATE INDEX IF NOT EXISTS "POLine_poId_idx" ON "POLine"("poId");
 CREATE INDEX IF NOT EXISTS "Invoice_createdAt_desc_idx" ON "Invoice"("createdAt" DESC);
 CREATE INDEX IF NOT EXISTS "Invoice_status_idx" ON "Invoice"(status);
 
+
+
+
