@@ -16,7 +16,12 @@ const nextConfig = {
     return [
       { source: "/_next/static/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       { source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|css|js|woff|woff2|ttf)", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
-      { source: "/api/:path*", headers: [{ key: "Cache-Control", value: "no-store" }] },
+      { source: "/api/:path*", headers: [
+        { key: "Cache-Control", value: "no-store" },
+        // CORS defaults to locked down; actual allowlist in middleware
+        { key: "Access-Control-Allow-Methods", value: "GET,POST,PUT,DELETE,OPTIONS" },
+        { key: "Access-Control-Allow-Headers", value: "X-Requested-With, Content-Type, Authorization" }
+      ] },
       { source: "/(.*)", headers: [{ key: "Cache-Control", value: "s-maxage=60, stale-while-revalidate=300" }] },
     ];
   },
