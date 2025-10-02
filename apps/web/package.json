@@ -52,7 +52,9 @@
     "verify:budgets": "bash ./scripts/verify-budgets.sh",
     "test:a11y": "playwright test -c tests/playwright.config.ts",
     "test:a11y:ci": "start-server-and-test \"LOCAL_LH=1 pnpm start -p 3010\" http://127.0.0.1:3010/login \"BASE_URL=http://127.0.0.1:3010 pnpm test:a11y\"",
-    "lh:smoke": "lhci collect --config=.lighthouserc.json || true"
+    "lh:smoke": "lhci collect --config=.lighthouserc.json || true",
+    "audit:images": "node ./scripts/image-audit.mjs",
+    "perf:quick": "pnpm -s opt:images && pnpm -s build:prod && pnpm -s size"
   },
   "dependencies": {
     "@nexa/registry": "file:../../stubs/registry",
