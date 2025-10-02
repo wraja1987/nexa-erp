@@ -1,0 +1,55 @@
+name: Accessibility & Perf Smoke
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  a11y-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: Install deps
+        working-directory: apps/web
+        run: |
+          pnpm install --frozen-lockfile
+          npx playwright install --with-deps
+
+      - name: Build (production)
+        working-directory: apps/web
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NODE_ENV: production
+        run: pnpm -s build:prod
+
+      - name: Run a11y tests (axe via Playwright)
+        working-directory: apps/web
+        env:
+          LOCAL_LH: "1"
+          PORT: "3010"
+        run: pnpm -s test:a11y:ci
+
+      - name: Perf smoke (collect only)
+        working-directory: apps/web
+        env:
+          LOCAL_LH: "1"
+          PORT: "3010"
+        run: pnpm -s lh:smoke
+
+      - name: Upload Playwright report (if any)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=20 <21"
   },
   "scripts": {
     "dev": "NODE_OPTIONS=\"--require=./scripts/nexa-path-shim.js\" next dev -p 3000",
@@ -49,7 +49,10 @@
     "lh:assert": "lhci assert --config=.lighthouserc.json",
     "lh:urls": "echo [\"http://localhost:3010/login\",\"http://localhost:3010/dashboard\"]",
     "opt:images": "node --experimental-modules ./scripts/optimise-images.mjs || node ./scripts/optimise-images.mjs",
-    "verify:budgets": "bash ./scripts/verify-budgets.sh"
+    "verify:budgets": "bash ./scripts/verify-budgets.sh",
+    "test:a11y": "playwright test -c tests/playwright.config.ts",
+    "test:a11y:ci": "start-server-and-test \"LOCAL_LH=1 pnpm start -p 3010\" http://127.0.0.1:3010/login \"BASE_URL=http://127.0.0.1:3010 pnpm test:a11y\"",
+    "lh:smoke": "lhci collect --config=.lighthouserc.json || true"
   },
   "dependencies": {
     "@nexa/registry": "file:../../stubs/registry",
@@ -92,7 +95,7 @@
     "npm-run-all": "^4.1.5",
     "playwright": "^1.55.0",
     "sharp": "^0.34.4",
-    "start-server-and-test": "^2.0.3",
+    "start-server-and-test": "^2.1.2",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.1",
     "tsx": "4.20.4",
