@@ -7,6 +7,6 @@ Quick navigation
 - Modules: 
 - Processes and Flows: 
 - Technical: 
-- Operations: 
+- Operations: [RUNBOOK](../Nexa ERP Documents/RUNBOOK.md)
 - Security & Compliance: 
 - Configuration & Admin:  and

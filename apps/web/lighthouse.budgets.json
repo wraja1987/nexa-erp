@@ -1,0 +1,15 @@
+[
+  {
+    "path": "/",
+    "options": {
+      "resourceSizes": [
+        { "resourceType": "image", "budget": 350 },
+        { "resourceType": "font",  "budget": 200 }
+      ],
+      "resourceCounts": [
+        { "resourceType": "image", "budget": 30 },
+        { "resourceType": "font",  "budget": 6 }
+      ]
+    }
+  }
+]
