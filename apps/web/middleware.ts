@@ -1,10 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
-function genNonce() {
-  const arr = new Uint8Array(16);
-  crypto.getRandomValues(arr);
-  // @ts-ignore
-  return Buffer.from(arr).toString("base64");
+function genNonce(): string {
+  try {
+    const arr = new Uint8Array(16);
+    crypto.getRandomValues(arr);
+    let binary = "";
+    for (const byte of arr) binary += String.fromCharCode(byte);
+    // btoa is available in many edge runtimes; if not, fallback to hex/uuid
+    // @ts-ignore
+    if (typeof btoa === "function") return btoa(binary);
+    return Array.from(arr).map((b) => b.toString(16).padStart(2, "0")).join("");
+  } catch {
+    // Fallback to UUID without dashes
+    // @ts-ignore
+    return (crypto.randomUUID?.() || "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").replace(/-/g, "");
+  }
 }
 
 export const config = {
@@ -17,17 +27,17 @@ export default function middleware(req: NextRequest) {
   const self = `${url.protocol}//${url.host}`;
 
   const csp = [
-    "default-src self",
-    `script-src self nonce- strict-dynamic ${process.env.NEXT_PUBLIC_CSP_STRIPE||""} ${process.env.NEXT_PUBLIC_CSP_SENTRY||""}`,
-    `style-src self nonce-`,
-    "img-src self data: blob:",
-    "font-src self data:",
-    `connect-src self ${process.env.NEXT_PUBLIC_CSP_STRIPE||""} ${process.env.NEXT_PUBLIC_CSP_SENTRY||""}`,
-    "frame-ancestors none",
-    `frame-src ${process.env.NEXT_PUBLIC_CSP_STRIPE||""}`,
-    "object-src none",
-    "base-uri self",
-    "form-action self",
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${(process.env.NEXT_PUBLIC_CSP_STRIPE || "").trim()} ${(process.env.NEXT_PUBLIC_CSP_SENTRY || "").trim()}`,
+    `style-src 'self' 'nonce-${nonce}'`,
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    `connect-src 'self' ${(process.env.NEXT_PUBLIC_CSP_STRIPE || "").trim()} ${(process.env.NEXT_PUBLIC_CSP_SENTRY || "").trim()}`,
+    "frame-ancestors 'none'",
+    `frame-src ${(process.env.NEXT_PUBLIC_CSP_STRIPE || "").trim()}`,
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
     "upgrade-insecure-requests"
   ].join("; ");
 

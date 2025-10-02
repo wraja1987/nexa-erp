@@ -19,7 +19,9 @@ export default function RootLayout(props:any){
     <html lang="en-GB" lang="en-GB">
       <body className={inter.className}>
   {/* Example Script usage with nonce so it passes CSP */}
-  <Script id="nexa-bootstrap" nonce={getCspNonce()} strategy="afterInteractive">{``}</Script>{children}</body>
+  <Script id="nexa-bootstrap" nonce={getCspNonce()} strategy="afterInteractive">{``}</Script>
+  {props.children}
+  </body>
     </html>
   );
 }

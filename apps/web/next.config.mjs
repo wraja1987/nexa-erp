@@ -11,7 +11,15 @@ const nextConfig = {
     disableServerWebpackPlugin: false,
     disableClientWebpackPlugin: false,
   },
-  // Security headers remain managed elsewhere in the Nexa baseline
+  images: { formats: ["image/avif", "image/webp"] },
+  async headers() {
+    return [
+      { source: "/_next/static/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      { source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|css|js|woff|woff2|ttf)", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      { source: "/api/:path*", headers: [{ key: "Cache-Control", value: "no-store" }] },
+      { source: "/(.*)", headers: [{ key: "Cache-Control", value: "s-maxage=60, stale-while-revalidate=300" }] },
+    ];
+  },
 };
 
 const sentryWebpackOptions = {
