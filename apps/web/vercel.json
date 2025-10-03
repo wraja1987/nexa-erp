@@ -1,9 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "package.json", "use": "@vercel/next" }
-  ],
-  "installCommand": "corepack enable && pnpm -v && pnpm install --no-frozen-lockfile",
-  "buildCommand": "corepack enable && pnpm -v && npx next build",
-  "outputDirectory": ".next"
+  "framework": "nextjs",
+  "installCommand": "corepack enable && pnpm install --frozen-lockfile",
+  "buildCommand": "corepack enable && pnpm build:ci"
 }
