@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "buildCommand": "corepack enable && pnpm install --frozen-lockfile && cd apps/web && pnpm build:ci",
+  "installCommand": "corepack enable && pnpm install --frozen-lockfile",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- apps/web",
+  "framework": "nextjs"
+}
