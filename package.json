@@ -2,6 +2,7 @@
   "name": "nexa-erp",
   "private": true,
   "packageManager": "pnpm@10.3.0",
+  "engines": { "node": ">=20 <21" },
   "workspaces": [
     "apps/*",
     "packages/*",

@@ -2,5 +2,12 @@
   "version": 2,
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build:ci",
+  "outputDirectory": "apps/web/.next"
+}
+{
+  "version": 2,
+  "framework": "nextjs",
+  "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build:ci"
 }

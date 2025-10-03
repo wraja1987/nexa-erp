@@ -43,6 +43,17 @@ export default function middleware(req: NextRequest) {
     "upgrade-insecure-requests"
   ].join("; ");
 
+  // Skip static assets, favicon, Next internals and API routes
+  const { pathname } = req.nextUrl;
+  if (
+    pathname.startsWith("/_next/") ||
+    pathname === "/favicon.ico" ||
+    pathname.startsWith("/api") ||
+    /\.[a-zA-Z0-9]+$/.test(pathname)
+  ) {
+    return NextResponse.next();
+  }
+
   // CORS allowlist + preflight for API routes
   if (url.pathname.startsWith("/api/")) {
     if (req.method === "OPTIONS") {
@@ -78,5 +89,7 @@ export default function middleware(req: NextRequest) {
   return res;
 }
 
-
-export const config = { matcher: '/:path*' };
+// ✅ Next 15-safe, string matcher (no regex capturing groups)
+export const config = {
+  matcher: '/:path*',
+};
