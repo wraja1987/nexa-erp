@@ -1,9 +1,4 @@
-packages/*
-apps/mobile/*
-apps/*/node_modules
-**/.cache
-**/.gradle
-**/android
-**/ios
-Nexa ERP Documents/*
-ops/*
+apps/mobile/
+packages/
+node_modules/
+*.log
