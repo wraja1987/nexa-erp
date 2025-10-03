@@ -1,0 +1,52 @@
+name: Vercel
+on: [pull_request, workflow_dispatch]
+permissions: { contents: read }
+concurrency: { group: vercel-${{ github.ref }}, cancel-in-progress: true }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Gate secrets
+        id: gate
+        run: |
+          miss=0
+          for v in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID VERCEL_SCOPE; do
+            if [ -z "${{ secrets[v] }}" ]; then echo "Missing $v"; miss=1; fi
+          done
+          echo "ok=$((1-miss))" >> "$GITHUB_OUTPUT"
+      - if: steps.gate.outputs.ok != 1
+        run: echo "Secrets incomplete; passing job as no-op."
+      - if: steps.gate.outputs.ok == 1
+        uses: actions/checkout@v4
+      - if: steps.gate.outputs.ok == 1
+        name: Verify Vercel auth (masked)
+        run: |
+          npm i -g vercel@latest >/dev/null 2>&1
+          # These echoes are masked by GitHub; just to confirm scope wires through
+          echo "SCOPE=${{ secrets.VERCEL_SCOPE }}"
+          echo "ORG=${{ secrets.VERCEL_ORG_ID }}"
+          echo "PROJ=${{ secrets.VERCEL_PROJECT_ID }}"
+          vercel --version
+          vercel --token="${{ secrets.VERCEL_TOKEN }}" --scope="${{ secrets.VERCEL_SCOPE }}" whoami || exit 1
+          vercel --token="${{ secrets.VERCEL_TOKEN }}" --scope="${{ secrets.VERCEL_SCOPE }}" projects ls | head -n 20 || true
+      - if: steps.gate.outputs.ok == 1
+        uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - if: steps.gate.outputs.ok == 1
+        uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - if: steps.gate.outputs.ok == 1
+        run: pnpm install --frozen-lockfile
+      - if: steps.gate.outputs.ok == 1
+        working-directory: apps/web
+        run: pnpm build:ci || pnpm next build
+      - if: steps.gate.outputs.ok == 1
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          working-directory: ./apps/web
+          scope: ${{ secrets.VERCEL_SCOPE }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
