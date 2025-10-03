@@ -18,7 +18,7 @@ function genNonce(): string {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(png|jpg|jpeg|gif|webp|avif|svg|ico|css|js|map)).*)"],
+  matcher: ["/(?!_next/static|_next/image|favicon.ico|.*\\.?:png|jpg|jpeg|gif|webp|avif|svg|ico|css|js|map).*)"],
 };
 
 export default function middleware(req: NextRequest) {
