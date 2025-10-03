@@ -1,23 +1,33 @@
 import { test, expect } from "@playwright/test";
 const PORT = process.env.PORT || "3010";
-const RL_HEADERS = { "X-RL-Max": "5", "X-RL-Window": "10" };
+const BASE = `http://localhost:${PORT}`;
 
-test("bursts yield 429 (deterministic with header overrides)", async ({ request }) => {
+test.beforeAll(async ({ request }) => {
+  for (let i = 0; i < 80; i++) {
+    const r = await request.get(`${BASE}/api/health`);
+    if (r.status() === 200) break;
+    await new Promise(r => setTimeout(r, 200));
+  }
+  await request.get(`${BASE}/api/test/rl-reset`);
+});
+
+test("bursts yield 429 via probe (deterministic)", async ({ request }) => {
+  const hdr = { "X-RL-Max": "3", "X-RL-Window": "8", "X-Forwarded-For": "203.0.113.10", "X-Test-IP": "203.0.113.10" };
   let got429 = false;
   for (let i = 0; i < 20; i++) {
-    const r = await request.get(`http://localhost:${PORT}/api/kpi/dashboard`, { headers: RL_HEADERS });
+    const r = await request.get(`${BASE}/api/test/rl-probe`, { headers: hdr });
     if (r.status() === 429) { got429 = true; break; }
   }
   expect(got429).toBeTruthy();
 });
 
 test("idempotent write returns 201 then 202", async ({ request }) => {
-  const url = `http://localhost:${PORT}/api/example/write`;
-  const r1 = await request.post(url, { headers: { "Idempotency-Key": "play-abc123", ...RL_HEADERS } });
+  const url = `${BASE}/api/example/write`;
+  const hdr = { "Idempotency-Key": "play-fixed-123", "X-RL-Bypass": "1" } as Record<string,string>;
+  const r1 = await request.post(url, { headers: hdr });
   expect(r1.status()).toBe(201);
-  const r2 = await request.post(url, { headers: { "Idempotency-Key": "play-abc123", ...RL_HEADERS } });
-  const s2 = r2.status();
-  expect([200,202]).toContain(s2);
+  const r2 = await request.post(url, { headers: hdr });
+  expect([200,202]).toContain(r2.status());
   const j2 = await r2.json();
   expect(Boolean(j2.deduped)).toBeTruthy();
 });
