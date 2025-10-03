@@ -1,38 +1,70 @@
-import { createClient } from "redis";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { getRedis } from "./redis";
+import { auditLog } from "./audit";
 
-type LimiterOpts = { windowMs: number; max: number; keyPrefix?: string; };
-type Verdict = { allowed: boolean; remaining: number; resetMs: number; };
+type KeyParts = { ip?: string|null; route: string; tenant?: string|null };
 
-const memStore = new Map<string, { count: number; expires: number }>();
-
-export function inMemoryLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts) {
-  return async (key: string): Promise<Verdict> => {
-    const now = Date.now();
-    const k = `${keyPrefix}:${key}`;
-    const cur = memStore.get(k);
-    if (!cur || cur.expires <= now) {
-      memStore.set(k, { count: 1, expires: now + windowMs });
-      return { allowed: true, remaining: max - 1, resetMs: windowMs };
-    }
-    if (cur.count >= max) return { allowed: false, remaining: 0, resetMs: cur.expires - now };
-    cur.count += 1;
-    return { allowed: true, remaining: max - cur.count, resetMs: cur.expires - now };
-  };
+function clientIp(req: NextApiRequest): string {
+  const xf = (req.headers["x-forwarded-for"] as string) || "";
+  const ip = xf.split(",")[0]?.trim() || (req.socket as any)?.remoteAddress || "0.0.0.0";
+  return String(ip);
 }
 
-export function redisLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts) {
-  const url = process.env.REDIS_URL;
-  if (!url) return inMemoryLimiter({ windowMs, max, keyPrefix });
-  const client = createClient({ url, socket: { reconnectStrategy: () => 1000 } });
-  client.on("error", () => {});
-  if (!client.isOpen) client.connect().catch(()=>{});
-  return async (key: string): Promise<Verdict> => {
-    const k = `${keyPrefix}:${key}`;
-    const res = await (client as any).multi().incr(k).ttl(k).exec();
-    const count = Number(res?.[0]?.[1] ?? 1);
-    let ttl = Number(res?.[1]?.[1] ?? -1);
-    if (ttl < 0) { await client.expire(k, Math.ceil(windowMs/1000)); ttl = Math.ceil(windowMs/1000); }
-    const remaining = Math.max(0, max - count);
-    return { allowed: count <= max, remaining, resetMs: ttl*1000 };
-  };
+export function buildKey({ ip, route, tenant }: KeyParts) {
+  const t = tenant || "anon";
+  const i = ip || "0.0.0.0";
+  return `rl:${t}:${route}:${i}`;
+}
+
+export async function rateLimit(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  opts?: { windowSec?: number; max?: number }
+): Promise<boolean> {
+  const windowSec = Number(opts?.windowSec ?? process.env.RATE_LIMIT_WINDOW_SEC ?? 60);
+  const max = Number(opts?.max ?? process.env.RATE_LIMIT_MAX ?? 100);
+  const route = req.url?.split("?")[0] || "unknown";
+  const ip = clientIp(req);
+  const tenant = (req.headers["x-tenant-id"] as string) || null;
+
+  const key = buildKey({ ip, route, tenant });
+  const r = getRedis();
+
+  const now = Date.now();
+  const ttlMs = windowSec * 1000;
+
+  const multi = r.multi();
+  multi.zremrangebyscore(key, 0, now - ttlMs);
+  multi.zadd(key, now, String(now));
+  multi.zcard(key);
+  multi.expire(key, windowSec);
+  const [, , count] = (await multi.exec()) ?? [null, null, [null, 0]];
+
+  const current = Array.isArray(count) ? Number(count[1]) : Number(count);
+  if (current > max) {
+    const retryAfter =  Math.ceil(windowSec);
+    res.setHeader("Retry-After", String(retryAfter));
+    res.setHeader("X-RateLimit-Limit", String(max));
+    res.setHeader("X-RateLimit-Remaining", "0");
+    res.status(429).json({ error: "rate_limited", message: "Too many requests. Please try again shortly." });
+
+    auditLog({
+      type: "rate_limit",
+      route,
+      ip,
+      tenant,
+      status: 429,
+      windowSec,
+      max,
+      count: current,
+      method: req.method,
+      ua: req.headers["user-agent"] || null,
+    });
+
+    return false;
+  }
+
+  res.setHeader("X-RateLimit-Limit", String(max));
+  res.setHeader("X-RateLimit-Remaining", String(Math.max(0, max - current)));
+  return true;
 }
