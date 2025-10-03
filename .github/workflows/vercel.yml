@@ -2,47 +2,49 @@ name: Vercel
 on: [pull_request, workflow_dispatch]
 permissions: { contents: read }
 concurrency: { group: vercel-${{ github.ref }}, cancel-in-progress: true }
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
     steps:
-      - name: Gate secrets
+      - name: Secrets gate
         id: gate
-        run: |
-          miss=0
-          for v in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID VERCEL_SCOPE; do
-            if [ -z "${{ secrets[v] }}" ]; then echo "Missing $v"; miss=1; fi
-          done
-          echo "ok=$((1-miss))" >> "$GITHUB_OUTPUT"
-      - if: steps.gate.outputs.ok != 1
-        run: echo "Secrets incomplete; passing job as no-op."
-      - if: steps.gate.outputs.ok == 1
-        uses: actions/checkout@v4
-      - if: steps.gate.outputs.ok == 1
-        name: Verify Vercel auth (masked)
+        if: ${{ secrets.VERCEL_TOKEN && secrets.VERCEL_ORG_ID && secrets.VERCEL_PROJECT_ID && secrets.VERCEL_SCOPE }}
+        run: echo "All Vercel secrets present."
+
+      - name: No-op if secrets missing
+        if: ${{ ! (secrets.VERCEL_TOKEN && secrets.VERCEL_ORG_ID && secrets.VERCEL_PROJECT_ID && secrets.VERCEL_SCOPE) }}
+        run: echo "Vercel secrets incomplete; passing job as no-op."
+
+      - uses: actions/checkout@v4
+        if: steps.gate.conclusion == success
+
+      - name: Verify Vercel auth
+        if: steps.gate.conclusion == success
         run: |
           npm i -g vercel@latest >/dev/null 2>&1
-          # These echoes are masked by GitHub; just to confirm scope wires through
-          echo "SCOPE=${{ secrets.VERCEL_SCOPE }}"
-          echo "ORG=${{ secrets.VERCEL_ORG_ID }}"
-          echo "PROJ=${{ secrets.VERCEL_PROJECT_ID }}"
           vercel --version
-          vercel --token="${{ secrets.VERCEL_TOKEN }}" --scope="${{ secrets.VERCEL_SCOPE }}" whoami || exit 1
-          vercel --token="${{ secrets.VERCEL_TOKEN }}" --scope="${{ secrets.VERCEL_SCOPE }}" projects ls | head -n 20 || true
-      - if: steps.gate.outputs.ok == 1
-        uses: pnpm/action-setup@v4
+          vercel --token="${{ secrets.VERCEL_TOKEN }}" --scope="${{ secrets.VERCEL_SCOPE }}" whoami
+
+      - uses: pnpm/action-setup@v4
+        if: steps.gate.conclusion == success
         with: { version: 9 }
-      - if: steps.gate.outputs.ok == 1
-        uses: actions/setup-node@v4
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.conclusion == success
         with: { node-version: 20, cache: pnpm }
-      - if: steps.gate.outputs.ok == 1
-        run: pnpm install --frozen-lockfile
-      - if: steps.gate.outputs.ok == 1
-        working-directory: apps/web
+
+      - run: pnpm install --frozen-lockfile
+        if: steps.gate.conclusion == success
+
+      - working-directory: apps/web
+        if: steps.gate.conclusion == success
         run: pnpm build:ci || pnpm next build
-      - if: steps.gate.outputs.ok == 1
-        uses: amondnet/vercel-action@v25
+
+      - uses: amondnet/vercel-action@v25
+        if: steps.gate.conclusion == success
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
