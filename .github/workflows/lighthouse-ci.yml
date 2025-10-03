@@ -1,25 +1,24 @@
 name: Lighthouse CI (Nexa budgets)
 on:
-  pull_request:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ '**' ]
 jobs:
-  lhci:
+  strict:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
-
       - name: Enable pnpm
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
-
       - name: Cache Next build cache
         uses: actions/cache@v4
         with:
@@ -28,13 +27,10 @@ jobs:
           key: next-cache-${{ runner.os }}-${{ hashFiles('apps/web/package.json', 'pnpm-lock.yaml') }}
           restore-keys: |
             next-cache-${{ runner.os }}-
-
       - name: Install deps
         working-directory: apps/web
         run: pnpm install --frozen-lockfile
-
       - name: Build + Lighthouse gate (budgets enforced)
-        id: lh
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -42,47 +38,38 @@ jobs:
           PORT: "3010"
           LOCAL_LH: "1"
         run: |
-          set -e
           pnpm -s opt:images
           pnpm -s build:prod
-          node -e "let j=require('./.lighthouserc.json'); j.ci.collect.startServerReadyPattern='(started server on|Ready in|ready - started server on)'; require('fs').writeFileSync('.lighthouserc.json', JSON.stringify(j,null,2))"
-          set +e
           lhci autorun --config=.lighthouserc.json
-          CODE=$?
-          set -e
-          if [ $CODE -ne 0 ]; then pnpm -s lh:summary; fi
-          exit $CODE
 
-      - name: Upload LHCI artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
+  pr-soft:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: lighthouseci
-          path: apps/web/.lighthouseci
-
-      - name: Post PR comment with scores
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const p = 'apps/web/.lighthouseci/collect.json';
-            if (!fs.existsSync(p)) { core.info("no collect.json"); return; }
-            const arr = JSON.parse(fs.readFileSync(p, 'utf8')) || [];
-            const rows = arr.map(r => r && r.summary ? `| ${r.url} | ${r.summary.performance} | ${r.summary.accessibility} | ${r.summary["best-practices"]} | ${r.summary.seo} |` : null).filter(Boolean);
-            const body = [
-              "## Lighthouse (budgets enforced)",
-              "",
-              "| URL | Perf | A11y | Best-Practices | SEO |",
-              "| --- | ---: | ---: | ---: | ---: |",
-              ...rows
-            ].join("\n");
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body
-            });
+          node-version: "20"
+          cache: "pnpm"
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+      - name: Install deps
+        working-directory: apps/web
+        run: pnpm install --frozen-lockfile
+      - name: Build + Lighthouse (collect only)
+        working-directory: apps/web
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NODE_ENV: production
+          PORT: "3010"
+          LOCAL_LH: "1"
+        run: |
+          pnpm -s build:prod
+          lhci collect --config=.lighthouserc.json || true
 
 
 

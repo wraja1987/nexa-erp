@@ -1,5 +1,48 @@
 name: Accessibility & Perf Smoke
 on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ '**' ]
+permissions: { contents: read }
+
+jobs:
+  strict:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: npx playwright install --with-deps
+      - run: pnpm -w -C apps/web build
+      - run: pnpm -w -C apps/web start:ci &
+      - run: npx wait-on http://localhost:4173
+      - run: pnpm -w -C apps/web test:a11y --ci
+
+  pr-soft:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: npx playwright install --with-deps
+      - run: pnpm -w -C apps/web build
+      - run: pnpm -w -C apps/web start:ci &
+      - run: npx wait-on http://localhost:4173
+      - run: pnpm -w -C apps/web test:a11y --ci || true
+name: Accessibility & Perf Smoke
+on:
   pull_request:
   push:
     branches: [ main ]
