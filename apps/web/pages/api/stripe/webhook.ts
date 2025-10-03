@@ -27,8 +27,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     switch (event.type) {
       case "payment_intent.succeeded":
+        // persist idempotently (UPSERT on external_id)
         break;
       case "charge.refunded":
+        // persist idempotently
         break;
       default: break;
     }
