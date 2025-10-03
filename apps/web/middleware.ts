@@ -16,11 +16,7 @@ function genNonce(): string {
     return (crypto.randomUUID?.() || "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").replace(/-/g, "");
   }
 }
-
-export const config = {
-  matcher: ["/(?!_next/static|_next/image|favicon.ico|.*\\.?:png|jpg|jpeg|gif|webp|avif|svg|ico|css|js|map).*)"],
-};
-
+// removed invalid matcher
 export default function middleware(req: NextRequest) {
   const nonce = genNonce();
   const url = new URL(req.url);
@@ -81,3 +77,6 @@ export default function middleware(req: NextRequest) {
 
   return res;
 }
+
+
+export const config = { matcher: '/:path*' };
