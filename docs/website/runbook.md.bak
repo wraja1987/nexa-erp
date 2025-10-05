@@ -1,0 +1,5 @@
+- Editing pages/assets under apps/web/public/website/**
+- Image optimisation scripts usage (sharp/jsdom)
+- Packaging & deploying to Hostinger (ZIP + .htaccess at root)
+- Audits: run_readonly.sh; where reports are saved
+- Rollback using /ops/site-backups ZIPs

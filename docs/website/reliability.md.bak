@@ -1,0 +1,2 @@
+- Add external uptime monitors: homepage (200), API endpoint (if any), SSL expiry
+- 404 simulation: request /website/system/does-not-exist.png

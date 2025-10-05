@@ -29,7 +29,12 @@
     "noEmit": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "types": [
+      "node",
+      "node",
+      "node"
+    ]
   },
   "include": [
     ".next/types/**/*.ts",
