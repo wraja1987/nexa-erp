@@ -1,0 +1,1 @@
+Scheduled maintenance: Nexa ERP will be temporarily unavailable on [DATE] from [START–END] [TZ] for a planned update. Service resumes immediately after.

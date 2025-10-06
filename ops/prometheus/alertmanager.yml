@@ -1,0 +1,20 @@
+global:
+  smtp_smarthost: "smtp.gmail.com:587"
+  smtp_from: "nexa-alerts@chiefaa.com"
+  smtp_auth_username: "nexa-alerts@chiefaa.com"
+  smtp_auth_password: "${SMTP_PASS:-}"
+  smtp_require_tls: true
+
+route:
+  receiver: "default"
+  group_by: ["alertname"]
+  group_wait: 10s
+  group_interval: 5m
+  repeat_interval: 4h
+
+receivers:
+  - name: "default"
+    email_configs:
+      - to: "info@chiefaa.com"
+        headers:
+          Subject: "[NEXA ALERT] Production Incident Notification"

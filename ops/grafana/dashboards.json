@@ -1,0 +1,15 @@
+{
+ "dashboard": {
+  "title": "Nexa ERP Ops Overview",
+  "schemaVersion": 39,
+  "panels": [
+    { "type": "timeseries", "title": "HTTP Latency p95", "targets": [{"expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))"}] },
+    { "type": "timeseries", "title": "HTTP 5xx Rate", "targets": [{"expr": "rate(http_requests_total{status=~\"5..\"}[5m])"}] },
+    { "type": "timeseries", "title": "Postgres Locks", "targets": [{"expr": "pg_locks_count"}] },
+    { "type": "timeseries", "title": "Redis Memory", "targets": [{"expr": "redis_memory_used_bytes"}] }
+  ],
+  "time": { "from": "now-6h", "to": "now" }
+ },
+ "overwrite": true
+}
+

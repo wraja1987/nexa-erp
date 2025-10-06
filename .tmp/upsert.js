@@ -1,0 +1,9 @@
+const { PrismaClient } = require(@prisma/client);
+const bcrypt = require(bcryptjs);
+const prisma = new PrismaClient();
+(async () => {
+  const SUPER_EMAIL = info@chiefaa.com;
+  const ADMIN_EMAIL = wraja1987@yahoo.co.uk;
+  const hash = bcrypt.hashSync(Wolfish123, 10);
+  let tenant = await prisma.tenant.findFirst({ orderBy: { createdAt: asc } });
+  if (!tenant) tenant = await prisma.tenant.create({ data: { name: Nexa

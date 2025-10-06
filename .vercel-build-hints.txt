@@ -1,0 +1,7 @@
+Confirm in Vercel → Project Settings:
+• Root Directory: apps/web
+• Framework Preset: Next.js
+• Node: 20
+• Install Command: npm ci   (or pnpm install --frozen-lockfile if using pnpm)
+• Build Command: npm run build   (or pnpm build)
+• Env (Preview): NEXTAUTH_URL, NEXTAUTH_SECRET, DATABASE_URL, NODE_ENV=production

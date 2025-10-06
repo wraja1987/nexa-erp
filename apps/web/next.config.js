@@ -12,6 +12,11 @@ const isLHCI = !!process.env.LHCI_DISABLE_E2E || process.env.NODE_ENV === "produ
 const config = {
   images: { formats: ["image/avif","image/webp"] },
 
+  env: {
+    NEXT_PUBLIC_RUNTIME_MAINT: process.env.MAINTENANCE_MODE ? String(process.env.MAINTENANCE_MODE) : "false",
+    NEXT_PUBLIC_MAINT_MSG: process.env.MAINTENANCE_MESSAGE || "",
+  },
+
   // Keep perf gate independent of type/lint errors
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },

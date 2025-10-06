@@ -1,0 +1,11 @@
+groups:
+  - name: NexaTestAlerts
+    rules:
+      - alert: NexaTestAlert
+        expr: vector(1)
+        for: 1m
+        labels:
+          severity: test
+        annotations:
+          summary: "Nexa ERP test alert"
+          description: "This is a sample alert to verify email delivery to info@chiefaa.com"

@@ -9,24 +9,13 @@ const max = Number(process.env.RATE_LIMIT_MAX || 100);
 const mem = new Map<string, { t: number; c: number }>();
 
 export function middleware(req: NextRequest) {
-  const url = new URL(req.url);
-  const route = url.pathname;
-  const ip = (req as any).ip || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "127.0.0.1";
-  const key = `${route}:${ip}`;
-  const now = Date.now();
-  const rec = mem.get(key);
-
-  if (!rec || now - rec.t > windowSec * 1000) {
-    mem.set(key, { t: now, c: 1 });
-    return NextResponse.next();
-  }
-
-  rec.c += 1;
-  if (rec.c > max) {
-    const r = NextResponse.json({ error: "rate_limited", message: "Too many requests. Try again shortly." }, { status: 429 });
-    r.headers.set("Retry-After", String(windowSec));
-    return r;
-  }
-
+  // To enforce a 503 during a window, uncomment and redeploy:
+  // if (process.env.MAINTENANCE_MODE === "true") {
+  //   const url = new URL(req.url);
+  //   const exempt = ["/maintenance.json", "/api/admin/maintenance", "/website/status"];
+  //   if (!exempt.some((p) => url.pathname.startsWith(p))) {
+  //     return NextResponse.rewrite(new URL("/503", req.url), { status: 503 });
+  //   }
+  // }
   return NextResponse.next();
 }

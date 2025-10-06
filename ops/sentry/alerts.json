@@ -1,0 +1,15 @@
+{
+  "name": "Nexa ERP Critical Alerts",
+  "environment": "production",
+  "actionMatch": "any",
+  "filterMatch": "all",
+  "conditions": [
+    {"id": "sentry.rules.conditions.regression_event.RegressionEventCondition"},
+    {"id": "sentry.rules.conditions.event_frequency.EventFrequencyCondition", "interval": "1h", "value": 10, "comparisonType": "count"}
+  ],
+  "actions": [
+    {"id": "sentry.mail.actions.NotifyEmailAction", "targetType": "IssueOwners", "targetIdentifier": null}
+  ],
+  "frequency": 5
+}
+
