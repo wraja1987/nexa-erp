@@ -1,8 +1,19 @@
+// Robust stub creator for @nexa/registry on CI/Vercel
+const fs = require("fs");
+const path = require("path");
 
-const fs=require('fs'), path=require('path');
-const dir=path.join(process.cwd(),'node_modules','@nexa','registry');
-fs.mkdirSync(dir,{recursive:true});
-fs.writeFileSync(path.join(dir,'package.json'),JSON.stringify({name:'@nexa/registry',version:'0.0.0-stub',main:'index.js',typings:'index.d.ts'},null,2));
-fs.writeFileSync(path.join(dir,'index.js'),"module.exports={components:{},themes:{},tokens:{}};");
-fs.writeFileSync(path.join(dir,'index.d.ts'),"declare const v:{components:any;themes:any;tokens:any}; export = v;");
-console.log('Stubbed @nexa/registry');
+const dest = path.join(process.cwd(), "node_modules", "@nexa", "registry", "index.js");
+
+try {
+  fs.mkdirSync(path.dirname(dest), { recursive: true }); // ensure parents
+  if (!fs.existsSync(dest)) {
+    fs.writeFileSync(dest, "module.exports = {};\n");
+    console.log("Stubbed @nexa/registry");
+  } else {
+    console.log("Stub already exists");
+  }
+} catch (e) {
+  console.warn("Skipping registry stub:", e.code || e.message);
+  // Don’t fail the build for this helper
+  process.exit(0);
+}
