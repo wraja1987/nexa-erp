@@ -83,3 +83,20 @@ Commands:
 - UI smoke: pnpm -w verify:ui
 - E2E: pnpm -w test:e2e -- --run
 - Probes: curl -sf http://localhost:3001/login, curl -sf http://localhost:3001/dashboard, curl -sf "http://localhost:3001/api/modules?tree=1"
+
+## Ops Quick Commands
+
+```bash
+# From repo root:
+export STATUS_TOKEN=<your prod token>
+export URL=https://<your-production-url>
+
+# One-click smoke (also available in Cursor task: "Smoke: Production")
+npm --prefix apps/web run smoke:prod
+
+# Deploy to production (also available in Cursor task: "Deploy: Production")
+npm --prefix apps/web run deploy:prod
+
+# New branch + open PR (requires GitHub CLI or do it via GitHub UI)
+scripts/new-pr.sh chore/my-change
+```
