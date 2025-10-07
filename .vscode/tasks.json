@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Smoke: Production",
+      "type": "shell",
+      "command": "npm run smoke:prod",
+      "options": { "cwd": "apps/web" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Deploy: Production",
+      "type": "shell",
+      "command": "npm run deploy:prod",
+      "options": { "cwd": "apps/web" },
+      "problemMatcher": []
+    }
+  ]
+}
+
+
