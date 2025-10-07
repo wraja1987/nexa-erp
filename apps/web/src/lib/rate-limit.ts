@@ -1,4 +1,5 @@
-import { createClient } from "redis";
+import { createClient } from "./redis";
+import { getRedis } from './redis';
 
 type LimiterOpts = { windowMs: number; max: number; keyPrefix?: string; };
 type Verdict = { allowed: boolean; remaining: number; resetMs: number; };
@@ -35,4 +36,15 @@ export function redisLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts) {
     const remaining = Math.max(0, max - count);
     return { allowed: count <= max, remaining, resetMs: ttl*1000 };
   };
+}
+
+// --- NO REDIS FALLBACK (build-safe) ---
+async function __ensureRedisOrFallback() {
+  const client = await getRedis();
+  if (!client) {
+    // TODO: optionally implement a tiny in-memory limiter here
+    // For now, we just act as if limits are not exceeded.
+    return null;
+  }
+  return client;
 }
