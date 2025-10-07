@@ -5,7 +5,16 @@ import { ENV } from "@/lib/env";
 import { getRedis } from "@/lib/redis";
 
 export default safe(async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "GET") return res.status(405).end();
+  // allow HEAD and OPTIONS
+  if (req.method === "HEAD") return res.status(200).end();
+  if (req.method === "OPTIONS") {
+    res.setHeader("Allow", "GET,HEAD,OPTIONS");
+    return res.status(204).end();
+  }
+  if (req.method !== "GET") {
+    res.setHeader("Allow", "GET,HEAD,OPTIONS");
+    return res.status(405).end();
+  }
 
   const token = process.env.STATUS_TOKEN;
   if (token && req.headers.authorization !== `Bearer ${token}`) {
