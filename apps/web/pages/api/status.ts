@@ -1,12 +1,15 @@
-// Tip: wrap handler with withSentry for richer traces
-import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { redisLimiter } from "@/src/lib/rate-limit";
-const limit = redisLimiter({ windowMs: 60_000, max: 20, keyPrefix: "status" });
+import { safe } from "@/lib/api-safe";
+import { ENV } from "@/lib/env";
+import { getRedis } from "@/lib/redis";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || "ip";
-  const verdict = await limit(`status:${ip}`);
-  if (!verdict.allowed) return res.status(429).json({ error: "Too many requests" });
-  res.status(200).json({ ok: true, ts: Date.now() });
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const redis = await getRedis();
+  res.status(200).json({
+    ok: true,
+    env: ENV.NODE_ENV,
+    region: process.env.VERCEL_REGION ?? "unknown",
+    integrations: { redis: !!redis },
+  });
 }
+export default safe(handler);
