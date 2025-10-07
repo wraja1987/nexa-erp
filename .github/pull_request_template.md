@@ -1,4 +1,13 @@
 ## Summary
+<!-- What changed & why -->
+
+## Checks
+- [ ] `/login` returns 200; no CSP console errors
+- [ ] `/api/health` => `{ ok: true }`
+- [ ] `/api/status` with Bearer token => `{ ok: true, env: "production" }`
+- [ ] Screens/Lighthouse basics pass locally (labels, focus, color contrast)
+
+## Summary
 Explain what changed and why.
 
 ## Checks
