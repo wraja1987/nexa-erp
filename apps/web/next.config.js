@@ -63,13 +63,14 @@ const config = {
   },
 
   async redirects() {
+    const redirects = [
+      { source: "/", destination: "/login", permanent: false }
+    ];
     // Hide /e2e/* in LHCI/production to avoid prerender errors and noise
     if (isLHCI) {
-      return [
-        { source: "/e2e/:path*", destination: "/", permanent: false }
-      ];
+      redirects.push({ source: "/e2e/:path*", destination: "/", permanent: false });
     }
-    return [];
+    return redirects;
   }
 };
 
