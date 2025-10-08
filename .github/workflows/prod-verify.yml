@@ -1,0 +1,42 @@
+name: Verify Production (apps/web)
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Production base URL (e.g. https://nexaai.co.uk or your vercel prod url)'
+        required: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl /login
+        run: |
+          set -e
+          URL="${{ github.event.inputs.url }}"
+          mkdir -p verify
+          curl -sSI "$URL/login" > verify/login.headers.txt || true
+          curl -sS  "$URL/login" > verify/login.body.html || true
+      - name: Curl /api/health
+        run: |
+          URL="${{ github.event.inputs.url }}"
+          curl -sSI "$URL/api/health" > verify/health.headers.txt || true
+          curl -sS  "$URL/api/health" > verify/health.body.json || true
+      - name: Curl /api/status (with optional token)
+        env:
+          STATUS_TOKEN: ${{ secrets.STATUS_TOKEN }}
+        run: |
+          URL="${{ github.event.inputs.url }}"
+          if [ -n "$STATUS_TOKEN" ]; then
+            curl -sSI -H "Authorization: Bearer $STATUS_TOKEN" "$URL/api/status" > verify/status.headers.txt || true
+            curl -sS  -H "Authorization: Bearer $STATUS_TOKEN" "$URL/api/status" > verify/status.body.json || true
+          else
+            curl -sSI "$URL/api/status" > verify/status.headers.txt || true
+            curl -sS  "$URL/api/status" > verify/status.body.json || true
+          fi
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-verification
+          path: verify
+
+
