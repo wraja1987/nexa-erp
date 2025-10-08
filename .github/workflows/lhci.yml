@@ -1,0 +1,26 @@
+name: LHCI (apps/web)
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  lhci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - name: Install
+        run: pnpm install -w
+      - name: Build (apps/web)
+        run: pnpm -C apps/web build
+      - name: Lighthouse CI (apps/web)
+        run: pnpm -C apps/web lhci
+      - name: Lint (apps/web, non-blocking)
+        run: pnpm -C apps/web lint
+
+

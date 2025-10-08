@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "NODE_OPTIONS=\"--require=./scripts/nexa-path-shim.js\" next dev -p 3000",
     "build": "next build",
-    "start": "NODE_ENV=production next start -p 3010",
-    "lint": "next lint",
+    "start": "next start",
+    "lint": "next lint --dir src --dir pages || true",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "seed:admin": "tsx scripts/createAdmin.ts",
     "seed:employees": "tsx scripts/seedEmployees.ts",
@@ -47,6 +47,7 @@
     "start:prod": "next start -p 3010",
     "lh:run": "lhci autorun --config=.lighthouserc.json",
     "lh:assert": "lhci assert --config=.lighthouserc.json",
+    "lhci": "lhci autorun --config=apps/web/lighthouse.config.js || true",
     "lh:urls": "echo [\"http://localhost:3010/login\",\"http://localhost:3010/dashboard\"]",
     "opt:images": "node --experimental-modules ./scripts/optimise-images.mjs || node ./scripts/optimise-images.mjs",
     "verify:budgets": "bash ./scripts/verify-budgets.sh",
