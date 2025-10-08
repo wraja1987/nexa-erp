@@ -1,0 +1,18 @@
+HTTP/2 404 
+date: Wed, 08 Oct 2025 23:00:19 GMT
+content-type: text/html
+vary: Accept-Encoding
+last-modified: Mon, 22 Sep 2025 19:34:12 GMT
+etag: W/"701-68d1a4b4-ac1abb7f093e6db4;gz"
+platform: hostinger
+panel: hpanel
+content-security-policy: default-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: geolocation=(), microphone=(), camera=()
+strict-transport-security: max-age=31536000; includeSubDomains
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: c54bc61afa78bf5ea6cfbf0a7a64dac8-phx-edge8
+

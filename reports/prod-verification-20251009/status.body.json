@@ -1,0 +1,31 @@
+<header class="header" role="banner">
+<div class="container">
+<div class="row">
+<a aria-label="Nexa home" class="brand" href="/homepage">
+<svg aria-hidden="true" viewbox="0 0 32 32">
+<defs><lineargradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E6BFF"></stop><stop offset="1" stop-color="#7A4DFF"></stop></lineargradient></defs>
+<circle cx="16" cy="16" fill="url(#g)" r="14"></circle>
+<path d="M10 20 L10 10 L22 22 L22 12" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path>
+</svg>
+<span>Nexa ERP</span>
+</a>
+<nav aria-label="Primary">
+<ul>
+<li><a href="/homepage">Home</a></li>
+<li><a href="/modules">Modules</a></li>
+<li><a href="/integrations">Integrations &amp; API</a></li>
+<li><a href="/security">Security &amp; Compliance</a></li>
+<li><a href="/pricing">Pricing</a></li>
+<li><a href="/resources">Resources</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+</nav>
+<div class="cta"><a aria-label="Login" class="btn" href="https://app.nexaai.co.uk/login">Login</a></div>
+</div>
+</div>
+</header><!DOCTYPE html>
+
+<meta charset="utf-8"/><title>Page not found — Nexa</title>
+<style>body{font-family:Inter,system-ui;-webkit-font-smoothing:antialiased;margin:0;background:#f7f9fc;color:#0F2747}main{max-width:760px;margin:10vh auto;padding:24px;border-radius:16px;background:#fff;border:1px solid #e6ecf5;box-shadow:0 8px 20px rgba(15,39,71,.06)}a.button{display:inline-block;margin-top:16px;padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,#3B82F6,#6D28D9);color:#fff;text-decoration:none;font-weight:600}</style>
+<main><h1>We can’t find that page</h1><p>Let’s get you back on track.</p><a class="button" href="/index.html">Return to home</a></main>
