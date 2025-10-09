@@ -96,6 +96,7 @@ jobs:
         if: contains(steps.classify.outputs.types, 'missing-headers')
         run: node scripts/selfheal/fix-headers.mjs
       - name: Compress oversized images (>300kB)
+        continue-on-error: true
         run: node scripts/selfheal/compress-images.mjs
       - name: Create auto-fix PR (only if changes)
         uses: peter-evans/create-pull-request@v6
@@ -112,6 +113,9 @@ jobs:
             **/middleware.*s
 
   verify_after_heal:
+  verify_after_heal:
+    needs: self_heal
+    if: always()
     needs: self_heal
     runs-on: ubuntu-latest
     steps:
@@ -123,7 +127,6 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
-
       # ✅ Resolve BASE_URL again
       - name: Resolve BASE_URL
         shell: bash
