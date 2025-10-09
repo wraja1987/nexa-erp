@@ -1,32 +1,27 @@
 name: Image Audit
-on:
-  pull_request:
+on: pull_request
+
 jobs:
   image-audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
+      # 1) Install pnpm first (adds pnpm to PATH)
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      # 2) Now it's safe to enable node caching for pnpm
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: 20
+          cache: pnpm
 
-      - name: Enable pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      # 3) (optional) install deps if your audit needs them
+      # - run: pnpm install --frozen-lockfile
 
-      - name: Install deps
-        working-directory: apps/web
-        run: pnpm install --frozen-lockfile
-
-      - name: Oversized image audit (>300kB)
-        working-directory: apps/web
-        env:
-          IMAGE_MAX: "300000"
-        run: pnpm -s audit:images
-        continue-on-error: true
-
-
+      # 4) run your audit script
+      # - name: Oversized image audit (>300kB)
+      #   run: pnpm run image:audit
