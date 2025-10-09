@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 env:
-  BASE_URL: \${{ inputs.prod_url || secrets.PROD_URL ||  }}
+  BASE_URL: ${{ inputs.prod_url != "" && inputs.prod_url || secrets.PROD_URL }}
 
 jobs:
   verify:
