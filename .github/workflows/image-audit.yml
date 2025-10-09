@@ -7,21 +7,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1) Install pnpm first (adds pnpm to PATH)
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-          run_install: false
-
-      # 2) Now it's safe to enable node caching for pnpm
+      # 1) Install Node first (no pnpm cache here to avoid pnpm lookup)
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
 
-      # 3) (optional) install deps if your audit needs them
+      # 2) Enable corepack and activate pnpm 9
+      - name: Enable corepack & install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9 --activate
+          pnpm -v
+
+      # 3) (optional) Install deps if your audit needs them
       # - run: pnpm install --frozen-lockfile
 
-      # 4) run your audit script
+      # 4) Run your audit script
       # - name: Oversized image audit (>300kB)
       #   run: pnpm run image:audit
