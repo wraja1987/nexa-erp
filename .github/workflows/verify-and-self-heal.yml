@@ -1,4 +1,5 @@
 name: Verify & Self-Heal (Playwright)
+
 on:
   pull_request:
   workflow_dispatch:
@@ -7,26 +8,41 @@ on:
         description: "Production URL (e.g. https://nexaai.co.uk)"
         required: false
         default: ""
+
 permissions:
   contents: write
   pull-requests: write
 
-
 jobs:
   verify:
     runs-on: ubuntu-latest
-    env:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+        with: { node-version: 20 }
       - name: Enable pnpm
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
           pnpm -v
+
+      # ✅ Resolve BASE_URL at runtime (planner-safe)
+      - name: Resolve BASE_URL
+        shell: bash
+        run: |
+          URL=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            URL="${{ github.event.inputs.prod_url }}"
+          fi
+          if [ -z "$URL" ] && [ -n "${{ secrets.PROD_URL }}" ]; then
+            URL="${{ secrets.PROD_URL }}"
+          fi
+          if [ -z "$URL" ]; then
+            echo "::error::No BASE_URL provided. Set workflow input 'prod_url' or repo secret PROD_URL."
+            exit 1
+          fi
+          echo "BASE_URL=$URL" >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
@@ -44,7 +60,7 @@ jobs:
 
   self_heal:
     needs: verify
-    if: failure() || always()  # run to classify + possibly patch
+    if: failure() || always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -55,12 +71,29 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
+
+      # ✅ Resolve BASE_URL again in this job scope
+      - name: Resolve BASE_URL
+        shell: bash
+        run: |
+          URL=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            URL="${{ github.event.inputs.prod_url }}"
+          fi
+          if [ -z "$URL" ] && [ -n "${{ secrets.PROD_URL }}" ]; then
+            URL="${{ secrets.PROD_URL }}"
+          fi
+          if [ -z "$URL" ]; then
+            echo "::error::No BASE_URL provided. Set workflow input 'prod_url' or repo secret PROD_URL."
+            exit 1
+          fi
+          echo "BASE_URL=$URL" >> "$GITHUB_ENV"
       - run: pnpm i --frozen-lockfile
       - name: Classify failures
         id: classify
         run: node scripts/selfheal/classify-failures.mjs
       - name: Fix headers (if missing)
-        if: contains(steps.classify.outputs.types, "missing-headers")
+        if: contains(steps.classify.outputs.types, 'missing-headers')
         run: node scripts/selfheal/fix-headers.mjs
       - name: Compress oversized images (>300kB)
         run: node scripts/selfheal/compress-images.mjs
@@ -77,26 +110,6 @@ jobs:
             public/**
             assets/**
             **/middleware.*s
-      - name: Summarize unfixables
-        run: node scripts/selfheal/report.mjs
-      - name: PR comment / Job summary
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require("fs");
-            const body = fs.readFileSync(".selfheal/summary.md","utf8");
-            try {
-              const pr = context.payload.pull_request?.number;
-              if (pr) {
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: pr,
-                  body
-                });
-              }
-            } catch(e) {}
-            core.summary.addRaw(body).write();
 
   verify_after_heal:
     needs: self_heal
@@ -110,6 +123,23 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
+
+      # ✅ Resolve BASE_URL again
+      - name: Resolve BASE_URL
+        shell: bash
+        run: |
+          URL=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            URL="${{ github.event.inputs.prod_url }}"
+          fi
+          if [ -z "$URL" ] && [ -n "${{ secrets.PROD_URL }}" ]; then
+            URL="${{ secrets.PROD_URL }}"
+          fi
+          if [ -z "$URL" ]; then
+            echo "::error::No BASE_URL provided. Set workflow input 'prod_url' or repo secret PROD_URL."
+            exit 1
+          fi
+          echo "BASE_URL=$URL" >> "$GITHUB_ENV"
       - run: pnpm i --frozen-lockfile
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
