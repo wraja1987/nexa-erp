@@ -19,21 +19,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
+
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
+
       - name: Enable pnpm
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
           pnpm -v
 
-      # ✅ Resolve BASE_URL at runtime (planner-safe)
       - name: Resolve BASE_URL
         shell: bash
         run: |
           URL=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            URL="${{ github.event.inputs.prod_url }}"
+            URL="$(jq -r '.inputs.prod_url // empty' "$GITHUB_EVENT_PATH")"
           fi
           if [ -z "$URL" ] && [ -n "${{ secrets.PROD_URL }}" ]; then
             URL="${{ secrets.PROD_URL }}"
@@ -43,11 +44,17 @@ jobs:
             exit 1
           fi
           echo "BASE_URL=$URL" >> "$GITHUB_ENV"
+
       - run: pnpm install --frozen-lockfile
+
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
+
       - name: Run Playwright verify
+        env:
+          BASE_URL: ${{ env.BASE_URL }}
         run: pnpm exec playwright test -c playwright.selfheal.config.js -g "@prod-verify" || echo "::warning::Tests failed (will trigger self-heal)"
+
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -60,25 +67,26 @@ jobs:
 
   self_heal:
     needs: verify
-    if: failure() || always()
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
+
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
+
       - name: Enable pnpm
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
 
-      # ✅ Resolve BASE_URL again in this job scope
       - name: Resolve BASE_URL
         shell: bash
         run: |
           URL=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            URL="${{ github.event.inputs.prod_url }}"
+            URL="$(jq -r '.inputs.prod_url // empty' "$GITHUB_EVENT_PATH")"
           fi
           if [ -z "$URL" ] && [ -n "${{ secrets.PROD_URL }}" ]; then
             URL="${{ secrets.PROD_URL }}"
@@ -88,16 +96,20 @@ jobs:
             exit 1
           fi
           echo "BASE_URL=$URL" >> "$GITHUB_ENV"
+
       - run: pnpm i --frozen-lockfile
+
       - name: Classify failures
         id: classify
         run: node scripts/selfheal/classify-failures.mjs
+
       - name: Fix headers (if missing)
         if: contains(steps.classify.outputs.types, 'missing-headers')
         run: node scripts/selfheal/fix-headers.mjs
+
       - name: Compress oversized images (>300kB)
-        continue-on-error: true
         run: node scripts/selfheal/compress-images.mjs
+
       - name: Create auto-fix PR (only if changes)
         uses: peter-evans/create-pull-request@v6
         with:
@@ -113,27 +125,26 @@ jobs:
             **/middleware.*s
 
   verify_after_heal:
-  verify_after_heal:
-    needs: self_heal
-    if: always()
     needs: self_heal
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
+
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
+
       - name: Enable pnpm
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
-      # ✅ Resolve BASE_URL again
+
       - name: Resolve BASE_URL
         shell: bash
         run: |
           URL=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            URL="${{ github.event.inputs.prod_url }}"
+            URL="$(jq -r '.inputs.prod_url // empty' "$GITHUB_EVENT_PATH")"
           fi
           if [ -z "$URL" ] && [ -n "${{ secrets.PROD_URL }}" ]; then
             URL="${{ secrets.PROD_URL }}"
@@ -143,11 +154,17 @@ jobs:
             exit 1
           fi
           echo "BASE_URL=$URL" >> "$GITHUB_ENV"
+
       - run: pnpm i --frozen-lockfile
+
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
-      - name: Re-run Playwright (report will show green or remaining failures)
+
+      - name: Re-run Playwright (post-heal)
+        env:
+          BASE_URL: ${{ env.BASE_URL }}
         run: pnpm exec playwright test -c playwright.selfheal.config.js -g "@prod-verify" || true
+
       - name: Upload artifacts (post-heal)
         if: always()
         uses: actions/upload-artifact@v4
