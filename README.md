@@ -100,3 +100,5 @@ npm --prefix apps/web run deploy:prod
 # New branch + open PR (requires GitHub CLI or do it via GitHub UI)
 scripts/new-pr.sh chore/my-change
 ```
+
+[![Verify & Self-Heal (Playwright)](https://github.com/wraja1987/nexa-erp/actions/workflows/verify-and-self-heal.yml/badge.svg)](https://github.com/wraja1987/nexa-erp/actions/workflows/verify-and-self-heal.yml)

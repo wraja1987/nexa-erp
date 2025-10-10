@@ -6,6 +6,8 @@ on:
       prod_url:
         description: "Production URL for verification (e.g., https://nexaai.co.uk)"
         required: true
+  schedule:
+    - cron: "15 2 * * *"  # nightly @ 02:15 UTC
 
 permissions:
   contents: write
