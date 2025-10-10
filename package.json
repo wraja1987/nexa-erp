@@ -90,7 +90,8 @@
     "h:quotas-sim": "tsx ops/users/quotas_check.ts",
     "h:rbac": "tsx ops/users/rbac_verify.ts",
     "h:audit": "tsx scripts/audit-stage-h.ts",
-    "dr:restore:demo": "bash ops/dr/restore_demo.sh"
+    "dr:restore:demo": "bash ops/dr/restore_demo.sh",
+    "assert:web": "scripts/ops/assert-next-output.sh"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
