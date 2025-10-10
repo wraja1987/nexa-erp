@@ -1,0 +1,20 @@
+HTTP/2 302 
+date: Fri, 10 Oct 2025 14:37:29 GMT
+content-type: text/html
+content-length: 771
+location: https://nexaai.co.uk/homepage/
+cache-control: no-cache, no-store, must-revalidate, max-age=0
+platform: hostinger
+panel: hpanel
+content-security-policy: default-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: geolocation=(), microphone=(), camera=()
+strict-transport-security: max-age=31536000; includeSubDomains
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 121c4d1ea3a47b3cb411e64d2d5eb8c6-fast-edge4
+x-hcdn-cache-status: DYNAMIC
+x-hcdn-upstream-rt: 0.053
+

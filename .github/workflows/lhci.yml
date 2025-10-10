@@ -19,9 +19,12 @@ jobs:
         run: pnpm install -w
       - name: Build (apps/web)
         run: pnpm -C apps/web build
+      - name: Assert Next.js output exists
+        run: scripts/ops/assert-next-output.sh
       - name: Lighthouse CI (apps/web)
         run: pnpm -C apps/web lhci
       - name: Lint (apps/web, non-blocking)
         run: pnpm -C apps/web lint
+
 
 

@@ -1,0 +1,18 @@
+{
+  "cache-control": "s-maxage=60, stale-while-revalidate=300",
+  "content-length": "4335",
+  "content-security-policy": "default-src 'self'; script-src 'self' 'nonce-B3iDc04fCX6/EIWJvQNRfA==' 'strict-dynamic'  ; style-src 'self' 'nonce-B3iDc04fCX6/EIWJvQNRfA=='; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'  ; frame-ancestors 'none'; frame-src ; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests",
+  "content-type": "text/html; charset=utf-8",
+  "date": "Fri, 10 Oct 2025 21:34:22 GMT",
+  "permissions-policy": "accelerometer=(), autoplay=(), camera=(), clipboard-read=(), clipboard-write=(), display-capture=(), document-domain=(), encrypted-media=(), fullscreen=*, geolocation=(), gyroscope=(), hid=(), idle-detection=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), usb=(), web-share=(), xr-spatial-tracking=()",
+  "referrer-policy": "strict-origin-when-cross-origin",
+  "server": "Vercel",
+  "strict-transport-security": "max-age=15552000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "DENY",
+  "x-matched-path": "/_error",
+  "x-nexa-nonce": "B3iDc04fCX6/EIWJvQNRfA==",
+  "x-vercel-cache": "MISS",
+  "x-vercel-error": "FUNCTION_INVOCATION_FAILED",
+  "x-vercel-id": "lhr1::nj2mm-1760132062595-c99379e005d1"
+}
