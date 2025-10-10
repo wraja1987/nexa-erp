@@ -1,0 +1,4 @@
+# Place in public_html/.htaccess on the website host (Hostinger)
+RewriteEngine On
+# Redirect the website /login to the app login
+RewriteRule ^login$ https://app.nexaai.co.uk/login [R=308,L]
