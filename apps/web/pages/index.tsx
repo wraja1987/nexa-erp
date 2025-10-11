@@ -15,3 +15,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default Index;
+
+

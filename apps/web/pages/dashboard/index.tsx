@@ -1,6 +1,6 @@
 import * as React from "react";
 import Head from "next/head";
-import { requireAuth } from "@/src/lib/auth/ssr";
+import { requireAuth } from "@/lib/auth/ssr";
 
 export const getServerSideProps = requireAuth(async () => ({ props: {} }));
 
