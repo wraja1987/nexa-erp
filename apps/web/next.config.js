@@ -33,17 +33,7 @@ const config = {
     ];
   },
 
-  // Stop output file tracing from crawling the monorepo (Expo/mobile)
-  outputFileTracingRoot: __dirname,
-  outputFileTracingExcludes: {
-    "*": [
-      "**/apps/mobile/**",
-      "**/packages/**/expo/**",
-      "**/node_modules/expo*/**",
-      "**/node_modules/@expo/**",
-      "**/node_modules/metro*/**"
-    ]
-  },
+  // Keep default tracing; avoid custom standalone/builders for Vercel preset
   // experimental.outputFileTracingRoot is deprecated; using top-level outputFileTracingRoot
 
   webpack(cfg, { dev }) {

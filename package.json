@@ -42,7 +42,7 @@
     "gates:all": "npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4 && npm run gate:phase5",
     "web": "npm --workspace apps/web run dev",
     "check": "npm run health && npm run gates:all",
-    "build": "pnpm -r run build",
+    "build": "turbo run build --filter=web^... || pnpm --filter web build",
     "dev:web": "pnpm --filter web dev",
     "openapi:generate": "node scripts/docs/publish-openapi.js",
     "docs:gen": "node scripts/docs/gen-docs.cjs",
