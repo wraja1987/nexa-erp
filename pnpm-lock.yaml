@@ -199,7 +199,6 @@ importers:
         version: 0.29.14(expo@52.0.47(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@expo/metro-runtime@4.0.1(react-native@0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1)))(react-native@0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1))(react@18.3.1))(react-native@0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1))(react@18.3.1)
       expo-router:
         specifier: ~4.0.21
-        version: 4.0.21(bfv6s53sfnn5thvt6a3bwxgjlq)
       expo-secure-store:
         specifier: ~14.0.1
         version: 14.0.1(expo@52.0.47(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@expo/metro-runtime@4.0.1(react-native@0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1)))(react-native@0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1))(react@18.3.1))
@@ -282,11 +281,6 @@ importers:
       '@sentry/types':
         specifier: ^10.17.0
         version: 10.19.0
-      bcryptjs:
-        specifier: ^3.0.2
-        version: 3.0.2
-      ioredis:
-        specifier: ^5.8.1
         version: 5.8.1
       next:
         specifier: 14.2.7
@@ -12078,12 +12072,6 @@ snapshots:
   '@playwright/test@1.56.0':
     dependencies:
       playwright: 1.56.0
-
-  '@prisma/client@6.17.1(prisma@6.17.1(magicast@0.3.5)(typescript@5.9.2))(typescript@5.9.2)':
-    optionalDependencies:
-      prisma: 6.17.1(magicast@0.3.5)(typescript@5.9.2)
-      typescript: 5.9.2
-
   '@prisma/config@6.17.1(magicast@0.3.5)':
     dependencies:
       c12: 3.1.0(magicast@0.3.5)
@@ -12147,25 +12135,6 @@ snapshots:
       yargs: 17.7.2
     transitivePeerDependencies:
       - bare-abort-controller
-      - react-native-b4a
-      - supports-color
-
-  '@puppeteer/browsers@2.10.11':
-    dependencies:
-      debug: 4.4.3
-      extract-zip: 2.0.1
-      progress: 2.0.3
-      proxy-agent: 6.5.0
-      semver: 7.7.3
-      tar-fs: 3.1.1
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - bare-abort-controller
-      - bare-buffer
-      - react-native-b4a
-      - supports-color
-
-  '@puppeteer/browsers@2.3.0':
     dependencies:
       debug: 4.4.3
       extract-zip: 2.0.1
@@ -15472,8 +15441,6 @@ snapshots:
       react-native: 0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1)
     transitivePeerDependencies:
       - supports-color
-
-  expo-router@4.0.21(bfv6s53sfnn5thvt6a3bwxgjlq):
     dependencies:
       '@expo/metro-runtime': 4.0.1(react-native@0.76.9(@babel/core@7.28.4)(@babel/preset-env@7.28.3(@babel/core@7.28.4))(@types/react@18.3.26)(react@18.3.1))
       '@expo/server': 0.5.3
@@ -17905,7 +17872,6 @@ snapshots:
   node-abi@3.78.0:
     dependencies:
       semver: 7.7.3
-
   node-dir@0.1.17:
     dependencies:
       minimatch: 3.1.2
@@ -18515,25 +18481,6 @@ snapshots:
       - utf-8-validate
 
   puppeteer-core@22.15.0:
-    dependencies:
-      '@puppeteer/browsers': 2.3.0
-      chromium-bidi: 0.6.3(devtools-protocol@0.0.1312386)
-      debug: 4.4.3
-      devtools-protocol: 0.0.1312386
-      ws: 8.18.3
-    transitivePeerDependencies:
-      - bare-abort-controller
-      - bare-buffer
-      - bufferutil
-      - react-native-b4a
-      - supports-color
-      - utf-8-validate
-
-  puppeteer-core@24.24.0:
-    dependencies:
-      '@puppeteer/browsers': 2.10.11
-      chromium-bidi: 9.1.0(devtools-protocol@0.0.1508733)
-      debug: 4.4.3
       devtools-protocol: 0.0.1508733
       typed-query-selector: 2.12.0
       webdriver-bidi-protocol: 0.3.6

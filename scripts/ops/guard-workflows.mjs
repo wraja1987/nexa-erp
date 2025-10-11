@@ -159,6 +159,3 @@ for (const f of files) {
   if (changed) { updated++; console.log(`Updated: ${f}`); }
 }
 console.log(`Workflows updated: ${updated}`);
-
-
-

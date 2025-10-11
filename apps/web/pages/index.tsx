@@ -2,7 +2,6 @@
 import type { GetServerSideProps } from "next";
 
 const Index = () => null;
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const { getServerSession } = await import("next-auth");
@@ -15,5 +14,3 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default Index;
-
-
