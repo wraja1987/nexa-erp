@@ -1,26 +1,4 @@
 import Head from "next/head";
-
-export default function Login() {
-  return (
-    <>
-      <Head>
-        <title>Sign in – Nexa</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main style={{ padding: 24 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 700 }}>Sign in</h1>
-        <p>Please sign in using your organisation account.</p>
-        {/* TODO: Wire credentials form or provider buttons if using Credentials. */}
-        <form method="post" action="/api/auth/signin/google">
-          <button type="submit" style={{ padding: 12, border: '1px solid #ddd', borderRadius: 8 }}>Sign in with Google</button>
-        </form>
-      </main>
-    </>
-  );
-}
-
-import * as React from "react";
-import Head from "next/head";
 import { getCsrfToken } from "next-auth/react";
 
 type LoginProps = { csrfToken?: string };
