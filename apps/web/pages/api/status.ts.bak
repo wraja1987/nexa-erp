@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { redisLimiter } from "@/src/lib/rate-limit";
+import { redisLimiter } from "@/lib/rate-limit";
 const limit = redisLimiter({ windowMs: 60_000, max: 20, keyPrefix: "status" });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

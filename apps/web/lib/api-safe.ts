@@ -1,9 +1,8 @@
-// Tiny try/catch wrapper used by some API routes
 export function apiSafe<T extends (...args: any[]) => Promise<any>>(fn: T): T {
   return (async (...a: any[]) => {
-    try { return await fn(...a); } catch (err) { throw err; }
+    try { return await fn(...a); } catch (e) { throw e; }
   }) as T;
 }
-// Some places import `safe`
+// Back-compat alias some files use
 export const safe = apiSafe;
 export default apiSafe;

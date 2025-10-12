@@ -1,27 +1,17 @@
-export { getServerSession } from "next-auth";
-import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth/options";
+import { authOptions } from "./options";
 
-export async function requireAuthGSSP<P>(ctx: GetServerSidePropsContext, fn: () => Promise<GetServerSidePropsResult<P>>) {
-  const session = await getServerSession(ctx.req, ctx.res, authOptions as any);
-  if (!session) {
-    return { redirect: { destination: "/login", permanent: false } } as GetServerSidePropsResult<P>;
-  }
-  return fn();
-}
+export { getServerSession, authOptions };
 
-// Backwards-compatible helper used by existing pages: requireAuth(async () => ({ props: {} }))
-export function requireAuth<T extends { [key: string]: any } = { [key: string]: any }>(
-  gssp: (ctx: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<T>>
-) {
-  return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<T>> => {
-    const session = await getServerSession(ctx.req, ctx.res, authOptions as any);
-    if (!session) {
-      return { redirect: { destination: "/login", permanent: false } } as GetServerSidePropsResult<T>;
-    }
-    return gssp(ctx);
+export function requireAuthGSSP<P>(fn: GetServerSideProps<P>): GetServerSideProps<P> {
+  return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<P>> => {
+    const session = await getServerSession(ctx.req as any, ctx.res as any, authOptions);
+    if (!session) return { redirect: { destination: "/login", permanent: false } };
+    return fn(ctx);
   };
 }
 
-
+// Back-compat: some pages import `requireAuth` from ssr
+export const requireAuth = requireAuthGSSP;
+export default requireAuthGSSP;
