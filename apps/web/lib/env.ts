@@ -3,3 +3,5 @@ export const env = {
   REDIS_URL: process.env.REDIS_URL ?? "",
   NODE_ENV: process.env.NODE_ENV ?? "development",
 };
+export default env;
+export const ENV = env;
