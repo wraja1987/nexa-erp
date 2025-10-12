@@ -6,7 +6,8 @@
     "apps/*",
     "packages/*",
     "packages/registry",
-    "packages/jobs"
+    "packages/jobs",
+    "apps/api"
   ],
   "scripts": {
     "dev:fast": "pnpm --filter web dev",
