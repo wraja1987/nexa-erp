@@ -1,7 +1,9 @@
-export function apiSafe<T extends (...a: any[]) => Promise<any>>(fn: T): T {
-  return (async (...args: Parameters<T>): Promise<ReturnType<T>> => {
-    try { return await fn(...args) as any; }
-    catch (err) { throw err; }
+// Tiny try/catch wrapper used by some API routes
+export function apiSafe<T extends (...args: any[]) => Promise<any>>(fn: T): T {
+  return (async (...a: any[]) => {
+    try { return await fn(...a); } catch (err) { throw err; }
   }) as T;
 }
+// Some places import `safe`
 export const safe = apiSafe;
+export default apiSafe;
