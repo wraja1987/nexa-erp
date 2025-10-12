@@ -1,40 +1,32 @@
 import type { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { z } from "zod";
-
-/**
- * Minimal, working Credentials provider so the login page functions.
- * Accept any non-empty email + password >= 3 chars.
- * Replace with your real user lookup when ready.
- */
-const credsSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3),
-});
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+  session: { strategy: "jwt" },
+  pages: { signIn: "/login" },
+
   providers: [
     Credentials({
-      name: "Credentials",
+      name: "Email & Password",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(raw) {
-        const parsed = credsSchema.safeParse({
-          email: raw?.email,
-          password: raw?.password,
-        });
-        if (!parsed.success) return null;
+      async authorize(creds) {
+        const email = (creds?.email || "").toLowerCase();
+        const password = creds?.password || "";
 
-        // TODO: replace with your real user lookup + password check
-        // For now, allow sign-in with any valid email + 3+ char password.
-        const { email } = parsed.data;
-        return { id: email, name: email, email };
+        // Temporary deterministic login so /login works now:
+        const allowedEmail = (process.env.LOCAL_LOGIN_EMAIL || "").toLowerCase();
+        const allowedPassword = process.env.LOCAL_LOGIN_PASSWORD || "";
+
+        if (allowedEmail && allowedPassword && email === allowedEmail && password === allowedPassword) {
+          return { id: "admin", name: "Admin", email };
+        }
+        return null;
       },
     }),
   ],
-  session: { strategy: "jwt" },
 };
-
 export default authOptions;
