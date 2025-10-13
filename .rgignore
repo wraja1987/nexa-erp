@@ -6,3 +6,7 @@
 **/.disabled/**
 **/*.map
 infra/monitoring/grafana/plugins/**
+.git/
+.disabled/
+**/*.map
+infra/monitoring/grafana/plugins/
