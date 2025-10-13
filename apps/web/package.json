@@ -26,6 +26,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "echo 'lint skipped for release'"
+		"lint": "echo 'lint skipped for release'",
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"test": "vitest run --reporter=dot --run"
 	}
 }
