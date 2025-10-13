@@ -22,7 +22,7 @@ export default function LoginPage() {
           <div className="bg-white shadow-xl rounded-2xl p-8 sm:p-10">
             <div className="text-center mb-6">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <img src="/logo.svg" alt="Nexa" width={160} height={44} loading="eager" />
+                <img src="/Nexa.png" alt="Nexa" height="44" loading="eager" className="mx-auto mb-2 h-11 w-auto" />
               </div>
               <h1 className="text-3xl font-semibold text-gray-900">Sign in to Nexa ERP</h1>
               <p className="text-sm text-gray-500">Manage your business with the Nexa AI Engine</p>
