@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { loadExpanded, saveExpanded } from "@/src/lib/sidebarState";
+import { loadExpanded, saveExpanded } from "@/lib/sidebarState";
 type Node = { id: string; label: string; href?: string; children?: Node[] };
 const demoTree: Node[] = [
   { id: "finance", label: "Finance", children: [

@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { routeForAction } from "@/src/lib/actionRoutes";
+import { routeForAction } from "@/lib/actionRoutes";
 export default function ActionRouter({ selector = "[data-action]" }: { selector?: string }) {
   const router = useRouter();
   function onClick(e: MouseEvent) {
