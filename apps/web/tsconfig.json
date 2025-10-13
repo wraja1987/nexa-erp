@@ -2,14 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*",
-        "*"
-      ],
-      "@/lib/*": [
-        "src/lib/*"
-      ]
+      "@/*": ["src/*", "*"],
+      "@": ["src"],
+      "@/lib/*": ["src/lib/*"]
     },
+    "types": ["node"],
     "jsx": "preserve",
     "resolveJsonModule": true,
     "allowJs": false,
