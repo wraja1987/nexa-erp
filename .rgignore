@@ -8,6 +8,11 @@
 infra/monitoring/grafana/plugins/**
 reports/
 consolidated_build_artifacts/
+artifacts/
+NEXA_LOG.md
+Nexa ERP Backend/**
+ops/**
+scripts/**
 .git/
 .disabled/
 **/*.map
