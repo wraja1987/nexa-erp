@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import Head from "next/head";
 import { signIn } from "next-auth/react";
 
@@ -23,7 +22,7 @@ export default function LoginPage() {
           <div className="bg-white shadow-xl rounded-2xl p-8 sm:p-10">
             <div className="text-center mb-6">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <Image src="/logo.svg" alt="Nexa" width={160} height={44} priority />
+                <img src="/logo.svg" alt="Nexa" width={160} height={44} loading="eager" />
               </div>
               <h1 className="text-3xl font-semibold text-gray-900">Sign in to Nexa ERP</h1>
               <p className="text-sm text-gray-500">Manage your business with the Nexa AI Engine</p>
@@ -63,7 +62,7 @@ export default function LoginPage() {
                 onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
                 className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
                 aria-label="Continue with Google">
-                <Image src="/icons/google.svg" alt="" width={18} height={18} />
+                <img src="/icons/google.svg" alt="" width={18} height={18} loading="lazy" />
                 <span>Google</span>
               </button>
 
@@ -71,7 +70,7 @@ export default function LoginPage() {
                 onClick={() => signIn("microsoft", { callbackUrl: "/dashboard" })}
                 className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
                 aria-label="Continue with Microsoft">
-                <Image src="/icons/microsoft.svg" alt="" width={18} height={18} />
+                <img src="/icons/microsoft.svg" alt="" width={18} height={18} loading="lazy" />
                 <span>Microsoft</span>
               </button>
             </div>
