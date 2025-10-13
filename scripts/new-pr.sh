@@ -9,6 +9,3 @@ if command -v gh >/dev/null 2>&1; then
 else
   echo "Open a PR from $BR → main on GitHub."
 fi
-
-
-

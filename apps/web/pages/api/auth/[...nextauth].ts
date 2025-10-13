@@ -1,55 +1,6 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import AzureADProvider from "next-auth/providers/azure-ad";
+export const runtime = "nodejs";
+import NextAuth from "next-auth";
+import { authOptions } from "@/lib/auth/options";
 
-export const authOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
-    }),
-    AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID ?? "",
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET ?? "",
-      tenantId: process.env.AZURE_AD_TENANT_ID || "common",
-    }),
-  ],
-  pages: { signIn: "/login" },
-  session: { strategy: "jwt", maxAge: 60 * 60 * 8 },
-  secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NEXTAUTH_DEBUG === "true",
-  callbacks: {
-    async signIn({ profile }) {
-      const domain = process.env.ALLOWED_EMAIL_DOMAIN?.trim().toLowerCase();
-      if (!domain) return true;
-      const email = (profile?.email||"").toLowerCase();
-      return email.endsWith("@"+domain);
-    },
-  },
-  logger: {
-    error(code, ...message) {
-      // eslint-disable-next-line no-console
-      console.error("[next-auth][error]", code, ...message);
-    },
-    warn(code, ...message) {
-      // eslint-disable-next-line no-console
-      console.warn("[next-auth][warn]", code, ...message);
-    },
-    debug(code, ...message) {
-      // eslint-disable-next-line no-console
-      console.log("[next-auth][debug]", code, ...message);
-    },
-  },
-  cookies: {
-    sessionToken: {
-      name: "nexa_session",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: true,
-        domain: (process.env.NEXT_PUBLIC_APP_ORIGIN ? new URL(process.env.NEXT_PUBLIC_APP_ORIGIN).hostname : undefined) as any,
-      },
-    },
-  },
-};
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST, handler as default };

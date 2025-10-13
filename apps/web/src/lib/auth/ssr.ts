@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "../../../pages/api/auth/[...nextauth]";
 
 export async function getSessionSSR(ctx: GetServerSidePropsContext) {
   const { req, res } = ctx;
