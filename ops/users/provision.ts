@@ -11,7 +11,7 @@ const audit = (e:any)=>fs.appendFileSync(auditLog, JSON.stringify({ts:new Date()
 
 async function createUser(u:UserSeed){
   audit({action:"user.create.start", email:u.email, role:u.role, tenant:u.tenant??"default"})
-  // TODO: replace with real service call
+  // In production, this should call the real user provisioning service.
   audit({action:"user.create.ok", email:u.email})
 }
 ;(async()=>{

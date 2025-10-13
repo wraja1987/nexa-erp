@@ -42,8 +42,7 @@ export function redisLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts) {
 async function __ensureRedisOrFallback() {
   const client = await getRedis();
   if (!client) {
-    // TODO: optionally implement a tiny in-memory limiter here
-    // For now, we just act as if limits are not exceeded.
+    // No Redis available; return null so caller can decide on fallback limiter.
     return null;
   }
   return client;

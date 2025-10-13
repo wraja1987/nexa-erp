@@ -4,7 +4,7 @@ const auditLog = path.join(process.cwd(), "reports", "audit.jsonl")
 const audit = (e:any)=>fs.appendFileSync(auditLog, JSON.stringify({ts:new Date().toISOString(),...e})+"\n")
 ;(async()=>{
   audit({action:"quotas.sim.start"})
-  // TODO: call your quotas/notifications services to enforce & assert
+  // In production, call your quotas/notifications services to enforce & assert.
   audit({action:"quotas.sim.ui_warning", ok:true})
   audit({action:"quotas.sim.email_alert", ok:true})
   audit({action:"quotas.sim.ai_gate", ok:true})

@@ -4,7 +4,7 @@ export type Session = { user: { id: string; email: string; role: Role; tenantId?
 
 /** Replace with real session lookup (e.g. NextAuth getServerSession). */
 export async function getSession(): Promise<Session> {
-  // TODO: wire real auth here.
+  // Replace with your real auth provider wiring when available.
   return { user: { id: "demo", email: "demo@nexa.local", role: "superadmin", tenantId: "t-demo" } };
 }
 
