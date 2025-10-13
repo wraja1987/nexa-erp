@@ -18,13 +18,12 @@ export default function LoginPage() {
   return (
     <>
       <Head><title>Sign in — Nexa ERP</title><meta name="robots" content="noindex"/></Head>
-      <div data-build="approved-login-v1" className="min-h-full flex items-center justify-center bg-gradient-to-br from-blue-600 to-violet-700 p-4">
+      <div className="min-h-full flex items-center justify-center bg-gradient-to-br from-blue-600 to-violet-700 p-4">
         <div className="w-full max-w-md">
           <div className="bg-white shadow-xl rounded-2xl p-8 sm:p-10">
             <div className="text-center mb-6">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <Image src="/logo.svg" alt="Nexa logo" width={36} height={36} />
-                <span className="text-3xl font-semibold text-gray-900">Nexa</span>
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Image src="/logo.svg" alt="Nexa" width={160} height={44} priority />
               </div>
               <h1 className="text-3xl font-semibold text-gray-900">Sign in to Nexa ERP</h1>
               <p className="text-sm text-gray-500">Manage your business with the Nexa AI Engine</p>
@@ -60,10 +59,21 @@ export default function LoginPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-                className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2">Google</button>
-              <button onClick={() => signIn("microsoft", { callbackUrl: "/dashboard" })}
-                className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2">Microsoft</button>
+              <button type="button"
+                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
+                aria-label="Continue with Google">
+                <Image src="/icons/google.svg" alt="" width={18} height={18} />
+                <span>Google</span>
+              </button>
+
+              <button type="button"
+                onClick={() => signIn("microsoft", { callbackUrl: "/dashboard" })}
+                className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
+                aria-label="Continue with Microsoft">
+                <Image src="/icons/microsoft.svg" alt="" width={18} height={18} />
+                <span>Microsoft</span>
+              </button>
             </div>
 
             <p className="mt-8 text-center text-xs text-gray-400">© Nexa ERP — All rights reserved</p>
