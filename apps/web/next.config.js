@@ -37,6 +37,11 @@ const config = {
   // experimental.outputFileTracingRoot is deprecated; using top-level outputFileTracingRoot
 
   webpack(cfg, { dev }) {
+    // Ensure that the '@' alias resolves to 'src' for server and client bundles
+    cfg.resolve = cfg.resolve || {};
+    cfg.resolve.alias = cfg.resolve.alias || {};
+    cfg.resolve.alias["@"] = path.resolve(__dirname, "src");
+    cfg.resolve.alias["@/lib"] = path.resolve(__dirname, "src/lib");
     if (isLHCI && !dev) {
       const webpack = require("webpack");
       // Broad match: ANY module path containing /e2e/
