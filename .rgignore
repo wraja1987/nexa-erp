@@ -4,3 +4,5 @@
 **/.next/**
 **/dist/**
 **/.disabled/**
+**/*.map
+infra/monitoring/grafana/plugins/**
