@@ -3,3 +3,4 @@
 **/.lighthouseci/**
 **/.next/**
 **/dist/**
+**/.disabled/**
