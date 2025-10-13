@@ -15,6 +15,11 @@ const authOptions: NextAuthOptions = {
   ],
   secret: process.env.AUTH_SECRET,
   session: { strategy: "jwt" },
+  pages: {
+    signIn: "/login",
+    error: "/login",
+    verifyRequest: "/login",
+  },
   // TODO: copy any existing callbacks/pages/events from prior config if found
 };
 export default authOptions;

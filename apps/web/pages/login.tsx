@@ -1,39 +1,61 @@
-import * as React from "react";
-import Head from "next/head";
-import { getCsrfToken } from "next-auth/react";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import Image from "next/image";
 
-type LoginProps = { csrfToken?: string };
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-export default function Login({ csrfToken }: LoginProps) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    await signIn("credentials", { redirect: true, email, password, callbackUrl: "/dashboard" });
+    setLoading(false);
+  };
+
   return (
-    <>
-      <Head>
-        <title>Sign in – Nexa</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <a href="#main" className="sr-only focus:not-sr-only">Skip to main content</a>
-      <main id="main" role="main" className="container-narrow" style={{ display: "grid" }}>
-        <div style={{ width: "100%", background: "white", border: "1px solid #e5e7eb", borderRadius: 12, padding: 24 }}>
-          <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>Sign in</h1>
-          <p id="signin-help" style={{ color: "#4b5563", marginBottom: 16 }}>Use your organisation account to continue.</p>
-          <div style={{ display: "grid", gap: 10 }}>
-            <form method="post" action="/api/auth/signin/google" aria-describedby="signin-help" style={{ margin: 0 }}>
-              <input type="hidden" name="csrfToken" value={csrfToken ?? ""} />
-              <button type="submit" style={{ width: "100%", textAlign: "center", padding: "10px 14px", border: "1px solid #e5e7eb", borderRadius: 8, background: "white", color: "#111" }}>Continue with Google</button>
-            </form>
-            <form method="post" action="/api/auth/signin/azure-ad" aria-describedby="signin-help" style={{ margin: 0 }}>
-              <input type="hidden" name="csrfToken" value={csrfToken ?? ""} />
-              <button type="submit" style={{ width: "100%", textAlign: "center", padding: "10px 14px", border: "1px solid #e5e7eb", borderRadius: 8, background: "white", color: "#111" }}>Continue with Microsoft</button>
-            </form>
-          </div>
-          <div style={{ marginTop: 16, fontSize: 12, color: "#6b7280" }}>Credentials login is disabled.</div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-violet-700 p-4">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 space-y-6">
+        <div className="text-center">
+          <Image src="/logo.svg" alt="Nexa ERP" width={60} height={60} className="mx-auto mb-2" />
+          <h1 className="text-2xl font-semibold text-gray-800">Sign in to Nexa ERP</h1>
+          <p className="text-sm text-gray-500">Manage your business with the Nexa AI Engine</p>
         </div>
-      </main>
-    </>
-  );
-}
 
-export async function getServerSideProps(context: any) {
-  const csrfToken = await getCsrfToken(context);
-  return { props: { csrfToken } };
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email address</label>
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+            <div className="text-right mt-1">
+              <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
+            </div>
+          </div>
+          <button type="submit" disabled={loading}
+            className="w-full py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50">
+            {loading ? "Signing in..." : "Sign in"}
+          </button>
+        </form>
+
+        <div className="flex items-center my-4">
+          <hr className="flex-1 border-gray-300" />
+          <span className="mx-2 text-sm text-gray-500">or continue with</span>
+          <hr className="flex-1 border-gray-300" />
+        </div>
+
+        <div className="flex gap-3">
+          <button onClick={() => signIn("google")} className="w-1/2 py-2 border rounded-md hover:bg-gray-50">Google</button>
+          <button onClick={() => signIn("azure-ad")} className="w-1/2 py-2 border rounded-md hover:bg-gray-50">Microsoft</button>
+        </div>
+
+        <p className="text-xs text-gray-400 text-center">© Nexa ERP — All rights reserved</p>
+      </div>
+    </div>
+  );
 }
