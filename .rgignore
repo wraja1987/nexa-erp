@@ -6,6 +6,8 @@
 **/.disabled/**
 **/*.map
 infra/monitoring/grafana/plugins/**
+reports/
+consolidated_build_artifacts/
 .git/
 .disabled/
 **/*.map
