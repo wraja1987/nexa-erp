@@ -1,0 +1,5 @@
+# Exclude VCS and build artifacts from ripgrep scans
+**/.git/**
+**/.lighthouseci/**
+**/.next/**
+**/dist/**
