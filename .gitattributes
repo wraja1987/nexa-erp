@@ -8,3 +8,4 @@
 *.mov filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+apps/web/public/Nexa.png -filter -diff -merge -text
