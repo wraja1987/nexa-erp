@@ -3,6 +3,8 @@ import Credentials from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
 
 // Env helpers: support both NEXTAUTH_* (v4) and AUTH_* (v5)
 const ENV = {
@@ -54,6 +56,7 @@ if (ENV.AZURE_ID && ENV.AZURE_SECRET && ENV.AZURE_TENANT) {
 }
 
 const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   providers,
   secret: ENV.SECRET,
   session: { strategy: "jwt" },
