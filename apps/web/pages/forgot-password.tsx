@@ -1,27 +1,33 @@
 import * as React from "react";
 import Head from "next/head";
-import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 export default function ForgotPassword() {
-  const [email, setEmail] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
-  const [sent, setSent] = React.useState(false);
-  const [err, setErr] = React.useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
     setLoading(true);
     try {
-      const res = await signIn("email", {
-        email,
-        redirect: false,
-        callbackUrl: "/dashboard",
+      const res = await fetch('/api/auth/signin/email?json=true', {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        credentials: 'same-origin',
+        body: new URLSearchParams({
+          email,
+          callbackUrl: '/dashboard',
+          json: 'true',
+        }),
       });
-      if (res && ((res as any).ok || (res as any).status === 200)) {
+      if (res.ok) {
         setSent(true);
       } else {
-        setErr("We couldn’t send the email. Please try again.");
+        const text = await res.text();
+        setErr(`Network error while sending the email. Please try again. (${res.status}) ${text.slice(0, 180)}`);
       }
     } catch {
       setErr("Network error while sending the email. Please try again.");
