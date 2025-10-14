@@ -13,14 +13,18 @@ export default function ForgotPassword() {
     setErr(null);
     setLoading(true);
     try {
+      // Fetch CSRF then POST urlencoded to match cURL behaviour
+      const csrfRes = await fetch('/api/auth/csrf');
+      const csrf = await csrfRes.json();
       const res = await fetch('/api/auth/signin/email?json=true', {
         method: 'POST',
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        headers: { 'content-type': 'application/x-www-form-urlencoded', 'accept': 'application/json' },
         credentials: 'same-origin',
         body: new URLSearchParams({
           email,
           callbackUrl: '/dashboard',
-          json: 'true',
+          redirect: 'false',
+          csrfToken: csrf.csrfToken,
         }),
       });
       if (res.ok) {

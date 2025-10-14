@@ -55,7 +55,7 @@ if (ENV.AZURE_ID && ENV.AZURE_SECRET && ENV.AZURE_TENANT) {
   );
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers,
   secret: ENV.SECRET,
@@ -67,4 +67,3 @@ const authOptions: NextAuthOptions = {
   },
   // TODO: copy any existing callbacks/pages/events from prior config if found
 };
-export default authOptions;

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import authOptions from "@/lib/auth/options";
+import { authOptions } from "@/lib/auth/options";
 
 export async function getSessionSSR(ctx: GetServerSidePropsContext) {
   const { req, res } = ctx;
