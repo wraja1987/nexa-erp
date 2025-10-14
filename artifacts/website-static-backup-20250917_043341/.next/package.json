@@ -1,1 +1,7 @@
-{"type": "commonjs"}
+{
+  "type": "commonjs",
+  "packageManager": "pnpm@10",
+  "engines": {
+    "node": ">=20 <21"
+  }
+}

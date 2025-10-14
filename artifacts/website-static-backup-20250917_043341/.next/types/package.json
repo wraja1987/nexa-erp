@@ -1,1 +1,7 @@
-{"type": "module"}
+{
+  "type": "module",
+  "packageManager": "pnpm@10",
+  "engines": {
+    "node": ">=20 <21"
+  }
+}

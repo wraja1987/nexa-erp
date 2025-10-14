@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 
 export default function ForgotPassword() {
@@ -6,10 +6,17 @@ export default function ForgotPassword() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const lastSubmitRef = useRef<number>(0);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
+    const now = Date.now();
+    if (now - lastSubmitRef.current < 10_000) {
+      setErr("Please wait a few seconds before trying again.");
+      return;
+    }
+    lastSubmitRef.current = now;
     setLoading(true);
     const res = await signIn("email", {
       email,
