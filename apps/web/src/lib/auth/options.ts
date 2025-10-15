@@ -1,10 +1,11 @@
 import type { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
+import { getTransporter } from "@/lib/email/transporter";
+import "@/lib/env";
 
 // Env helpers: support both NEXTAUTH_* (v4) and AUTH_* (v5)
 const ENV = {
@@ -25,14 +26,30 @@ const ENV = {
 
 const providers = [
   EmailProvider({
-    server: {
-      host: ENV.SMTP_HOST!,
-      port: Number(ENV.SMTP_PORT || 587),
-      auth: { user: ENV.SMTP_USER!, pass: ENV.SMTP_PASS! },
-      secure: ENV.SMTP_SECURE === "true",
-    },
     from: ENV.EMAIL_FROM,
     maxAge: 15 * 60,
+    async sendVerificationRequest({ identifier, url, provider }) {
+      const transporter = getTransporter();
+      const result = await transporter
+        .sendMail({
+          to: identifier,
+          from: provider.from ?? ENV.EMAIL_FROM!,
+          subject: "Sign in to Nexa ERP",
+          text: `Sign in to Nexa ERP: ${url}`,
+          html: `<p>Click the button to sign in:</p>
+                 <p><a href="${url}" style="background:#4f46e5;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none">Sign in</a></p>
+                 <p>Or copy and paste this URL: <br>${url}</p>`,
+        })
+        .catch((err: any) => {
+          console.error("[email] sendMail error:", err?.message || err);
+          throw new Error(`Email transport failed: ${err?.message || "unknown error"}`);
+        });
+      if ((result as any)?.rejected?.length) {
+        const msg = `Email rejected: ${(result as any).rejected.join(", ")}`;
+        console.error("[email] rejected:", msg);
+        throw new Error(msg);
+      }
+    },
   }),
 ];
 
@@ -48,22 +65,24 @@ if (ENV.GOOGLE_ID && ENV.GOOGLE_SECRET) {
 if (ENV.AZURE_ID && ENV.AZURE_SECRET && ENV.AZURE_TENANT) {
   providers.push(
     AzureADProvider({
+      tenantId: ENV.AZURE_TENANT!,
       clientId: ENV.AZURE_ID!,
       clientSecret: ENV.AZURE_SECRET!,
-      tenantId: ENV.AZURE_TENANT!,
+      authorization: { params: { scope: "openid profile email" } },
     })
   );
 }
 
 export const authOptions: NextAuthOptions = {
+  trustHost: true,
   adapter: PrismaAdapter(prisma),
   providers,
   secret: ENV.SECRET,
   session: { strategy: "jwt" },
-  pages: {
-    signIn: "/login",
-    error: "/login",
-    verifyRequest: "/login",
+  pages: { signIn: "/login" },
+  logger: {
+    error: (code, meta) => console.error("[NextAuth][error]", code, meta),
+    warn: (code) => console.warn("[NextAuth][warn]", code),
+    debug: (code, meta) => console.debug("[NextAuth][debug]", code, meta),
   },
-  // TODO: copy any existing callbacks/pages/events from prior config if found
 };

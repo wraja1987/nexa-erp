@@ -67,7 +67,7 @@ export default function LoginPage() {
               </button>
 
               <button type="button"
-                onClick={() => signIn("microsoft", { callbackUrl: "/dashboard" })}
+                onClick={() => signIn("azure-ad", { callbackUrl: "/dashboard" })}
                 className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
                 aria-label="Continue with Microsoft">
                 <img src="/icons/microsoft.svg" alt="" width={18} height={18} loading="lazy" />

@@ -14,27 +14,21 @@ export default function ForgotPassword() {
     setLoading(true);
     try {
       // Fetch CSRF then POST urlencoded to match cURL behaviour
-      const csrfRes = await fetch('/api/auth/csrf');
-      const csrf = await csrfRes.json();
-      const res = await fetch('/api/auth/signin/email?json=true', {
-        method: 'POST',
-        headers: { 'content-type': 'application/x-www-form-urlencoded', 'accept': 'application/json' },
-        credentials: 'same-origin',
-        body: new URLSearchParams({
-          email,
-          callbackUrl: '/dashboard',
-          redirect: 'false',
-          csrfToken: csrf.csrfToken,
-        }),
+      const csrf = await fetch('/api/auth/csrf', { credentials: 'same-origin' }).then(r => r.json());
+      const body = new URLSearchParams({ email, callbackUrl: '/dashboard', redirect: 'false', csrfToken: csrf.csrfToken });
+      const resp = await fetch('/api/auth/signin/email?json=true', {
+        method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded', 'accept': 'application/json' },
+        credentials: 'same-origin', body,
       });
-      if (res.ok) {
-        setSent(true);
-      } else {
-        const text = await res.text();
-        setErr(`Network error while sending the email. Please try again. (${res.status}) ${text.slice(0, 180)}`);
+      if (!resp.ok) {
+        const txt = await resp.text();
+        let msg = txt;
+        try { const data = JSON.parse(txt); msg = data.message || data.error || txt; } catch {}
+        throw new Error(msg);
       }
-    } catch {
-      setErr("Network error while sending the email. Please try again.");
+      setSent(true);
+    } catch (e:any) {
+      setErr(e?.message || 'Unable to send email');
     } finally {
       setLoading(false);
     }
