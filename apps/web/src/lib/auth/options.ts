@@ -5,7 +5,7 @@ import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { createTransporter } from "@/lib/email/transporter";
-import { env } from "@/env.server";
+import "@/env.server";
 
 // Env helpers: support both NEXTAUTH_* (v4) and AUTH_* (v5)
 const ENV = {
