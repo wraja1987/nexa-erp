@@ -3,7 +3,7 @@ import { z } from 'zod';
 const EnvSchema = z.object({
   NEXTAUTH_URL: z.string().url(),
   NEXTAUTH_SECRET: z.string().min(32),
-  EMAIL_FROM: z.string().email(),
+  EMAIL_FROM: z.string().email("EMAIL_FROM must be a plain email like info@nexaai.co.uk"),
   SMTP_HOST: z.string().min(1),
   SMTP_PORT: z.string().min(1),
   SMTP_USER: z.string().min(1),

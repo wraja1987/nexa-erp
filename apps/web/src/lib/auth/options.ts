@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
-import { createTransporter } from "@/lib/email/transporter";
+import { createTransporter, verifyTransporter } from "@/lib/email/transporter";
 import "@/env.server";
 
 // Env helpers: support both NEXTAUTH_* (v4) and AUTH_* (v5)
@@ -29,25 +29,24 @@ const providers = [
     from: ENV.EMAIL_FROM,
     maxAge: 15 * 60,
     async sendVerificationRequest({ identifier, url, provider }) {
+      const verify = await verifyTransporter();
+      if (!verify.ok) {
+        throw new Error("SMTP verify failed: " + verify.error);
+      }
       const transporter = createTransporter();
-      const result = await transporter
-        .sendMail({
+      const from = process.env.EMAIL_FROM;
+      try {
+        await transporter.sendMail({
           to: identifier,
-          from: provider.from ?? ENV.EMAIL_FROM!,
-          subject: `Sign in to ${new URL(url).host}`,
-          text: `Sign in to ${new URL(url).host}: ${url}`,
-          html: `<p>Click the button to sign in:</p>
-                 <p><a href="${url}" style="background:#4f46e5;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none">Sign in</a></p>
-                 <p>Or copy and paste this URL: <br>${url}</p>`,
-        })
-        .catch((err: any) => {
-          console.error("[email] sendMail error:", err?.message || err);
-          throw new Error(`Email transport failed: ${err?.message || "unknown error"}`);
+          from,
+          subject: `Sign in to Nexa ERP`,
+          text: `Sign in: ${url}`,
+          html: `<p>Sign in:</p><p><a href="${url}">${url}</a></p>`,
         });
-      if ((result as any)?.rejected?.length) {
-        const msg = `Email rejected: ${(result as any).rejected.join(", ")}`;
-        console.error("[email] rejected:", msg);
-        throw new Error(msg);
+        console.info('[na-email][sent]', { to: identifier });
+      } catch (err: any) {
+        console.error('[na-email][send]', { error: String(err) });
+        throw err;
       }
     },
   }),
