@@ -260,7 +260,7 @@ model $M {
 PRISMA
       done
     } >> ../../prisma/schema.prisma
-    (cd ../../ and pnpm prisma generate && pnpm prisma migrate dev --name add_autogen_models)
+    (cd ../../ && pnpm prisma generate && pnpm prisma migrate dev --name add_autogen_models)
   fi
 fi
 
