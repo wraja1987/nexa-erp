@@ -53,22 +53,16 @@ const providers = [
   }),
 ];
 
-if (ENV.GOOGLE_ID && ENV.GOOGLE_SECRET) {
-  providers.push(
-    GoogleProvider({
-      clientId: ENV.GOOGLE_ID!,
-      clientSecret: ENV.GOOGLE_SECRET!,
-    })
-  );
-}
 
 if (ENV.AZURE_ID && ENV.AZURE_SECRET && ENV.AZURE_TENANT) {
   providers.push(
     AzureADProvider({
+      id: 'azure-ad',
       tenantId: ENV.AZURE_TENANT!,
       clientId: ENV.AZURE_ID!,
       clientSecret: ENV.AZURE_SECRET!,
-      authorization: { params: { scope: "openid profile email offline_access User.Read" } },
+      authorization: { params: { scope: "openid email profile offline_access User.Read" } },
+      checks: ["pkce", "state"],
     })
   );
 }
@@ -78,7 +72,12 @@ if (ENV.GOOGLE_ID && ENV.GOOGLE_SECRET) {
     GoogleProvider({
       clientId: ENV.GOOGLE_ID!,
       clientSecret: ENV.GOOGLE_SECRET!,
-      authorization: { params: { prompt: "consent", access_type: "offline", response_type: "code", scope: "openid email profile" } },
+      authorization: { params: { prompt: "consent", access_type: "offline", response_type: "code" } },
+      checks: ["pkce", "state"],
+      profile(profile) { return profile as any; },
+      allowDangerousEmailAccountLinking: true,
+      idToken: false,
+      // scopes declared in params above plus provider default openid/email/profile
     })
   );
 }

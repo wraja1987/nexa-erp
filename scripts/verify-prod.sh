@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-set -e
-BASE="https://app.nexaai.co.uk"
-echo "# ping"; curl -s "$BASE/api/ping"; echo; echo
-echo "# providers"; curl -s "$BASE/api/auth/providers"; echo; echo
-echo "# diag"; curl -s "$BASE/api/_diag/na-health" || true; echo; echo
-echo "# POST email (no CSRF - may 302)"; curl -i -X POST "$BASE/api/auth/signin/email?json=true" -H "content-type: application/x-www-form-urlencoded" --data "email=test@example.com&callbackUrl=%2Fdashboard" | sed -n '1,20p'; echo
+set -euo pipefail
+BASE="${NEXT_PUBLIC_APP_URL:-https://app.nexaai.co.uk}"
+echo "== DB check ==" && curl -s "$BASE/api/_diag/na-db" | jq || true
+echo "== NextAuth ==" && curl -s "$BASE/api/_diag/na-nextauth" | jq || true
+echo "== Providers ==" && curl -s "$BASE/api/auth/providers" | jq || true
+echo "== Email POST smoke ==" && curl -i -X POST "$BASE/api/auth/signin/email?json=true" \
+  -H "content-type: application/x-www-form-urlencoded" \
+  --data "email=test@example.com&callbackUrl=%2Fdashboard" | sed -n '1,40p'
 
 
