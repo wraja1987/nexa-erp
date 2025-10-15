@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "pnpm build",
+  "functions": {
+    "api/**": {
+      "runtime": "nodejs20.x",
+      "includeFiles": [
+        "packages/**",
+        "apps/web/prisma/**",
+        "apps/web/public/**"
+      ]
+    }
+  }
+}
+
+
