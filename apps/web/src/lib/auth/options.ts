@@ -4,8 +4,8 @@ import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
-import { getTransporter } from "@/lib/email/transporter";
-import "@/lib/env";
+import { createTransporter } from "@/lib/email/transporter";
+import { env } from "@/env.server";
 
 // Env helpers: support both NEXTAUTH_* (v4) and AUTH_* (v5)
 const ENV = {
@@ -29,13 +29,13 @@ const providers = [
     from: ENV.EMAIL_FROM,
     maxAge: 15 * 60,
     async sendVerificationRequest({ identifier, url, provider }) {
-      const transporter = getTransporter();
+      const transporter = createTransporter();
       const result = await transporter
         .sendMail({
           to: identifier,
           from: provider.from ?? ENV.EMAIL_FROM!,
-          subject: "Sign in to Nexa ERP",
-          text: `Sign in to Nexa ERP: ${url}`,
+          subject: `Sign in to ${new URL(url).host}`,
+          text: `Sign in to ${new URL(url).host}: ${url}`,
           html: `<p>Click the button to sign in:</p>
                  <p><a href="${url}" style="background:#4f46e5;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none">Sign in</a></p>
                  <p>Or copy and paste this URL: <br>${url}</p>`,
@@ -68,7 +68,17 @@ if (ENV.AZURE_ID && ENV.AZURE_SECRET && ENV.AZURE_TENANT) {
       tenantId: ENV.AZURE_TENANT!,
       clientId: ENV.AZURE_ID!,
       clientSecret: ENV.AZURE_SECRET!,
-      authorization: { params: { scope: "openid profile email" } },
+      authorization: { params: { scope: "openid profile email offline_access User.Read" } },
+    })
+  );
+}
+
+if (ENV.GOOGLE_ID && ENV.GOOGLE_SECRET) {
+  providers.push(
+    GoogleProvider({
+      clientId: ENV.GOOGLE_ID!,
+      clientSecret: ENV.GOOGLE_SECRET!,
+      authorization: { params: { prompt: "consent", access_type: "offline", response_type: "code", scope: "openid email profile" } },
     })
   );
 }
@@ -83,6 +93,6 @@ export const authOptions: NextAuthOptions = {
   logger: {
     error: (code, meta) => console.error("[NextAuth][error]", code, meta),
     warn: (code) => console.warn("[NextAuth][warn]", code),
-    debug: (code, meta) => console.debug("[NextAuth][debug]", code, meta),
+    debug: (code, meta) => { if (process.env.NODE_ENV !== 'production') console.debug("[NextAuth][debug]", code, meta); },
   },
 };
