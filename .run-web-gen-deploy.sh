@@ -234,7 +234,8 @@ grep -RIl "@/components/nexa/" app || true | xargs -I{} perl -pi -e "s#@/compone
 # 5) Optional: add missing Prisma models (if allowed)
 # ─────────────────────────────
 if [ "$ALLOW_AUTOGEN_MIGRATIONS" = "1" ] && [ -f "../../prisma/schema.prisma" ]; then
-  MISSING_MODELS=$(node - <<'NODE'
+  TMP_MM_JS=$(mktemp)
+  cat > "$TMP_MM_JS" <<'NODE'
 const fs=require('fs');
 const src=fs.readFileSync('app/api/_crud/[resource]/route.ts','utf8');
 const map=src.match(/modelMap:\s*Record<string,string>\s*=\s*{([\s\S]*?)}/);
@@ -244,7 +245,7 @@ const schema=fs.readFileSync('../../prisma/schema.prisma','utf8');
 const miss=[...new Set(models)].filter(m=>!new RegExp(`model\\s+${m}\\s+{`).test(schema));
 console.log(miss.join('\n'));
 NODE
-)
+  MISSING_MODELS=$(node "$TMP_MM_JS"); rm -f "$TMP_MM_JS"
   if [ -n "$MISSING_MODELS" ]; then
     {
       echo
