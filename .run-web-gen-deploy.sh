@@ -273,7 +273,7 @@ pnpm build
 
 : > /tmp/nexa-built.txt
 [ -f ".next/server/pages-manifest.json" ] && node -e "const m=require('./.next/server/pages-manifest.json'); for(const k of Object.keys(m)) if(!k.startsWith('/_next')&&!k.includes('_middleware')&&!k.includes('_document')&&!k.includes('_app')) console.log(k)" >> /tmp/nexa-built.txt
-[ -f ".next/server/app-paths-manifest.json" ] && node -e "const m=require('./.next/server/app-paths-manifest.json'); for(const k of Object.keys(m)) console.log(k)" >> /tmp/nexa-built.txt
+[ -f ".next/server/app-paths-manifest.json" ] && node -e "const m=require('./.next/server/app-paths-manifest.json'); for(const k of Object.keys(m)) { const p = k.replace(/\\/page$/,'').replace(/\\/route$/,''); if(!p.startsWith('/_next')) console.log(p) }" >> /tmp/nexa-built.txt
 sort -u /tmp/nexa-built.txt | sed 's#//#/#g' > /tmp/nexa-built.unique.txt
 
 MISSING=$(comm -23 "$REQUIRED_TXT" /tmp/nexa-built.unique.txt || true)
