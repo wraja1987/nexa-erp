@@ -2,6 +2,8 @@ import type { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 
 // Accept SMTP_* OR EMAIL_SERVER_* naming
 const EMAIL_HOST = process.env.EMAIL_SERVER_HOST || process.env.SMTP_HOST;
@@ -15,6 +17,7 @@ const hasGoogle = !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_S
 const hasAzure  = !!(process.env.AZURE_AD_CLIENT_ID && process.env.AZURE_AD_CLIENT_SECRET && process.env.AZURE_AD_TENANT_ID);
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(new PrismaClient()),
   trustHost: true,
   pages: {
     signIn: "/login",
