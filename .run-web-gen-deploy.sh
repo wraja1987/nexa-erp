@@ -298,7 +298,7 @@ if ! vercel whoami >/dev/null 2>&1; then vercel login; fi
 if ! vercel link --yes --project "$VERCEL_PROJECT" >/dev/null 2>&1; then vercel link; fi
 
 # Deploy using prebuilt output (cache clear with --force)
-DEPLOY_URL=$(vercel deploy --prod --prebuilt --force --confirm --cwd "$REPO_DIR/$APP_DIR" --yes | tail -n1)
+DEPLOY_URL=$(vercel deploy --prod --force --yes --cwd "$REPO_DIR/$APP_DIR" | tail -n1)
 echo "✓ Deployed: $DEPLOY_URL"
 vercel alias set "$DEPLOY_URL" "$DOMAIN" || true
 
