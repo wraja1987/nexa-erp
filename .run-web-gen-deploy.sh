@@ -295,12 +295,12 @@ KPI=$(curl -s -o /dev/null -w "%{http_code}\n" "$PROD_URL/api/kpi/dashboard"); i
 
 # Login & link once if needed
 if ! vercel whoami >/dev/null 2>&1; then vercel login; fi
-if ! vercel link --yes --scope "$VERCEL_ORG" --project "$VERCEL_PROJECT" >/dev/null 2>&1; then vercel link --scope "$VERCEL_ORG"; fi
+if ! vercel link --yes --project "$VERCEL_PROJECT" >/dev/null 2>&1; then vercel link; fi
 
 # Deploy using prebuilt output (cache clear with --force)
-DEPLOY_URL=$(vercel deploy --prod --prebuilt --force --scope "$VERCEL_ORG" --confirm --cwd "$REPO_DIR/$APP_DIR" --yes | tail -n1)
+DEPLOY_URL=$(vercel deploy --prod --prebuilt --force --confirm --cwd "$REPO_DIR/$APP_DIR" --yes | tail -n1)
 echo "✓ Deployed: $DEPLOY_URL"
-vercel alias set "$DEPLOY_URL" "$DOMAIN" --scope "$VERCEL_ORG" || true
+vercel alias set "$DEPLOY_URL" "$DOMAIN" || true
 
 # Post-deploy checks
 curl -s "$PROD_URL/api/auth/providers" | jq >/dev/null || true
