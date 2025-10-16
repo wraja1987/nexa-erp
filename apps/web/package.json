@@ -29,5 +29,8 @@
 		"lint": "echo 'lint skipped for release'",
 		"typecheck": "tsc -p tsconfig.json --noEmit || true",
 		"test": "vitest run --reporter=dot --run || true"
+	},
+	"devDependencies": {
+		"@types/react": "~18.3.12"
 	}
 }
