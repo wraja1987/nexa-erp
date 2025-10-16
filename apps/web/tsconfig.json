@@ -6,11 +6,14 @@
         "./src/*"
       ],
       "@/lib/*": [
-        "lib/*"
+        "./src/lib/*"
       ],
       "@/lib/auth/*": [
-        "lib/auth/*",
-        "lib/Auth/*"
+        "./src/lib/auth/*",
+        "./src/lib/Auth/*"
+      ],
+      "@/src/*": [
+        "./src/*"
       ]
     },
     "jsx": "preserve",
