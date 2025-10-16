@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-export const fetchCache = 'no-store';
+export const fetchCache = 'force-no-store';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -85,3 +85,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+

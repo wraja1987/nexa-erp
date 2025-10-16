@@ -17,7 +17,6 @@ const hasGoogle = !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_S
 const hasAzure  = !!(process.env.AZURE_AD_CLIENT_ID && process.env.AZURE_AD_CLIENT_SECRET && process.env.AZURE_AD_TENANT_ID);
 
 export const authOptions: NextAuthOptions = {
-  trustHost: true,
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   // Force the sign-in UI to our /login page

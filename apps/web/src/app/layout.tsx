@@ -16,7 +16,7 @@ import { inter } from '@/lib/fonts';
 export const metadata = { title: 'Nexa', description: 'ERP' };
 export default function RootLayout(props:any){
   return (
-    <html lang="en-GB" lang="en-GB">
+    <html lang="en-GB">
       <body className={inter.className}>
   {/* Example Script usage with nonce so it passes CSP */}
   <Script id="nexa-bootstrap" nonce={getCspNonce()} strategy="afterInteractive">{``}</Script>
