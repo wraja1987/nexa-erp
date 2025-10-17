@@ -1,10 +1,5 @@
-import type { Metadata } from 'next'
-import LoginApproved from '@/src/features/auth/LoginApproved'
-
-export const metadata: Metadata = {
-  title: 'Sign in to Nexa ERP'
-}
-
+import dynamic from "next/dynamic";
+const LoginApproved = dynamic(() => import("@/src/features/auth/LoginApproved"), { ssr: false });
 export default function Page() {
-  return <LoginApproved />
+  return <LoginApproved />;
 }

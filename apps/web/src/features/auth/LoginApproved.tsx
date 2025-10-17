@@ -3,17 +3,20 @@ import Image from "next/image";
 
 export default function LoginApproved() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-blue-500 to-purple-500 flex items-center justify-center">
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/login-bg.jpg')" }}
+    >
       <div className="w-full max-w-md bg-white/95 backdrop-blur rounded-2xl shadow-xl p-8">
         <div className="flex justify-center mb-6">
           <Image src="/Nexa.png" alt="Nexa" width={36} height={36} priority />
         </div>
+
         <h1 className="text-2xl font-semibold text-center">Sign in to Nexa ERP</h1>
         <p className="text-center text-sm text-gray-500 mt-1">
           Manage your business with the Nexa AI Engine
         </p>
 
-        {/* email */}
         <label className="block text-sm font-medium mt-6">Email address</label>
         <input
           className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -22,10 +25,11 @@ export default function LoginApproved() {
           name="email"
         />
 
-        {/* password + forgot */}
         <div className="mt-4 flex items-center justify-between">
           <label className="text-sm font-medium">Password</label>
-          <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
+          <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+            Forgot password?
+          </a>
         </div>
         <input
           className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
