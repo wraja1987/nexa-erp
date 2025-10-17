@@ -72,17 +72,18 @@ async function upsertUser(client: Client, table: string, cols: Cols, email: stri
   const insertParams: any[] = [email];
   let j = 2;
 
-  if (cols.id && !cols.idHasDefault) { insertCols.unshift('"id"'); insertVals.unshift(`$${j++}`); insertParams.unshift(randomUUID()); }
+  if (cols.id && !cols.idHasDefault) { insertCols.unshift('"id"'); insertVals.unshift(`$${j++}`); insertParams.unshift(email); }
   if (cols.passwordHash) { insertCols.push(`"${cols.passwordHash}"`); insertVals.push(`$${j++}`); insertParams.push(hash); }
   if (cols.role)         { insertCols.push(`"${cols.role}"`);         insertVals.push(`$${j++}`); insertParams.push(role); }
   if (cols.mfaEnforced)  { insertCols.push(`"${cols.mfaEnforced}"`);  insertVals.push(`$${j++}`); insertParams.push(true); }
   if (cols.isActive)     { insertCols.push(`"${cols.isActive}"`);     insertVals.push(`$${j++}`); insertParams.push(true); }
   if (cols.mustChangePassword) { insertCols.push(`"${cols.mustChangePassword}"`); insertVals.push(`$${j++}`); insertParams.push(false); }
 
+  const conflictTarget = cols.id ? '"id"' : `"${cols.email}"`;
   const sql = `
     INSERT INTO ${table} (${insertCols.join(', ')})
     VALUES (${insertVals.join(', ')})
-    ON CONFLICT ("${cols.email}") ${sets.length ? `DO UPDATE SET ${sets.join(', ')}` : 'DO NOTHING'};
+    ON CONFLICT (${conflictTarget}) ${sets.length ? `DO UPDATE SET ${sets.join(', ')}` : 'DO NOTHING'};
   `;
 
   await client.query(sql, insertParams.length ? insertParams : [email]);
