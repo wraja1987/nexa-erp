@@ -22,7 +22,7 @@ export default function LoginPage() {
             <div className="font-extrabold tracking-wide">Nexa ERP</div>
           </div>
 
-          <h1 className="text-3xl font-semibold">Sign in to Nexa ERP</h1>
+        <h1 className="text-3xl font-semibold">Nexa Login (legacy)</h1>
           <p className="mt-2 text-sm text-slate-600">Manage your business with the Nexa AI Engine</p>
 
           <form className="mt-8 space-y-5" action="/api/auth/callback/credentials" method="post" noValidate>
