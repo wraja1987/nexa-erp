@@ -20,10 +20,27 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   // Force the sign-in UI to our /login page
-  pages: { signIn: "/login", verifyRequest: "/auth/verify-request", error: "/login" },
-  session: { strategy: "jwt" },
+  pages: { signIn: "/login", verifyRequest: "/login", error: "/login" },
+  session: { strategy: "jwt", maxAge: 30*24*60*60 },
   // Normalise redirects to production base URL
   callbacks: {
+    async jwt({ token, user, account, profile }) {
+      // propagate role/tenantId if present on user (from DB) and mfa flag
+      if (user) {
+        const anyUser = user as any
+        if (anyUser.role) token.role = anyUser.role
+        if (anyUser.tenantId || anyUser.tenant_id) token.tenantId = anyUser.tenantId ?? anyUser.tenant_id
+        if (typeof anyUser.mfaPassed === 'boolean') token.mfaPassed = anyUser.mfaPassed
+      }
+      return token
+    },
+    async session({ session, token }) {
+      const s: any = session
+      s.role = (token as any).role
+      s.tenantId = (token as any).tenantId
+      s.mfaPassed = (token as any).mfaPassed === true
+      return session
+    },
     async redirect({ url, baseUrl }) {
       const prod = process.env.NEXTAUTH_URL || baseUrl;
       try {

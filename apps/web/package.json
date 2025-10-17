@@ -29,7 +29,8 @@
 		"start": "next start",
 		"lint": "echo 'lint skipped for release'",
 		"typecheck": "tsc -p tsconfig.json --noEmit || true",
-		"test": "vitest run --reporter=dot --run || true"
+		"test": "vitest run --reporter=dot --run || true",
+		"ops:enforce-admin-auth": "tsx scripts/ops/enforce-admin-auth.ts"
 	},
 	"devDependencies": {
 		"@types/react": "~18.3.12"
