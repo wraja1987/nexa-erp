@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 export default function LoginApproved() {
   return (
@@ -49,14 +50,14 @@ export default function LoginApproved() {
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <a href="/api/auth/signin/google" className="border rounded-lg py-2.5 flex items-center justify-center hover:bg-gray-50">
+          <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="border rounded-lg py-2.5 flex items-center justify-center hover:bg-gray-50">
             <Image src="/icons/google.svg" alt="Google" width={18} height={18} />
             <span className="ml-2 text-sm">Google</span>
-          </a>
-          <a href="/api/auth/signin/azure-ad" className="border rounded-lg py-2.5 flex items-center justify-center hover:bg-gray-50">
+          </button>
+          <button onClick={() => signIn("azure-ad", { callbackUrl: "/dashboard" })} className="border rounded-lg py-2.5 flex items-center justify-center hover:bg-gray-50">
             <Image src="/icons/microsoft.svg" alt="Microsoft" width={18} height={18} />
             <span className="ml-2 text-sm">Microsoft</span>
-          </a>
+          </button>
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-8">© Nexa ERP — All rights reserved</p>
