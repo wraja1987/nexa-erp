@@ -1,22 +1,3 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import dynamic from "next/dynamic";
-const LoginApproved = dynamic(() => import("@/components/auth/LoginApproved"), { ssr: true });
-
-export const config = { runtime: "nodejs" };
-export const revalidate = 0;
-
-const Page: NextPage = () => (
-  <>
-    <Head>
-      <title>Sign in to Nexa ERP</title>
-      <meta name="robots" content="noindex, noarchive, noimageindex, max-snippet:0" />
-    </Head>
-    <LoginApproved />
-  </>
-);
-export default Page;
-
 import * as React from "react";
 import type { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
