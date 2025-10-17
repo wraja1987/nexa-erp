@@ -4,13 +4,13 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Nexa ERP',
-  description: 'Sign in to Nexa ERP',
+  description: 'Run your business with the Nexa AI Engine',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
