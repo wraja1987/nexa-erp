@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   // Force the sign-in UI to our /login page
-  pages: { signIn: "/login", verifyRequest: "/login", error: "/login" },
+  pages: { signIn: "/login", verifyRequest: "/auth/verify-request", error: "/login" },
   session: { strategy: "jwt", maxAge: 30*24*60*60 },
   // Normalise redirects to production base URL
   callbacks: {
