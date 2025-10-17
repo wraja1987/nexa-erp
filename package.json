@@ -93,7 +93,8 @@
     "h:audit": "tsx scripts/audit-stage-h.ts",
     "dr:restore:demo": "bash ops/dr/restore_demo.sh",
     "assert:web": "scripts/ops/assert-next-output.sh",
-    "postinstall": "pnpm -w prisma generate || true"
+    "postinstall": "pnpm -w prisma generate || true",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
