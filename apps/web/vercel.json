@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "package.json", "use": "@vercel/next" }
-  ],
   "functions": {
     "api/**": {
       "runtime": "nodejs20.x",
@@ -13,5 +10,7 @@
   "installCommand": "pnpm install",
   "buildCommand": "pnpm build",
   "outputDirectory": ".next",
-  "regions": ["iad1"]
+  "regions": [
+    "iad1"
+  ]
 }

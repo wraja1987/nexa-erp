@@ -8,14 +8,8 @@ export default function Dashboard() {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps() {
   try {
-    // Soft auth check here if needed; avoid heavy DB on build.
-    // Example (commented to keep build-safe without next-auth in build env):
-    // const { getServerSession } = await import("next-auth/next");
-    // const { authOptions } = await import("../api/auth/[...nextauth]");
-    // const session = await getServerSession(ctx.req, ctx.res, authOptions);
-    // if (!session) return { redirect: { destination: "/login", permanent: false } };
     return { props: {} };
   } catch (e) {
     return { redirect: { destination: "/login", permanent: false } };
