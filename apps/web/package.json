@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS=\"--require=./scripts/nexa-path-shim.js\" next dev -p 3000",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p 3000",
     "lint": "next lint --dir src --dir pages || true",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "seed:admin": "tsx scripts/createAdmin.ts",
