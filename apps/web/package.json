@@ -15,7 +15,7 @@
     "seed:employees": "tsx scripts/seedEmployees.ts",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "postinstall": "node scripts/create-nexa-registry-stub.js && prisma generate || true",
+    "postinstall": "prisma generate --schema ../../prisma/schema.prisma || true",
     "db:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:fix": "tsx scripts/migrate-deploy.ts",
