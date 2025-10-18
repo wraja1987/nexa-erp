@@ -1,0 +1,18 @@
+name: UI Guard
+on: [push, pull_request]
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run check:no-placeholders
+      - run: pnpm run check:routes
+      - run: pnpm run typecheck
+      - run: pnpm run build
+      - run: pnpm run e2e
