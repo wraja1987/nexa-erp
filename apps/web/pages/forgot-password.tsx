@@ -1,38 +1,77 @@
 import * as React from "react";
-import { signIn } from "next-auth/react";
+import Head from "next/head";
+import { useState } from "react";
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail] = React.useState("");
-  const [busy, setBusy] = React.useState(false);
-  const [sent, setSent] = React.useState(false);
+export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setBusy(true);
+    setErr(null);
+    setLoading(true);
     try {
-      await signIn("email", { email, callbackUrl: "/dashboard", redirect: true });
+      // Fetch CSRF then POST urlencoded to match cURL behaviour
+      const csrf = await fetch('/api/auth/csrf', { credentials: 'same-origin' }).then(r => r.json());
+      const body = new URLSearchParams({ email, callbackUrl: '/dashboard', redirect: 'false', csrfToken: csrf.csrfToken });
+      const resp = await fetch('/api/auth/signin/email?json=true', {
+        method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded', 'accept': 'application/json' },
+        credentials: 'same-origin', body,
+      });
+      if (!resp.ok) {
+        const txt = await resp.text();
+        let msg = txt;
+        try { const data = JSON.parse(txt); msg = data.message || data.error || txt; } catch {}
+        throw new Error(msg);
+      }
       setSent(true);
+    } catch (e:any) {
+      setErr(e?.message || 'Unable to send email');
     } finally {
-      setBusy(false);
+      setLoading(false);
     }
   }
 
   return (
-    <main style={{minHeight:"100vh", display:"grid", placeItems:"center", padding:"24px"}}>
-      <section style={{width:"100%", maxWidth:480, border:"1px solid #e5e7eb", borderRadius:12, padding:"24px", background:"white", boxShadow:"0 4px 16px rgba(0,0,0,0.06)"}}>
-        <h1 style={{fontSize:22, fontWeight:600, marginBottom:8}}>Reset your access</h1>
-        <p style={{color:"#6b7280", fontSize:14, marginBottom:16}}>Enter your email and we’ll send you a sign-in link.</p>
-        <form onSubmit={onSubmit}>
-          <label htmlFor="email" style={{display:"block", fontWeight:600}}>Email</label>
-          <input id="email" name="email" type="email" required value={email} onChange={(e)=>setEmail(e.target.value)}
-            style={{width:"100%", margin:"6px 0 14px", padding:"10px 12px", border:"1px solid #e5e7eb", borderRadius:8}} />
-          <button type="submit" disabled={busy} style={{width:"100%", padding:"10px 12px", borderRadius:8, border:"1px solid #2563eb", background:"#2563eb", color:"#fff", fontWeight:600}}>
-            {busy?"Sending…":"Send link"}
-          </button>
-        </form>
-        {sent && <p style={{marginTop:12, color:"#065f46"}}>If that email exists, a link is on its way.</p>}
-        <p style={{textAlign:"center", marginTop:14}}><a href="/login" style={{color:"#2563eb"}}>Back to login</a></p>
-      </section>
-    </main>
+    <>
+      <Head><title>Nexa — Forgot password</title></Head>
+      <div style={{minHeight:"100vh",display:"grid",placeItems:"center",background:"#0b1020"}}>
+        <div style={{width:420,background:"#fff",borderRadius:12,boxShadow:"0 8px 30px rgba(0,0,0,.12)",padding:24}}>
+          {sent ? (
+            <div style={{textAlign:"center"}}>
+              <h2 style={{margin:"8px 0 4px"}}>Check your email</h2>
+              <p style={{color:"#555",margin:"0 0 16px"}}>We’ve sent a secure sign-in link to <strong>{email}</strong>.</p>
+              <button onClick={()=>window.close()} style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"0",background:"#4f46e5",color:"#fff",fontWeight:600,cursor:"pointer"}}>
+                Close window
+              </button>
+            </div>
+          ) : (
+            <>
+              <h2 style={{margin:"0 0 8px"}}>Forgot your password?</h2>
+              <p style={{color:"#555",margin:"0 0 16px"}}>Enter your email and we’ll send you a secure sign-in link.</p>
+              <form onSubmit={onSubmit}>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
+                  placeholder="name@example.com"
+                  style={{width:"100%",padding:"10px 12px",border:"1px solid #ddd",borderRadius:8,marginBottom:12}}
+                />
+                <button disabled={loading} type="submit"
+                  style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"0",background:"#4f46e5",color:"#fff",fontWeight:600,cursor:"pointer",opacity:loading?0.7:1}}>
+                  {loading ? "Sending..." : "Send sign-in link"}
+                </button>
+                {err && <p style={{color:"#d92d20",marginTop:10}}>{err}</p>}
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
+
+

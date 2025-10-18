@@ -2,5 +2,9 @@
   "name": "@nexa/registry",
   "version": "0.0.0-stub",
   "main": "index.js",
-  "typings": "index.d.ts"
+  "typings": "index.d.ts",
+  "packageManager": "pnpm@10",
+  "engines": {
+    "node": ">=20 <21"
+  }
 }

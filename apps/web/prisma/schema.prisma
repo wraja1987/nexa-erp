@@ -8,88 +8,78 @@ datasource db {
 }
 
 model Invoice {
-  id        String   @id @default(cuid())
-  code      String   @unique
+  id         String        @id @default(cuid())
+  total      Decimal       @default(0) @db.Decimal(14, 2)
+  status     String        @default("DRAFT")
+  code       String        @unique
+  createdAt  DateTime      @default(now())
+  currency   String        @default("GBP")
   customerId String
-  currency  String   @default("GBP")
-  status    String   @default("DRAFT")
-  total     Decimal  @db.Decimal(14,2) @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  lines     InvoiceLine[]
+  updatedAt  DateTime      @updatedAt
+  lines      InvoiceLine[]
 }
 
 model InvoiceLine {
   id        String   @id @default(cuid())
-  invoice   Invoice  @relation(fields: [invoiceId], references: [id])
   invoiceId String
   sku       String
   qty       Int
-  price     Decimal  @db.Decimal(14,2)
+  price     Decimal  @db.Decimal(14, 2)
   createdAt DateTime @default(now())
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id])
 }
 
 model PurchaseOrder {
-  id        String   @id @default(cuid())
-  code      String   @unique
+  id         String   @id @default(cuid())
   supplierId String
-  currency  String   @default("GBP")
-  status    String   @default("DRAFT")
-  total     Decimal  @db.Decimal(14,2) @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  lines     POLine[]
+  currency   String   @default("GBP")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  code       String   @unique
+  total      Decimal  @default(0) @db.Decimal(14, 2)
+  status     String   @default("DRAFT")
+  lines      POLine[]
 }
 
 model POLine {
-  id        String   @id @default(cuid())
-  po        PurchaseOrder @relation(fields: [poId], references: [id])
+  id        String        @id @default(cuid())
   poId      String
   sku       String
   qty       Int
-  price     Decimal  @db.Decimal(14,2)
-  createdAt DateTime @default(now())
+  price     Decimal       @db.Decimal(14, 2)
+  createdAt DateTime      @default(now())
+  po        PurchaseOrder @relation(fields: [poId], references: [id])
 }
 
 model ModuleNode {
-  id        String   @id @default(cuid())
-  slug      String   @unique
+  id        String       @id @default(cuid())
+  slug      String       @unique
   name      String
   path      String
   parentId  String?
   icon      String?
   status    String?
   sortKey   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  parent    ModuleNode? @relation("ParentChildren", fields: [parentId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  parent    ModuleNode?  @relation("ParentChildren", fields: [parentId], references: [id])
   children  ModuleNode[] @relation("ParentChildren")
 }
 
-model User {
-  id            String   @id @default(cuid())
-  name          String?
-  email         String?  @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-}
-
+/// --- NextAuth required models ---
 model Account {
   id                String  @id @default(cuid())
-  userId            String
   type              String
+  access_token      String? @map("accessToken")
+  expires_at        Int?    @map("expiresAt")
+  id_token          String? @map("idToken")
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
+  refresh_token     String? @map("refreshToken")
   scope             String?
-  id_token          String?
-  session_state     String?
+  session_state     String? @map("sessionState")
+  token_type        String? @map("tokenType")
+  userId            String
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -101,6 +91,16 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  name          String?
+  accounts      Account[]
+  sessions      Session[]
 }
 
 model VerificationToken {

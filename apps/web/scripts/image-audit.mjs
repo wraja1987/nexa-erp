@@ -37,3 +37,10 @@ for (const x of findings) {
   console.log(`- ${x.file}  (${kb} kB)  webp:${x.hasWebp?"yes":"no"}  avif:${x.hasAvif?"yes":"no"}`);
 }
 process.exit( findings.length ? 1 : 0 );
+
+
+
+
+
+
+

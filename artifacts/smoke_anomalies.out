@@ -1,0 +1,135 @@
+.                                        |  WARN  Unsupported engine: wanted: {"node":"^20.0.0"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/api                                 |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/mobile                              |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/web                                 |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/website                             |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+packages/jobs                            |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+packages/registry                        |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+packages/sdk-nexa                        |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+
+> web@0.1.0 build /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/apps/web
+> next build
+
+  ▲ Next.js 14.2.7
+  - Environments: .env.local, .env.production, .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/49) ...
+   Generating static pages (12/49) 
+   Generating static pages (24/49) 
+   Generating static pages (36/49) 
+ ✓ Generating static pages (49/49)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                               Size     First Load JS
+─ ƒ /api/auth/forgot                      0 B                0 B
++ First Load JS shared by all             0 B
+
+Route (pages)                             Size     First Load JS
+┌ ƒ /                                     239 B          89.1 kB
+├   /_app                                 0 B            88.9 kB
+├ ƒ /404                                  434 B          89.3 kB
+├ ○ /ai                                   1.07 kB        92.4 kB
+├ ○ /ai/documents                         1.76 kB        93.1 kB
+├ ○ /ai/insights                          1.76 kB        93.1 kB
+├ ○ /ai/playbooks                         1.76 kB        93.1 kB
+├ ○ /ai/settings                          1.04 kB        92.4 kB
+├ ƒ /api/_auth-diag                       0 B            88.9 kB
+├ ƒ /api/_diag/auth-env                   0 B            88.9 kB
+├ ƒ /api/_diag/na-db                      0 B            88.9 kB
+├ ƒ /api/_diag/na-health                  0 B            88.9 kB
+├ ƒ /api/_diag/na-nextauth                0 B            88.9 kB
+├ ƒ /api/_diag/na-smtp-send               0 B            88.9 kB
+├ ƒ /api/_shim-check                      0 B            88.9 kB
+├ ƒ /api/actions/invoice                  0 B            88.9 kB
+├ ƒ /api/actions/po                       0 B            88.9 kB
+├ ƒ /api/ai/audit/logs                    0 B            88.9 kB
+├ ƒ /api/auth/[...nextauth]               0 B            88.9 kB
+├ ƒ /api/cache/revalidate                 0 B            88.9 kB
+├ ƒ /api/crud/kpi                         0 B            88.9 kB
+├ ƒ /api/health                           0 B            88.9 kB
+├ ƒ /api/hmrc/vat/ping                    0 B            88.9 kB
+├ ƒ /api/kpi/dashboard                    0 B            88.9 kB
+├ ƒ /api/kpi/gm                           0 B            88.9 kB
+├ ƒ /api/kpi/invoices                     0 B            88.9 kB
+├ ƒ /api/kpi/revenue                      0 B            88.9 kB
+├ ƒ /api/kpi/wip                          0 B            88.9 kB
+├ ƒ /api/modules                          0 B            88.9 kB
+├ ƒ /api/ping                             0 B            88.9 kB
+├ ƒ /api/secure/ping                      0 B            88.9 kB
+├ ƒ /api/status                           0 B            88.9 kB
+├ ƒ /api/twilio/ping                      0 B            88.9 kB
+├ ƒ /dashboard                            965 B          92.3 kB
+├ ○ /finance                              1.08 kB        92.4 kB
+├ ○ /finance/banking                      1.76 kB        93.1 kB
+├ ○ /finance/bills                        1.75 kB        93.1 kB
+├ ○ /finance/invoices                     1.76 kB        93.1 kB
+├ ○ /finance/payments                     1.76 kB        93.1 kB
+├ ○ /finance/reports                      1.76 kB        93.1 kB
+├ ○ /forgot-password                      1.32 kB        90.2 kB
+├ ○ /hr                                   1.08 kB        92.4 kB
+├ ○ /hr/attendance                        1.76 kB        93.1 kB
+├ ○ /hr/employees                         1.76 kB        93.1 kB
+├ ○ /hr/leave                             1.75 kB        93.1 kB
+├ ○ /hr/payroll                           1.76 kB        93.1 kB
+├ ○ /hr/reports                           1.76 kB        93.1 kB
+├ ○ /inventory                            1.09 kB        92.4 kB
+├ ○ /inventory/items                      1.76 kB        93.1 kB
+├ ○ /inventory/purchase-orders            1.77 kB        93.1 kB
+├ ○ /inventory/reports                    1.76 kB        93.1 kB
+├ ○ /inventory/stock-moves                1.76 kB        93.1 kB
+├ ○ /inventory/warehouses                 1.76 kB        93.1 kB
+├ ○ /login                                1.41 kB        90.3 kB
+├ ○ /manufacturing                        1.08 kB        92.4 kB
+├ ○ /manufacturing/bom                    1.76 kB        93.1 kB
+├ ○ /manufacturing/reports                1.76 kB        93.1 kB
+├ ○ /manufacturing/scheduling             1.76 kB        93.1 kB
+├ ○ /manufacturing/work-orders            1.76 kB        93.1 kB
+├ ○ /pos                                  1.08 kB        92.4 kB
+├ ○ /pos/receipts                         1.76 kB        93.1 kB
+├ ○ /pos/register                         1.07 kB        92.4 kB
+├ ○ /pos/reports                          1.76 kB        93.1 kB
+├ ○ /pos/sessions                         1.76 kB        93.1 kB
+├ ○ /projects                             1.07 kB        92.4 kB
+├ ○ /projects/billing                     1.76 kB        93.1 kB
+├ ○ /projects/boards                      1.76 kB        93.1 kB
+├ ○ /projects/reports                     1.76 kB        93.1 kB
+├ ○ /projects/tasks                       1.76 kB        93.1 kB
+├ ○ /projects/time                        1.76 kB        93.1 kB
+├ ○ /sales                                1.09 kB        92.4 kB
+├ ○ /sales/customers                      1.76 kB        93.1 kB
+├ ○ /sales/leads                          1.75 kB        93.1 kB
+├ ○ /sales/opportunities                  1.76 kB        93.1 kB
+├ ○ /sales/orders                         1.75 kB        93.1 kB
+├ ○ /sales/quotes                         1.75 kB        93.1 kB
+└ ○ /sales/reports                        1.76 kB        93.1 kB
++ First Load JS shared by all             92.5 kB
+  ├ chunks/framework-dea7547f87c2f54a.js  45.2 kB
+  ├ chunks/main-64918f11906b19a8.js       32.2 kB
+  └ other shared chunks (total)           15.1 kB
+
+ƒ Middleware                              25.9 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+.                                        |  WARN  Unsupported engine: wanted: {"node":"^20.0.0"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/api                                 |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/mobile                              |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/web                                 |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+apps/website                             |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+packages/jobs                            |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+packages/registry                        |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+packages/sdk-nexa                        |  WARN  Unsupported engine: wanted: {"node":">=20 <21"} (current: {"node":"v22.14.0","pnpm":"10.3.0"})
+
+> web@0.1.0 start /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/apps/web
+> next start -p $PORT -p 3000
+
+/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/apps/web:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  web@0.1.0 start: `next start -p $PORT -p 3000`
+Exit status 1

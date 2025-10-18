@@ -13,3 +13,7 @@ if [ -z "${SELF_HEAL_ID:-}" ]; then
 fi
 echo "===== self_heal logs (from PR step) ====="
 gh run view "$RID" --job "$SELF_HEAL_ID" --log | sed -n "/Create auto-fix PR/,$p"
+
+
+
+

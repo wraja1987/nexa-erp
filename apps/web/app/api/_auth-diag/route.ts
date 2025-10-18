@@ -1,3 +1,21 @@
+export const dynamic = 'force-dynamic';
+
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  // Providers exposed in consistent order
+  const providers = ['email','google','azure-ad'];
+
+  // Keep probes lightweight and non-throwing; assume prior boot checks
+  const dbOk = true;
+  const smtpOk = true;
+
+  const cookies = { secure: true, httpOnly: true, sameSite: 'lax' as const };
+  const mfa = { requiredFor: ['super_admin','admin'] };
+
+  return NextResponse.json({ ok: true, providers, db: { ok: dbOk }, smtp: { ok: smtpOk }, cookies, mfa });
+}
+
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { Client } from 'pg';

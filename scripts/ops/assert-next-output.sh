@@ -10,3 +10,7 @@ fi
 echo "ERROR: Next.js routes manifest not found at $TARGET" >&2
 echo "Hint: Ensure apps/web/package.json has \"build\": \"next build\" and the build ran successfully." >&2
 exit 1
+
+
+
+

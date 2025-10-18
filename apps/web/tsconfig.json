@@ -2,20 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/lib/*": [
-        "./src/lib/*"
-      ],
-      "@/lib/auth/*": [
-        "./src/lib/auth/*",
-        "./src/lib/Auth/*"
-      ],
-      "@/src/*": [
-        "./src/*"
-      ]
+      "@/*": ["src/*", "*"],
+      "@": ["src"],
+      "@/lib/*": ["src/lib/*"]
     },
+    "types": ["node"],
     "jsx": "preserve",
     "resolveJsonModule": true,
     "allowJs": false,
@@ -43,6 +34,7 @@
   "include": [
     ".next/types/**/*.ts",
     "src",
+    "pages",
     ".next-build/types/**/*.ts"
   ],
   "exclude": [
