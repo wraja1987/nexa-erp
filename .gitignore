@@ -36,3 +36,4 @@ apps/web/.env.local
 # allow template env
 !/.env.example
 github-recovery-codes.txt
+.vercel

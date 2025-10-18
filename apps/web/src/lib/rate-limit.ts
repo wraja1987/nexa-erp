@@ -1,4 +1,3 @@
-import { createClient } from "./redis";
 import { getRedis } from './redis';
 
 type LimiterOpts = { windowMs: number; max: number; keyPrefix?: string; };
@@ -24,12 +23,12 @@ export function inMemoryLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts
 export function redisLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts) {
   const url = process.env.REDIS_URL;
   if (!url) return inMemoryLimiter({ windowMs, max, keyPrefix });
-  const client = createClient({ url, socket: { reconnectStrategy: () => 1000 } });
-  client.on("error", () => {});
-  if (!client.isOpen) client.connect().catch(()=>{});
+  // Use runtime-resolved client to avoid build-time type/import errors
   return async (key: string): Promise<Verdict> => {
+    const client: any = await getRedis();
+    if (!client) return inMemoryLimiter({ windowMs, max, keyPrefix })(key);
     const k = `${keyPrefix}:${key}`;
-    const res = await (client as any).multi().incr(k).ttl(k).exec();
+    const res = await client.multi().incr(k).ttl(k).exec();
     const count = Number(res?.[0]?.[1] ?? 1);
     let ttl = Number(res?.[1]?.[1] ?? -1);
     if (ttl < 0) { await client.expire(k, Math.ceil(windowMs/1000)); ttl = Math.ceil(windowMs/1000); }
@@ -42,8 +41,7 @@ export function redisLimiter({ windowMs, max, keyPrefix = "rl" }: LimiterOpts) {
 async function __ensureRedisOrFallback() {
   const client = await getRedis();
   if (!client) {
-    // TODO: optionally implement a tiny in-memory limiter here
-    // For now, we just act as if limits are not exceeded.
+    // No Redis available; return null so caller can decide on fallback limiter.
     return null;
   }
   return client;
