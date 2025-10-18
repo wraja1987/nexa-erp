@@ -5,11 +5,7 @@
   "functions": {
     "api/**": {
       "runtime": "nodejs20.x",
-      "includeFiles": [
-        "packages/**",
-        "apps/web/prisma/**",
-        "apps/web/public/**"
-      ]
+      "includeFiles": "node_modules/.prisma/client/**"
     }
   }
 }
