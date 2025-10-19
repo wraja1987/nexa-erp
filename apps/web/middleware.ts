@@ -6,7 +6,6 @@ export default withAuth({
 
 export const config = {
   matcher: [
-    // protect all routes except:
     "/((?!login|api/auth|_next|fonts|favicon\\.ico|robots\\.txt|sitemap\\.xml).*)",
   ],
 };
