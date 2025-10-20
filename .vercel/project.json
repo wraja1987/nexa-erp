@@ -1,1 +1,16 @@
-{"projectId":"prj_pKmLfg6cUFXAYYThk3x3Sgr6giXL","orgId":"team_h1uf3B0N7UvzodLNFzfDOa3D","projectName":"nexa-erp"}
+{
+  "projectId": "prj_pKmLfg6cUFXAYYThk3x3Sgr6giXL",
+  "orgId": "team_h1uf3B0N7UvzodLNFzfDOa3D",
+  "projectName": "nexa-erp",
+  "settings": {
+    "createdAt": 1756856127765,
+    "framework": "nextjs",
+    "devCommand": null,
+    "installCommand": "pnpm install",
+    "buildCommand": "pnpm build",
+    "outputDirectory": ".next",
+    "rootDirectory": "apps/web",
+    "directoryListing": false,
+    "nodeVersion": "20.x"
+  }
+}
