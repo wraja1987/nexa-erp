@@ -20,13 +20,18 @@ model User {
   email     String   @unique
   role      String
   active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  mfaEnabled Boolean  @default(false)
-  mfaSecret  String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  mfaEnabled Boolean  @default(false) @map("mfa_enabled")
+  mfaSecret  String?  @map("mfa_secret")
 
   @@index([tenant_id])
-  passwordHash String?
+  passwordHash String? @map("password_hash")
+
+  // NextAuth-compatible optional columns
+  name          String?
+  image         String?
+  emailVerified DateTime?
 }
 
 model Entity {

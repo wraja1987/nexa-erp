@@ -9,6 +9,8 @@
     "packages/jobs"
   ],
   "scripts": {
+    "prisma:generate": "prisma generate --schema prisma/schema.prisma",
+    "prisma:validate": "prisma validate --schema prisma/schema.prisma",
     "dev:fast": "pnpm --filter web dev",
     "build:modules": "tsx scripts/build_modules.ts",
     "smoke:web": "pnpm --filter web build && node -e \"console.log('web build ok')\"",
