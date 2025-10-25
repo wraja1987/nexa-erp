@@ -16,7 +16,7 @@
     "type": "table",
     "columns": ["Scenario", "Area", "Assumption", "Impact"],
     "rows": [
-      ["Price +3%", "Sales", "Increase list price by 3%", "GP +£48k"],
+      ["Price +3%", "Sales", "Increase list price by 3%", "GP +"Contact us for a quote"k"],
       ["Lead time +5d", "Inventory", "Supplier delay", "Stockout risk ↑"]
     ],
     "actions": [

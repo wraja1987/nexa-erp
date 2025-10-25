@@ -5,7 +5,7 @@
     {
       "id": "revenue",
       "title": "Revenue (MTD)",
-      "value": "£405,280",
+      "value": ""Contact us for a quote"",
       "hint": "↑ 12.5%",
       "kpi": true
     },
@@ -50,7 +50,7 @@
     }
   ],
   "insights": [
-    "AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~£12k/quarter.",
+    "AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~"Contact us for a quote"k/quarter.",
     "Predicted cash gap in 21 days if AR > 45d persists; recommend AP smoothing.",
     "Anomaly: WMS cycle-count delta +2.1% vs baseline in Aisle C."
   ],

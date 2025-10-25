@@ -63,15 +63,15 @@ function makeJson(moduleSlug: string, title: string, preset: string, crumbs: str
   }
   if (preset === "scenario-table") {
     base.kpis = [ { id: "scenarios", label: "Saved Scenarios", value: 12 }, { id: "forecast-horizon", label: "Forecast Horizon (months)", value: 6 } ];
-    base.content = { type: "table", columns: ["Scenario","Area","Assumption","Impact"], rows: [["Price +3%","Sales","Increase list price by 3%","GP +£48k"],["Lead time +5d","Inventory","Supplier delay","Stockout risk ↑"]] };
+    base.content = { type: "table", columns: ["Scenario","Area","Assumption","Impact"], rows: [["Price +3%","Sales","Increase list price by 3%","GP +Contact us for a quotek"],["Lead time +5d","Inventory","Supplier delay","Stockout risk ↑"]] };
   }
   if (preset === "workflow-table") {
     base.kpis = [ { id: "active", label: "Active", value: 37 }, { id: "failed-24h", label: "Failed (24h)", value: 1 } ];
-    base.table = { columns: ["Workflow","Trigger","Last Run","Status"], rows: [["Auto-tag POs > £10k","PO created","Today 11:02","OK"],["OCR Invoices","File uploaded","Today 10:41","OK"],["Sync bank feed","Hourly","Today 10:00","OK"]] };
+    base.table = { columns: ["Workflow","Trigger","Last Run","Status"], rows: [["Auto-tag POs > Contact us for a quotek","PO created","Today 11:02","OK"],["OCR Invoices","File uploaded","Today 10:41","OK"],["Sync bank feed","Hourly","Today 10:00","OK"]] };
   }
   if (preset === "list-rules") {
     base.kpis = [ { id: "rules", label: "Active Rules", value: 22 }, { id: "sent-7d", label: "Sent (7d)", value: 418 } ];
-    base.content = { type: "list", title: "Example Rules", items: ["Alert: Invoice overdue > 7 days","Slack: Stock below safety level","Email: Large payment posted (> £20k)"] };
+    base.content = { type: "list", title: "Example Rules", items: ["Alert: Invoice overdue > 7 days","Slack: Stock below safety level","Email: Large payment posted (> Contact us for a quotek)"] };
   }
   return base;
 }
@@ -359,7 +359,7 @@ function makeJson(moduleSlug: string, title: string, preset: string, crumbs: str
       ];
       base.content = { type: "assist", panels: [
         { title: "Ask Nexa", placeholder: "Ask about revenue, invoices, workflows, or stock…" },
-        { title: "Suggested Prompts", items: ["Summarise this week’s invoices over £5,000","Draft an email to chase overdue invoices","Create a workflow to auto-tag purchase orders > £10k"] },
+        { title: "Suggested Prompts", items: ["Summarise this week’s invoices over Contact us for a quote","Draft an email to chase overdue invoices","Create a workflow to auto-tag purchase orders > Contact us for a quotek"] },
       ]};
       break;
     case "uploader":
@@ -371,15 +371,15 @@ function makeJson(moduleSlug: string, title: string, preset: string, crumbs: str
       break;
     case "scenario-table":
       base.kpis = [ { id: "scenarios", label: "Saved Scenarios", value: 12 }, { id: "forecast-horizon", label: "Forecast Horizon (months)", value: 6 } ];
-      base.content = { type: "table", columns: ["Scenario","Area","Assumption","Impact"], rows: [["Price +3%","Sales","Increase list price by 3%","GP +£48k"],["Lead time +5d","Inventory","Supplier delay","Stockout risk ↑"]], actions: [{ label: "New Scenario", href: "/app/ai-automation/predictive-scenarios" }] };
+      base.content = { type: "table", columns: ["Scenario","Area","Assumption","Impact"], rows: [["Price +3%","Sales","Increase list price by 3%","GP +Contact us for a quotek"],["Lead time +5d","Inventory","Supplier delay","Stockout risk ↑"]], actions: [{ label: "New Scenario", href: "/app/ai-automation/predictive-scenarios" }] };
       break;
     case "workflow-table":
       base.kpis = [ { id: "active", label: "Active", value: 37 }, { id: "failed-24h", label: "Failed (24h)", value: 1 } ];
-      base.table = { columns: ["Workflow","Trigger","Last Run","Status"], rows: [["Auto-tag POs > £10k","PO created","Today 11:02","OK"],["OCR Invoices","File uploaded","Today 10:41","OK"],["Sync bank feed","Hourly","Today 10:00","OK"]], actions: [{ label: "New Workflow", href: "/app/ai-automation/workflows-jobs" }] };
+      base.table = { columns: ["Workflow","Trigger","Last Run","Status"], rows: [["Auto-tag POs > Contact us for a quotek","PO created","Today 11:02","OK"],["OCR Invoices","File uploaded","Today 10:41","OK"],["Sync bank feed","Hourly","Today 10:00","OK"]], actions: [{ label: "New Workflow", href: "/app/ai-automation/workflows-jobs" }] };
       break;
     case "list-rules":
       base.kpis = [ { id: "rules", label: "Active Rules", value: 22 }, { id: "sent-7d", label: "Sent (7d)", value: 418 } ];
-      base.content = { type: "list", title: "Example Rules", items: ["Alert: Invoice overdue > 7 days","Slack: Stock below safety level","Email: Large payment posted (> £20k)"], actions: [{ label: "Create Rule", href: "/app/ai-automation/notifications" }] };
+      base.content = { type: "list", title: "Example Rules", items: ["Alert: Invoice overdue > 7 days","Slack: Stock below safety level","Email: Large payment posted (> Contact us for a quotek)"], actions: [{ label: "Create Rule", href: "/app/ai-automation/notifications" }] };
       break;
     default:
       // keep minimal placeholders

@@ -74,9 +74,9 @@
       {
         "title": "Suggested Prompts",
         "items": [
-          "Summarise this week’s invoices over £5,000",
+          "Summarise this week’s invoices over "Contact us for a quote"",
           "Draft an email to chase overdue invoices",
-          "Create a workflow to auto-tag purchase orders > £10k"
+          "Create a workflow to auto-tag purchase orders > "Contact us for a quote"k"
         ]
       }
     ]
@@ -84,9 +84,9 @@
   "list": {
     "title": "Suggested Prompts",
     "items": [
-      "Summarise this week’s invoices over £5,000",
+      "Summarise this week’s invoices over "Contact us for a quote"",
       "Draft an email to chase overdue invoices",
-      "Create a workflow to auto-tag purchase orders > £10k"
+      "Create a workflow to auto-tag purchase orders > "Contact us for a quote"k"
     ]
   }
 }

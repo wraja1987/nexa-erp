@@ -78,7 +78,7 @@
       [
         "pi_123",
         "Acme",
-        "£120",
+        ""Contact us for a quote"",
         "succeeded",
         "card",
         "10:12"
@@ -86,7 +86,7 @@
       [
         "pi_456",
         "Globex",
-        "£49",
+        ""Contact us for a quote"",
         "succeeded",
         "card",
         "10:14"

@@ -68,7 +68,7 @@
     "items": [
       "Alert: Invoice overdue > 7 days",
       "Slack: Stock below safety level",
-      "Email: Large payment posted (> £20k)"
+      "Email: Large payment posted (> "Contact us for a quote"k)"
     ],
     "actions": [
       {

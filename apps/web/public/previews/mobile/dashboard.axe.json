@@ -2612,7 +2612,7 @@
             }
           ],
           "impact": null,
-          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">£405,280</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
+          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">"Contact us for a quote"</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
           "target": [
             "div[role=\"listitem\"]:nth-child(1)"
           ]
@@ -4468,7 +4468,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">£405,280</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
+          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">"Contact us for a quote"</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
           "target": [
             "div[role=\"listitem\"]:nth-child(1)"
           ]
@@ -6105,7 +6105,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">£405,280</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
+          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">"Contact us for a quote"</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
           "target": [
             "div[role=\"listitem\"]:nth-child(1)"
           ]
@@ -8895,7 +8895,7 @@
             }
           ],
           "impact": null,
-          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">£405,280</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
+          "html": "<div role=\"listitem\"><div class=\"nexa-card\"><div style=\"font-size:12px;color:var(--color-muted)\">Revenue (MTD)</div><div style=\"font-size:22px;font-weight:700;margin-top:4px\">"Contact us for a quote"</div><div style=\"font-size:12px;color:var(--color-muted);margin-top:2px\">↑ 12.5%</div></div></div>",
           "target": [
             "div[role=\"listitem\"]:nth-child(1)"
           ]
@@ -9749,7 +9749,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div style=\"font-size:22px;font-weight:700;margin-top:4px\">£405,280</div>",
+          "html": "<div style=\"font-size:22px;font-weight:700;margin-top:4px\">"Contact us for a quote"</div>",
           "target": [
             "div[role=\"listitem\"]:nth-child(1) > .nexa-card > div:nth-child(2)"
           ]
@@ -10174,7 +10174,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li style=\"margin-bottom:6px\">AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~£12k/quarter.</li>",
+          "html": "<li style=\"margin-bottom:6px\">AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~"Contact us for a quote"k/quarter.</li>",
           "target": [
             "li:nth-child(1)"
           ]
@@ -10776,7 +10776,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li style=\"margin-bottom:6px\">AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~£12k/quarter.</li>",
+          "html": "<li style=\"margin-bottom:6px\">AI suggests lowering MOQ on 3 SKUs to reduce holding cost by ~"Contact us for a quote"k/quarter.</li>",
           "target": [
             "li:nth-child(1)"
           ]
