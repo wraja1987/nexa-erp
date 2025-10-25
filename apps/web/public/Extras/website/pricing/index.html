@@ -1,225 +1,139 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nexa ERP — Pricing</title>
-<style>
-:root{
-  --nexa-blue:#2E6BFF; --nexa-violet:#7A4DFF; --nexa-navy:#0F2747;
-  --bg:#F7F9FC; --text:#0B1424; --border:#E6EAF2; --radius:12px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
-.container{max-width:1200px;margin:0 auto;padding:24px}
-
-/* Header */
-.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:20}
-.header-inner{display:flex;align-items:center;gap:24px;padding:14px 24px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nexa-navy)}
-.logo img{height:28px;width:auto;display:block}
-.brand-text{font-weight:800;color:var(--nexa-navy)}
-.nav{display:flex;gap:16px;flex-wrap:wrap}
-.nav a{color:var(--nexa-navy);text-decoration:none;padding:8px 10px;border-radius:8px}
-.nav a:hover,.nav a:focus{background:rgba(46,107,255,.08);outline:none}
-.header-cta{margin-left:auto;display:flex;gap:10px}
-.btn{border:1px solid var(--nexa-blue);padding:10px 14px;border-radius:10px;text-decoration:none;transition:.2s transform,.2s ease box-shadow}
-.btn.primary{background:var(--nexa-blue);color:#fff}
-.btn.secondary{background:#fff;color:var(--nexa-blue)}
-.btn:hover,.btn:focus{transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.20)}
-
-/* Hero */
-h1{color:var(--nexa-navy);margin:8px 0 0}
-.lead{margin:6px 0 10px;color:#334155}
-
-/* Pricing grid */
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
-.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden}
-.card:hover,.card:focus-within{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
-.card h3{margin:6px 0 6px;color:var(--nexa-navy);font-size:20px}
-.card p,.card li{font-size:15px}
-.price{font-size:28px;font-weight:800;margin:6px 0 8px;color:var(--nexa-navy)}
-.meta{font-size:14px;color:#475569;margin:0 0 8px}
-ul{margin:0 0 10px 18px;padding:0}
-.meta-row{display:flex;gap:10px;align-items:center;margin:8px 0;color:#0F2747;flex-wrap:wrap}
-.badge-kv{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:#fff;font-size:14px;line-height:1.2}
-.badge-kv svg{flex:0 0 auto}
-.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.add-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px}
-.add-card h3{margin:0 0 6px;color:var(--nexa-navy)}
-.add-card ul{margin-left:18px}
-li{margin:4px 0}
-.card .spacer{flex:1}
-.card .actions{display:flex;gap:10px;flex-wrap:wrap}
-.tip{font-size:13px;color:#334155;background:#F3F6FF;border:1px solid #DFE7FF;border-radius:8px;padding:8px;margin-top:6px}
-
-/* Expand/collapse behaviour */
-.details{max-height:0;overflow:hidden;transition:max-height .35s ease;margin-top:8px;padding-top:4px;border-top:1px dashed #E6EAF2}
-.card.expanded .details{max-height:5000px}
-.togglebar{margin-top:8px;display:flex;justify-content:flex-start}
-.toggle-btn{font-size:14px;color:#2E6BFF;background:#fff;border:1px solid #2E6BFF;padding:10px 12px;border-radius:10px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:.2s ease background,.2s ease transform,.2s ease box-shadow}
-.toggle-btn:hover,.toggle-btn:focus{background:#F3F6FF;transform:translateY(-1px);box-shadow:0 8px 22px rgba(46,107,255,.15)}
-
-/* CTA band */
-.cta{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0}
-
-/* Add-ons */
-.addons{margin-top:8px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
-.addons h2{color:var(--nexa-navy);margin:0 0 10px}
-.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.add-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;transition:.2s ease box-shadow,.2s ease transform,.2s ease border-color}
-.add-card:hover{box-shadow:0 14px 38px rgba(46,107,255,.18);transform:translateY(-2px);border-color:rgba(46,107,255,.35)}
-.add-card ul{margin-left:18px}
-
-/* FAQ */
-.faq{margin-top:14px}
-.faq h2{color:var(--nexa-navy);margin:0 0 8px}
-.faq h3{color:var(--nexa-navy);margin:10px 0 6px}
-.faq p{margin:0 0 8px}
-
-/* Footer */
-.footer{border-top:1px solid var(--border);background:#fff;margin-top:32px}
-.footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.footer a{color:var(--nexa-navy);text-decoration:none}
-.footer a:hover{text-decoration:underline}
-.small{font-size:14px;color:#4b5563}
-
-@media (max-width:1200px){.grid{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.grid{grid-template-columns:1fr}.footer .cols{grid-template-columns:1fr}.cta{flex-direction:column;align-items:flex-start}.more{display:none}}
-</style>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nexa ERP — Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root{--bg:#f5f7fb;--card:#ffffff;--muted:#64748b;--text:#0f172a;--ring:#e2e8f0;--brand:#4F46E5;--brand-strong:#4338CA;--pill:#eef2ff}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;color:var(--text);background:var(--bg)}
+    a{text-decoration:none;color:inherit}
+    .topbar{background:#fff;border-bottom:1px solid var(--ring)}
+    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:24px;padding:14px 20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand img{height:24px}
+    .navlinks{margin-left:auto;display:flex;gap:18px}
+    .login a{padding:8px 14px;border-radius:10px;border:1px solid var(--ring);background:#fff}
+    .wrap{max-width:1200px;margin:0 auto;padding:40px 20px}
+    .hero h1{font-size:36px;line-height:1.1;margin:0 0 10px;font-weight:800}
+    .hero p{margin:0 0 26px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+    @media (max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:660px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:16px;border:1px solid var(--ring);padding:22px;box-shadow:0 10px 30px rgba(16,24,40,.06)}
+    .badge{display:inline-block;background:var(--pill);color:#1e1b4b;font-weight:700;font-size:14px;padding:8px 12px;border-radius:999px;margin-bottom:18px}
+    .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:700;border-radius:10px;padding:12px 16px;line-height:1.1;transition:all .15s ease;border:1px solid transparent}
+    .cta:hover{background:var(--brand-strong)}
+    .pillrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 6px}
+    .pill{background:#fff;border:1px dashed var(--ring);border-radius:12px;padding:10px 14px;display:inline-flex;align-items:center;gap:8px;color:#0f172a;box-shadow:0 2px 10px rgba(16,24,40,.04)}
+    .pill small{display:block;color:var(--muted)}
+    .list{margin:14px 0 0;padding:0 0 0 18px}.list li{margin:8px 0;color:#0f172a}
+    .faq h2{margin:40px 0 10px}.faq p{margin:8px 0}
+  </style>
 </head>
 <body>
-<header class="header">
-  <div class="header-inner">
-    <a class="logo" href="/">
-      <img src="/logo-nexa.png" alt="Nexa logo"/>
-      <span class="brand-text">Nexa ERP</span>
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="/">Home</a>
-      <a href="/modules">Modules</a>
-      <a href="/integrations">Integrations</a>
-      <a href="/security">Security &amp; Compliance</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/resources">Resources</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="header-cta">
-      <a class="btn primary" href="/login">Login</a>
-    </div>
-  </div>
-</header>
 
-<main class="container">
-  <h1>Clear pricing that grows with your business</h1>
-  <a href="/contact" class="cta-quote" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#4F46E5;color:#fff;text-decoration:none;font-weight:600;line-height:1.2;">Contact us for a quote</a>
-
-  <section class="grid" id="plans">
-    <!-- Starter -->
-    <article class="card" tabindex="0">
-      <h3>Starter plan</h3>
-      <a href="/contact" class="cta-quote" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#4F46E5;color:#fff;text-decoration:none;font-weight:600;line-height:1.2;">Contact us for a quote</a>
-      
-      <div class="meta-row"><span class="badge-kv"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><a href="/contact" class="cta-quote" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#4F46E5;color:#fff;text-decoration:none;font-weight:600;line-height:1.2;">Contact us for a quote</a>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq">
-    <h2>Frequently asked questions</h2>
-    <h3>How is pricing calculated?</h3>
-    <a href="/contact" class="cta-quote" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#4F46E5;color:#fff;text-decoration:none;font-weight:600;line-height:1.2;">Contact us for a quote</a>
-    <h3>Can I add modules later?</h3>
-    <p>Yes. You can add modules or increase users as you grow.</p>
-    <h3>How do payments work?</h3>
-    <p>Invoices are raised and can be paid by card through Stripe. Bank transfer is available on request.</p>
-    <h3>Need a formal quote?</h3>
-    <p>Email <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> or use the form on our Contact page.</p>
-  </section>
-
-  <!-- CTA -->
-  <div class="cta">
-    <div>
-      <h3 style="margin:0 0 6px;color:var(--nexa-navy)">Not sure which plan fits?</h3>
-      <p style="margin:0">Tell us about your goals and team size. We will recommend a plan and give a clear quote without surprises.</p>
-    </div>
-    <a class="btn primary" href="/contact#pricing">Request a quote</a>
-  </div>
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="add-grid">
-      <div>
-        <h4>Nexa ERP</h4>
-        <p class="small">Enterprise planning with clear controls and a full audit trail.</p>
-        <p class="small">Contact: <a href="mailto:info@chiefaa.com">info@chiefaa.com</a> · +44 7398 975374</p>
+  <div class="topbar">
+    <div class="nav">
+      <div class="brand">
+        <img src="/logo-nexa.png" alt="Nexa logo" />
+        Nexa ERP
       </div>
-      <div>
-        <h4>Product</h4>
-        <p><a href="/modules">Modules</a><br><a href="/pricing">Pricing</a></p>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <p><a href="/about">About</a><br><a href="/about#partners">Partners</a></p>
-      </div>
-      <div>
-        <h4>Resources</h4>
-        <p><a href="/resources/guides">Guides</a><br><a href="/resources/release-notes">Release Notes</a><br><a href="/resources/faq">Frequently Asked Questions</a></p>
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/modules/">Modules</a>
+        <a href="/integrations/">Integrations &amp; API</a>
+        <a href="/security/">Security &amp; Compliance</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/resources/">Resources</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <span class="login"><a href="/login/">Login</a></span>
       </div>
     </div>
-    <p class="small" style="margin-top:16px">© Nexa ERP — All rights reserved · <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/cookies">Cookies</a> · <a href="/legal/accessibility">Accessibility</a></p>
   </div>
-</footer>
 
-<script>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Clear pricing that grows with your business</h1>
+      <p>Choose the plan that fits your team and modules. Add-ons can be purchased any time.</p>
+    </section>
 
-// Expand on click/keyboard; only one open at a time
-const cards = Array.from(document.querySelectorAll('.card'));
-function toggleCard(card){
-  const isOpen = card.classList.contains('expanded');
-  cards.forEach(c => { c.classList.remove('expanded'); c.setAttribute('aria-expanded','false'); });
-  if(!isOpen){ card.classList.add('expanded'); card.setAttribute('aria-expanded','true'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); }
-}
+    <section class="grid" aria-label="Pricing plans">
+      <article class="card" aria-labelledby="starter-title">
+        <span class="badge" id="starter-title">Starter package</span>
+        <div style="margin:6px 0 10px"><a class="cta" href="/contact/">Contact us for a quote</a></div>
+        <div class="pillrow">
+          <div class="pill"><strong>Users:</strong>&nbsp;2 included</div>
+          <div class="pill"><div><div>⭐ AI Tokens: 25,000</div><small>per month</small></div></div>
+          <div class="pill"><div><div>🧩 API Calls: 2,000</div><small>per month</small></div></div>
+        </div>
+        <ul class="list">
+          <li><strong>Core Platform:</strong> Dashboard, AI Assist (basic prompts), basic reporting &amp; CSV exports, GDPR tools and audit.</li>
+          <li><strong>Finance:</strong> GL, AP, AR, Bank &amp; Cash.</li>
+          <li><strong>Inventory:</strong> Items &amp; stock.</li>
+        </ul>
+      </article>
 
-cards.forEach(card => {
-  card.setAttribute('role','button');
-  card.setAttribute('aria-expanded','false');
-  card.setAttribute('aria-controls','details');
-  card.addEventListener('click', (e) => {
-    // Allow inner button clicks to work without toggling
-    if((e.target as HTMLElement).closest('.actions')) return;
-    toggleCard(card);
-  });
-  card.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      toggleCard(card);
-    }
-  });
-});
+      <article class="card" aria-labelledby="standard-title">
+        <span class="badge" id="standard-title">Standard package</span>
+        <div style="margin:6px 0 10px"><a class="cta" href="/contact/">Contact us for a quote</a></div>
+        <div class="pillrow">
+          <div class="pill"><strong>Users:</strong>&nbsp;5 included</div>
+          <div class="pill"><div><div>⭐ AI Tokens: 100,000</div><small>per month</small></div></div>
+          <div class="pill"><div><div>🧩 API Calls: 10,000</div><small>per month</small></div></div>
+        </div>
+        <ul class="list">
+          <li><strong>Core Platform:</strong> RBAC, dashboards, CSV export.</li>
+          <li><strong>Finance:</strong> GL, AP, AR, Bank &amp; Cash, VAT (MTD with HMRC keys), Fixed Assets, Period Close, FX.</li>
+          <li><strong>Inventory &amp; WMS:</strong> Items, lots, warehouses, stock.</li>
+        </ul>
+      </article>
 
-// Expand on click/keyboard for accessibility (mobile support)
+      <article class="card" aria-labelledby="pro-title">
+        <span class="badge" id="pro-title">Professional package</span>
+        <div style="margin:6px 0 10px"><a class="cta" href="/contact/">Contact us for a quote</a></div>
+        <div class="pillrow">
+          <div class="pill"><strong>Users:</strong>&nbsp;20 included</div>
+          <div class="pill"><div><div>⭐ AI Tokens: 500,000</div><small>per month</small></div></div>
+          <div class="pill"><div><div>🧩 API Calls: 50,000</div><small>per month</small></div></div>
+        </div>
+        <ul class="list">
+          <li><strong>Everything in Standard</strong> plus:</li>
+          <li><strong>Advanced WMS:</strong> ASNs, wave planning, 3PL, cycle counting, quality (holds &amp; CAPA).</li>
+          <li><strong>Manufacturing:</strong> BOMs &amp; Work Orders (starter).</li>
+        </ul>
+      </article>
 
-// Also toggle when clicking the 'View details' button
-document.querySelectorAll('.toggle-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const card = (e.target as HTMLElement).closest('.card');
-    if(card){
-      const isOpen = card.classList.contains('expanded');
-      cards.forEach(c => { c.classList.remove('expanded'); c.setAttribute('aria-expanded','false'); });
-      if(!isOpen){ card.classList.add('expanded'); card.setAttribute('aria-expanded','true'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); }
-    }
-  });
-});
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('click', () => card.classList.toggle('expanded'));
-  card.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('expanded'); }
-  });
-});
-</script>
+      <article class="card" aria-labelledby="ent-title">
+        <span class="badge" id="ent-title">Enterprise package</span>
+        <div style="margin:6px 0 10px"><a class="cta" href="/contact/">Contact us for a quote</a></div>
+        <div class="pillrow">
+          <div class="pill"><strong>Users:</strong>&nbsp;Unlimited</div>
+          <div class="pill"><div><div>⭐ AI Tokens: 2,000,000</div><small>per month</small></div></div>
+          <div class="pill"><div><div>🧩 API Calls: 250,000</div><small>per month</small></div></div>
+        </div>
+        <ul class="list">
+          <li><strong>Everything in Professional</strong> plus:</li>
+          <li>Advanced planning &amp; scheduling, multi-entity, BYOK, SSO/SAML, and priority support.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="wrap faq" style="padding-left:0;padding-right:0">
+      <h2>Frequently asked questions</h2>
+      <p><strong>How is pricing calculated?</strong></p>
+      <p><a class="cta" href="/contact/">Contact us for a quote</a></p>
+      <p><strong>Can I add modules later?</strong><br/>Yes. You can add modules or increase users as you grow.</p>
+      <p><strong>How do payments work?</strong><br/>Invoices are raised and can be paid by card through Stripe. Bank transfer is available on request.</p>
+      <p><strong>Need a formal quote?</strong><br/>Use the form on our Contact page.</p>
+    </section>
+  </main>
 </body>
 </html>
