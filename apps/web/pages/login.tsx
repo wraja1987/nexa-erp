@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
@@ -22,7 +23,7 @@ export default function LoginPage() {
           <div className="bg-white shadow-xl rounded-2xl p-8 sm:p-10">
             <div className="text-center mb-6">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <img src="/Nexa.png" alt="Nexa" height="44" loading="eager" className="mx-auto mb-2 h-11 w-auto" />
+                <Image src="/brand/nexa.svg" alt="Nexa" width={28} height={28} priority className="mx-auto mb-2 h-7 w-7" />
               </div>
               <h1 className="text-3xl font-semibold text-gray-900">Sign in to Nexa ERP</h1>
               <p className="text-sm text-gray-500">Manage your business with the Nexa AI Engine</p>
@@ -62,7 +63,7 @@ export default function LoginPage() {
                 onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
                 className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
                 aria-label="Continue with Google">
-                <img src="/icons/google.svg" alt="" width={18} height={18} loading="lazy" />
+                <Image src="/icons/google.svg" alt="" width={18} height={18} />
                 <span>Google</span>
               </button>
 
@@ -70,7 +71,7 @@ export default function LoginPage() {
                 onClick={() => signIn("azure-ad", { callbackUrl: "/dashboard" })}
                 className="py-2.5 rounded-md border border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2"
                 aria-label="Continue with Microsoft">
-                <img src="/icons/microsoft.svg" alt="" width={18} height={18} loading="lazy" />
+                <Image src="/icons/microsoft.svg" alt="" width={18} height={18} />
                 <span>Microsoft</span>
               </button>
             </div>
