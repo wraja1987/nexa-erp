@@ -1,18 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="60" viewBox="0 0 220 60" role="img" aria-label="NEXA">
-  <defs>
-    <linearGradient id="nexa-g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#2563EB"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
-    </linearGradient>
-  </defs>
-  <!-- N mark -->
-  <rect x="0" y="0" width="60" height="60" rx="14" fill="url(#nexa-g)"/>
-  <path d="M18 42 L28 22 L36 36 L46 22" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Wordmark -->
-  <g fill="#0B2141" transform="translate(75, 14)">
-    <path d="M0 31V0h7.6l14.2 21.5V0h7.6v31h-7.6L7.6 9.5V31H0z"/>
-    <path d="M40.4 31V0h22.8v6.4H48.1v5.7h14.1v6.2H48.1V24h15.1v7H40.4z"/>
-    <path d="M86.1 31L74.5 0h8.1l6 17.8L94.7 0h8l-11.5 31h-5.1z"/>
-    <path d="M116.1 31L128.1 0h7.8l12.1 31h-8.3l-2.1-5.7h-11.7l-2 5.7h-7.8z M124.9 19.2h7.7l-3.9-10.8-3.8 10.8z"/>
-  </g>
-</svg>
+version https://git-lfs.github.com/spec/v1
+oid sha256:ccc7a70266d6f32832600d34b9b84aa9cf682049f5e170c3021b69ecfb4a4a8c
+size 944
