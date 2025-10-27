@@ -1,85 +1,47 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
-import { z } from "zod";
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { compare } from "bcryptjs";
+import { pool } from "@/lib/db";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-export const maxDuration = 10;
-
-const prisma = new PrismaClient();
-
-export const authOptions: NextAuthOptions = {
-  trustHost: true,
-  secret: process.env.NEXTAUTH_SECRET,
-  session: { strategy: "jwt" },
-  debug: false,
-  pages: {
-    signIn: "/login",
-    error: "/login"
-  },
+const authOptions = {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
-      },
-      authorize: async (credentials) => {
-        try {
-          const schema = z.object({ email: z.string().min(1), password: z.string().min(1) });
-          const { email, password } = schema.parse({ email: credentials?.email, password: credentials?.password });
-          const normalizedEmail = email.toLowerCase();
-
-          const user = await prisma.user.findFirst({
-            where: { email: normalizedEmail, active: true },
-            select: { id: true, email: true, role: true, tenant_id: true, passwordHash: true },
-          });
-          if (!user || !user.passwordHash) return null;
-
-          const ok = await bcrypt.compare(password, user.passwordHash);
-          if (!ok) return null;
-
-          return { id: user.id, email: user.email, role: user.role ?? "USER", tenant_id: user.tenant_id ?? null } as any;
-        } catch (err) {
-          console.error('[auth/credentials]', err);
-          return null;
-        }
+    Credentials({
+      name: "Nexa Credentials",
+      credentials: { email: { label: "Email", type: "text" }, password: { label: "Password", type: "password" } },
+      authorize: async (creds) => {
+        if (!creds?.email || !creds?.password) return null;
+        const q = `
+          SELECT id, email, role,
+                 COALESCE("tenantId","tenant_id") AS "tenantId",
+                 COALESCE("password_hash","password") AS "password_hash"
+          FROM public."User"
+          WHERE email = $1
+          LIMIT 1
+        `;
+        const { rows } = await pool.query(q, [creds.email]);
+        const user = rows[0];
+        if (!user) return null;
+        const ok = await compare(creds.password, user.password_hash);
+        if (!ok) return null;
+        return { id: String(user.id), email: user.email, role: user.role, tenantId: user.tenantId };
       }
     })
   ],
+  session: { strategy: "jwt" as const },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        (token as any).role = (user as any).role;
-        (token as any).tenant_id = (user as any).tenant_id ?? null;
-      }
+      if (user) { token.id = (user as any).id; token.role = (user as any).role; token.tenantId = (user as any).tenantId; }
       return token;
     },
     async session({ session, token }) {
-      // Ensure required keys on session.user
-      session.user = (session.user || {}) as any;
-      (session.user as any).id = (token as any).sub ?? (session.user as any).id ?? null;
-      (session.user as any).email = (token as any).email ?? (session.user as any).email ?? null;
-      (session.user as any).role = (token as any).role;
-      (session.user as any).tenant_id = (token as any).tenant_id ?? null;
+      if (session?.user) { (session.user as any).id = token.id; (session.user as any).role = token.role; (session.user as any).tenantId = token.tenantId; }
       return session;
     }
   },
-  cookies: {
-    sessionToken: {
-      name: "__Secure-next-auth.session-token",
-      options: {
-        domain: ".nexaai.co.uk",
-        httpOnly: true,
-        sameSite: "lax",
-        secure: true,
-        path: "/"
-      }
-    }
-  }
+  pages: { signIn: "/login" },
+  secret: process.env.NEXTAUTH_SECRET,
+  trustHost: true
 };
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions as any);
 export { handler as GET, handler as POST };

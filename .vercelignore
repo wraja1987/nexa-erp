@@ -1,0 +1,16 @@
+**/.next/
+**/node_modules/
+**/coverage/
+**/reports/
+**/.cache/
+**/*.log
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+**/*.bak
+**/*.tmp
+**/*.swp
+**/.DS_Store
+artifacts/
+consolidated_build_artifacts/

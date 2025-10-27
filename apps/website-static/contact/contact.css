@@ -1,0 +1,18 @@
+/* Base (kept minimal; existing page styles remain) */
+:root{--border:#e8ecf3}
+.container{max-width:980px;margin:0 auto;padding:0 20px}
+.site-main{padding:48px 0}
+.intro{margin:0 0 24px;color:#5c6476}
+/* === Nexa header (exact layout) === */
+.site-header{background:#fff;border-bottom:1px solid #e8ecf3;box-shadow:0 1px 4px rgba(0,0,0,.03);position:sticky;top:0;z-index:100}
+.header-container{max-width:1250px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
+.header-left{display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;text-decoration:none;color:#0b1220}
+.brand-text{font-weight:700;color:#0b1220}
+.nav-links{display:flex;gap:28px}
+.nav-links a{text-decoration:none;color:#0b1220;font-weight:700;letter-spacing:.1px;padding:0 0 2px}
+.nav-links a:hover{opacity:.75}
+.nav-links a.active{color:#0b1220;border-bottom:2px solid #0b1220}
+.header-right{display:flex;align-items:center}
+.login-btn{background:#fff;border:1px solid rgba(13,27,42,.15);border-radius:999px;padding:8px 20px;font-weight:700;color:#0b1220;text-decoration:none;box-shadow:0 3px 10px rgba(13,27,42,.08);transition:background .2s ease,box-shadow .2s ease}
+.login-btn:hover{background:#f8f9fc;box-shadow:0 5px 16px rgba(13,27,42,.12)}

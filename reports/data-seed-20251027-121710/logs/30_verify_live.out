@@ -1,0 +1,83 @@
+  set_config   
+---------------
+ Nexa Demo Ltd
+(1 row)
+
+=== KPI VERIFY (tenant-scoped) ===
+   tbl   |     m      | n  |    s     
+---------+------------+----+----------
+ Invoice | 2024-11-01 | 12 | 12138.39
+ Invoice | 2024-12-01 | 12 | 12082.85
+ Invoice | 2025-01-01 | 12 | 12038.68
+ Invoice | 2025-02-01 | 12 | 12138.58
+ Invoice | 2025-03-01 | 12 | 12225.41
+ Invoice | 2025-04-01 | 12 | 12168.31
+ Invoice | 2025-05-01 | 12 | 12160.55
+ Invoice | 2025-06-01 | 12 | 12085.48
+ Invoice | 2025-07-01 | 12 | 12063.72
+ Invoice | 2025-08-01 | 12 | 12234.16
+ Invoice | 2025-09-01 | 12 | 11983.46
+(11 rows)
+
+     tbl      |     m      | n |    s    
+--------------+------------+---+---------
+ SupplierBill | 2024-11-01 | 9 | 5085.37
+ SupplierBill | 2024-12-01 | 9 | 5113.75
+ SupplierBill | 2025-01-01 | 9 | 5104.16
+ SupplierBill | 2025-02-01 | 9 | 5069.61
+ SupplierBill | 2025-03-01 | 9 | 5170.49
+ SupplierBill | 2025-04-01 | 9 | 5108.56
+ SupplierBill | 2025-05-01 | 9 | 5112.56
+ SupplierBill | 2025-06-01 | 9 | 5085.34
+ SupplierBill | 2025-07-01 | 9 | 5088.96
+ SupplierBill | 2025-08-01 | 9 | 5082.42
+ SupplierBill | 2025-09-01 | 9 | 5034.98
+(11 rows)
+
+       tbl       |     m      | n  |    s    
+-----------------+------------+----+---------
+ CustomerPayment | 2024-11-01 | 12 | 6428.91
+ CustomerPayment | 2024-12-01 | 12 | 6396.85
+ CustomerPayment | 2025-01-01 | 12 | 6575.23
+ CustomerPayment | 2025-02-01 | 12 | 6566.73
+ CustomerPayment | 2025-03-01 | 12 | 6482.42
+ CustomerPayment | 2025-04-01 | 12 | 6513.93
+ CustomerPayment | 2025-05-01 | 12 | 6461.06
+ CustomerPayment | 2025-06-01 | 12 | 6272.68
+ CustomerPayment | 2025-07-01 | 12 | 6452.30
+ CustomerPayment | 2025-08-01 | 12 | 6491.60
+ CustomerPayment | 2025-09-01 | 12 | 6416.49
+(11 rows)
+
+      tbl      |     m      | n  
+---------------+------------+----
+ PurchaseOrder | 2024-11-01 |  9
+ PurchaseOrder | 2024-12-01 | 11
+ PurchaseOrder | 2025-01-01 | 10
+ PurchaseOrder | 2025-02-01 |  9
+ PurchaseOrder | 2025-03-01 | 11
+ PurchaseOrder | 2025-04-01 |  9
+ PurchaseOrder | 2025-05-01 | 11
+ PurchaseOrder | 2025-06-01 |  9
+ PurchaseOrder | 2025-07-01 | 11
+ PurchaseOrder | 2025-08-01 | 10
+ PurchaseOrder | 2025-09-01 |  9
+ PurchaseOrder | 2025-10-01 |  1
+(12 rows)
+
+   tbl   |     m      | n  |    s    
+---------+------------+----+---------
+ PosSale | 2024-11-01 | 29 | 1554.46
+ PosSale | 2024-12-01 | 41 | 2273.76
+ PosSale | 2025-01-01 | 40 | 2121.60
+ PosSale | 2025-02-01 | 37 | 2001.60
+ PosSale | 2025-03-01 | 43 | 2515.19
+ PosSale | 2025-04-01 | 39 | 2146.41
+ PosSale | 2025-05-01 | 41 | 2228.84
+ PosSale | 2025-06-01 | 39 | 2023.77
+ PosSale | 2025-07-01 | 41 | 2192.90
+ PosSale | 2025-08-01 | 40 | 2079.97
+ PosSale | 2025-09-01 | 39 | 2129.64
+ PosSale | 2025-10-01 | 11 |  588.44
+(12 rows)
+

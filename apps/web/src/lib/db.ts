@@ -1,13 +1,7 @@
-// Stubbed prisma for web build to avoid bringing Prisma client into the browser/server bundle.
-// Use API routes with `pg` for data access in this app.
-export const prisma: any = new Proxy({}, {
-  get() {
-    throw new Error('Prisma client not available in apps/web build. Use API routes backed by pg.');
-  }
+import { Pool } from "pg";
+const connectionString = process.env.DATABASE_URL!;
+if (!connectionString) throw new Error("DATABASE_URL missing");
+export const pool = new Pool({
+  connectionString,
+  ssl: { rejectUnauthorized: false },
 });
-
-
-
-
-
-

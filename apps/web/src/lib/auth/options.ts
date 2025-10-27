@@ -1,9 +1,8 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
+import { pool } from "../db";
 
-const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   trustHost: true,
@@ -22,14 +21,21 @@ export const authOptions: NextAuthOptions = {
         const password = credentials?.password || "";
         if (!email || !password) return null;
 
-        const user = await prisma.user.findFirst({
-          where: { email, active: true },
-          select: { id: true, email: true, role: true, tenant_id: true, passwordHash: true },
-        });
-        if (!user?.passwordHash) return null;
-        const ok = await bcrypt.compare(password, user.passwordHash);
+        const q = `
+          SELECT id, email, role,
+                 COALESCE("tenantId","tenant_id") AS tenant_id,
+                 COALESCE("password_hash","password") AS password_hash,
+                 active
+          FROM public."User"
+          WHERE email = $1
+          LIMIT 1
+        `;
+        const { rows } = await pool.query(q, [email]);
+        const user = rows[0];
+        if (!user || user.active === false || !user.password_hash) return null;
+        const ok = await bcrypt.compare(password, user.password_hash);
         if (!ok) return null;
-        return { id: user.id, email: user.email, role: user.role ?? "USER", tenant_id: user.tenant_id ?? null } as any;
+        return { id: String(user.id), email: user.email, role: user.role ?? "USER", tenant_id: user.tenant_id ?? null } as any;
       },
     }),
   ],

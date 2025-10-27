@@ -1,0 +1,7 @@
+# Deny direct access to secrets and logs
+<Files ".env">
+  Require all denied
+</Files>
+Options -Indexes
+RewriteEngine On
+RewriteRule ^logs/ - [F,L]

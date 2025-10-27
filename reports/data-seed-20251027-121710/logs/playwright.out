@@ -1,0 +1,52 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] tests/e2e/prod-login-and-kpis.spec.ts:20:7 › Production smokes › Admin can login and see module lists populated
+[1A[2K  1) tests/e2e/prod-login-and-kpis.spec.ts:20:7 › Production smokes › Admin can login and see module lists populated 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel(/email/i)[22m
+
+
+       7 | async function login(page: Page, email: string, password: string) {
+       8 |   await page.goto(`${BASE_URL}/login`);
+    >  9 |   await page.getByLabel(/email/i).fill(email);
+         |                                   ^
+      10 |   await page.getByLabel(/password/i).fill(password);
+      11 |   await Promise.all([
+      12 |     page.waitForURL(`${BASE_URL}/dashboard`, { timeout: 30000 }),
+        at login (/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:9:35)
+        at /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:21:5
+
+    Error Context: test-results/tests-e2e-prod-login-and-k-7bfed--see-module-lists-populated/error-context.md
+
+
+[1A[2K[2/2] tests/e2e/prod-login-and-kpis.spec.ts:27:7 › Production smokes › Super admin can login and reach dashboard
+[1A[2K  2) tests/e2e/prod-login-and-kpis.spec.ts:27:7 › Production smokes › Super admin can login and reach dashboard 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel(/email/i)[22m
+
+
+       7 | async function login(page: Page, email: string, password: string) {
+       8 |   await page.goto(`${BASE_URL}/login`);
+    >  9 |   await page.getByLabel(/email/i).fill(email);
+         |                                   ^
+      10 |   await page.getByLabel(/password/i).fill(password);
+      11 |   await Promise.all([
+      12 |     page.waitForURL(`${BASE_URL}/dashboard`, { timeout: 30000 }),
+        at login (/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:9:35)
+        at /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:28:5
+
+    Error Context: test-results/tests-e2e-prod-login-and-k-66168-n-login-and-reach-dashboard/error-context.md
+
+
+[1A[2K  2 failed
+    tests/e2e/prod-login-and-kpis.spec.ts:20:7 › Production smokes › Admin can login and see module lists populated 
+    tests/e2e/prod-login-and-kpis.spec.ts:27:7 › Production smokes › Super admin can login and reach dashboard 

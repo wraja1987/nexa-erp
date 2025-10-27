@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Nexa</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;margin:40px;line-height:1.5} form{max-width:520px;display:grid;gap:12px} input,textarea,button{font:inherit;padding:10px;border:1px solid #ccc;border-radius:6px} button{background:#0a5;color:#fff;border:0;cursor:pointer}</style>
+<body>
+<h1>Contact us</h1>
+<form method="post" action="send.php" novalidate>
+  <input type="text" name="name" placeholder="Your name" required>
+  <input type="email" name="email" placeholder="Your email" required>
+  <input type="tel" name="phone" placeholder="Phone (optional)">
+  <textarea name="message" placeholder="Your message" rows="6" required></textarea>
+  <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+  <button type="submit">Send message</button>
+</form>
+</body></html>

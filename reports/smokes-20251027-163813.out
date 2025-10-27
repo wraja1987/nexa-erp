@@ -1,0 +1,58 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] tests/e2e/prod-login-and-kpis.spec.ts:51:7 › Nexa (prod) smokes › Admin: login + key lists populated
+[1A[2K  1) tests/e2e/prod-login-and-kpis.spec.ts:51:7 › Nexa (prod) smokes › Admin: login + key lists populated 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.waitForURL: Test timeout of 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+      navigated to "https://app.nexaai.co.uk/login?callbackUrl=https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard"
+      navigated to "https://app.nexaai.co.uk/login?callbackUrl=https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard"
+      navigated to "https://app.nexaai.co.uk/login?callbackUrl=https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard"
+    ============================================================
+
+      38 |
+      39 |   await Promise.all([
+    > 40 |     page.waitForURL(/\/dashboard/i, { timeout: 30000 }),
+         |          ^
+      41 |     page.locator('button[type="submit"], button:has-text("Sign in"), button:has-text("Login")').first().click(),
+      42 |   ]);
+      43 |
+        at login (/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:40:10)
+        at /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:52:5
+
+    Error Context: test-results/tests-e2e-prod-login-and-k-e8763-n-login-key-lists-populated/error-context.md
+
+
+[1A[2K[2/2] tests/e2e/prod-login-and-kpis.spec.ts:71:7 › Nexa (prod) smokes › Super admin: login + dashboard chrome
+[1A[2K  2) tests/e2e/prod-login-and-kpis.spec.ts:71:7 › Nexa (prod) smokes › Super admin: login + dashboard chrome 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.waitForURL: Test timeout of 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+      navigated to "https://app.nexaai.co.uk/login?callbackUrl=https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard"
+      navigated to "https://app.nexaai.co.uk/login?callbackUrl=https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard"
+      navigated to "https://app.nexaai.co.uk/login?callbackUrl=https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard"
+    ============================================================
+
+      38 |
+      39 |   await Promise.all([
+    > 40 |     page.waitForURL(/\/dashboard/i, { timeout: 30000 }),
+         |          ^
+      41 |     page.locator('button[type="submit"], button:has-text("Sign in"), button:has-text("Login")').first().click(),
+      42 |   ]);
+      43 |
+        at login (/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:40:10)
+        at /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:72:5
+
+    Error Context: test-results/tests-e2e-prod-login-and-k-87fc9-dmin-login-dashboard-chrome/error-context.md
+
+
+[1A[2K  2 failed
+    tests/e2e/prod-login-and-kpis.spec.ts:51:7 › Nexa (prod) smokes › Admin: login + key lists populated 
+    tests/e2e/prod-login-and-kpis.spec.ts:71:7 › Nexa (prod) smokes › Super admin: login + dashboard chrome 

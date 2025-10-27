@@ -1,0 +1,62 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] tests/e2e/prod-login-and-kpis.spec.ts:36:7 › Nexa (prod) smokes › Admin: login + key lists
+[1A[2K  1) tests/e2e/prod-login-and-kpis.spec.ts:36:7 › Nexa (prod) smokes › Admin: login + key lists ────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="kpi-value"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="kpi-value"]').first()[22m
+
+
+      30 |
+      31 |   await expect(page).toHaveURL(/dashboard/i);
+    > 32 |   await expect(page.locator('[data-testid="kpi-value"]').first()).toBeVisible();
+         |                                                                   ^
+      33 | }
+      34 |
+      35 | test.describe('Nexa (prod) smokes', () => {
+        at login (/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:32:67)
+        at /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:37:5
+
+    Error Context: test-results/tests-e2e-prod-login-and-k-7f094-mokes-Admin-login-key-lists/error-context.md
+
+
+[1A[2K[2/2] tests/e2e/prod-login-and-kpis.spec.ts:44:7 › Nexa (prod) smokes › Super admin: login + dashboard
+[1A[2K  2) tests/e2e/prod-login-and-kpis.spec.ts:44:7 › Nexa (prod) smokes › Super admin: login + dashboard 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="kpi-value"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="kpi-value"]').first()[22m
+
+
+      30 |
+      31 |   await expect(page).toHaveURL(/dashboard/i);
+    > 32 |   await expect(page.locator('[data-testid="kpi-value"]').first()).toBeVisible();
+         |                                                                   ^
+      33 | }
+      34 |
+      35 | test.describe('Nexa (prod) smokes', () => {
+        at login (/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:32:67)
+        at /Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/tests/e2e/prod-login-and-kpis.spec.ts:45:5
+
+    Error Context: test-results/tests-e2e-prod-login-and-k-dfa78-Super-admin-login-dashboard/error-context.md
+
+
+[1A[2K  2 failed
+    tests/e2e/prod-login-and-kpis.spec.ts:36:7 › Nexa (prod) smokes › Admin: login + key lists ─────
+    tests/e2e/prod-login-and-kpis.spec.ts:44:7 › Nexa (prod) smokes › Super admin: login + dashboard 

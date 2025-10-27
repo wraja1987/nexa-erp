@@ -1,0 +1,6 @@
+/* Lighter, professional gradient for auth pages */
+.auth-gradient {
+  background: linear-gradient(135deg, #f3f6ff 0%, #edf2ff 45%, #eaf4ff 100%);
+}
+
+
