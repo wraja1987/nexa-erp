@@ -1,4 +1,4 @@
-import { prisma } from "@/src/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { compare } from "bcryptjs";
 
 export async function verifyCredentials(rawEmail?: string | null, rawPassword?: string | null) {

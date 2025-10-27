@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/src/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import crypto from "crypto";
 // Dynamic import inside handler to avoid cold start issues on edge
