@@ -2,11 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
+  const sp = useSearchParams();
+  const callbackUrl = (sp?.get("callbackUrl") || "/dashboard").toString();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [csrfToken, setCsrfToken] = useState("");
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    fetch("/api/auth/csrf", { credentials: "include", cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => setCsrfToken(d?.csrfToken ?? ""))
+      .catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +40,9 @@ export default function LoginPage() {
           Manage your business with the Nexa AI Engine
         </p>
 
-        <form className="mt-6 grid gap-3" method="post" action="/api/auth/callback/credentials">
+        <form method="post" action="/api/auth/callback/credentials" className="mt-6 grid gap-3" autoComplete="off">
+          <input type="hidden" name="csrfToken" value={csrfToken} />
+          <input type="hidden" name="callbackUrl" value={callbackUrl} />
           <label className="text-sm font-medium">Email address</label>
           <input
             name="email"
@@ -56,6 +74,9 @@ export default function LoginPage() {
           <button
             type="submit"
             className="mt-3 h-10 rounded-md bg-indigo-600 text-white font-medium hover:opacity-95"
+            disabled={!csrfToken}
+            aria-disabled={!csrfToken}
+            title={!csrfToken ? "Preparing CSRF…" : "Sign in"}
           >
             Sign in
           </button>
@@ -64,18 +85,18 @@ export default function LoginPage() {
         <div className="my-4 text-center text-xs text-neutral-500">or continue with</div>
 
         <div className="grid grid-cols-2 gap-3">
-          <form method="post" action="/api/auth/signin/google" className="contents">
-            <button type="submit" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
+          <Link href="/login" className="contents">
+            <button type="button" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
               <Image src="/icons/google.svg" alt="" width={20} height={20} />
               <span>Google</span>
             </button>
-          </form>
-          <form method="post" action="/api/auth/signin/azure-ad" className="contents">
-            <button type="submit" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
+          </Link>
+          <Link href="/login" className="contents">
+            <button type="button" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
               <Image src="/icons/microsoft.svg" alt="" width={18} height={18} />
               <span>Microsoft</span>
             </button>
-          </form>
+          </Link>
         </div>
 
         <p className="mt-6 text-center text-xs text-neutral-500">© Nexa ERP — All rights reserved</p>
