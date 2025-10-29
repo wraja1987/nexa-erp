@@ -12,16 +12,20 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
-  const hasFetched = useRef(false);
+  const [ready, setReady] = useState(false);
+  const fetched = useRef(false);
 
   useEffect(() => {
-    if (hasFetched.current) return;
-    hasFetched.current = true;
-
+    if (fetched.current) return;
+    fetched.current = true;
+    // StrictMode-safe: run exactly once
     fetch("/api/auth/csrf", { credentials: "include", cache: "no-store" })
       .then((r) => r.json())
-      .then((d) => setCsrfToken(d?.csrfToken ?? ""))
-      .catch(() => {});
+      .then((d) => {
+        setCsrfToken(d?.csrfToken ?? "");
+        setReady(true);
+      })
+      .catch(() => setReady(true));
   }, []);
 
   return (
@@ -30,19 +34,19 @@ export default function LoginPage() {
         <Image src="/logo-nexa.png" alt="Nexa" width={112} height={28} priority />
       </Link>
 
-      <div className="w-full max-w-md rounded-2xl bg-white/70 backdrop-blur-md shadow-xl p-8">
-        <div className="flex justify-center mb-4">
-          <Image src="/logo-nexa.png" alt="Nexa" width={80} height={20} />
+      <div className="w-[420px] max-w-full p-6">
+        <div className="flex items-center gap-2">
+          <Image src="/logo-nexa.png" alt="NEXA" width={28} height={28} />
+          <span className="sr-only">NEXA</span>
         </div>
 
-        <h1 className="text-center text-xl font-semibold">Sign in to Nexa ERP</h1>
-        <p className="mt-1 text-center text-sm text-neutral-600">
-          Manage your business with the Nexa AI Engine
-        </p>
+        <h1 className="mt-8 text-center text-lg font-semibold">Sign in to Nexa ERP</h1>
+        <p className="mt-1 text-center text-sm text-neutral-500">Manage your business with the Nexa AI Engine</p>
 
-        <form method="post" action="/api/auth/callback/credentials" className="mt-6 grid gap-3" autoComplete="off">
+        <form className="mt-6 grid gap-3" method="post" action="/api/auth/callback/credentials">
           <input type="hidden" name="csrfToken" value={csrfToken} />
           <input type="hidden" name="callbackUrl" value={callbackUrl} />
+
           <label className="text-sm font-medium">Email address</label>
           <input
             name="email"
@@ -73,33 +77,26 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="mt-3 h-10 rounded-md bg-indigo-600 text-white font-medium hover:opacity-95"
-            disabled={!csrfToken}
-            aria-disabled={!csrfToken}
-            title={!csrfToken ? "Preparing CSRF…" : "Sign in"}
+            disabled={!ready || !csrfToken}
+            className="mt-2 h-10 rounded-md bg-indigo-600 text-white disabled:opacity-50"
           >
-            Sign in
+            {ready && csrfToken ? "Sign in" : "Preparing…"}
           </button>
         </form>
 
         <div className="my-4 text-center text-xs text-neutral-500">or continue with</div>
-
         <div className="grid grid-cols-2 gap-3">
-          <Link href="/login" className="contents">
-            <button type="button" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
-              <Image src="/icons/google.svg" alt="" width={20} height={20} />
-              <span>Google</span>
-            </button>
-          </Link>
-          <Link href="/login" className="contents">
-            <button type="button" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
-              <Image src="/icons/microsoft.svg" alt="" width={18} height={18} />
-              <span>Microsoft</span>
-            </button>
-          </Link>
+          <button type="button" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
+            <Image src="/icons/google.svg" alt="" width={20} height={20} />
+            <span>Google</span>
+          </button>
+          <button type="button" className="flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 hover:bg-neutral-50">
+            <Image src="/icons/microsoft.svg" alt="" width={18} height={18} />
+            <span>Microsoft</span>
+          </button>
         </div>
 
-        <p className="mt-6 text-center text-xs text-neutral-500">© Nexa ERP — All rights reserved</p>
+        <p className="mt-10 text-center text-xs text-neutral-500">© Nexa ERP — All rights reserved</p>
       </div>
     </>
   );

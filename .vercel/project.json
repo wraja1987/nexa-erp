@@ -1,16 +1,1 @@
-{
-  "projectId": "prj_pKmLfg6cUFXAYYThk3x3Sgr6giXL",
-  "orgId": "team_h1uf3B0N7UvzodLNFzfDOa3D",
-  "projectName": "nexa-erp",
-  "settings": {
-    "createdAt": 1756856127765,
-    "framework": "nextjs",
-    "devCommand": null,
-    "installCommand": "pnpm install",
-    "buildCommand": "pnpm build",
-    "outputDirectory": ".next",
-    "rootDirectory": "apps/web",
-    "directoryListing": false,
-    "nodeVersion": "20.x"
-  }
-}
+{"projectId":"prj_B6ql7z96eewcd2Dgb0XjhLC2wAYY","orgId":"team_h1uf3B0N7UvzodLNFzfDOa3D","projectName":"nexa-erp-reset"}

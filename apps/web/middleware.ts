@@ -1,41 +1,33 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-const PUBLIC_FILE = /\.(.*)$/;
+const PUBLIC_PATHS = [
+  "/login",
+  "/api/auth",
+  "/favicon.ico",
+  "/icons",
+  "/images",
+  "/assets",
+  "/logo-nexa.png",
+];
 
 export async function middleware(req: NextRequest) {
-  const { pathname, search } = req.nextUrl;
-  const isPublic =
-    pathname.startsWith('/login') ||
-    pathname.startsWith('/api/auth') ||
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/icons') ||
-    pathname.startsWith('/favicon') ||
-    pathname.startsWith('/images') ||
-    pathname.startsWith('/assets') ||
-    pathname.startsWith('/public') ||
-    PUBLIC_FILE.test(pathname);
-
-  if (isPublic) {
-    console.log('[mw] allow', pathname);
+  const { pathname } = req.nextUrl;
+  if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p))) {
     return NextResponse.next();
   }
+  if (/\.(png|jpg|jpeg|svg|gif|webp|ico|css|js|map|txt)$/.test(pathname)) return NextResponse.next();
 
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  if (token) {
-    console.log('[mw] allow', pathname, 'user', token?.sub);
-    return NextResponse.next();
+  if (!token) {
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
+    return NextResponse.redirect(loginUrl);
   }
-
-  const cb = encodeURIComponent(`${pathname}${search || ''}`);
-  const url = new URL(`/login?callbackUrl=${cb}`, req.url);
-  console.log('[mw] redirect', pathname);
-  return NextResponse.redirect(url);
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next|api/auth|icons|images|favicon.ico).*)',
-  ],
+  matcher: ["/((?!_next|api/auth|icons|images|favicon.ico).*)"],
 };

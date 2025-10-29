@@ -11,7 +11,6 @@ export const authOptions = {
   trustHost: true,
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
-  useSecureCookies: false,
   debug: false,
   pages: {
     signIn: "/login",
@@ -22,11 +21,7 @@ export const authOptions = {
       name: "Nexa Credentials",
       credentials: { email: { label: "Email", type: "text" }, password: { label: "Password", type: "password" } },
       authorize: async (credentials) => {
-        const schema = z.object({
-          email: z.string().min(1),
-          password: z.string().min(1),
-        });
-        const parsed = schema.safeParse({
+        const parsed = z.object({ email: z.string().min(1), password: z.string().min(1) }).safeParse({
           email: credentials?.email,
           password: credentials?.password,
         });
@@ -35,9 +30,8 @@ export const authOptions = {
         const email = parsed.data.email.trim().toLowerCase();
         const password = parsed.data.password;
 
-        // 1) Try Prisma with camelCase fields that we know exist
-        //    (DO NOT select tenantId here – it may not exist in this schema).
-        const prismaUser = await (prisma as any).user?.findUnique?.({
+        // Try Prisma model mapping (camelCase)
+        const u1 = await (prisma as any).user?.findUnique?.({
           where: { email },
           select: {
             id: true,
@@ -45,13 +39,13 @@ export const authOptions = {
             name: true,
             role: true,
             active: true,
-            passwordHash: true, // if your Prisma model maps password_hash -> passwordHash
+            passwordHash: true, // if your schema maps snake_case to camelCase
           },
         });
 
-        // 2) Fallback: if not found or missing hash, query snake_case directly
-        let rowUser: any = null;
-        if (!prismaUser || !prismaUser.passwordHash) {
+        // Fallback to raw snake_case
+        let u = u1 as any;
+        if (!u) {
           const rows = await prisma.$queryRaw<Array<{
             id: string;
             email: string;
@@ -66,80 +60,59 @@ export const authOptions = {
             WHERE lower(email) = ${email}
             LIMIT 1
           `;
-          const r = rows?.[0];
+          const r = rows.at(0);
           if (r) {
-            rowUser = {
+            u = {
               id: r.id,
               email: r.email,
-              name: r.name ?? "",
+              name: r.name,
               role: r.role ?? "user",
-              active: r.active ?? true,
+              active: (r.active ?? true),
               passwordHash: r.password_hash,
               tenantId: r.tenant_id ?? "root",
             };
           }
         }
 
-        const u = (prismaUser
-          ? {
-              id: String(prismaUser.id),
-              email: prismaUser.email,
-              name: prismaUser.name ?? "",
-              role: prismaUser.role ?? "user",
-              active: prismaUser.active ?? true,
-              passwordHash: prismaUser.passwordHash ?? null,
-              tenantId: "root", // default if not in Prisma schema
-            }
-          : rowUser);
-
-        if (!u || !u.active || !u.passwordHash) { console.log('[auth] credentials FAIL for', email); return null; }
-
+        if (!u || !u.active || !u.passwordHash) return null;
         const ok = await bcrypt.compare(password, u.passwordHash);
-        if (!ok) { console.log('[auth] credentials FAIL for', email); return null; }
+        if (!ok) return null;
 
-        console.log('[auth] credentials OK for', email);
-        return {
-          id: String(u.id),
-          email: u.email,
-          name: u.name ?? "",
-          role: u.role ?? "user",
-          tenantId: u.tenantId ?? "root",
-        };
-      }
-    })
+        return { id: String(u.id), email: u.email, name: u.name ?? "", role: u.role ?? "user", tenantId: u.tenantId ?? "root" };
+      },
+    }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    jwt: async ({ token, user }) => {
       if (user) {
-        token.sub = String((user as any).id ?? token.sub);
-        token.email = (user as any).email ?? token.email;
-        token.name = (user as any).name ?? token.name;
-        (token as any).role = (user as any).role ?? (token as any).role ?? 'user';
-        (token as any).tenantId = (user as any).tenantId ?? (token as any).tenantId ?? 'root';
+        token.id = (user as any).id;
+        token.email = (user as any).email;
+        token.name = (user as any).name;
+        token.role = (user as any).role;
+        token.tenantId = (user as any).tenantId;
       }
       return token;
     },
-    async session({ session, token }) {
-      if (!session.user) session.user = {} as any;
-      (session.user as any).id = token.sub ?? (session.user as any).id;
-      session.user.email = (token.email as string) ?? session.user.email;
-      session.user.name = (token.name as string) ?? session.user.name;
-      (session.user as any).role = (token as any).role ?? (session.user as any).role ?? 'user';
-      (session.user as any).tenantId = (token as any).tenantId ?? (session.user as any).tenantId ?? 'root';
+    session: async ({ session, token }) => {
+      (session as any).user = {
+        id: token.id,
+        email: token.email,
+        name: token.name,
+        role: token.role,
+        tenantId: token.tenantId,
+      } as any;
       return session;
     },
-    async redirect({ url, baseUrl }) {
+    redirect: async ({ url, baseUrl }) => {
       try {
         const u = new URL(url, baseUrl);
-        const cb = u.searchParams.get('callbackUrl');
-        if (cb) return cb.startsWith('http') ? cb : `${baseUrl}${cb}`;
+        const cb = u.searchParams.get("callbackUrl");
+        if (cb) return cb;
       } catch {}
-      if (url.startsWith('/')) return `${baseUrl}${url}`;
-      if (url.startsWith(baseUrl)) return url;
-      return baseUrl + '/dashboard';
+      return "/dashboard";
     },
   },
-};
+} as const;
 
 const handler = NextAuth(authOptions as any);
 export { handler as GET, handler as POST };
