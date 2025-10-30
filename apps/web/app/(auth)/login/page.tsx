@@ -14,6 +14,7 @@ function LoginForm() {
   const [csrfToken, setCsrfToken] = useState("");
   const fetched = useRef(false);
 
+  // client-side CSRF fetch so /api/auth/callback/credentials works in PROD
   useEffect(() => {
     if (fetched.current) return;
     fetched.current = true;
@@ -124,33 +125,31 @@ function LoginForm() {
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <form method="post" action="/api/auth/signin/google">
+          <form
+            action="/api/auth/signin/google"
+            method="post"
+            className="w-full"
+          >
+            <input type="hidden" name="callbackUrl" value={callbackUrl} readOnly />
             <button
               type="submit"
-              className="w-full border border-slate-200 rounded-lg py-2.5 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition flex items-center justify-center gap-2"
+              className="w-full flex items-center justify-center gap-2 rounded-lg border border-slate-200 py-2 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition"
             >
-              <Image
-                src="/google.svg"
-                alt="Google"
-                width={16}
-                height={16}
-                className="h-4 w-4"
-              />
+              <Image src="/google.svg" alt="Google" width={16} height={16} />
               Google
             </button>
           </form>
-          <form method="post" action="/api/auth/signin/microsoft">
+          <form
+            action="/api/auth/signin/azure-ad"
+            method="post"
+            className="w-full"
+          >
+            <input type="hidden" name="callbackUrl" value={callbackUrl} readOnly />
             <button
               type="submit"
-              className="w-full border border-slate-200 rounded-lg py-2.5 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition flex items-center justify-center gap-2"
+              className="w-full flex items-center justify-center gap-2 rounded-lg border border-slate-200 py-2 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition"
             >
-              <Image
-                src="/microsoft.svg"
-                alt="Microsoft"
-                width={16}
-                height={16}
-                className="h-4 w-4"
-              />
+              <Image src="/microsoft.svg" alt="Microsoft" width={16} height={16} />
               Microsoft
             </button>
           </form>
@@ -165,9 +164,9 @@ function LoginForm() {
 }
 
 
-export default function LoginPage() {
+export default function Page() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-50" />}> 
+    <Suspense>
       <LoginForm />
     </Suspense>
   );
