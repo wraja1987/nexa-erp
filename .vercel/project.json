@@ -1,1 +1,16 @@
-{"projectId":"prj_B6ql7z96eewcd2Dgb0XjhLC2wAYY","orgId":"team_h1uf3B0N7UvzodLNFzfDOa3D","projectName":"nexa-erp-reset"}
+{
+  "projectId": "prj_B6ql7z96eewcd2Dgb0XjhLC2wAYY",
+  "orgId": "team_h1uf3B0N7UvzodLNFzfDOa3D",
+  "projectName": "nexa-erp-reset",
+  "settings": {
+    "createdAt": 1761643642487,
+    "framework": "nextjs",
+    "devCommand": null,
+    "installCommand": "corepack enable && corepack prepare pnpm@10 --activate && pnpm install --frozen-lockfile",
+    "buildCommand": null,
+    "outputDirectory": ".next",
+    "rootDirectory": "apps/web",
+    "directoryListing": false,
+    "nodeVersion": "22.x"
+  }
+}
