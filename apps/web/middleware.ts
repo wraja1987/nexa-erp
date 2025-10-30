@@ -14,18 +14,39 @@ const PUBLIC_PATHS = [
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p))) {
+
+  // Allow public paths
+  if (
+    PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p)) ||
+    pathname.startsWith("/_next") ||
+    pathname.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$/)
+  ) {
+    // Minimal log to prove allowlist
+    console.log("[mw] allow", pathname);
     return NextResponse.next();
   }
-  if (/\.(png|jpg|jpeg|svg|gif|webp|ico|css|js|map|txt)$/.test(pathname)) return NextResponse.next();
 
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  if (!token) {
-    const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
-    return NextResponse.redirect(loginUrl);
+  // Read token explicitly from dev cookie name for NextAuth v4 JWT strategy
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+    secureCookie: false,
+    cookieName: "next-auth.session-token", // dev/HTTP cookie name
+  });
+
+  // Lightweight diagnostics: what cookies exist, do we have a token?
+  const cookieNames = req.cookies.getAll().map((c) => c.name);
+  console.log("[mw] path", pathname, "cookies", cookieNames, "hasToken", Boolean(token));
+
+  if (token) {
+    return NextResponse.next();
   }
-  return NextResponse.next();
+
+  const url = req.nextUrl.clone();
+  url.pathname = "/login";
+  url.searchParams.set("callbackUrl", req.nextUrl.pathname);
+  console.log("[mw] redirect", pathname, "→", url.toString());
+  return NextResponse.redirect(url);
 }
 
 export const config = {
