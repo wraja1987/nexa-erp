@@ -1,11 +1,19 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./src/app/**/*.{js,ts,jsx,tsx}"
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {},
+  },
+  safelist: [
+    "bg-gradient-to-br",
+    "from-[#2E3B8F]",
+    "via-[#4C3BCF]",
+    "to-[#6A4DFF]",
+  ],
   plugins: [],
 };
