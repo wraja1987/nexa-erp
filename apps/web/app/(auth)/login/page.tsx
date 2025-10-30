@@ -14,35 +14,30 @@ function LoginForm() {
   const [csrfToken, setCsrfToken] = useState("");
   const fetched = useRef(false);
 
-  // client-side CSRF fetch so /api/auth/callback/credentials works in PROD
   useEffect(() => {
     if (fetched.current) return;
     fetched.current = true;
     (async () => {
       try {
-        const res = await fetch("/api/auth/csrf", {
-          credentials: "include",
-        });
+        const res = await fetch("/api/auth/csrf", { credentials: "include" });
         if (!res.ok) return;
         const json = await res.json();
-        if (json?.csrfToken) {
-          setCsrfToken(json.csrfToken);
-        }
+        if (json?.csrfToken) setCsrfToken(json.csrfToken);
       } catch {
-        // ignore
+        /* ignore */
       }
     })();
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#2E3B8F] via-[#4C3BCF] to-[#6A4DFF] px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#2E3B8F] via-[#4C3BCF] to-[#6A4DFF] px-4 py-10">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         <div className="flex justify-center mb-6">
           <Image
             src="/logo-nexa.png"
             alt="Nexa"
-            width={90}
-            height={32}
+            width={92}
+            height={28}
             priority
             className="h-10 w-auto"
           />
@@ -119,7 +114,7 @@ function LoginForm() {
         <div className="flex items-center gap-3 my-5">
           <div className="h-px bg-slate-200 flex-1" />
           <span className="text-xs text-slate-400 uppercase tracking-wide">
-            or continue with
+            OR CONTINUE WITH
           </span>
           <div className="h-px bg-slate-200 flex-1" />
         </div>
@@ -128,34 +123,47 @@ function LoginForm() {
           <form
             action="/api/auth/signin/google"
             method="post"
-            className="w-full"
+            className="contents"
           >
-            <input type="hidden" name="callbackUrl" value={callbackUrl} readOnly />
+            <input type="hidden" name="callbackUrl" value={callbackUrl} />
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 rounded-lg border border-slate-200 py-2 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition"
+              className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white py-2.5 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition"
             >
-              <Image src="/google.svg" alt="Google" width={16} height={16} />
+              <Image
+                src="/google.svg"
+                alt="Google"
+                width={24}
+                height={24}
+                className="h-6 w-6"
+              />
               Google
             </button>
           </form>
+
           <form
             action="/api/auth/signin/azure-ad"
             method="post"
-            className="w-full"
+            className="contents"
           >
-            <input type="hidden" name="callbackUrl" value={callbackUrl} readOnly />
+            <input type="hidden" name="callbackUrl" value={callbackUrl} />
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 rounded-lg border border-slate-200 py-2 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition"
+              className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white py-2.5 text-sm font-medium text-slate-700 hover;border-[#4C3BCF] transition"
             >
-              <Image src="/microsoft.svg" alt="Microsoft" width={16} height={16} />
+              <Image
+                src="/microsoft.svg"
+                alt="Microsoft"
+                width={24}
+                height={24}
+                className="h-6 w-6"
+              />
               Microsoft
             </button>
           </form>
         </div>
 
-        <p className="mt-6 text-center text-xs text-slate-400">
+        <p className="mt-6 text-center text-[11px] text-slate-300">
           © Nexa ERP — All rights reserved
         </p>
       </div>
@@ -166,9 +174,8 @@ function LoginForm() {
 
 export default function Page() {
   return (
-    <Suspense>
+    <Suspense fallback={null}>
       <LoginForm />
     </Suspense>
   );
 }
-
