@@ -14,7 +14,6 @@ function LoginForm() {
   const [csrfToken, setCsrfToken] = useState("");
   const fetched = useRef(false);
 
-  // keep the working CSRF flow
   useEffect(() => {
     if (fetched.current) return;
     fetched.current = true;
@@ -118,32 +117,46 @@ function LoginForm() {
 
         <div className="flex items-center gap-3 my-5">
           <div className="h-px bg-slate-200 flex-1" />
-          <span className="text-[11px] uppercase tracking-wide text-slate-400">
+          <span className="text-xs text-slate-400 uppercase tracking-wide">
             or continue with
           </span>
           <div className="h-px bg-slate-200 flex-1" />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <form action="/api/auth/signin/google" method="post">
+          <form method="post" action="/api/auth/signin/google">
             <button
               type="submit"
-              className="w-full border border-slate-200 rounded-lg py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="w-full border border-slate-200 rounded-lg py-2.5 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition flex items-center justify-center gap-2"
             >
+              <Image
+                src="/google.svg"
+                alt="Google"
+                width={16}
+                height={16}
+                className="h-4 w-4"
+              />
               Google
             </button>
           </form>
-          <form action="/api/auth/signin/azure-ad" method="post">
+          <form method="post" action="/api/auth/signin/microsoft">
             <button
               type="submit"
-              className="w-full border border-slate-200 rounded-lg py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="w-full border border-slate-200 rounded-lg py-2.5 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition flex items-center justify-center gap-2"
             >
+              <Image
+                src="/microsoft.svg"
+                alt="Microsoft"
+                width={16}
+                height={16}
+                className="h-4 w-4"
+              />
               Microsoft
             </button>
           </form>
         </div>
 
-        <p className="mt-6 text-center text-[11px] text-slate-400">
+        <p className="mt-6 text-center text-xs text-slate-400">
           © Nexa ERP — All rights reserved
         </p>
       </div>
@@ -154,8 +167,9 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-100" />}>
+    <Suspense fallback={<div className="min-h-screen bg-slate-50" />}> 
       <LoginForm />
     </Suspense>
   );
 }
+
