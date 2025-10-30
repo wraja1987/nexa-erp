@@ -1,11 +1,21 @@
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import AzureADProvider from "next-auth/providers/azure-ad";
 import { compare } from "bcryptjs";
-import { prisma } from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const handler = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    Credentials({
+    // 1) credentials — keep working path
+    CredentialsProvider({
+      id: "credentials",
       name: "Nexa Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -13,123 +23,108 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing credentials");
+          return null;
         }
 
-        const email = credentials.email.toLowerCase().trim();
-        const password = credentials.password;
+        // seeded emails that must work even if tenantId was temporarily optional
+        const seededEmails = [
+          "super@nexa.ai",
+          "info@nexaai.co.uk",
+          "wraja1987@gmail.com",
+        ];
 
-        // 1) hard-known production accounts to unblock prod login
-        const hardKnown: Record<
-          string,
-          {
-            id: string;
-            name: string;
-            email: string;
-            role: string;
-            tenantId: string;
-            password: string;
-          }
-        > = {
-          "super@nexa.ai": {
-            id: "super-nexa-ai",
-            name: "Super Admin",
-            email: "super@nexa.ai",
-            role: "superadmin",
-            tenantId: "root",
-            password: "ChangeMe!123",
-          },
-          "info@nexaai.co.uk": {
-            id: "info-nexaai-co-uk",
-            name: "Info Nexa",
-            email: "info@nexaai.co.uk",
-            role: "superadmin",
-            tenantId: "root",
-            password: "Wolfish123",
-          },
-          "wraja1987@gmail.com": {
-            id: "wraja1987-gmail-com",
-            name: "Admin",
-            email: "wraja1987@gmail.com",
-            role: "admin",
-            tenantId: "root",
-            password: "Wolfish123",
-          },
-        };
-
-        const hk = hardKnown[email];
-        if (hk && password === hk.password) {
-          return {
-            id: hk.id,
-            name: hk.name,
-            email: hk.email,
-            role: hk.role,
-            tenantId: hk.tenantId,
-          };
-        }
-
-        // 2) fallback to DB user
         const user = await prisma.user.findFirst({
           where: {
-            email: email,
+            email: credentials.email,
           },
         });
 
-        if (!user) {
-          throw new Error("User not found");
-        }
-        if (!user.password) {
-          throw new Error("No password set");
-        }
+        if (!user) return null;
 
-        const ok = await compare(password, user.password);
-        if (!ok) {
-          throw new Error("Invalid password");
+        // if user has a password hash, verify
+        if (user.password) {
+          const ok = await compare(credentials.password, user.password);
+          if (!ok) return null;
+        } else {
+          // for seeded users without password hash, allow only known passwords
+          if (
+            seededEmails.includes(credentials.email) &&
+            (credentials.password === "ChangeMe!123" ||
+              credentials.password === "Wolfish123")
+          ) {
+            // pass
+          } else {
+            return null;
+          }
         }
 
         return {
           id: user.id,
+          name: user.name ?? user.email,
           email: user.email,
-          name: user.name ?? "",
-          role: (user as any).role ?? "user",
-          tenantId: (user as any).tenantId ?? "root",
+          tenantId: user.tenantId ?? null,
+          role: user.role ?? "USER",
         };
       },
     }),
+
+    // 2) google — must appear in /api/auth/providers
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+    }),
+
+    // 3) microsoft / azure ad
+    AzureADProvider({
+      clientId: process.env.AZURE_AD_CLIENT_ID ?? "",
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET ?? "",
+      tenantId: process.env.AZURE_AD_TENANT_ID ?? "common",
+    }),
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // allow credentials
+      if (account?.provider === "credentials") {
+        return true;
+      }
+
+      // allow google/microsoft for the seeded emails
+      const seededEmails = [
+        "super@nexa.ai",
+        "info@nexaai.co.uk",
+        "wraja1987@gmail.com",
+      ];
+      if (user?.email && seededEmails.includes(user.email)) {
+        return true;
+      }
+
+      // otherwise block (avoids random google accounts)
+      return false;
+    },
     async jwt({ token, user }) {
       if (user) {
-        token.id = (user as any).id;
-        token.role = (user as any).role ?? "user";
-        token.tenantId = (user as any).tenantId ?? "root";
-        token.name = (user as any).name ?? "";
-        token.email = (user as any).email ?? "";
+        token.email = user.email as string;
+        // @ts-expect-error
+        if ((user as any).tenantId) token.tenantId = (user as any).tenantId;
+        // @ts-expect-error
+        if ((user as any).role) token.role = (user as any).role;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
-        session.user.role = (token.role as string) ?? "user";
-        session.user.tenantId = (token.tenantId as string) ?? "root";
-        session.user.name = (token.name as string) ?? "";
-        session.user.email = (token.email as string) ?? "";
+        session.user.email = token.email as string;
+        // @ts-expect-error
+        session.user.tenantId = (token as any).tenantId ?? null;
+        // @ts-expect-error
+        session.user.role = (token as any).role ?? "USER";
       }
       return session;
-    },
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      if (url.startsWith(baseUrl)) return url;
-      return `${baseUrl}/dashboard`;
     },
   },
   pages: {
     signIn: "/login",
     error: "/login",
-  },
-  session: {
-    strategy: "jwt",
   },
 });
 export { handler as GET, handler as POST };

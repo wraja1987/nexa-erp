@@ -1,11 +1,9 @@
 "use client";
 
-
 import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
 
 function LoginForm() {
   const search = useSearchParams();
@@ -24,25 +22,24 @@ function LoginForm() {
         const json = await res.json();
         if (json?.csrfToken) setCsrfToken(json.csrfToken);
       } catch {
-        /* ignore */
+        // ignore
       }
     })();
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#2E3B8F] via-[#4C3BCF] to-[#6A4DFF] px-4 py-10">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#2F3FB5] via-[#4B3FFF] to-[#7A4DF7] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         <div className="flex justify-center mb-6">
           <Image
             src="/logo-nexa.png"
             alt="Nexa"
-            width={92}
-            height={28}
+            width={90}
+            height={32}
             priority
             className="h-10 w-auto"
           />
         </div>
-
         <h1 className="text-2xl font-semibold text-center text-slate-900 mb-1">
           Sign in to Nexa ERP
         </h1>
@@ -59,10 +56,7 @@ function LoginForm() {
           <input type="hidden" name="callbackUrl" value={callbackUrl} readOnly />
 
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-slate-700 mb-1"
-            >
+            <label className="block text-sm font-medium mb-1" htmlFor="email">
               Email address
             </label>
             <input
@@ -70,23 +64,19 @@ function LoginForm() {
               name="email"
               type="email"
               required
-              autoComplete="email"
               placeholder="you@company.com"
-              className="w-full rounded-lg border-slate-200 focus:border-[#4C3BCF] focus:ring-[#4C3BCF] text-sm"
+              className="w-full rounded-lg border-slate-200 focus:border-[#4B3FFF] focus:ring-[#4B3FFF] text-sm"
             />
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-slate-700"
-              >
+              <label className="block text-sm font-medium" htmlFor="password">
                 Password
               </label>
               <Link
                 href="/forgot-password"
-                className="text-xs font-medium text-[#4C3BCF] hover:text-[#2E3B8F]"
+                className="text-xs font-medium text-[#4B3FFF] hover:text-[#2F3FB5]"
               >
                 Forgot password?
               </Link>
@@ -96,16 +86,15 @@ function LoginForm() {
               name="password"
               type="password"
               required
-              autoComplete="current-password"
               placeholder="••••••••"
-              className="w-full rounded-lg border-slate-200 focus:border-[#4C3BCF] focus:ring-[#4C3BCF] text-sm"
+              className="w-full rounded-lg border-slate-200 focus:border-[#4B3FFF] focus:ring-[#4B3FFF] text-sm"
             />
           </div>
 
           <button
             type="submit"
             disabled={!csrfToken}
-            className="w-full inline-flex justify-center items-center rounded-lg bg-[#4C3BCF] hover:bg-[#2E3B8F] text-white font-semibold py-2.5 text-sm transition disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full rounded-lg bg-[#4B3FFF] hover:bg-[#2F3FB5] text-white font-semibold py-2.5 text-sm transition disabled:opacity-60"
           >
             Sign in
           </button>
@@ -113,57 +102,32 @@ function LoginForm() {
 
         <div className="flex items-center gap-3 my-5">
           <div className="h-px bg-slate-200 flex-1" />
-          <span className="text-xs text-slate-400 uppercase tracking-wide">
-            OR CONTINUE WITH
-          </span>
+          <span className="text-xs text-slate-400">or continue with</span>
           <div className="h-px bg-slate-200 flex-1" />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <form
-            action="/api/auth/signin/google"
-            method="post"
-            className="contents"
+        <div className="space-y-3">
+          <a
+            href={`/api/auth/signin/google?callbackUrl=${encodeURIComponent(
+              callbackUrl
+            )}`}
+            className="w-full inline-flex items-center justify-center gap-2 border border-slate-200 rounded-lg py-2 text-sm hover:bg-slate-50"
           >
-            <input type="hidden" name="callbackUrl" value={callbackUrl} />
-            <button
-              type="submit"
-              className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white py-2.5 text-sm font-medium text-slate-700 hover:border-[#4C3BCF] transition"
-            >
-              <Image
-                src="/google.svg"
-                alt="Google"
-                width={24}
-                height={24}
-                className="h-6 w-6"
-              />
-              Google
-            </button>
-          </form>
-
-          <form
-            action="/api/auth/signin/azure-ad"
-            method="post"
-            className="contents"
+            <Image src="/google.svg" alt="Google" width={20} height={20} />
+            Google
+          </a>
+          <a
+            href={`/api/auth/signin/azure-ad?callbackUrl=${encodeURIComponent(
+              callbackUrl
+            )}`}
+            className="w-full inline-flex items-center justify-center gap-2 border border-slate-200 rounded-lg py-2 text-sm hover:bg-slate-50"
           >
-            <input type="hidden" name="callbackUrl" value={callbackUrl} />
-            <button
-              type="submit"
-              className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white py-2.5 text-sm font-medium text-slate-700 hover;border-[#4C3BCF] transition"
-            >
-              <Image
-                src="/microsoft.svg"
-                alt="Microsoft"
-                width={24}
-                height={24}
-                className="h-6 w-6"
-              />
-              Microsoft
-            </button>
-          </form>
+            <Image src="/microsoft.svg" alt="Microsoft" width={20} height={20} />
+            Microsoft
+          </a>
         </div>
 
-        <p className="mt-6 text-center text-[11px] text-slate-300">
+        <p className="text-xs text-slate-400 text-center mt-6">
           © Nexa ERP — All rights reserved
         </p>
       </div>
@@ -171,10 +135,9 @@ function LoginForm() {
   );
 }
 
-
 export default function Page() {
   return (
-    <Suspense fallback={null}>
+    <Suspense>
       <LoginForm />
     </Suspense>
   );
