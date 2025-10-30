@@ -1,59 +1,51 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
 
-
-// Public + auth routes that must NEVER be blocked by middleware
-const PUBLIC_PATHS = [
+const AUTH_FREE = [
   "/login",
+  "/api/auth/csrf",
+  "/api/auth/providers",
+  "/api/auth/signin",
+  "/api/auth/signin/google",
+  "/api/auth/signin/azure-ad",
+  "/api/auth/callback/google",
+  "/api/auth/callback/azure-ad",
+  "/api/auth/callback/credentials",
+  "/api/auth/error",
+  "/(public)/forgot-password",
   "/forgot-password",
-  "/api/auth",
+  "/_next",
   "/favicon.ico",
   "/logo-nexa.png",
-  "/images",
-  "/icons",
+  "/Nexa.png"
 ];
 
-function isPublic(pathname: string) {
-  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
-}
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-
-export async function middleware(req: NextRequest) {
-  const { pathname, origin, search } = req.nextUrl;
-
-  // 1) Always allow public + NextAuth
-  if (isPublic(pathname)) {
+  // allow all auth + public + static
+  if (
+    AUTH_FREE.some((p) => pathname === p || pathname.startsWith(p)) ||
+    pathname.startsWith("/api/auth/")
+  ) {
     return NextResponse.next();
   }
 
-  // 2) Try to read the NextAuth token, but NEVER crash if it fails
-  let token: any = null;
-  try {
-    token = await getToken({
-      req,
-      secret: process.env.NEXTAUTH_SECRET,
-      // prod = true, but previews (vercel.app) must not crash
-      secureCookie: process.env.NODE_ENV === "production",
-    });
-  } catch (err) {
-    // swallow: no token means we’ll just redirect below
+  // session check
+  const hasSession =
+    req.cookies.get("__Secure-next-auth.session-token") ||
+    req.cookies.get("next-auth.session-token");
+
+  if (!hasSession) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/login";
+    url.searchParams.set("callbackUrl", req.nextUrl.pathname);
+    return NextResponse.redirect(url);
   }
 
-  // 3) If no token, send user to /login on THIS origin, preserving callback
-  if (!token) {
-    const loginUrl = new URL("/login", origin);
-    // preserve target (e.g. /dashboard)
-    loginUrl.searchParams.set("callbackUrl", `${origin}${pathname}${search}`);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  // 4) Valid token → continue
   return NextResponse.next();
 }
 
-
-// Apply to all routes except Next static, files, etc.
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

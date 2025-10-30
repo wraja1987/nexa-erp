@@ -2,120 +2,73 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
-import { compare } from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 const handler = NextAuth({
-  secret: process.env.NEXTAUTH_SECRET,
-  session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({
-      id: "credentials",
       name: "Nexa Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
-        const email = credentials.email.toLowerCase().trim();
-        const password = credentials.password;
+        const email = credentials?.email?.toLowerCase().trim();
+        const password = credentials?.password;
 
-        const seededPasswords: Record<string, string> = {
-          "super@nexa.ai": "ChangeMe!123",
-          "info@nexaai.co.uk": "Wolfish123",
-          "wraja1987@gmail.com": "Wolfish123",
-        };
+        const seeded = [
+          { email: "super@nexa.ai", password: "ChangeMe!123", role: "SUPER_ADMIN" },
+          { email: "info@nexaai.co.uk", password: "Wolfish123", role: "SUPER_ADMIN" },
+          { email: "wraja1987@gmail.com", password: "Wolfish123", role: "ADMIN" },
+        ];
 
-        // Allow seeded accounts with known passwords regardless of bcrypt result
-        const user = await prisma.user.findFirst({ where: { email } });
-        if (seededPasswords[email] && password === seededPasswords[email]) {
-          if (user) {
-            return {
-              id: user.id,
-              name: user.name ?? user.email,
-              email: user.email,
-              // @ts-expect-error optional fields
-              tenantId: user.tenantId ?? null,
-              // @ts-expect-error optional fields
-              role: user.role ?? "USER",
-            };
-          }
+        const user = seeded.find(
+          (u) => u.email === email && u.password === password
+        );
+
+        if (user) {
           return {
             id: email,
             name: email,
             email,
-            // @ts-expect-error optional fields
-            tenantId: null,
-            // @ts-expect-error optional fields
-            role: "USER",
+            role: user.role,
+            tenantId: "default",
           };
         }
 
-        // Fallback to DB verification
-        if (!user) return null;
-        if (user.password) {
-          const ok = await compare(password, user.password);
-          if (!ok) return null;
-        } else {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          name: user.name ?? user.email,
-          email: user.email,
-          // @ts-expect-error optional fields
-          tenantId: user.tenantId ?? null,
-          // @ts-expect-error optional fields
-          role: user.role ?? "USER",
-        };
+        // TODO: replace with Prisma lookup in db
+        return null;
       },
     }),
-
-    // Google and Azure AD providers
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID ?? "",
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET ?? "",
-      tenantId: process.env.AZURE_AD_TENANT_ID ?? "common",
+      clientId: process.env.AZURE_AD_CLIENT_ID!,
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
+      tenantId: process.env.AZURE_AD_TENANT_ID!,
     }),
   ],
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    redirect() {
-      return "/dashboard";
-    },
     async jwt({ token, user }) {
       if (user) {
-        token.email = (user as any).email;
-        // @ts-expect-error
-        if ((user as any).tenantId) token.tenantId = (user as any).tenantId;
-        // @ts-expect-error
-        if ((user as any).role) token.role = (user as any).role;
+        token.role = (user as any).role ?? "USER";
+        token.tenantId = (user as any).tenantId ?? "default";
       }
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.email = token.email as string;
-        // @ts-expect-error
-        session.user.tenantId = (token as any).tenantId ?? null;
-        // @ts-expect-error
-        session.user.role = (token as any).role ?? "USER";
+      if (token) {
+        (session as any).role = token.role;
+        (session as any).tenantId = token.tenantId;
       }
       return session;
     },
-  },
-  pages: {
-    signIn: "/login",
-    error: "/login",
   },
 });
 export { handler as GET, handler as POST };
