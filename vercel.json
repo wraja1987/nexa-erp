@@ -1,15 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "cd apps/web && pnpm build || (cd apps/web && npm run build)",
-  "outputDirectory": "apps/web/.next",
+  "builds": [
+    { "src": "package.json", "use": "@vercel/next" }
+  ],
   "framework": "nextjs",
-  "installCommand": "corepack enable && corepack prepare pnpm@10 --activate && pnpm install --frozen-lockfile",
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024
-    }
-  }
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": ".next"
 }
-
-
-
