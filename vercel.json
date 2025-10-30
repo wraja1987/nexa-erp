@@ -1,10 +1,3 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "apps/web/package.json", "use": "@vercel/next" }
-  ],
-  "framework": "nextjs",
-  "installCommand": "corepack enable && corepack prepare pnpm@10 --activate && pnpm install --frozen-lockfile",
-  "buildCommand": "cd apps/web && pnpm build",
-  "outputDirectory": "apps/web/.next"
+  "version": 2
 }
