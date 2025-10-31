@@ -1,0 +1,69 @@
+
+# .cursorrules — Nexa ERP (final)
+
+---
+
+alwaysApply: true
+
+---
+
+project: Nexa ERP
+
+baseline:
+
+  stack: Next.js (App Router) + TypeScript + PNPM 10 + Node 20 + Prisma (Neon/Postgres) + Vercel
+
+  root: apps/web
+
+  productionUrl: https://app.nexaai.co.uk
+
+  auth: next-auth (credentials + Google + Microsoft + OTP)
+
+  ui: approved Nexa ERP layout (sidebar, header/breadcrumbs, KPI band, AI Engine bar at bottom)
+
+nonNegotiables:
+
+  - Do NOT create /pages routes. App Router only.
+
+  - Do NOT change package manager. PNPM 10 only.
+
+  - Do NOT edit production .env or Vercel prod env; only output names.
+
+  - Do NOT weaken CSP/HSTS/rate limits.
+
+  - Do NOT touch apps/web/app/(auth)/** or NextAuth config unless current task explicitly says so.
+
+  - Do NOT change the approved login layout.
+
+  - Do NOT commit code with "PLACEHOLDER" or "TODO UI".
+
+protectedFiles:
+
+  - .env
+
+  - .env.*
+
+  - prisma/schema.prisma
+
+  - apps/web/app/(auth)/**
+
+  - apps/web/middleware.ts
+
+  - vercel.json
+
+  - docs/**
+
+  - ops/**
+
+globalRules:
+
+  - Every authenticated page must use the shared Nexa layout and render the AI Engine bar.
+
+  - Every query must be tenant-aware once tenancy is re-tightened.
+
+  - Every schema change must produce: 1) schema diff, 2) prisma migrate command, 3) backfill/seed instructions, 4) Neon/staging apply steps.
+
+  - Every auth or layout change must add/update Playwright smoke tests.
+
+  - Output file list + CLI commands for me to run.
+
