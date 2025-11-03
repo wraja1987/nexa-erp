@@ -3,7 +3,7 @@ import { prisma } from '../db'
 export async function postSaleToGlAndInventory(options: { saleId: string; tenantId: string }): Promise<{ ok: true }> {
   const enabled = process.env.POS_POSTING_ENABLED === 'true'
   if (!enabled) return { ok: true }
-  const sale = await prisma.posSale.findUnique({ where: { id: options.saleId }, include: { lines: true } })
+  const sale = await prisma.posSale.findFirst({ where: { id: options.saleId, tenantId: options.tenantId }, include: { lines: true } })
   if (!sale) return { ok: true }
   // Decrement inventory via FIFO lots where available, else fallback to InventoryItem
   for (const l of sale.lines) {
@@ -52,7 +52,7 @@ async function getAccountId(tenantId: string, name: string): Promise<{ id: strin
 export async function reverseSaleFromGlAndInventory(options: { saleId: string; tenantId: string }): Promise<{ ok: true }> {
   const enabled = process.env.POS_POSTING_ENABLED === 'true'
   if (!enabled) return { ok: true }
-  const sale = await prisma.posSale.findUnique({ where: { id: options.saleId }, include: { lines: true } })
+  const sale = await prisma.posSale.findFirst({ where: { id: options.saleId, tenantId: options.tenantId }, include: { lines: true } })
   if (!sale) return { ok: true }
   // Increment inventory back (add to most recent lot or fallback to InventoryItem)
   for (const l of sale.lines) {

@@ -1,0 +1,81 @@
+{
+  "modules": [
+    { "id": "dashboard", "path": "/dashboard" },
+    {
+      "id": "finance", "path": "/finance",
+      "children": [
+        { "id": "invoices", "path": "/finance/invoices" },
+        { "id": "bills", "path": "/finance/bills" },
+        { "id": "expenses", "path": "/finance/expenses" },
+        { "id": "banking", "path": "/finance/banking" },
+        { "id": "reconciliation", "path": "/finance/reconciliation" },
+        { "id": "reports", "path": "/finance/reports" }
+      ]
+    },
+    {
+      "id": "inventory", "path": "/inventory",
+      "children": [
+        { "id": "items", "path": "/inventory/items" },
+        { "id": "categories", "path": "/inventory/categories" },
+        { "id": "warehouses", "path": "/inventory/warehouses" },
+        { "id": "stock-movements", "path": "/inventory/stock-movements" },
+        { "id": "suppliers", "path": "/inventory/suppliers" }
+      ]
+    },
+    {
+      "id": "manufacturing", "path": "/manufacturing",
+      "children": [
+        { "id": "bom", "path": "/manufacturing/bom" },
+        { "id": "work-orders", "path": "/manufacturing/work-orders" },
+        { "id": "routing", "path": "/manufacturing/routing" },
+        { "id": "resources", "path": "/manufacturing/resources" }
+      ]
+    },
+    {
+      "id": "sales", "path": "/sales",
+      "children": [
+        { "id": "leads", "path": "/sales/leads" },
+        { "id": "opportunities", "path": "/sales/opportunities" },
+        { "id": "quotes", "path": "/sales/quotes" },
+        { "id": "orders", "path": "/sales/orders" },
+        { "id": "customers", "path": "/sales/customers" }
+      ]
+    },
+    {
+      "id": "projects", "path": "/projects",
+      "children": [
+        { "id": "board", "path": "/projects/board" },
+        { "id": "tasks", "path": "/projects/tasks" },
+        { "id": "time", "path": "/projects/time" },
+        { "id": "billing", "path": "/projects/billing" }
+      ]
+    },
+    {
+      "id": "hr", "path": "/hr",
+      "children": [
+        { "id": "employees", "path": "/hr/employees" },
+        { "id": "payroll", "path": "/hr/payroll" },
+        { "id": "leave", "path": "/hr/leave" },
+        { "id": "recruitment", "path": "/hr/recruitment" }
+      ]
+    },
+    {
+      "id": "pos", "path": "/pos",
+      "children": [
+        { "id": "register", "path": "/pos/register" },
+        { "id": "sessions", "path": "/pos/sessions" },
+        { "id": "products", "path": "/pos/products" }
+      ]
+    },
+    {
+      "id": "ai", "path": "/ai",
+      "children": [
+        { "id": "workbench", "path": "/ai/workbench" },
+        { "id": "automations", "path": "/ai/automations" },
+        { "id": "logs", "path": "/ai/logs" }
+      ]
+    }
+  ]
+}
+
+

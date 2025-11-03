@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build",
+  "installCommand": "corepack enable && corepack prepare pnpm@10 --activate && pnpm install --frozen-lockfile",
+  "outputDirectory": ".next"
+}

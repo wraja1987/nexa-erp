@@ -1,11 +1,11 @@
 export type PrinterMode = 'pdf' | 'network'
 
-async function printViaNetwork(saleId: string): Promise<void> {
+async function printViaNetwork(saleId: string, tenantId?: string): Promise<void> {
   const host = process.env.POS_PRINTER_HOST || '127.0.0.1'
   const port = Number(process.env.POS_PRINTER_PORT || 9100)
   const { createConnection } = await import('node:net')
   const { prisma } = await import('../db')
-  const sale = await prisma.posSale.findUnique({ where: { id: saleId }, include: { lines: true, payments: true, store: true } })
+  const sale = await prisma.posSale.findFirst({ where: { id: saleId, ...(tenantId ? { tenantId } : {}) }, include: { lines: true, payments: true, store: true } })
   if (!sale) return
   const c = createConnection({ host, port })
   const write = (text: string) => c.write(text)
@@ -30,10 +30,10 @@ async function printViaNetwork(saleId: string): Promise<void> {
   c.end()
 }
 
-export async function printReceipt(options: { saleId: string; mode?: PrinterMode }): Promise<{ ok: true }> {
+export async function printReceipt(options: { saleId: string; mode?: PrinterMode; tenantId?: string }): Promise<{ ok: true }> {
   const mode = options.mode || (process.env.POS_PRINTER_MODE as PrinterMode) || 'pdf'
   if (mode === 'network') {
-    await printViaNetwork(options.saleId).catch(()=>{})
+    await printViaNetwork(options.saleId, options.tenantId).catch(()=>{})
     return { ok: true }
   }
   // PDF handled by /api/pos/receipt.pdf

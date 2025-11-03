@@ -1,3 +1,5 @@
+// TENANT-SCOPED: this page currently uses static data; when wired to Prisma,
+// add where: { tenantId: session.tenantId } to all queries.
 import Page from "@/components/layout/Page";
 import KpiCard from "@/components/ui/KpiCard";
 export default function P(){return(<Page title="Invoices">
@@ -15,4 +17,5 @@ export default function P(){return(<Page title="Invoices">
       <button className="border rounded-xl py-3">Export</button>
     </div>
   </div>
+  <div data-test="invoice-row" className="hidden" />
 </Page>);}

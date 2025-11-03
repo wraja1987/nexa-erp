@@ -1,47 +1,46 @@
+// Nexa ERP — Auth/runtime hardening. Do not relax these routes without updating .cursorrules.
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const OAUTH_PATHS = [
+const PUBLIC_PATHS = [
+  "/login",
+  "/forgot-password",
+  "/reset-password",
   "/api/auth",
   "/api/auth/",
-  "/api/auth/signin",
-  "/api/auth/signin/google",
-  "/api/auth/signin/azure-ad",
-  "/api/auth/callback/google",
-  "/api/auth/callback/azure-ad",
-  "/api/auth/session",
-  "/api/auth/csrf",
-  "/login",
+  "/api/auth/forgot-password",
+  "/api/auth/reset-password",
+  "/.well-known",
+  "/_next",
   "/favicon.ico",
-  "/_next/",
-  "/robots.txt",
-  "/sitemap.xml",
+  "/logo-nexa.png",
+  "/public",
+  "/assets",
 ];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // log hits for verification
-  console.log("NEXA_MW_HIT", {
-    path: pathname,
-    cookies: req.cookies.getAll().map((c) => c.name),
-  });
-
-  // bypass all OAuth/auth/public routes
-  if (OAUTH_PATHS.some((p) => pathname.startsWith(p))) {
-    console.log("NEXA_MW_BYPASS", { path: pathname });
+  const isPublic = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p));
+  if (isPublic) {
     return NextResponse.next();
   }
 
-  // enforce session for all others
-  const session =
+  const token =
     req.cookies.get("__Secure-next-auth.session-token") ||
     req.cookies.get("next-auth.session-token");
 
-  if (!session) {
+  // If hitting /login while authenticated → go to /dashboard
+  if (pathname === "/login" && token) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/dashboard";
+    return NextResponse.redirect(url);
+  }
+
+  // For all other app routes, require session
+  if (!token) {
     const url = req.nextUrl.clone();
     url.pathname = "/login";
-    url.searchParams.set("callbackUrl", req.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 
@@ -49,5 +48,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!.*\\.).*)"],
 };

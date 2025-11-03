@@ -4,11 +4,43 @@ import { loadExpanded, saveExpanded } from "@/lib/sidebarState";
 type Node = { id: string; label: string; href?: string; children?: Node[] };
 const demoTree: Node[] = [
   { id: "finance", label: "Finance", children: [
-    { id: "invoices", label: "Invoices", href: "/modules/finance/invoices" },
-    { id: "bills", label: "Bills", href: "/modules/finance/bills" },
+    { id: "customer-invoice", label: "Customer Invoice", href: "/modules/finance/invoices" },
+    { id: "supplier-bill", label: "Supplier Bill", href: "/modules/finance/bills" },
+    { id: "bank-account", label: "Bank Account", href: "/modules/finance/bank-accounts" },
+    { id: "journal-entry", label: "Journal Entry", href: "/modules/finance/journal-entries" },
+    { id: "ledger", label: "Ledger", href: "/modules/finance/ledger" },
+    { id: "kpi-snapshot", label: "Kpi Snapshot", href: "/modules/finance/kpi" },
   ]},
-  { id: "sales", label: "Sales & CRM", children: [
-    { id: "orders", label: "Orders", href: "/modules/sales-crm/sales-orders" },
+  { id: "operations", label: "Operations", children: [
+    { id: "warehouse", label: "Warehouse", href: "/modules/operations/warehouse" },
+    { id: "location", label: "Location", href: "/modules/operations/locations" },
+    { id: "work-order", label: "Work Order", href: "/modules/operations/work-orders" },
+    { id: "inventory-lot", label: "Inventory Lot", href: "/modules/operations/inventory-lots" },
+    { id: "quality-inspection", label: "Quality Inspection", href: "/modules/operations/quality/inspections" },
+    { id: "quality-hold", label: "Quality Hold", href: "/modules/operations/quality/holds" },
+    { id: "capa", label: "Capa", href: "/modules/operations/quality/capa" },
+    { id: "third-party-connector", label: "Third Party Connector", href: "/modules/operations/connectors" },
+  ]},
+  { id: "procurement", label: "Procurement", children: [
+    { id: "purchase-order", label: "Purchase Order", href: "/modules/procurement/purchase-orders" },
+    { id: "po-line", label: "Po Line", href: "/modules/procurement/po-lines" },
+  ]},
+  { id: "hr", label: "HR & Payroll", children: [
+    { id: "employee", label: "Employee", href: "/modules/hr/employees" },
+    { id: "payroll-run", label: "Payroll Run", href: "/modules/hr/payroll-runs" },
+    { id: "payslip", label: "Payslip", href: "/modules/hr/payslips" },
+  ]},
+  { id: "notifications", label: "Notifications", children: [
+    { id: "notification", label: "Notification", href: "/modules/notifications/list" },
+    { id: "notification-job", label: "Notification Job", href: "/modules/notifications/jobs" },
+    { id: "audit-log", label: "Audit Log", href: "/modules/notifications/audit-log" },
+  ]},
+  { id: "pos", label: "POS", children: [
+    { id: "store", label: "Store", href: "/modules/pos/stores" },
+    { id: "pos-sale", label: "Pos Sale", href: "/modules/pos/sales" },
+    { id: "pos-line", label: "Pos Line", href: "/modules/pos/lines" },
+    { id: "pos-payment", label: "Pos Payment", href: "/modules/pos/payments" },
+    { id: "pos-refund", label: "Pos Refund", href: "/modules/pos/refunds" },
   ]},
 ];
 export default function Sidebar({ userId = "demo-user", tree = demoTree }: { userId?: string; tree?: Node[] }) {

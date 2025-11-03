@@ -1,5 +1,4 @@
-
-# .cursorrules — Nexa ERP (final)
+# .cursorrules — Nexa ERP (Final Patched+++ Complete, Hardened Chain)
 
 ---
 
@@ -23,19 +22,19 @@ baseline:
 
 nonNegotiables:
 
-  - Do NOT create /pages routes. App Router only.
+  - App Router only (no /pages directory).
 
   - Do NOT change package manager. PNPM 10 only.
 
-  - Do NOT edit production .env or Vercel prod env; only output names.
+  - Do NOT alter or weaken CSP, HSTS, or rate limits.
 
-  - Do NOT weaken CSP/HSTS/rate limits.
+  - Do NOT modify authentication or login layout unless the current task explicitly allows it.
 
-  - Do NOT touch apps/web/app/(auth)/** or NextAuth config unless current task explicitly says so.
+  - Do NOT commit code containing "PLACEHOLDER" or "TODO UI".
 
-  - Do NOT change the approved login layout.
+  - Do NOT generate or overwrite the existing .cursorrules. Always use the root .cursorrules as the authoritative Nexa ERP ruleset.
 
-  - Do NOT commit code with "PLACEHOLDER" or "TODO UI".
+  - Only the tenancy/migration task (Task 2) may modify `prisma/schema.prisma` or add Prisma migrations. All other tasks must treat the schema as read-only and output the required migration/backfill instructions instead.
 
 protectedFiles:
 
@@ -57,13 +56,120 @@ protectedFiles:
 
 globalRules:
 
-  - Every authenticated page must use the shared Nexa layout and render the AI Engine bar.
+  - Every authenticated page must use the shared Nexa ERP layout (sidebar, header/breadcrumbs, KPI band) and render the AI Engine bar at the bottom.
 
   - Every query must be tenant-aware once tenancy is re-tightened.
 
-  - Every schema change must produce: 1) schema diff, 2) prisma migrate command, 3) backfill/seed instructions, 4) Neon/staging apply steps.
+  - Every schema change must include: schema diff, Prisma migrate command, seed/backfill steps, and Neon/staging apply instructions.
 
-  - Every auth or layout change must add/update Playwright smoke tests.
+  - Every auth or layout change must include updated Playwright smoke tests.
 
-  - Output file list + CLI commands for me to run.
+  - Always output a file list and CLI commands for manual verification after any edit.
 
+  - When adding or validating new routes, use the manifest-driven structure under `/apps/web/scripts/route-manifest.json`.
+
+  - Respect the 7-task build structure (Tasks 1 – 7). Never blend or reorder them.
+
+  - For each task:
+
+      - Task 1: Auth/Session/Runtime Hardening – modify auth stack only; do not change schema.
+
+      - Task 2: Tenancy/Schema Backfill – may run migrations and modify Prisma schema.
+
+      - Task 3: Routes/UI/AI Bar – UI and layout propagation only.
+
+      - Task 4: Seeding/KPI API – data and KPI generation only.
+
+      - Task 5: ERP Logic/RBAC/Predictive Scenarios – service-layer, rules, permissions; schema read-only.
+
+      - Task 6: Integrations/Monitoring/Legal/GDPR/AI Engine – external integrations and compliance; schema read-only.
+
+      - Task 7: Ops/DR/Performance/Go-Live Rehearsal – verification, CI, documentation; read-only.
+
+  - No task may override the sequence or cross into restricted areas from other tasks.
+
+workspace:
+
+  commands:
+
+    - pnpm -w install
+
+    - pnpm -w build
+
+    - pnpm -w dev
+
+    - pnpm -w lint
+
+    - pnpm -w test -- --run
+
+    - pnpm -w prisma generate
+
+    - pnpm -w prisma migrate dev
+
+    - pnpm -w prisma db push
+
+  manager: corepack (pnpm@10.3.0)
+
+  baseBranch: main
+
+security:
+
+  - Maintain centralised headers and rate limiting.
+
+  - Never print or expose credentials, tokens, or secrets in code or chat.
+
+  - All sensitive configuration via environment variables.
+
+codeStyle:
+
+  - Use explicit types on public APIs.
+
+  - Keep descriptive variable names and early returns.
+
+  - Avoid unnecessary try/catch blocks.
+
+  - Preserve indentation and do not reformat unrelated code.
+
+process:
+
+  - For multi-step operations, show a concise TODO list and update progress after each step.
+
+  - Provide brief status updates as work progresses.
+
+  - Use absolute paths in all CLI examples.
+
+  - Execute commands non-interactively when possible.
+
+verification:
+
+  - After every major change, run:
+
+      - `pnpm lint`
+
+      - `pnpm build`
+
+      - `pnpm test:e2e:smoke`
+
+      - `pnpm check:routes`
+
+      - `pnpm check:placeholders`
+
+  - Confirm Playwright smokes pass for /login → /dashboard and Google/Microsoft OAuth callbacks.
+
+  - Confirm AI bar renders on all authenticated routes.
+
+  - Confirm no PLACEHOLDER or TODO strings exist.
+
+summary:
+
+  - These rules define the complete, hardened Nexa ERP baseline for all build and deployment activity.
+
+  - They are permanent, enforce the 7-task sequence, and must not be changed without explicit instruction.
+
+
+# Nexa ERP — Auth surface protection
+
+- Do NOT add Google/Microsoft/AzureAD/OIDC providers to `apps/web/app/api/auth/[...nextauth]/route.ts` unless an explicit task says so.
+- Do NOT remove `/forgot-password` or `/reset-password` routes.
+- Do NOT relax `apps/web/middleware.ts` redirects/bypasses for `/api/auth/**`, `/_next/**`, and static assets.
+- All auth changes must preserve the approved purple gradient login UI.
