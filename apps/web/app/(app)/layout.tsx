@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "../../styles/globals.css";
+import { NexaAIBar } from "@/components/ai/nexa-ai-bar";
 
 function Chevron() {
   return (
@@ -57,13 +58,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </nav>
           </aside>
           <main className="relative p-6">{children}</main>
-          <footer data-testid="ai-engine-bar" className="col-span-2 sticky bottom-0 w-full bg-white/10 backdrop-blur p-4">
-            <form className="mx-auto max-w-4xl flex items-center gap-3">
-              <span className="text-white/80">AI Engine</span>
-              <input name="q" placeholder="Ask Nexa AI Engine…" className="flex-1 rounded-lg bg-white/90 px-4 py-3 outline-none" autoComplete="off" />
-              <button className="rounded-lg bg-white/90 px-4 py-3 font-medium">Send</button>
-            </form>
-          </footer>
+          <NexaAIBar />
         </div>
       </body>
     </html>
