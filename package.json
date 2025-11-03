@@ -91,7 +91,8 @@
     "h:rbac": "tsx ops/users/rbac_verify.ts",
     "h:audit": "tsx scripts/audit-stage-h.ts",
     "dr:restore:demo": "bash ops/dr/restore_demo.sh",
-    "assert:web": "scripts/ops/assert-next-output.sh"
+    "assert:web": "scripts/ops/assert-next-output.sh",
+    "check:routes": "tsx apps/web/scripts/check-routes.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
