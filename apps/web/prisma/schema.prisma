@@ -93,15 +93,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  name          String?
-  accounts      Account[]
-  sessions      Session[]
-}
 
 model VerificationToken {
   identifier String
@@ -109,4 +100,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String?  @map("password")
+  password_hash String?  @map("password_hash")
+  role          String?
+  tenantId      String?  @map("tenant_id")
+  active        Boolean  @default(true)
+
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("users")
 }

@@ -1,3 +1,91 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nexa
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Enable pnpm 10.3.0 via corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.3.0 --activate
+
+      - name: Install dependencies
+        run: pnpm -v && pnpm -w install
+
+      - name: Create apps/web/.env.local
+        run: |
+          mkdir -p apps/web
+          cat > apps/web/.env.local <<'EOF'
+          NEXTAUTH_URL=http://localhost:3000
+          NEXTAUTH_SECRET=ci-ci-ci-secret
+          AUTH_TRUST_HOST=true
+          DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nexa?schema=public
+          AUTH_URL=http://localhost:3000
+          AUTH_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          EOF
+
+      - name: Seed SUPER_ADMIN user
+        run: pnpm -s tsx scripts/seed_users_table.ts
+
+      - name: Install Playwright browsers
+        run: pnpm -w exec playwright install --with-deps
+
+      - name: Start web dev server
+        run: pnpm --filter web dev & echo $! > web.pid
+
+      - name: Wait for server
+        run: npx --yes wait-on http-get://localhost:3000/api/auth/csrf
+
+      - name: Check routes
+        run: ROUTES_BASE_URL=http://localhost:3000 pnpm -s check:routes
+
+      - name: Generate storageState for e2e
+        env:
+          NEXA_E2E_EMAIL: ${{ secrets.NEXA_E2E_EMAIL }}
+          NEXA_E2E_PASSWORD: ${{ secrets.NEXA_E2E_PASSWORD }}
+          PW_BASE_URL: http://localhost:3000
+        run: bash scripts/ci/make-storage-from-auth.sh
+
+      - name: Run Playwright AI bar spec
+        run: |
+          if [ ! -d apps/web/tests/e2e/ai-bar.spec.ts-snapshots ]; then
+            echo "Snapshots missing; generating baseline..."
+            cd apps/web && pnpm -s test:e2e -c ./playwright.config.ts -g "AI bar renders" --update-snapshots
+          else
+            echo "Snapshots present; running without updates."
+            cd apps/web && pnpm -s test:e2e -c ./playwright.config.ts -g "AI bar renders"
+          fi
+
+      - name: Run a11y sweep for shell + AI bar
+        run: cd apps/web && pnpm -s test:e2e -c ./playwright.config.ts -g "A11y — header/sidebar/AI bar"
+
+      - name: Stop server
+        if: always()
+        run: kill $(cat web.pid) || true
+
 name: CI
 on:
   pull_request:

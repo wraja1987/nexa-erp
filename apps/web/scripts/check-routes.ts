@@ -24,7 +24,20 @@ function existsInAnyGroup(rel: string): boolean {
   }
   return false;
 }
-function main() {
+async function fetchOk(url: string): Promise<boolean> {
+  try {
+    const resHead = await fetch(url, { method: "HEAD" });
+    if (resHead.ok) return true;
+  } catch {}
+  try {
+    const resGet = await fetch(url, { method: "GET" });
+    return resGet.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function main() {
   if (!fs.existsSync(manifestPath)) {
     console.error("route-manifest.json not found at", manifestPath);
     process.exit(1);
@@ -34,6 +47,8 @@ function main() {
     modules: Array<{ id: string; path: string; children?: Array<{ id: string; path: string }> }>;
   };
   const missing: string[] = [];
+  const badStatus: string[] = [];
+  const base = process.env.ROUTES_BASE_URL || "http://localhost:3000";
   for (const m of manifest.modules) {
     const top = routeToRel(m.path);
     if (!existsInAnyGroup(top)) missing.push(m.path);
@@ -44,12 +59,38 @@ function main() {
       }
     }
   }
-  if (missing.length) {
+  // HTTP status checks (only if server reachable)
+  const toCheck: string[] = [];
+  for (const m of manifest.modules) {
+    toCheck.push(m.path);
+    for (const c of m.children ?? []) toCheck.push(c.path);
+  }
+  // check concurrently up to 8 at a time
+  const pool = 8;
+  let i = 0;
+  const workers: Promise<void>[] = [];
+  for (let w = 0; w < pool; w++) {
+    workers.push((async () => {
+      while (i < toCheck.length) {
+        const idx = i++;
+        const p = toCheck[idx];
+        const ok = await fetchOk(new URL(p, base).toString());
+        if (!ok) badStatus.push(p);
+      }
+    })());
+  }
+  await Promise.all(workers);
+
+  if (missing.length || badStatus.length) {
     console.error("Missing routes:");
     for (const r of missing) console.error(" -", r);
+    if (badStatus.length) {
+      console.error("Non-200 routes at", base, ":");
+      for (const r of badStatus) console.error(" -", r);
+    }
     process.exit(1);
   }
-  console.log("All routes in route-manifest.json exist.");
+  console.log("All routes in route-manifest.json exist and return 200 at", base);
 }
 main();
 

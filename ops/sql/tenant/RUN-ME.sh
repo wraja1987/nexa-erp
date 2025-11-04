@@ -17,3 +17,7 @@ echo "Prod DB tenancy scripts applied."
 
 
 
+
+
+
+

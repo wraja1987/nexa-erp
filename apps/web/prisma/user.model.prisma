@@ -1,0 +1,11 @@
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String?  @map("password")
+  password_hash String?  @map("password_hash")
+  role          String?
+  tenantId      String?  @map("tenant_id")
+  active        Boolean  @default(true)
+
+  @@map("users")
+}

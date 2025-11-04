@@ -14,3 +14,7 @@ test("tenant-scoped API is not anonymous", async ({ request }) => {
   expect([401, 403]).toContain(r.status());
 });
 
+
+
+
+
