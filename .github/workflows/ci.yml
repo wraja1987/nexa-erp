@@ -68,6 +68,9 @@ jobs:
       - name: Tenancy query checker
         run: pnpm -s tsx scripts/tenancy/check-prisma-queries.ts
 
+      - name: SMTP envs check (warn-only)
+        run: pnpm -s tsx scripts/ci/check-smtp-envs.ts || true
+
       - name: Generate storageState for e2e
         env:
           NEXA_E2E_EMAIL: ${{ secrets.NEXA_E2E_EMAIL }}

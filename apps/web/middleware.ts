@@ -21,9 +21,19 @@ const PUBLIC_PATHS = [
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // Security headers quick pass
+  const resHeaders: Record<string,string> = {
+    'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'X-Content-Type-Options': 'nosniff',
+    'Permissions-Policy': 'geolocation=()'
+  };
+
   const isPublic = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p));
   if (isPublic) {
-    return NextResponse.next();
+    const r = NextResponse.next();
+    Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
+    return r;
   }
 
   const token =
@@ -34,17 +44,23 @@ export function middleware(req: NextRequest) {
   if (pathname === "/login" && token) {
     const url = req.nextUrl.clone();
     url.pathname = "/dashboard";
-    return NextResponse.redirect(url);
+    const r = NextResponse.redirect(url);
+    Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
+    return r;
   }
 
   // For all other app routes, require session
   if (!token) {
     const url = req.nextUrl.clone();
     url.pathname = "/login";
-    return NextResponse.redirect(url);
+    const r = NextResponse.redirect(url);
+    Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
+    return r;
   }
 
-  return NextResponse.next();
+  const r = NextResponse.next();
+  Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
+  return r;
 }
 
 export const config = {

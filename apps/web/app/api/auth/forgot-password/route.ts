@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { randomBytes } from "crypto";
-import { addHours } from "date-fns";
+import { addMinutes } from "date-fns";
 import nodemailer from "nodemailer";
+import { getLimiter, keyFromReq } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const RESET_EXPIRY_HOURS = 2;
+const RESET_EXPIRY_MINUTES = 30;
 
 async function readEmail(req: Request): Promise<string | null> {
   const contentType = req.headers.get("content-type") || "";
@@ -33,6 +34,9 @@ async function readEmail(req: Request): Promise<string | null> {
 
 export async function POST(req: Request) {
   try {
+    const limiter = getLimiter('forgot_password', 10, 60_000); // 10/min per IP
+    const k = keyFromReq(req);
+    if (!limiter.allow(k)) return NextResponse.json({ ok: true }, { status: 429 });
     const email = await readEmail(req);
     if (!email) {
       return NextResponse.json({ ok: true }, { status: 200 });
@@ -46,24 +50,11 @@ export async function POST(req: Request) {
     }
 
     const token = randomBytes(32).toString("hex");
-    const expiresAt = addHours(new Date(), RESET_EXPIRY_HOURS);
+    const expiresAt = addMinutes(new Date(), RESET_EXPIRY_MINUTES);
 
-    try {
-      await prisma.passwordResetToken.create({
-        data: { userId: user.id, token, expiresAt, used: false },
-      } as any);
-    } catch (e) {
-      // If the model/constraint differs, fall back to update or upsert patterns gracefully
-      try {
-        await prisma.passwordResetToken.upsert({
-          where: { token },
-          update: { token, expiresAt, used: false },
-          create: { userId: user.id, token, expiresAt, used: false },
-        } as any);
-      } catch (e2) {
-        console.warn("[forgot-password] token persistence failed; continuing non-enumerating", e2);
-      }
-    }
+    // Invalidate any existing tokens for this user to enforce rotation on request
+    await prisma.passwordResetToken.updateMany({ where: { userId: user.id, used: false }, data: { used: true } } as any);
+    await prisma.passwordResetToken.create({ data: { userId: user.id, token, expiresAt, used: false } } as any);
 
     const baseUrl = process.env.NEXTAUTH_URL ?? "https://app.nexaai.co.uk";
     const resetUrl = `${baseUrl}/reset-password?token=${encodeURIComponent(token)}`;

@@ -1,10 +1,16 @@
 import Link from "next/link";
 
 export default async function DashboardPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/dashboard/kpis`, { cache: "no-store" });
-  const data = await res.json();
+  let data: any = null;
+  try {
+    const res = await fetch(`/api/dashboard/kpis?months=12`, { cache: "no-store" });
+    if (!res.ok) throw new Error(String(res.status));
+    data = await res.json();
+  } catch {
+    data = { totals: { invoicesTotal: 0, billsTotal: 0, receiptsTotal: 0, posTotal: 0, payrollTotal: 0 }, series: [] };
+  }
   const totals = data.totals as { invoicesTotal: number; billsTotal: number; receiptsTotal: number; posTotal: number; payrollTotal: number };
-  const kpis = { revenue: (totals.invoicesTotal + totals.posTotal), bills: totals.billsTotal, receipts: totals.receiptsTotal };
+  const kpis = { revenue: Math.round((totals.invoicesTotal + totals.posTotal) * 100) / 100, bills: Math.round(totals.billsTotal * 100) / 100, receipts: Math.round(totals.receiptsTotal * 100) / 100 };
   const recentInvoices: any[] = [];
   const recentBills: any[] = [];
 

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { PrismaClient, Prisma } from "@prisma/client";
+import { monthStartUTC } from "@/lib/time/months" as any;
 
 const prisma = new PrismaClient();
 
@@ -18,10 +19,7 @@ function startOfMonth(d: Date): Date {
 function monthsBack(n: number): Date[] {
   const now = new Date();
   const months: Date[] = [];
-  for (let i = n - 1; i >= 0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    months.push(d);
-  }
+  for (let i = n - 1; i >= 0; i--) months.push(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - i, 1)));
   return months;
 }
 
@@ -200,9 +198,16 @@ async function seedHr(tenant: Tenant, months: Date[]) {
 async function main() {
   const months = monthsBack(12);
   const master = await ensureTenant("Nexa Master Tenant", "MASTER");
-  const demo = await ensureTenant("Demo Tenant", "DEMO");
+  const tenants: Tenant[] = [master];
+  if (process.env.SEED_ENABLE_DEMO === 'true' || process.env.NODE_ENV !== 'production') {
+    const demo = await ensureTenant("Demo Tenant", "DEMO");
+    tenants.push(demo);
+  }
+  if (process.env.NODE_ENV === 'production' && process.env.SEED_ENABLE_DEMO !== 'true') {
+    console.log('Skipping demo seeding in production (SEED_ENABLE_DEMO not true)');
+  }
 
-  for (const tenant of [master, demo]) {
+  for (const tenant of tenants) {
     await seedFinance(tenant, months);
     await seedInventory(tenant, months);
     await seedManufacturing(tenant, months);

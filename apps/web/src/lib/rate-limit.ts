@@ -1,3 +1,46 @@
+type Key = string;
+
+class SlidingWindowLimiter {
+  private windowMs: number;
+  private limit: number;
+  private hits: Map<Key, number[]> = new Map();
+
+  constructor(limit: number, windowMs: number) {
+    this.limit = limit;
+    this.windowMs = windowMs;
+  }
+
+  allow(key: Key): boolean {
+    const now = Date.now();
+    const cutoff = now - this.windowMs;
+    const arr = this.hits.get(key) || [];
+    const kept = arr.filter((t) => t > cutoff);
+    if (kept.length >= this.limit) {
+      this.hits.set(key, kept);
+      return false;
+    }
+    kept.push(now);
+    this.hits.set(key, kept);
+    return true;
+  }
+}
+
+const globalAny = global as any;
+if (!globalAny.__nexa_rl) globalAny.__nexa_rl = {} as Record<string, SlidingWindowLimiter>;
+
+export function getLimiter(name: string, limit: number, windowMs: number): SlidingWindowLimiter {
+  const store = (global as any).__nexa_rl as Record<string, SlidingWindowLimiter>;
+  if (!store[name]) store[name] = new SlidingWindowLimiter(limit, windowMs);
+  return store[name];
+}
+
+export function keyFromReq(req: Request, userId?: string | null): string {
+  const ip = (req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || '')
+    .split(',')[0]
+    .trim();
+  return userId ? `${ip}:${userId}` : ip || 'unknown';
+}
+
 import { createClient } from "./redis";
 import { getRedis } from './redis';
 
