@@ -1,8 +1,26 @@
 "use client";
 
 import React from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
+  const [csrfToken, setCsrfToken] = useState<string>("");
+  const [callbackUrl, setCallbackUrl] = useState<string>("/dashboard");
+
+  useEffect(() => {
+    // Fetch NextAuth CSRF token for credentials flow
+    fetch("/api/auth/csrf")
+      .then((r) => r.json())
+      .then((d) => setCsrfToken(d?.csrfToken || ""))
+      .catch(() => setCsrfToken(""));
+
+    // Preserve redirect target if present
+    try {
+      const u = new URL(window.location.href);
+      const cb = u.searchParams.get("callbackUrl");
+      if (cb) setCallbackUrl(cb);
+    } catch {}
+  }, []);
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#6366f1_0%,_#4338ca_45%,_#0f172a_100%)] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white/95 backdrop-blur rounded-3xl shadow-2xl border border-white/20">
@@ -19,6 +37,9 @@ export default function LoginPage() {
           action="/api/auth/callback/credentials"
           className="px-8 pt-6 pb-6 space-y-4"
         >
+          {/* Required hidden inputs for NextAuth credentials flow */}
+          <input type="hidden" name="csrfToken" value={csrfToken} />
+          <input type="hidden" name="callbackUrl" value={callbackUrl} />
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-slate-700">
               Email address
