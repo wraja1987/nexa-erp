@@ -1,18 +1,29 @@
 import Page from "@/components/layout/Page";
-import KpiCard from "@/components/ui/KpiCard";
-export default function P(){return(<Page title="Help">
-  <KpiCard title="Revenue" value="€405,280" trend="12.5%" />
-  <div className="col-span-12 md:col-span-8 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">AI Insights</div>
-    <div className="border rounded-xl p-4">Optimising labour costs could enhance your profit margins for the current quarter</div>
-  </div>
-  <div className="col-span-12 md:col-span-4 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">Quick Links</div>
-    <div className="grid grid-cols-2 gap-3">
-      <button className="border rounded-xl py-3">New</button>
-      <button className="border rounded-xl py-3">Run Report</button>
-      <button className="border rounded-xl py-3">Import</button>
-      <button className="border rounded-xl py-3">Export</button>
-    </div>
-  </div>
-</Page>);}
+import Link from "next/link";
+
+export default function HelpPage() {
+  const links = [
+    { label: "Getting Started", href: "/help#getting-started" },
+    { label: "Finance: Invoices & VAT (MTD)", href: "/finance" },
+    { label: "Inventory & WMS", href: "/inventory" },
+    { label: "HR & Payroll", href: "/hr" },
+    { label: "Manufacturing", href: "/manufacturing" },
+    { label: "Sales & CRM", href: "/sales" },
+  ];
+  return (
+    <Page title="Help">
+      <div className="col-span-12">
+        <div className="rounded-2xl border bg-white p-6" style={{ borderColor: "var(--border)" }}>
+          <p className="text-sm" style={{ color: "var(--color-muted)" }}>
+            Browse help topics or jump directly to a module. Use the AI Engine to ask contextual questions.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            {links.map((l) => (
+              <Link key={l.href} href={l.href} className="rounded-xl border p-4 hover:bg-slate-50" style={{ borderColor: "var(--border)" }}>{l.label}</Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Page>
+  );
+}

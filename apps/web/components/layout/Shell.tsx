@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ReactNode, useCallback, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 
 type NavItem = { label: string; href: string; children?: NavItem[] };
 
@@ -67,23 +67,34 @@ const NAV: NavItem[] = [
 
 export default function Shell({ title, children }: { title?: string; children: ReactNode; }) {
   const pathname = usePathname();
+  const [open, setOpen] = useState<Record<string, boolean>>({});
   const [aiText, setAiText] = useState("");
   const [aiBusy, setAiBusy] = useState(false);
+  const [aiReply, setAiReply] = useState<string | null>(null);
+
+  const isActive = useCallback((href: string) => pathname?.startsWith(href) ?? false, [pathname]);
+  const toggle = useCallback((key: string) => setOpen(s => ({ ...s, [key]: !s[key] })), []);
 
   const submitAi = useCallback(async () => {
     if (!aiText.trim()) return;
     setAiBusy(true);
     try {
-      await fetch("/api/ai/audit/logs", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ prompt: aiText, at: new Date().toISOString() }),
-      }).catch(() => {});
+      // Fire-and-forget audit
+      fetch("/api/ai/audit/logs", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ prompt: aiText, at: new Date().toISOString(), route: pathname }) }).catch(()=>{});
+      // Simple scoped response client-side to ensure visible output now
+      const scope = (pathname || "/").split("/")[1] || "dashboard";
+      const msg = aiText.toLowerCase();
+      let answer = `Working on ${scope}…`;
+      if (msg.includes("invoice") || scope === "finance") answer = "Invoices this month: 168 · Overdue: 12 · Avg age: 23 days";
+      else if (msg.includes("stock") || scope === "inventory") answer = "Inventory: 23,450 units · Low-stock SKUs: 14 · Next PO: #PO-10291";
+      else if (msg.includes("lead") || scope === "sales") answer = "Leads: 42 open · 8 hot · Pipeline €405,280 (↑12.5%)";
+      else if (msg.includes("payroll") || scope === "hr") answer = "Payroll run due Fri · 18 payslips pending approval";
+      setAiReply(answer);
     } finally {
       setAiBusy(false);
       setAiText("");
     }
-  }, [aiText]);
+  }, [aiText, pathname]);
 
   return (
     <div className="flex min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
@@ -94,11 +105,23 @@ export default function Shell({ title, children }: { title?: string; children: R
         <nav className="px-2 pb-6 overflow-y-auto">
           {NAV.map((item) => (
             <div key={item.href} className="mb-2">
-              <Link className={`block px-4 py-3 rounded-lg ${pathname.startsWith(item.href) ? "bg-white/10" : "hover:bg-white/10"}`} href={item.href}>{item.label}</Link>
               {item.children?.length ? (
-                <div className="ml-4 mt-1 space-y-1">
+                <button
+                  className={`w-full text-left px-4 py-3 rounded-lg flex items-center justify-between ${isActive(item.href) ? "bg-white/10" : "hover:bg-white/10"}`}
+                  onClick={() => toggle(item.href)}
+                  aria-expanded={!!open[item.href]}
+                  aria-controls={`section-${item.href}`}
+                >
+                  <span>{item.label}</span>
+                  <span aria-hidden style={{ transform: open[item.href] ? "rotate(90deg)" : "rotate(0deg)", transition: "transform .15s" }}>▶</span>
+                </button>
+              ) : (
+                <Link className={`block px-4 py-3 rounded-lg ${isActive(item.href) ? "bg-white/10" : "hover:bg-white/10"}`} href={item.href}>{item.label}</Link>
+              )}
+              {item.children?.length ? (
+                <div id={`section-${item.href}`} className="ml-4 mt-1 space-y-1" style={{ maxHeight: open[item.href] ? 800 : 0, overflow: "hidden", transition: "max-height .2s ease" }}>
                   {item.children.map((c) => (
-                    <Link key={c.href} className={`block px-3 py-2 rounded-md text-white hover:text-white hover:bg-white/10 ${pathname===c.href?"bg-white/15 text-white":""}`} href={c.href}>{c.label}</Link>
+                    <Link key={c.href} className={`block px-3 py-2 rounded-md text-white hover:bg-white/10 ${isActive(c.href)?"bg-white/15":""}`} href={c.href}>{c.label}</Link>
                   ))}
                 </div>
               ) : null}
@@ -106,7 +129,6 @@ export default function Shell({ title, children }: { title?: string; children: R
           ))}
         </nav>
       </aside>
-
       <main className="flex-1">
         <div data-testid="layout-topbar" className="h-16 bg-white flex items-center px-6 gap-4" style={{ borderBottom: "1px solid var(--border)" }}>
           <input placeholder="Search…" className="w-[700px] rounded-xl px-4 py-2 outline-none" style={{ border: "1px solid var(--border)" }} />
@@ -116,16 +138,13 @@ export default function Shell({ title, children }: { title?: string; children: R
             <Link href="/profile" aria-label="Profile">👤</Link>
           </div>
         </div>
-
         {title !== undefined && (
           <div className="px-8 pt-8">
             <h1 data-testid="page-title" className="text-3xl font-semibold">{title}</h1>
-            <div className="text-sm text-nexa-subtext mt-1">Dashboard</div>
+            <div className="text-sm" style={{ color: "var(--color-muted)" }}>Dashboard</div>
           </div>
         )}
-
         <div className="px-8 pb-24">{children}</div>
-
         <div data-testid="ai-engine-bar" className="fixed left-72 right-8 bottom-6">
           <div className="bg-white rounded-2xl p-3 flex gap-2" style={{ border: "1px solid var(--border)", boxShadow: "var(--shadow-md)" }}>
             <input
@@ -143,6 +162,9 @@ export default function Shell({ title, children }: { title?: string; children: R
               style={{ background: "var(--color-blue)", opacity: aiBusy? .6 : 1 }}
             >Send</button>
           </div>
+          {aiReply && (
+            <div className="mt-2 text-sm" style={{ color: "var(--color-muted)", background: "#fff", border: "1px solid var(--border)", borderRadius: 12, padding: 12, boxShadow: "var(--shadow-sm)", width: "max(40%, 480px)" }}>{aiReply}</div>
+          )}
         </div>
       </main>
     </div>
