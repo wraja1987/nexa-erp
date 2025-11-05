@@ -11,7 +11,7 @@ export default async function DashboardPage() {
     );
   }
 
-  const tenantId = (session.user as any).tenant_id ?? "root";
+  const tenantId = (session.user as any).tenantId ?? (session.user as any).tenant_id ?? "00000000-0000-0000-0000-000000000000";
 
   let kpis = { revenue: 0, bills: 0, receipts: 0 };
   let recentInvoices: any[] = [];

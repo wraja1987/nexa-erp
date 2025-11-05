@@ -25,7 +25,7 @@ model User {
   mfa_enabled           Boolean  @default(false)
   mfa_secret            String?
   password_hash         String?
-  tenantId              String?  @map("tenant_id")
+  tenantId              String   @map("tenant_id")
   updated_at            DateTime?
   emailVerified         DateTime?
   image                 String?
@@ -616,7 +616,7 @@ model Account {
   code              String?
   createdAt         DateTime      @default(now())
   name              String?
-  tenantId          String?
+  tenantId          String
   updatedAt         DateTime      @updatedAt
   userId            String?
   providerAccountId String?
