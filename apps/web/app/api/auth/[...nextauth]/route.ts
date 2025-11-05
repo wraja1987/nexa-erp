@@ -4,6 +4,10 @@ import verifyCredentials from "../../../../src/lib/auth-credentials";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
+  // Trust proxy host headers (Vercel/NGINX) to correctly compute callbacks
+  trustHost: true,
+  // Ensure the custom login page is used
+  pages: { signIn: "/login" },
   // Explicit cookie options for clarity (functionally equivalent to defaults)
   cookies: {
     sessionToken: {
@@ -33,7 +37,8 @@ export const authOptions: NextAuthOptions = {
         ? "__Host-next-auth.csrf-token"
         : "next-auth.csrf-token",
       options: {
-        httpOnly: true,
+        // NextAuth's CSRF cookie must be readable by the browser (double-submit cookie pattern)
+        httpOnly: false,
         sameSite: "lax",
         path: "/",
         secure: !!process.env.NEXTAUTH_URL && process.env.NEXTAUTH_URL.startsWith("https://"),
