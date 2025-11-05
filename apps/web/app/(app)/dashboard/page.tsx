@@ -1,52 +1,12 @@
-import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
-import { authOptions } from "@/lib/auth/options";
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions as any);
-  if (!session?.user) {
-    return (
-      <meta httpEquiv="refresh" content="0; url=/login?callbackUrl=/dashboard" />
-    );
-  }
-
-  const tenantId = (session.user as any).tenantId ?? (session.user as any).tenant_id ?? "00000000-0000-0000-0000-000000000000";
-
-  let kpis = { revenue: 0, bills: 0, receipts: 0 };
-  let recentInvoices: any[] = [];
-  let recentBills: any[] = [];
-
-  try {
-    const [invSum, billSum, recCount] = await Promise.all([
-      prisma.customerInvoice.aggregate({ _sum: { total: true }, where: { tenantId } }),
-      prisma.supplierBill.aggregate({ _sum: { total: true }, where: { tenantId } }),
-      prisma.customerPayment.count({ where: { tenantId } }),
-    ]);
-
-    kpis = {
-      revenue: Number(invSum._sum.total ?? 0),
-      bills: Number(billSum._sum.total ?? 0),
-      receipts: recCount ?? 0,
-    };
-
-    [recentInvoices, recentBills] = await Promise.all([
-      prisma.customerInvoice.findMany({
-        where: { tenantId },
-        orderBy: { issuedAt: "desc" },
-        take: 5,
-        select: { number: true, total: true, status: true, issuedAt: true },
-      }),
-      prisma.supplierBill.findMany({
-        where: { tenantId },
-        orderBy: { receivedAt: "desc" },
-        take: 5,
-        select: { number: true, total: true, status: true, receivedAt: true },
-      }),
-    ]);
-  } catch (e) {
-    console.error("[dashboard] query error", e);
-  }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/dashboard/kpis`, { cache: "no-store" });
+  const data = await res.json();
+  const totals = data.totals as { invoicesTotal: number; billsTotal: number; receiptsTotal: number; posTotal: number; payrollTotal: number };
+  const kpis = { revenue: (totals.invoicesTotal + totals.posTotal), bills: totals.billsTotal, receipts: totals.receiptsTotal };
+  const recentInvoices: any[] = [];
+  const recentBills: any[] = [];
 
   return (
     <div className="p-6 space-y-6">

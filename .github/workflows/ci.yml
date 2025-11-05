@@ -50,6 +50,9 @@ jobs:
       - name: Seed SUPER_ADMIN user
         run: pnpm -s tsx scripts/seed_users_table.ts
 
+      - name: Seed domain data (12 months)
+        run: pnpm -s prisma db seed
+
       - name: Install Playwright browsers
         run: pnpm -w exec playwright install --with-deps
 
@@ -84,6 +87,11 @@ jobs:
 
       - name: Run a11y sweep for shell + AI bar
         run: cd apps/web && pnpm -s test:e2e -c ./playwright.config.ts -g "A11y — header/sidebar/AI bar"
+
+      - name: Run API KPI test
+        env:
+          TEST_BASE_URL: http://localhost:3000
+        run: pnpm -s test:api
 
       - name: Stop server
         if: always()

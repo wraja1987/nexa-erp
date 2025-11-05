@@ -173,6 +173,9 @@
     "redis": "^5.8.1",
     "stripe": "^16.12.0"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed/index.ts"
+  },
   "pnpm": {
     "overrides": {
       "react": "18.3.1",
