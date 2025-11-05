@@ -24,6 +24,49 @@ export default function HelpPage() {
           </div>
         </div>
       </div>
+
+      <div className="col-span-12">
+        <div id="getting-started" className="rounded-2xl border bg-white p-6 mt-6 space-y-4" style={{ borderColor: "var(--border)" }}>
+          <h2 className="text-xl font-semibold">Using Nexa ERP</h2>
+          <p>These short guides are written in plain British English and cover day‑to‑day use of Nexa.</p>
+
+          <section>
+            <h3 className="font-semibold">Super Admin</h3>
+            <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
+              <li>Invite users and assign roles (Super Admin, Admin, Standard).</li>
+              <li>Configure tenants, default currency, timezone and VAT settings.</li>
+              <li>Review audit logs on the Alerts page and set rate‑limits/headers in Ops.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="font-semibold">Admin</h3>
+            <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
+              <li>Manage Finance (invoices, bills, VAT submissions) and HR (employees, payroll).</li>
+              <li>Maintain master data (items, suppliers, warehouses) and posting rules.</li>
+              <li>Use the AI Engine for assisted workflows (e.g. “Draft a dunning email”).</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="font-semibold">Standard User</h3>
+            <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
+              <li>Raise documents you have access to (e.g. sales orders, purchase orders).</li>
+              <li>Upload evidence and attach files to transactions where required.</li>
+              <li>Search, filter and export lists using the toolbar on each module page.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="font-semibold">Tips</h3>
+            <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
+              <li>Look for the AI bar at the bottom of the page; it understands where you are.</li>
+              <li>Use the left navigation to expand a module and pick the sub‑module you need.</li>
+              <li>Press / to focus search, and ? for keyboard shortcuts.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
     </Page>
   );
 }

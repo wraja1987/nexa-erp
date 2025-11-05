@@ -89,6 +89,9 @@ export default function Shell({ title, children }: { title?: string; children: R
       else if (msg.includes("stock") || scope === "inventory") answer = "Inventory: 23,450 units · Low-stock SKUs: 14 · Next PO: #PO-10291";
       else if (msg.includes("lead") || scope === "sales") answer = "Leads: 42 open · 8 hot · Pipeline €405,280 (↑12.5%)";
       else if (msg.includes("payroll") || scope === "hr") answer = "Payroll run due Fri · 18 payslips pending approval";
+      else if (scope === "pos" && (msg.includes("receipt") || (pathname||"").includes("/pos/receipts"))) {
+        answer = "Receipts (demo): 0 found. Import POS data or create a session to view live totals.";
+      }
       setAiReply(answer);
     } finally {
       setAiBusy(false);
@@ -100,7 +103,7 @@ export default function Shell({ title, children }: { title?: string; children: R
     <div className="flex min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
       <aside data-testid="layout-sidebar" className="w-72 shrink-0 text-white" style={{ background: "linear-gradient(180deg,#2E6BFF 0%,#7A4DFF 100%)" }}>
         <div className="flex items-center gap-3 px-6 h-20">
-          <Image src="/logo-nexa.png" alt="Nexa" width={140} height={40} priority />
+          <span style={{ fontWeight: 800, fontSize: 22, letterSpacing: .3 }}>NEXA</span>
         </div>
         <nav className="px-2 pb-6 overflow-y-auto">
           {NAV.map((item) => (

@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import Page from "@/components/layout/Page";
+import Preferences from "../../../components/profile/Preferences";
+import SecuritySection from "../../../components/profile/SecuritySection";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions as any).catch(()=>null);
@@ -8,7 +10,7 @@ export default async function ProfilePage() {
   return (
     <Page title="Profile">
       <div className="col-span-12">
-        <div className="rounded-2xl border bg-white p-6" style={{ borderColor: "var(--border)" }}>
+        <div className="rounded-2xl border bg-white p-6 space-y-6" style={{ borderColor: "var(--border)" }}>
           {user ? (
             <div className="grid gap-4 md:grid-cols-2">
               <div>
@@ -27,6 +29,10 @@ export default async function ProfilePage() {
           ) : (
             <div className="text-sm" style={{ color: "var(--color-muted)" }}>No session detected.</div>
           )}
+
+          {user && <SecuritySection email={String(user.email)} />}
+
+          <Preferences />
         </div>
       </div>
     </Page>
