@@ -65,7 +65,7 @@ const NAV: NavItem[] = [
   { label: "Help", href: "/help" }
 ];
 
-export default function Shell({ title, children }: { title: string; children: ReactNode; }) {
+export default function Shell({ title, children }: { title?: string; children: ReactNode; }) {
   const pathname = usePathname();
   return (
     <div className="flex min-h-screen bg-[rgb(248,250,252)] text-nexa-text">
@@ -97,10 +97,12 @@ export default function Shell({ title, children }: { title: string; children: Re
           </div>
         </div>
 
-        <div className="px-8 pt-8">
-          <h1 data-testid="page-title" className="text-3xl font-semibold">{title}</h1>
-          <div className="text-sm text-nexa-subtext mt-1">Dashboard</div>
-        </div>
+        {title !== undefined && (
+          <div className="px-8 pt-8">
+            <h1 data-testid="page-title" className="text-3xl font-semibold">{title}</h1>
+            <div className="text-sm text-nexa-subtext mt-1">Dashboard</div>
+          </div>
+        )}
 
         <div className="px-8 pb-24">{children}</div>
 

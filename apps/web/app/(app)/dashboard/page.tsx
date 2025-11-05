@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Page from "@/components/layout/Page";
 
 export default async function DashboardPage() {
   let data: any = null;
@@ -15,8 +16,7 @@ export default async function DashboardPage() {
   const recentBills: any[] = [];
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
+    <Page title="Dashboard">
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="rounded-2xl p-4 shadow border">
@@ -63,6 +63,6 @@ export default async function DashboardPage() {
       <div className="text-sm text-gray-500">
         <Link href="/finance/invoices" className="underline">Go to Finance</Link>
       </div>
-    </div>
+    </Page>
   );
 }

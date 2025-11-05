@@ -1,5 +1,8 @@
 import "../../styles/globals.css";
-import { NexaAIBar } from "@/components/ai/nexa-ai-bar";
+import dynamic from "next/dynamic";
+
+// Use the approved shell with sidebar, topbar, and AI Engine bar
+const Shell = dynamic(() => import("../../components/layout/Shell"), { ssr: false });
 
 export const metadata = { title: "Nexa ERP" };
 
@@ -7,10 +10,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-screen bg-background antialiased">
-        <div className="min-h-screen">
-          <main role="main">{children}</main>
-        </div>
-        <NexaAIBar />
+        <Shell>{children}</Shell>
       </body>
     </html>
   );
