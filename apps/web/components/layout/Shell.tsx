@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useCallback, useState } from "react";
 
 type NavItem = { label: string; href: string; children?: NavItem[] };
 
@@ -67,20 +67,38 @@ const NAV: NavItem[] = [
 
 export default function Shell({ title, children }: { title?: string; children: ReactNode; }) {
   const pathname = usePathname();
+  const [aiText, setAiText] = useState("");
+  const [aiBusy, setAiBusy] = useState(false);
+
+  const submitAi = useCallback(async () => {
+    if (!aiText.trim()) return;
+    setAiBusy(true);
+    try {
+      await fetch("/api/ai/audit/logs", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ prompt: aiText, at: new Date().toISOString() }),
+      }).catch(() => {});
+    } finally {
+      setAiBusy(false);
+      setAiText("");
+    }
+  }, [aiText]);
+
   return (
-    <div className="flex min-h-screen bg-[rgb(248,250,252)] text-nexa-text">
-      <aside data-testid="layout-sidebar" className="w-72 shrink-0 bg-gradient-to-b from-nexa-sidebarBg to-nexa-sidebarBg2 text-white">
+    <div className="flex min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
+      <aside data-testid="layout-sidebar" className="w-72 shrink-0 text-white" style={{ background: "linear-gradient(180deg,#2E6BFF 0%,#7A4DFF 100%)" }}>
         <div className="flex items-center gap-3 px-6 h-20">
           <Image src="/logo-nexa.png" alt="Nexa" width={140} height={40} priority />
         </div>
         <nav className="px-2 pb-6 overflow-y-auto">
           {NAV.map((item) => (
             <div key={item.href} className="mb-2">
-              <Link className={`block px-4 py-3 rounded-lg ${pathname.startsWith(item.href) ? "bg:white/10" : "hover:bg-white/5"}`} href={item.href}>{item.label}</Link>
+              <Link className={`block px-4 py-3 rounded-lg ${pathname.startsWith(item.href) ? "bg-white/10" : "hover:bg-white/10"}`} href={item.href}>{item.label}</Link>
               {item.children?.length ? (
                 <div className="ml-4 mt-1 space-y-1">
                   {item.children.map((c) => (
-                    <Link key={c.href} className={`block px-3 py-2 rounded-md text-white/80 hover:text-white hover:bg-white/5 ${pathname===c.href?"bg-white/10 text-white":""}`} href={c.href}>{c.label}</Link>
+                    <Link key={c.href} className={`block px-3 py-2 rounded-md text-white hover:text-white hover:bg-white/10 ${pathname===c.href?"bg-white/15 text-white":""}`} href={c.href}>{c.label}</Link>
                   ))}
                 </div>
               ) : null}
@@ -90,10 +108,12 @@ export default function Shell({ title, children }: { title?: string; children: R
       </aside>
 
       <main className="flex-1">
-        <div data-testid="layout-topbar" className="h-16 border-b border-nexa-border bg-white flex items-center px-6 gap-4">
-          <input placeholder="Search…" className="w-[700px] rounded-xl border border-nexa-border px-4 py-2 outline-none" />
-          <div className="ml-auto flex items-center gap-5 text-nexa-subtext">
-            <span>🔔</span><span>❓</span><span>👤</span>
+        <div data-testid="layout-topbar" className="h-16 bg-white flex items-center px-6 gap-4" style={{ borderBottom: "1px solid var(--border)" }}>
+          <input placeholder="Search…" className="w-[700px] rounded-xl px-4 py-2 outline-none" style={{ border: "1px solid var(--border)" }} />
+          <div className="ml-auto flex items-center gap-5" style={{ color: "var(--color-muted)" }}>
+            <Link href="/alerts" aria-label="Notifications">🔔</Link>
+            <Link href="/help" aria-label="Help">❓</Link>
+            <Link href="/profile" aria-label="Profile">👤</Link>
           </div>
         </div>
 
@@ -107,9 +127,21 @@ export default function Shell({ title, children }: { title?: string; children: R
         <div className="px-8 pb-24">{children}</div>
 
         <div data-testid="ai-engine-bar" className="fixed left-72 right-8 bottom-6">
-          <div className="bg-white shadow-card rounded-2xl border border-nexa-border p-3 flex gap-2">
-            <input className="flex-1 px-4 py-3 rounded-xl border border-nexa-border outline-none" placeholder="Send a message…" />
-            <button className="px-4 py-3 rounded-xl bg-nexa-blue text-white">›</button>
+          <div className="bg-white rounded-2xl p-3 flex gap-2" style={{ border: "1px solid var(--border)", boxShadow: "var(--shadow-md)" }}>
+            <input
+              className="flex-1 px-4 py-3 rounded-xl outline-none"
+              style={{ border: "1px solid var(--border)" }}
+              placeholder="Send a message…"
+              value={aiText}
+              onChange={(e)=>setAiText(e.target.value)}
+              onKeyDown={(e)=>{ if(e.key==='Enter'){ e.preventDefault(); submitAi(); } }}
+            />
+            <button
+              onClick={submitAi}
+              disabled={aiBusy}
+              className="px-4 py-3 rounded-xl text-white"
+              style={{ background: "var(--color-blue)", opacity: aiBusy? .6 : 1 }}
+            >Send</button>
           </div>
         </div>
       </main>
