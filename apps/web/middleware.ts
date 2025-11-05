@@ -10,6 +10,7 @@ const PUBLIC_PATHS = [
   "/api/auth/",
   "/api/auth/forgot-password",
   "/api/auth/reset-password",
+  "/api/_diag",
   "/.well-known",
   "/_next",
   "/favicon.ico",

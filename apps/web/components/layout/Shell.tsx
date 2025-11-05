@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ReactNode, useCallback, useMemo, useState } from "react";
+import { signOut } from "next-auth/react";
 
 type NavItem = { label: string; href: string; children?: NavItem[] };
 
@@ -103,7 +104,7 @@ export default function Shell({ title, children }: { title?: string; children: R
     <div className="flex min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
       <aside data-testid="layout-sidebar" className="w-72 shrink-0 text-white" style={{ background: "linear-gradient(180deg,#2E6BFF 0%,#7A4DFF 100%)" }}>
         <div className="flex items-center gap-3 px-6 h-20">
-          <Image src="/logo-nexa.png" alt="Nexa" width={120} height={32} priority />
+          <Image src="/logo-nexa.webp" alt="Nexa" width={120} height={32} priority />
         </div>
         <nav className="px-2 pb-6 overflow-y-auto">
           {NAV.map((item) => (
@@ -139,6 +140,7 @@ export default function Shell({ title, children }: { title?: string; children: R
             <Link href="/alerts" aria-label="Notifications">🔔</Link>
             <Link href="/help" aria-label="Help">❓</Link>
             <Link href="/profile" aria-label="Profile">👤</Link>
+            <button onClick={()=>signOut({ callbackUrl: '/login' })} className="px-3 py-1.5 rounded-lg text-white" style={{ background: "var(--color-blue)" }}>Logout</button>
           </div>
         </div>
         {title !== undefined && (
