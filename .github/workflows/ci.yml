@@ -62,6 +62,9 @@ jobs:
       - name: Check routes
         run: ROUTES_BASE_URL=http://localhost:3000 pnpm -s check:routes
 
+      - name: Tenancy query checker
+        run: pnpm -s tsx scripts/tenancy/check-prisma-queries.ts
+
       - name: Generate storageState for e2e
         env:
           NEXA_E2E_EMAIL: ${{ secrets.NEXA_E2E_EMAIL }}
