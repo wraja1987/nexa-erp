@@ -92,7 +92,8 @@
     "h:audit": "tsx scripts/audit-stage-h.ts",
     "dr:restore:demo": "bash ops/dr/restore_demo.sh",
     "assert:web": "scripts/ops/assert-next-output.sh",
-    "check:routes": "tsx apps/web/scripts/check-routes.ts"
+    "check:routes": "tsx apps/web/scripts/check-routes.ts",
+    "a11y:check": "pnpm -C apps/web test:e2e -c ./playwright.config.ts -g \"A11y — header/sidebar/AI bar\""
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

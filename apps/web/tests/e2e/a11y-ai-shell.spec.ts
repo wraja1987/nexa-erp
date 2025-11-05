@@ -34,12 +34,12 @@ test.describe("A11y — header/sidebar/AI bar", () => {
       const critical = results.violations.filter(v => v.impact === "critical");
       const serious = results.violations.filter(v => v.impact === "serious");
       if (serious.length) {
-        console.warn("[a11y-serious]", JSON.stringify(serious, null, 2));
+        console.error("[a11y-serious]", JSON.stringify(serious, null, 2));
       }
       if (critical.length) {
         console.error("[a11y-critical]", JSON.stringify(critical, null, 2));
       }
-      expect(critical, `${route} has critical a11y violations`).toHaveLength(0);
+      expect([...critical, ...serious], `${route} has serious/critical a11y violations`).toHaveLength(0);
     });
   }
 });

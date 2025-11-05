@@ -91,6 +91,12 @@ jobs:
       - name: Run a11y sweep for shell + AI bar
         run: cd apps/web && pnpm -s test:e2e -c ./playwright.config.ts -g "A11y — header/sidebar/AI bar"
 
+      - name: Security headers (login + dashboard)
+        run: pnpm -w playwright test tests/e2e/headers.spec.ts --reporter=line
+
+      - name: A11y gate
+        run: pnpm -w a11y:check
+
       - name: Run API KPI test
         env:
           TEST_BASE_URL: http://localhost:3000
