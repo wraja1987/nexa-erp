@@ -1,7 +1,11 @@
 import Page from "@/components/layout/Page";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
-export default function HelpPage() {
+export default async function HelpPage() {
+  const session = await getServerSession(authOptions as any).catch(()=>null);
+  const role = ((session as any)?.user?.role || "USER").toString().toUpperCase();
   const links = [
     { label: "Getting Started", href: "/help#getting-started" },
     { label: "Finance: Invoices & VAT (MTD)", href: "/finance" },
@@ -28,8 +32,9 @@ export default function HelpPage() {
       <div className="col-span-12">
         <div id="getting-started" className="rounded-2xl border bg-white p-6 mt-6 space-y-4" style={{ borderColor: "var(--border)" }}>
           <h2 className="text-xl font-semibold">Using Nexa ERP</h2>
-          <p>These short guides are written in plain British English and cover day‑to‑day use of Nexa.</p>
+          <p>These short guides explain how to use Nexa for your daily tasks and operations.</p>
 
+          {role === "SUPER_ADMIN" && (
           <section>
             <h3 className="font-semibold">Super Admin</h3>
             <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
@@ -38,7 +43,9 @@ export default function HelpPage() {
               <li>Review audit logs on the Alerts page and set rate‑limits/headers in Ops.</li>
             </ul>
           </section>
+          )}
 
+          {role === "ADMIN" && (
           <section>
             <h3 className="font-semibold">Admin</h3>
             <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
@@ -47,7 +54,9 @@ export default function HelpPage() {
               <li>Use the AI Engine for assisted workflows (e.g. “Draft a dunning email”).</li>
             </ul>
           </section>
+          )}
 
+          {role === "USER" && (
           <section>
             <h3 className="font-semibold">Standard User</h3>
             <ul className="list-disc ml-6 text-sm" style={{ color: "var(--color-muted)" }}>
@@ -56,6 +65,7 @@ export default function HelpPage() {
               <li>Search, filter and export lists using the toolbar on each module page.</li>
             </ul>
           </section>
+          )}
 
           <section>
             <h3 className="font-semibold">Tips</h3>
