@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import verifyCredentials from "../../../../src/lib/auth-credentials";
+import { auditEvent } from "@/lib/observability/audit";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -77,6 +78,52 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).tenantId = (token as any).tenantId ?? null;
       }
       return session;
+    },
+  },
+  events: {
+    async signIn(message) {
+      try {
+        if (process.env.AUTH_AUDIT_ENABLED !== "true") return;
+        await auditEvent("auth.sign_in", {
+          tenantId: (message.user as any)?.tenantId ?? null,
+          userId: (message.user as any)?.id ?? null,
+          provider: message?.account?.provider ?? "credentials",
+          ip: (message as any)?.ip ?? null,
+          userAgent: (message as any)?.userAgent ?? null,
+          at: new Date().toISOString(),
+        });
+      } catch {}
+    },
+    async signOut(message) {
+      try {
+        if (process.env.AUTH_AUDIT_ENABLED !== "true") return;
+        await auditEvent("auth.sign_out", {
+          tenantId: (message.session as any)?.user?.tenantId ?? null,
+          userId: (message.session as any)?.user?.id ?? null,
+          at: new Date().toISOString(),
+        });
+      } catch {}
+    },
+    async session({ session }) {
+      try {
+        if (process.env.AUTH_AUDIT_ENABLED !== "true") return;
+        await auditEvent("auth.session", {
+          tenantId: (session as any)?.user?.tenantId ?? null,
+          userId: (session as any)?.user?.id ?? null,
+          at: new Date().toISOString(),
+        });
+      } catch {}
+    },
+    async linkAccount({ user, account }) {
+      try {
+        if (process.env.AUTH_AUDIT_ENABLED !== "true") return;
+        await auditEvent("auth.link_account", {
+          tenantId: (user as any)?.tenantId ?? null,
+          userId: (user as any)?.id ?? null,
+          provider: account?.provider ?? null,
+          at: new Date().toISOString(),
+        });
+      } catch {}
     },
   },
 };

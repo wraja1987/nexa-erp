@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "__Host-next-auth.csrf-token",
+      "value": "bad018377c264c7005aa7fc55d5453b5b78bbe1067955de6b2c4e9e570decaef%7C2f45e8c5d1190a31264de28f5ae6bc80dae607c75281c43e95205f009a127b7a",
+      "domain": "app.nexaai.co.uk",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-next-auth.callback-url",
+      "value": "https%3A%2F%2Fapp.nexaai.co.uk%2Fdashboard",
+      "domain": "app.nexaai.co.uk",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-next-auth.session-token",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..O-uxpPP9G-BiLgaD.W6VoV_pJ_RqNGhvXKauAL2FF1stuY-REiHGcK5IU5KvLEbJu09SQL_MXfTwBKX3V0Bjcijq5S3BxtyrcXVT_q5OzCD9qIjo7G1P50ztLwAa0v4AP6C_R0Lx97y7urjB9ZXr_1fLMQGu9kFf39zHFADux-4T4irINSQvLakmX6FzHZSwoWJGhKIX2yVkcEsW9AShgX9OEiYb3Jj-22ZhgrBqtb7nKEh7cTkIqKUFGaniuyz1iZwj68RrUry1vHe1J.DHbvTYmhRrIXDK-gFMDTow",
+      "domain": "app.nexaai.co.uk",
+      "path": "/",
+      "expires": 1765300260.460325,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

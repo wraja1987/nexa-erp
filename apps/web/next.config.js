@@ -58,9 +58,7 @@ const config = {
   },
 
   async redirects() {
-    const redirects = [
-      { source: "/", destination: "/login", permanent: false }
-    ];
+    const redirects = [];
     // Hide /e2e/* in LHCI/production to avoid prerender errors and noise
     if (isLHCI) {
       redirects.push({ source: "/e2e/:path*", destination: "/", permanent: false });

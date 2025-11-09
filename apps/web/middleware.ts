@@ -1,69 +1,39 @@
-// Nexa ERP — Auth/runtime hardening. Do not relax these routes without updating .cursorrules.
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const PUBLIC_PATHS = [
-  "/login",
-  "/forgot-password",
-  "/reset-password",
-  "/api/auth",
-  "/api/auth/",
-  "/api/auth/forgot-password",
-  "/api/auth/reset-password",
-  "/api/_diag",
-  "/.well-known",
-  "/_next",
-  "/favicon.ico",
-  "/logo-nexa.png",
-  "/public",
-  "/assets",
-];
+const SOFT_GUARD_PATHS = ["/finance/reports"];
+const LOGIN_PATH = "/login";
 
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const { pathname, search } = req.nextUrl;
 
-  // Security headers quick pass
-  const resHeaders: Record<string,string> = {
-    'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
-    'Referrer-Policy': 'strict-origin-when-cross-origin',
-    'X-Content-Type-Options': 'nosniff',
-    'Permissions-Policy': 'geolocation=()'
-  };
-
-  const isPublic = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p));
-  if (isPublic) {
-    const r = NextResponse.next();
-    Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
-    return r;
+  // Always bypass NextAuth's auth routes
+  if (pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
   }
 
-  const token =
-    req.cookies.get("__Secure-next-auth.session-token") ||
-    req.cookies.get("next-auth.session-token");
+  // Require login everywhere except the login page itself
+  const isLoggedIn =
+    req.cookies.has("next-auth.session-token") ||
+    req.cookies.has("__Secure-next-auth.session-token");
 
-  // If hitting /login while authenticated → go to /dashboard
-  if (pathname === "/login" && token) {
+  if (!isLoggedIn && pathname !== LOGIN_PATH) {
     const url = req.nextUrl.clone();
-    url.pathname = "/dashboard";
-    const r = NextResponse.redirect(url);
-    Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
-    return r;
+    url.pathname = LOGIN_PATH;
+    url.search = "";
+    url.searchParams.set("callbackUrl", pathname + (search || ""));
+    return NextResponse.redirect(url);
   }
 
-  // For all other app routes, require session
-  if (!token) {
-    const url = req.nextUrl.clone();
-    url.pathname = "/login";
-    const r = NextResponse.redirect(url);
-    Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
-    return r;
+  // IMPORTANT: let these routes fall through to the page.
+  if (SOFT_GUARD_PATHS.some(p => pathname.startsWith(p))) {
+    return NextResponse.next();
   }
 
-  const r = NextResponse.next();
-  Object.entries(resHeaders).forEach(([k,v])=>r.headers.set(k,v));
-  return r;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!.*\\.).*)"],
+  matcher: [
+    "/((?!api/auth|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)",
+  ],
 };

@@ -55,6 +55,7 @@
     "golden:all": "pnpm -w golden:invoice && pnpm -w golden:siem",
     "seed:phase4": "tsx scripts/seeds/seed-phase4.ts",
     "seed:phase6": "tsx scripts/seeds/seed-phase6.ts",
+    "seed:phase5": "tsx scripts/seeds/seed-phase5.ts",
     "seed:stubs": "tsx scripts/seeds/seed-stubs.ts",
     "report:stubs": "tsx scripts/reports/stubs-ai-audit-summary.ts",
     "seed:phase4:demo-off": "tsx scripts/seeds/seed-phase4.ts --disableDemo",

@@ -5,6 +5,8 @@ import { Client } from 'pg'
 
 function loadEnv() {
   const envPaths = [
+    path.resolve(process.cwd(), 'apps/web/.env.production.local'),
+    path.resolve(process.cwd(), '.env.production.local'),
     path.resolve(process.cwd(), 'apps/web/.env.local'),
     path.resolve(process.cwd(), '.env.local'),
     path.resolve(process.cwd(), 'apps/web/.env'),

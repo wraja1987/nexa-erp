@@ -19,3 +19,4 @@ export default function SecuritySection({ email }: { email: string }) {
     </div>
   );
 }
+
