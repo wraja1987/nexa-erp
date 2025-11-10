@@ -1,0 +1,33 @@
+Playwright — Production Acceptance (alias: https://app.nexaai.co.uk)
+
+Summary: 19 passed
+
+RBAC
+- ADMIN /finance/reports: 200 (page visible, no "Not authorised")
+- STAFF /finance/reports: 200 (renders "Not authorised")
+- STAFF POST /api/admin/users/role: 403
+
+A11y (axe) — 0 serious/critical
+- /finance, /inventory, /manufacturing, /sales, /projects, /hr, /pos, /ai
+
+Health/Readiness
+[healthz] {"status":200,"ok":true,"db":true,"redis":false}
+[readyz]  {"status":200,"ok":true,"db":true,"redis":false}
+
+Report APIs (safe 200s; payloads empty-safe with meta)
+- /api/finance/reports/trial-balance — 200
+- /api/finance/reports/pnl — 200
+- /api/finance/reports/balance-sheet — 200
+- /api/inventory/reports/valuation — 200
+- /api/manufacturing/reports/wip — 200
+- /api/manufacturing/reports/variance — 200
+
+Backups
+- POST /api/admin/backups/run — 202 {"ok":true,"storage":"local-fallback","jobId":"..."} (idempotent; rate-limit headers present)
+
+Correlation IDs
+- Present in API logs and audit records; included in fallback/error branches.
+
+Result: ✅ READY TO PROCEED
+
+
