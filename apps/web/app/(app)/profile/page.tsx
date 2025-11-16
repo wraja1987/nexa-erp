@@ -1,8 +1,10 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import Page from "@/components/layout/Page";
-import Preferences from "../../../components/profile/Preferences";
+import PreferencesClient from "../../../components/profile/PreferencesClient";
 import SecuritySection from "../../../components/profile/SecuritySection";
+
+export const dynamic = "force-dynamic";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions as any).catch(()=>null);
@@ -32,7 +34,7 @@ export default async function ProfilePage() {
 
           {user && <SecuritySection email={String(user.email)} />}
 
-          <Preferences />
+          <PreferencesClient />
         </div>
       </div>
     </Page>

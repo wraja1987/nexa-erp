@@ -1,8 +1,6 @@
 import "../../styles/globals.css";
-import dynamic from "next/dynamic";
-
 // Use the approved shell with sidebar, topbar, and AI Engine bar
-const Shell = dynamic(() => import("../../components/layout/Shell"), { ssr: false });
+import Shell from "../../components/layout/Shell";
 
 export const metadata = { title: "Nexa ERP" };
 
