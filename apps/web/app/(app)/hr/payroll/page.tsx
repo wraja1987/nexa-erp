@@ -1,18 +1,85 @@
-import Page from "@/components/layout/Page";
-import KpiCard from "@/components/ui/KpiCard";
-export default function P(){return(<Page title="Payroll">
-  <KpiCard title="Revenue" value="€405,280" trend="12.5%" />
-  <div className="col-span-12 md:col-span-8 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">AI Insights</div>
-    <div className="border rounded-xl p-4">Optimising labour costs could enhance your profit margins for the current quarter</div>
-  </div>
-  <div className="col-span-12 md:col-span-4 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">Quick Links</div>
-    <div className="grid grid-cols-2 gap-3">
-      <button className="border rounded-xl py-3">New</button>
-      <button className="border rounded-xl py-3">Run Report</button>
-      <button className="border rounded-xl py-3">Import</button>
-      <button className="border rounded-xl py-3">Export</button>
-    </div>
-  </div>
-</Page>);}
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { DataTable, type Column } from "@/components/table/DataTable";
+
+async function getRuns() {
+  const base = process.env.NEXT_PUBLIC_APP_URL || "";
+  const res = await fetch(`${base}/api/hr/payroll/runs/list`, { cache: "no-store" });
+  if (!res.ok) return { runs: [] as any[] };
+  return res.json();
+}
+
+type PayrollRun = {
+  id: string;
+  periodStart: string;
+  periodEnd: string;
+  status: string;
+  createdAt: string;
+};
+
+export default async function PayrollPage() {
+  const { runs } = await getRuns();
+
+  const columns: Column<PayrollRun>[] = [
+    {
+      key: "period",
+      header: "Period",
+      sortable: true,
+      accessor: (row) => `${new Date(row.periodStart).toLocaleDateString()} → ${new Date(row.periodEnd).toLocaleDateString()}`,
+    },
+    {
+      key: "status",
+      header: "Status",
+      sortable: true,
+    },
+    {
+      key: "createdAt",
+      header: "Created",
+      sortable: true,
+      hideOnMobile: true,
+      accessor: (row) => new Date(row.createdAt).toLocaleString(),
+    },
+  ];
+
+  return (
+    <>
+      <PageHeader
+        title="HR — Payroll"
+        breadcrumb={[
+          { label: "HR & Payroll", href: "/hr" },
+          { label: "Payroll" },
+        ]}
+        actions={
+          <>
+            <Button variant="secondary" size="sm">
+              Import
+            </Button>
+            <Button variant="primary" size="sm">
+              New Pay Run
+            </Button>
+          </>
+        }
+      />
+
+      <main className="space-y-4 px-8 pb-24">
+        <Alert variant="info" title="Note">
+          Build/Commit pay runs via APIs. HMRC export available as scaffolding under HR → HMRC (no live submission).
+        </Alert>
+
+        <DataTable
+          columns={columns}
+          data={runs || []}
+          searchable={true}
+          searchPlaceholder="Search payroll runs..."
+          emptyMessage="No payroll runs found"
+        />
+      </main>
+    </>
+  );
+}
+

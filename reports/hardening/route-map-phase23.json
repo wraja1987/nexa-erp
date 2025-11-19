@@ -1,0 +1,694 @@
+{
+  "generated": "2025-11-18T07:26:55.760Z",
+  "totalRoutes": 134,
+  "routes": [
+    {
+      "route": "/admin/coa-templates",
+      "inNav": false,
+      "file": "apps/web/app/(app)/admin/coa-templates/page.tsx"
+    },
+    {
+      "route": "/admin/industry-presets",
+      "inNav": false,
+      "file": "apps/web/app/(app)/admin/industry-presets/page.tsx"
+    },
+    {
+      "route": "/admin/localisation",
+      "inNav": false,
+      "file": "apps/web/app/(app)/admin/localisation/page.tsx"
+    },
+    {
+      "route": "/admin/security",
+      "inNav": false,
+      "file": "apps/web/app/(app)/admin/security/page.tsx"
+    },
+    {
+      "route": "/ai/assistant",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ai/assistant/page.tsx"
+    },
+    {
+      "route": "/ai/automation",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ai/automation/page.tsx"
+    },
+    {
+      "route": "/ai/automations",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ai/automations/page.tsx"
+    },
+    {
+      "route": "/ai/logs",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ai/logs/page.tsx"
+    },
+    {
+      "route": "/ai/overview",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ai/overview/page.tsx"
+    },
+    {
+      "route": "/ai",
+      "inNav": true,
+      "navLabel": "Overview",
+      "permission": "ai:view",
+      "file": "apps/web/app/(app)/ai/page.tsx"
+    },
+    {
+      "route": "/ai/workbench",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ai/workbench/page.tsx"
+    },
+    {
+      "route": "/alerts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/alerts/page.tsx"
+    },
+    {
+      "route": "/analytics/module/[module]",
+      "inNav": false,
+      "file": "apps/web/app/(app)/analytics/module/[module]/page.tsx"
+    },
+    {
+      "route": "/analytics/overview",
+      "inNav": false,
+      "file": "apps/web/app/(app)/analytics/overview/page.tsx"
+    },
+    {
+      "route": "/analytics/snapshots",
+      "inNav": false,
+      "file": "apps/web/app/(app)/analytics/snapshots/page.tsx"
+    },
+    {
+      "route": "/attachments",
+      "inNav": false,
+      "file": "apps/web/app/(app)/attachments/page.tsx"
+    },
+    {
+      "route": "/banking/accounts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/banking/accounts/page.tsx"
+    },
+    {
+      "route": "/banking/cash/forecast",
+      "inNav": false,
+      "file": "apps/web/app/(app)/banking/cash/forecast/page.tsx"
+    },
+    {
+      "route": "/banking/cash/position",
+      "inNav": false,
+      "file": "apps/web/app/(app)/banking/cash/position/page.tsx"
+    },
+    {
+      "route": "/banking/reconciliation",
+      "inNav": false,
+      "file": "apps/web/app/(app)/banking/reconciliation/page.tsx"
+    },
+    {
+      "route": "/banking/statements/import",
+      "inNav": false,
+      "file": "apps/web/app/(app)/banking/statements/import/page.tsx"
+    },
+    {
+      "route": "/costing",
+      "inNav": false,
+      "file": "apps/web/app/(app)/costing/page.tsx"
+    },
+    {
+      "route": "/crm/accounts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/crm/accounts/page.tsx"
+    },
+    {
+      "route": "/crm/activities",
+      "inNav": false,
+      "file": "apps/web/app/(app)/crm/activities/page.tsx"
+    },
+    {
+      "route": "/crm/contacts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/crm/contacts/page.tsx"
+    },
+    {
+      "route": "/crm/pipelines",
+      "inNav": false,
+      "file": "apps/web/app/(app)/crm/pipelines/page.tsx"
+    },
+    {
+      "route": "/dashboard",
+      "inNav": false,
+      "file": "apps/web/app/(app)/dashboard/page.tsx"
+    },
+    {
+      "route": "/finance/ap",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/ap/page.tsx"
+    },
+    {
+      "route": "/finance/ar",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/ar/page.tsx"
+    },
+    {
+      "route": "/finance/bank",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/bank/page.tsx"
+    },
+    {
+      "route": "/finance/banking",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/banking/page.tsx"
+    },
+    {
+      "route": "/finance/bills",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/bills/page.tsx"
+    },
+    {
+      "route": "/finance/close",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/close/page.tsx"
+    },
+    {
+      "route": "/finance/expenses",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/expenses/page.tsx"
+    },
+    {
+      "route": "/finance/fa",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/fa/page.tsx"
+    },
+    {
+      "route": "/finance/fx",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/fx/page.tsx"
+    },
+    {
+      "route": "/finance/gl",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/gl/page.tsx"
+    },
+    {
+      "route": "/finance/invoices",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/invoices/page.tsx"
+    },
+    {
+      "route": "/finance",
+      "inNav": true,
+      "navLabel": "General Ledger",
+      "permission": "finance:view_gl",
+      "file": "apps/web/app/(app)/finance/page.tsx"
+    },
+    {
+      "route": "/finance/payments",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/payments/page.tsx"
+    },
+    {
+      "route": "/finance/purchase-orders",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/purchase-orders/page.tsx"
+    },
+    {
+      "route": "/finance/reconciliation",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reconciliation/page.tsx"
+    },
+    {
+      "route": "/finance/reports/ap-ar/payables-aging",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/ap-ar/payables-aging/page.tsx"
+    },
+    {
+      "route": "/finance/reports/ap-ar/receivables-aging",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/ap-ar/receivables-aging/page.tsx"
+    },
+    {
+      "route": "/finance/reports/fx/realised",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/fx/realised/page.tsx"
+    },
+    {
+      "route": "/finance/reports/fx/unrealised",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/fx/unrealised/page.tsx"
+    },
+    {
+      "route": "/finance/reports",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/page.tsx"
+    },
+    {
+      "route": "/finance/reports/revenue/schedule",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx"
+    },
+    {
+      "route": "/finance/reports/revenue/summary",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/reports/revenue/summary/page.tsx"
+    },
+    {
+      "route": "/finance/vat",
+      "inNav": false,
+      "file": "apps/web/app/(app)/finance/vat/page.tsx"
+    },
+    {
+      "route": "/healthcare/claims",
+      "inNav": false,
+      "file": "apps/web/app/(app)/healthcare/claims/page.tsx"
+    },
+    {
+      "route": "/healthcare/pcn",
+      "inNav": false,
+      "file": "apps/web/app/(app)/healthcare/pcn/page.tsx"
+    },
+    {
+      "route": "/healthcare/practices",
+      "inNav": false,
+      "file": "apps/web/app/(app)/healthcare/practices/page.tsx"
+    },
+    {
+      "route": "/healthcare/reports",
+      "inNav": false,
+      "file": "apps/web/app/(app)/healthcare/reports/page.tsx"
+    },
+    {
+      "route": "/healthcare/rota",
+      "inNav": false,
+      "file": "apps/web/app/(app)/healthcare/rota/page.tsx"
+    },
+    {
+      "route": "/help",
+      "inNav": false,
+      "file": "apps/web/app/(app)/help/page.tsx"
+    },
+    {
+      "route": "/hr/contracts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/contracts/page.tsx"
+    },
+    {
+      "route": "/hr/departments",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/departments/page.tsx"
+    },
+    {
+      "route": "/hr/employees",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/employees/page.tsx"
+    },
+    {
+      "route": "/hr/leave",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/leave/page.tsx"
+    },
+    {
+      "route": "/hr",
+      "inNav": true,
+      "navLabel": "Employees",
+      "permission": "hr:view_employees",
+      "file": "apps/web/app/(app)/hr/page.tsx"
+    },
+    {
+      "route": "/hr/payroll/hmrc",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/payroll/hmrc/page.tsx"
+    },
+    {
+      "route": "/hr/payroll",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/payroll/page.tsx"
+    },
+    {
+      "route": "/hr/payroll/payslips",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/payroll/payslips/page.tsx"
+    },
+    {
+      "route": "/hr/recruitment",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/recruitment/page.tsx"
+    },
+    {
+      "route": "/hr/timesheets",
+      "inNav": false,
+      "file": "apps/web/app/(app)/hr/timesheets/page.tsx"
+    },
+    {
+      "route": "/import-export",
+      "inNav": false,
+      "file": "apps/web/app/(app)/import-export/page.tsx"
+    },
+    {
+      "route": "/inventory/adjustments",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/adjustments/page.tsx"
+    },
+    {
+      "route": "/inventory/bins",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/bins/page.tsx"
+    },
+    {
+      "route": "/inventory/categories",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/categories/page.tsx"
+    },
+    {
+      "route": "/inventory/cyclecount",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/cyclecount/page.tsx"
+    },
+    {
+      "route": "/inventory/fulfilment",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/fulfilment/page.tsx"
+    },
+    {
+      "route": "/inventory/items",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/items/page.tsx"
+    },
+    {
+      "route": "/inventory",
+      "inNav": true,
+      "navLabel": "Items",
+      "permission": "inventory:view_items",
+      "file": "apps/web/app/(app)/inventory/page.tsx"
+    },
+    {
+      "route": "/inventory/stock",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/stock/page.tsx"
+    },
+    {
+      "route": "/inventory/stock-movements",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/stock-movements/page.tsx"
+    },
+    {
+      "route": "/inventory/suppliers",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/suppliers/page.tsx"
+    },
+    {
+      "route": "/inventory/transfers",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/transfers/page.tsx"
+    },
+    {
+      "route": "/inventory/variance",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/variance/page.tsx"
+    },
+    {
+      "route": "/inventory/warehouses",
+      "inNav": false,
+      "file": "apps/web/app/(app)/inventory/warehouses/page.tsx"
+    },
+    {
+      "route": "/manufacturing/bom",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/bom/page.tsx"
+    },
+    {
+      "route": "/manufacturing/boms",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/boms/page.tsx"
+    },
+    {
+      "route": "/manufacturing/mrp",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/mrp/page.tsx"
+    },
+    {
+      "route": "/manufacturing",
+      "inNav": true,
+      "navLabel": "BOMs",
+      "permission": "manufacturing:view_boms",
+      "file": "apps/web/app/(app)/manufacturing/page.tsx"
+    },
+    {
+      "route": "/manufacturing/resources",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/resources/page.tsx"
+    },
+    {
+      "route": "/manufacturing/routing",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/routing/page.tsx"
+    },
+    {
+      "route": "/manufacturing/routings",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/routings/page.tsx"
+    },
+    {
+      "route": "/manufacturing/schedules",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/schedules/page.tsx"
+    },
+    {
+      "route": "/manufacturing/work-orders",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/work-orders/page.tsx"
+    },
+    {
+      "route": "/manufacturing/workcenters",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/workcenters/page.tsx"
+    },
+    {
+      "route": "/manufacturing/workorders",
+      "inNav": false,
+      "file": "apps/web/app/(app)/manufacturing/workorders/page.tsx"
+    },
+    {
+      "route": "/ops/observability",
+      "inNav": false,
+      "file": "apps/web/app/(app)/ops/observability/page.tsx"
+    },
+    {
+      "route": "/partner/overview",
+      "inNav": false,
+      "file": "apps/web/app/(app)/partner/overview/page.tsx"
+    },
+    {
+      "route": "/pos/cashup",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/cashup/page.tsx"
+    },
+    {
+      "route": "/pos",
+      "inNav": true,
+      "navLabel": "Register",
+      "permission": "pos:use_register",
+      "file": "apps/web/app/(app)/pos/page.tsx"
+    },
+    {
+      "route": "/pos/products",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/products/page.tsx"
+    },
+    {
+      "route": "/pos/promotions",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/promotions/page.tsx"
+    },
+    {
+      "route": "/pos/receipts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/receipts/page.tsx"
+    },
+    {
+      "route": "/pos/register",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/register/page.tsx"
+    },
+    {
+      "route": "/pos/reports",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/reports/page.tsx"
+    },
+    {
+      "route": "/pos/sessions",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/sessions/page.tsx"
+    },
+    {
+      "route": "/pos/variance",
+      "inNav": false,
+      "file": "apps/web/app/(app)/pos/variance/page.tsx"
+    },
+    {
+      "route": "/profile",
+      "inNav": false,
+      "file": "apps/web/app/(app)/profile/page.tsx"
+    },
+    {
+      "route": "/projects/analytics",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/analytics/page.tsx"
+    },
+    {
+      "route": "/projects/billing",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/billing/page.tsx"
+    },
+    {
+      "route": "/projects/board",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/board/page.tsx"
+    },
+    {
+      "route": "/projects/boards",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/boards/page.tsx"
+    },
+    {
+      "route": "/projects",
+      "inNav": true,
+      "navLabel": "Boards",
+      "permission": "projects:view_boards",
+      "file": "apps/web/app/(app)/projects/page.tsx"
+    },
+    {
+      "route": "/projects/phases",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/phases/page.tsx"
+    },
+    {
+      "route": "/projects/projects",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/projects/page.tsx"
+    },
+    {
+      "route": "/projects/retainers",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/retainers/page.tsx"
+    },
+    {
+      "route": "/projects/tasks",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/tasks/page.tsx"
+    },
+    {
+      "route": "/projects/time",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/time/page.tsx"
+    },
+    {
+      "route": "/projects/timesheets",
+      "inNav": false,
+      "file": "apps/web/app/(app)/projects/timesheets/page.tsx"
+    },
+    {
+      "route": "/purchasing/blanket",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/blanket/page.tsx"
+    },
+    {
+      "route": "/purchasing/contracts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/contracts/page.tsx"
+    },
+    {
+      "route": "/purchasing/landed",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/landed/page.tsx"
+    },
+    {
+      "route": "/purchasing/orders",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/orders/page.tsx"
+    },
+    {
+      "route": "/purchasing",
+      "inNav": true,
+      "navLabel": "Suppliers",
+      "permission": "purchasing:view_suppliers",
+      "file": "apps/web/app/(app)/purchasing/page.tsx"
+    },
+    {
+      "route": "/purchasing/performance",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/performance/page.tsx"
+    },
+    {
+      "route": "/purchasing/po",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/po/page.tsx"
+    },
+    {
+      "route": "/purchasing/receipts",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/receipts/page.tsx"
+    },
+    {
+      "route": "/purchasing/suppliers",
+      "inNav": false,
+      "file": "apps/web/app/(app)/purchasing/suppliers/page.tsx"
+    },
+    {
+      "route": "/sales/chains",
+      "inNav": false,
+      "file": "apps/web/app/(app)/sales/chains/page.tsx"
+    },
+    {
+      "route": "/sales/customers",
+      "inNav": false,
+      "file": "apps/web/app/(app)/sales/customers/page.tsx"
+    },
+    {
+      "route": "/sales/leads",
+      "inNav": false,
+      "file": "apps/web/app/(app)/sales/leads/page.tsx"
+    },
+    {
+      "route": "/sales/opportunities",
+      "inNav": false,
+      "file": "apps/web/app/(app)/sales/opportunities/page.tsx"
+    },
+    {
+      "route": "/sales/orders",
+      "inNav": false,
+      "file": "apps/web/app/(app)/sales/orders/page.tsx"
+    },
+    {
+      "route": "/sales",
+      "inNav": true,
+      "navLabel": "Leads",
+      "permission": "sales:view_leads",
+      "file": "apps/web/app/(app)/sales/page.tsx"
+    },
+    {
+      "route": "/sales/quotes",
+      "inNav": false,
+      "file": "apps/web/app/(app)/sales/quotes/page.tsx"
+    },
+    {
+      "route": "/tax/audit-pack",
+      "inNav": false,
+      "file": "apps/web/app/(app)/tax/audit-pack/page.tsx"
+    },
+    {
+      "route": "/tax/gcc-einvoice",
+      "inNav": false,
+      "file": "apps/web/app/(app)/tax/gcc-einvoice/page.tsx"
+    },
+    {
+      "route": "/tax/hmrc-mtd",
+      "inNav": false,
+      "file": "apps/web/app/(app)/tax/hmrc-mtd/page.tsx"
+    },
+    {
+      "route": "/tax/vat",
+      "inNav": false,
+      "file": "apps/web/app/(app)/tax/vat/page.tsx"
+    }
+  ]
+}

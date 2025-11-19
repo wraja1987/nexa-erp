@@ -1,17 +1,25 @@
-"use client";
-
-import NexaShell from "@/components/shells/nexa-shell";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card, CardContent } from "@/components/ui/Card";
 
 export default function Page() {
   return (
-    <NexaShell
-      title="Sales — Customers"
-      subtitle="Manage customers."
-      breadcrumbs={[{ label: "Sales", href: "/sales" }, { label: "Customers", href: "/sales/customers" }]}>
-      
-      <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">This is the Nexa Sales — Customers workspace.</p>
-      </div>
-    </NexaShell>
+    <>
+      <PageHeader
+        title="Sales — Customers"
+        breadcrumb={[
+          { label: "Sales & CRM", href: "/sales" },
+          { label: "Customers" },
+        ]}
+      />
+      <main className="space-y-4 px-8 pb-24">
+        <Card>
+          <CardContent>
+            <p className="text-sm" style={{ color: "#6b7280" }}>
+              This is the Nexa Sales — Customers workspace.
+            </p>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 }

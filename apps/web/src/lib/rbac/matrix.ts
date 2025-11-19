@@ -11,7 +11,7 @@ export function normalizeRole(input?: string | null): AppRole {
 }
 
 // Permission matrix (expand as needed)
-const matrix: Record<string, AppRole[]> = {
+export const matrix: Record<string, AppRole[]> = {
   "finance:approve_invoice": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
   "finance:record_payment": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
   // Finance GL & ops
@@ -31,6 +31,32 @@ const matrix: Record<string, AppRole[]> = {
   "admin:role_change": ["ADMIN", "SUPER_ADMIN"],
   // Admin routes
   "ui:finance_reports:view": ["ADMIN", "SUPER_ADMIN"],
+  "ui:admin:view": ["ADMIN", "SUPER_ADMIN"],
+  "ui:admin:manage": ["ADMIN", "SUPER_ADMIN"],
+  "ui:admin:super": ["SUPER_ADMIN"],
+  "ui:healthcare:view": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
+  "ui:healthcare:admin": ["ADMIN", "SUPER_ADMIN"],
+  "ui:attachments:view": ["ADMIN", "MANAGER", "STAFF", "SUPER_ADMIN"],
+  "ui:attachments:edit": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
+  // Workflow permissions (Phase 24)
+  "ui:workflow:view": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
+  "ui:workflow:admin": ["ADMIN", "SUPER_ADMIN"],
+  // Custom Fields permissions (Phase 25)
+  "ui:customfields:view": ["ADMIN", "MANAGER", "STAFF", "SUPER_ADMIN"],
+  "ui:customfields:admin": ["ADMIN", "SUPER_ADMIN"],
+  // Planning / S&OP permissions (Phase 26)
+  "ui:planning:view": ["ADMIN", "MANAGER", "STAFF", "SUPER_ADMIN"],
+  "ui:planning:admin": ["ADMIN", "SUPER_ADMIN"],
+  // User Management permissions (Phase 27)
+  "ui:superadmin:portal": ["SUPER_ADMIN"],
+  "ui:admin:users": ["ADMIN", "SUPER_ADMIN"],
+  "ui:admin:rbac": ["ADMIN", "SUPER_ADMIN"],
+  // Agent AI permissions (Phase 28)
+  "ui:ai:admin": ["ADMIN", "SUPER_ADMIN"],
+  "ui:ai:finance": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
+  "ui:ai:inventory": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
+  "ui:ai:planning": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
+  "ui:ai:analytics": ["ADMIN", "MANAGER", "SUPER_ADMIN"],
 };
 
 export function hasPermission(role: AppRole, perm: string): boolean {

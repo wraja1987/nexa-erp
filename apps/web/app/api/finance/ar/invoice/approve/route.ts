@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
     Sentry.addBreadcrumb({ category: "erp.logic", message: "finance.approve", level: "info", data: { tenantId, invoiceId: body.invoiceId } });
 
-    const updated = await approveCustomerInvoice({ tenantId, invoiceId: body.invoiceId, actorId: userId });
+    const updated = await approveCustomerInvoice({ tenantId, invoiceId: body.invoiceId, actorId: userId, actorRole: perm.role });
     return Response.json({ ok: true, invoice: updated });
   } catch (e: any) {
     const code = e?.code || 400;

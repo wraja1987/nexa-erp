@@ -1,17 +1,25 @@
-"use client";
-
-import NexaShell from "@/components/shells/nexa-shell";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card, CardContent } from "@/components/ui/Card";
 
 export default function Page() {
   return (
-    <NexaShell
-      title="Pos — Products"
-      subtitle="Manage products."
-      breadcrumbs={[{ label: "Pos", href: "/pos" }, { label: "Products", href: "/pos/products" }]}>
-      
-      <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">This is the Nexa Pos — Products workspace.</p>
-      </div>
-    </NexaShell>
+    <>
+      <PageHeader
+        title="POS — Products"
+        breadcrumb={[
+          { label: "POS", href: "/pos" },
+          { label: "Products" },
+        ]}
+      />
+      <main className="space-y-4 px-8 pb-24">
+        <Card>
+          <CardContent>
+            <p className="text-sm" style={{ color: "#6b7280" }}>
+              This is the Nexa POS — Products workspace.
+            </p>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 }

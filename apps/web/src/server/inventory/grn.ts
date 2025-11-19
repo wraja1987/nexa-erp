@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { auditEvent, auditEventInTx } from "@/lib/observability/audit";
+import { publishWithOutbox } from "@/server/events/publisher";
+import { newEventId, nowIso } from "@/server/events/types";
 
 export type GoodsReceiptInput = {
   tenantId: string;
@@ -36,6 +38,56 @@ export async function postGoodsReceipt({ tenantId, sku, qty, unitCostMinor, ware
       if (res.count === 1) {
         const updated = await tx.inventoryItem.findUnique({ where: { id: current.id } });
         await auditEventInTx(tx as any, "inventory.grn.received", { tenantId, actorId, sku, qty, unitCostMinor, warehouseId, locationId });
+        
+        // Create StockMove entry (Phase 4E - Depth Pass)
+        try {
+          await (tx as any).stockMove.create({
+            data: {
+              tenantId,
+              sku,
+              warehouseId: warehouseId || null,
+              fromLocationId: null, // GRN from external
+              toLocationId: locationId || null,
+              type: "grn",
+              qty: qty as any,
+              unitCost: unitCostMinor as any,
+              totalCost: (qty * unitCostMinor) as any,
+              sourceType: "grn",
+              sourceId: null, // Could link to PurchaseOrder if available
+              movedAt: new Date(),
+              movedBy: actorId,
+              reference: `GRN: ${sku}`,
+            },
+          });
+        } catch (error) {
+          // Log but don't fail - StockMove is best-effort
+          console.error("[WMS] Failed to create StockMove for GRN:", error);
+        }
+        
+        // Emit domain event after transaction (Phase 4E)
+        try {
+          const type = await import("@/server/events/types");
+          await publishWithOutbox<type.WmsGrnReceived>({
+            id: newEventId(),
+            tenantId,
+            type: "wms.grn.received",
+            occurredAt: nowIso(),
+            source: "inventory.grn",
+            version: 1,
+            payload: {
+              sku,
+              qty,
+              unitCost: unitCostMinor,
+              warehouseId: warehouseId || undefined,
+              locationId: locationId || undefined,
+              receivedAt: new Date().toISOString(),
+              actorId,
+            },
+          });
+        } catch (error) {
+          console.error("[WMS] Failed to emit grn.received event:", error);
+        }
+        
         return updated as any;
       }
     }

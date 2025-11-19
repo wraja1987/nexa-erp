@@ -1,17 +1,25 @@
-"use client";
-
-import NexaShell from "@/components/shells/nexa-shell";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card, CardContent } from "@/components/ui/Card";
 
 export default function Page() {
   return (
-    <NexaShell
-      title="Manufacturing — Resources"
-      subtitle="Manage resources."
-      breadcrumbs={[{ label: "Manufacturing", href: "/manufacturing" }, { label: "Resources", href: "/manufacturing/resources" }]}>
-      
-      <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">This is the Nexa Manufacturing — Resources workspace.</p>
-      </div>
-    </NexaShell>
+    <>
+      <PageHeader
+        title="Manufacturing — Resources"
+        breadcrumb={[
+          { label: "Manufacturing", href: "/manufacturing" },
+          { label: "Resources" },
+        ]}
+      />
+      <main className="space-y-4 px-8 pb-24">
+        <Card>
+          <CardContent>
+            <p className="text-sm" style={{ color: "#6b7280" }}>
+              This is the Nexa Manufacturing — Resources workspace.
+            </p>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 }

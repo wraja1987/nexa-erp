@@ -1,6 +1,5 @@
 import "../../styles/globals.css";
-// Use the approved shell with sidebar, topbar, and AI Engine bar
-import Shell from "../../components/layout/Shell";
+import AppShell from "@/components/layout/AppShell";
 
 export const metadata = { title: "Nexa ERP" };
 
@@ -8,7 +7,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-screen bg-background antialiased">
-        <Shell>{children}</Shell>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

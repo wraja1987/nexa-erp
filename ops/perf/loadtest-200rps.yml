@@ -1,0 +1,130 @@
+# Artillery load test config — Target ~200 RPS
+# Usage: artillery run ops/perf/loadtest-200rps.yml
+# Set PERF_BASE_URL environment variable (must not be production)
+
+config:
+  target: "${PERF_BASE_URL:-http://localhost:3000}"
+  phases:
+    # Ramp up to 200 RPS over 1 minute
+    - duration: 60
+      arrivalRate: 50
+      rampTo: 200
+      name: "Ramp up to 200 RPS"
+    # Sustain 200 RPS for 3 minutes
+    - duration: 180
+      arrivalRate: 200
+      name: "Sustain 200 RPS"
+    # Ramp down over 30 seconds
+    - duration: 30
+      arrivalRate: 200
+      rampTo: 0
+      name: "Ramp down"
+  processor: "./ops/perf/loadtest-processor.js"
+  plugins:
+    expect: {}
+  ensure:
+    maxErrorRate: 1  # Fail if error rate exceeds 1%
+    p95: 2000        # Fail if p95 latency exceeds 2000ms
+    p99: 5000        # Fail if p99 latency exceeds 5000ms
+
+scenarios:
+  - name: "Health endpoints"
+    weight: 5
+    flow:
+      - get:
+          url: "/api/health"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/api/status"
+          expect:
+            - statusCode: 200
+
+  - name: "Finance reports"
+    weight: 20
+    flow:
+      - get:
+          url: "/api/finance/reports/pnl"
+          expect:
+            - statusCode: [200, 401, 403]  # Accept auth errors
+      - get:
+          url: "/api/finance/reports/balance-sheet"
+          expect:
+            - statusCode: [200, 401, 403]
+      - get:
+          url: "/api/finance/reports/ap-ar/receivables-aging"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "Banking"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/banking/accounts/list"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "HR/Payroll"
+    weight: 15
+    flow:
+      - get:
+          url: "/api/hr/employees/list"
+          expect:
+            - statusCode: [200, 401, 403]
+      - get:
+          url: "/api/hr/payroll/runs/list"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "Inventory"
+    weight: 15
+    flow:
+      - get:
+          url: "/api/inventory/stock/summary"
+          expect:
+            - statusCode: [200, 401, 403]
+      - get:
+          url: "/api/inventory/items/list"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "Manufacturing"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/manufacturing/workorders/list"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "Purchasing"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/purchasing/po/list"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "Analytics"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/analytics/kpi/all"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "AI Engine"
+    weight: 3
+    flow:
+      - get:
+          url: "/api/ai/management/commentary"
+          expect:
+            - statusCode: [200, 401, 403]
+
+  - name: "Healthcare"
+    weight: 2
+    flow:
+      - get:
+          url: "/api/healthcare/reports/overview"
+          expect:
+            - statusCode: [200, 401, 403]
+

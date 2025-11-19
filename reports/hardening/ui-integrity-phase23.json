@@ -1,0 +1,553 @@
+{
+  "generated": "2025-11-18T07:27:37.217Z",
+  "brokenImports": [],
+  "duplicateExports": [
+    {
+      "file": "apps/web/src/app/layout.tsx",
+      "export": "metadata",
+      "duplicates": [
+        "apps/web/app/(app)/layout.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/src/components/Header.tsx",
+      "export": "Header",
+      "duplicates": [
+        "apps/web/src/components/layout/header.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/src/components/KpiCard.tsx",
+      "export": "KpiCard",
+      "duplicates": [
+        "apps/web/src/components/ui/KpiCard.tsx",
+        "apps/web/src/lib/ui/KpiCard.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/src/components/Sidebar.tsx",
+      "export": "Sidebar",
+      "duplicates": [
+        "apps/web/src/components/layout/sidebar.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/src/components/ai/NexaAIBar.tsx",
+      "export": "NexaAIBar",
+      "duplicates": [
+        "apps/web/src/components/ai/nexa-ai-bar.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/src/components/layout/Page.tsx",
+      "export": "Page",
+      "duplicates": [
+        "apps/web/app/(app)/ai/automations/page.tsx",
+        "apps/web/app/(app)/ai/logs/page.tsx",
+        "apps/web/app/(app)/ai/workbench/page.tsx",
+        "apps/web/app/(app)/finance/banking/page.tsx",
+        "apps/web/app/(app)/finance/expenses/page.tsx",
+        "apps/web/app/(app)/finance/reconciliation/page.tsx",
+        "apps/web/app/(app)/hr/recruitment/page.tsx",
+        "apps/web/app/(app)/inventory/categories/page.tsx",
+        "apps/web/app/(app)/inventory/stock-movements/page.tsx",
+        "apps/web/app/(app)/inventory/suppliers/page.tsx",
+        "apps/web/app/(app)/manufacturing/resources/page.tsx",
+        "apps/web/app/(app)/manufacturing/routing/page.tsx",
+        "apps/web/app/(app)/pos/products/page.tsx",
+        "apps/web/app/(app)/pos/sessions/page.tsx",
+        "apps/web/app/(app)/projects/board/page.tsx",
+        "apps/web/app/(app)/projects/time/page.tsx",
+        "apps/web/app/(app)/sales/customers/page.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/src/lib/auth/auth.ts",
+      "export": "Role",
+      "duplicates": [
+        "apps/web/src/lib/auth/roles.ts",
+        "apps/web/src/lib/auth.ts",
+        "apps/web/src/lib/rbac.ts"
+      ]
+    },
+    {
+      "file": "apps/web/src/lib/auth/ssr.ts",
+      "export": "requireAuth",
+      "duplicates": [
+        "apps/web/src/lib/auth.ts"
+      ]
+    },
+    {
+      "file": "apps/web/src/lib/connectors/mockConnectorService.ts",
+      "export": "ConnectorKey",
+      "duplicates": [
+        "apps/web/src/types/phase6.ts",
+        "apps/web/src/types/phase6.ts"
+      ]
+    },
+    {
+      "file": "apps/web/src/lib/manufacturing/lifecycle.ts",
+      "export": "canCancel",
+      "duplicates": [
+        "apps/web/src/lib/purchasing/po-lifecycle.ts"
+      ]
+    },
+    {
+      "file": "apps/web/src/middleware/security.ts",
+      "export": "config",
+      "duplicates": [
+        "apps/web/src/middleware.ts"
+      ]
+    },
+    {
+      "file": "apps/web/src/server/attachments/service.ts",
+      "export": "TenantContext",
+      "duplicates": [
+        "apps/web/src/server/imports/jobs.ts"
+      ]
+    },
+    {
+      "file": "apps/web/app/(app)/admin/coa-templates/page.tsx",
+      "export": "dynamic",
+      "duplicates": [
+        "apps/web/app/(app)/admin/industry-presets/page.tsx",
+        "apps/web/app/(app)/admin/localisation/page.tsx",
+        "apps/web/app/(app)/ai/overview/page.tsx",
+        "apps/web/app/(app)/analytics/module/[module]/page.tsx",
+        "apps/web/app/(app)/analytics/overview/page.tsx",
+        "apps/web/app/(app)/analytics/snapshots/page.tsx",
+        "apps/web/app/(app)/attachments/page.tsx",
+        "apps/web/app/(app)/banking/accounts/page.tsx",
+        "apps/web/app/(app)/banking/cash/forecast/page.tsx",
+        "apps/web/app/(app)/banking/cash/position/page.tsx",
+        "apps/web/app/(app)/banking/reconciliation/page.tsx",
+        "apps/web/app/(app)/crm/accounts/page.tsx",
+        "apps/web/app/(app)/crm/activities/page.tsx",
+        "apps/web/app/(app)/crm/contacts/page.tsx",
+        "apps/web/app/(app)/crm/pipelines/page.tsx",
+        "apps/web/app/(app)/dashboard/page.tsx",
+        "apps/web/app/(app)/finance/bills/page.tsx",
+        "apps/web/app/(app)/finance/gl/page.tsx",
+        "apps/web/app/(app)/finance/invoices/page.tsx",
+        "apps/web/app/(app)/finance/reports/page.tsx",
+        "apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx",
+        "apps/web/app/(app)/finance/reports/revenue/summary/page.tsx",
+        "apps/web/app/(app)/healthcare/claims/page.tsx",
+        "apps/web/app/(app)/healthcare/pcn/page.tsx",
+        "apps/web/app/(app)/healthcare/practices/page.tsx",
+        "apps/web/app/(app)/healthcare/reports/page.tsx",
+        "apps/web/app/(app)/healthcare/rota/page.tsx",
+        "apps/web/app/(app)/hr/contracts/page.tsx",
+        "apps/web/app/(app)/hr/departments/page.tsx",
+        "apps/web/app/(app)/hr/employees/page.tsx",
+        "apps/web/app/(app)/hr/payroll/hmrc/page.tsx",
+        "apps/web/app/(app)/hr/payroll/page.tsx",
+        "apps/web/app/(app)/hr/payroll/payslips/page.tsx",
+        "apps/web/app/(app)/hr/timesheets/page.tsx",
+        "apps/web/app/(app)/inventory/bins/page.tsx",
+        "apps/web/app/(app)/inventory/cyclecount/page.tsx",
+        "apps/web/app/(app)/inventory/fulfilment/page.tsx",
+        "apps/web/app/(app)/inventory/items/page.tsx",
+        "apps/web/app/(app)/inventory/stock/page.tsx",
+        "apps/web/app/(app)/inventory/transfers/page.tsx",
+        "apps/web/app/(app)/inventory/variance/page.tsx",
+        "apps/web/app/(app)/inventory/warehouses/page.tsx",
+        "apps/web/app/(app)/manufacturing/bom/page.tsx",
+        "apps/web/app/(app)/manufacturing/mrp/page.tsx",
+        "apps/web/app/(app)/manufacturing/routings/page.tsx",
+        "apps/web/app/(app)/manufacturing/work-orders/page.tsx",
+        "apps/web/app/(app)/manufacturing/workcenters/page.tsx",
+        "apps/web/app/(app)/manufacturing/workorders/page.tsx",
+        "apps/web/app/(app)/partner/overview/page.tsx",
+        "apps/web/app/(app)/pos/cashup/page.tsx",
+        "apps/web/app/(app)/pos/promotions/page.tsx",
+        "apps/web/app/(app)/pos/reports/page.tsx",
+        "apps/web/app/(app)/pos/variance/page.tsx",
+        "apps/web/app/(app)/profile/page.tsx",
+        "apps/web/app/(app)/projects/analytics/page.tsx",
+        "apps/web/app/(app)/projects/billing/page.tsx",
+        "apps/web/app/(app)/projects/phases/page.tsx",
+        "apps/web/app/(app)/projects/projects/page.tsx",
+        "apps/web/app/(app)/projects/retainers/page.tsx",
+        "apps/web/app/(app)/projects/timesheets/page.tsx",
+        "apps/web/app/(app)/purchasing/blanket/page.tsx",
+        "apps/web/app/(app)/purchasing/contracts/page.tsx",
+        "apps/web/app/(app)/purchasing/landed/page.tsx",
+        "apps/web/app/(app)/purchasing/performance/page.tsx",
+        "apps/web/app/(app)/purchasing/po/page.tsx",
+        "apps/web/app/(app)/purchasing/receipts/page.tsx",
+        "apps/web/app/(app)/purchasing/suppliers/page.tsx",
+        "apps/web/app/(app)/sales/chains/page.tsx",
+        "apps/web/app/(app)/sales/orders/page.tsx",
+        "apps/web/app/(app)/sales/quotes/page.tsx",
+        "apps/web/app/(app)/tax/audit-pack/page.tsx",
+        "apps/web/app/(app)/tax/gcc-einvoice/page.tsx",
+        "apps/web/app/(app)/tax/hmrc-mtd/page.tsx",
+        "apps/web/app/(app)/tax/vat/page.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/app/(app)/ai/assistant/page.tsx",
+      "export": "P",
+      "duplicates": [
+        "apps/web/app/(app)/ai/automation/page.tsx",
+        "apps/web/app/(app)/ai/page.tsx",
+        "apps/web/app/(app)/costing/page.tsx",
+        "apps/web/app/(app)/finance/ap/page.tsx",
+        "apps/web/app/(app)/finance/ar/page.tsx",
+        "apps/web/app/(app)/finance/bank/page.tsx",
+        "apps/web/app/(app)/finance/close/page.tsx",
+        "apps/web/app/(app)/finance/fa/page.tsx",
+        "apps/web/app/(app)/finance/fx/page.tsx",
+        "apps/web/app/(app)/finance/page.tsx",
+        "apps/web/app/(app)/finance/payments/page.tsx",
+        "apps/web/app/(app)/finance/purchase-orders/page.tsx",
+        "apps/web/app/(app)/finance/vat/page.tsx",
+        "apps/web/app/(app)/hr/leave/page.tsx",
+        "apps/web/app/(app)/hr/page.tsx",
+        "apps/web/app/(app)/inventory/adjustments/page.tsx",
+        "apps/web/app/(app)/inventory/page.tsx",
+        "apps/web/app/(app)/manufacturing/boms/page.tsx",
+        "apps/web/app/(app)/manufacturing/page.tsx",
+        "apps/web/app/(app)/manufacturing/schedules/page.tsx",
+        "apps/web/app/(app)/pos/page.tsx",
+        "apps/web/app/(app)/pos/receipts/page.tsx",
+        "apps/web/app/(app)/pos/register/page.tsx",
+        "apps/web/app/(app)/projects/boards/page.tsx",
+        "apps/web/app/(app)/projects/page.tsx",
+        "apps/web/app/(app)/projects/tasks/page.tsx",
+        "apps/web/app/(app)/purchasing/orders/page.tsx",
+        "apps/web/app/(app)/purchasing/page.tsx",
+        "apps/web/app/(app)/sales/leads/page.tsx",
+        "apps/web/app/(app)/sales/opportunities/page.tsx",
+        "apps/web/app/(app)/sales/page.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/app/(app)/ai/overview/page.tsx",
+      "export": "revalidate",
+      "duplicates": [
+        "apps/web/app/(app)/analytics/module/[module]/page.tsx",
+        "apps/web/app/(app)/analytics/overview/page.tsx",
+        "apps/web/app/(app)/analytics/snapshots/page.tsx",
+        "apps/web/app/(app)/attachments/page.tsx",
+        "apps/web/app/(app)/banking/accounts/page.tsx",
+        "apps/web/app/(app)/banking/cash/forecast/page.tsx",
+        "apps/web/app/(app)/banking/cash/position/page.tsx",
+        "apps/web/app/(app)/banking/reconciliation/page.tsx",
+        "apps/web/app/(app)/crm/accounts/page.tsx",
+        "apps/web/app/(app)/crm/activities/page.tsx",
+        "apps/web/app/(app)/crm/contacts/page.tsx",
+        "apps/web/app/(app)/crm/pipelines/page.tsx",
+        "apps/web/app/(app)/dashboard/page.tsx",
+        "apps/web/app/(app)/finance/bills/page.tsx",
+        "apps/web/app/(app)/finance/gl/page.tsx",
+        "apps/web/app/(app)/finance/invoices/page.tsx",
+        "apps/web/app/(app)/finance/reports/page.tsx",
+        "apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx",
+        "apps/web/app/(app)/finance/reports/revenue/summary/page.tsx",
+        "apps/web/app/(app)/hr/contracts/page.tsx",
+        "apps/web/app/(app)/hr/departments/page.tsx",
+        "apps/web/app/(app)/hr/employees/page.tsx",
+        "apps/web/app/(app)/hr/payroll/hmrc/page.tsx",
+        "apps/web/app/(app)/hr/payroll/page.tsx",
+        "apps/web/app/(app)/hr/payroll/payslips/page.tsx",
+        "apps/web/app/(app)/hr/timesheets/page.tsx",
+        "apps/web/app/(app)/inventory/bins/page.tsx",
+        "apps/web/app/(app)/inventory/cyclecount/page.tsx",
+        "apps/web/app/(app)/inventory/fulfilment/page.tsx",
+        "apps/web/app/(app)/inventory/items/page.tsx",
+        "apps/web/app/(app)/inventory/stock/page.tsx",
+        "apps/web/app/(app)/inventory/transfers/page.tsx",
+        "apps/web/app/(app)/inventory/variance/page.tsx",
+        "apps/web/app/(app)/inventory/warehouses/page.tsx",
+        "apps/web/app/(app)/manufacturing/bom/page.tsx",
+        "apps/web/app/(app)/manufacturing/mrp/page.tsx",
+        "apps/web/app/(app)/manufacturing/routings/page.tsx",
+        "apps/web/app/(app)/manufacturing/work-orders/page.tsx",
+        "apps/web/app/(app)/manufacturing/workcenters/page.tsx",
+        "apps/web/app/(app)/manufacturing/workorders/page.tsx",
+        "apps/web/app/(app)/pos/cashup/page.tsx",
+        "apps/web/app/(app)/pos/promotions/page.tsx",
+        "apps/web/app/(app)/pos/reports/page.tsx",
+        "apps/web/app/(app)/pos/variance/page.tsx",
+        "apps/web/app/(app)/projects/analytics/page.tsx",
+        "apps/web/app/(app)/projects/billing/page.tsx",
+        "apps/web/app/(app)/projects/phases/page.tsx",
+        "apps/web/app/(app)/projects/projects/page.tsx",
+        "apps/web/app/(app)/projects/retainers/page.tsx",
+        "apps/web/app/(app)/projects/timesheets/page.tsx",
+        "apps/web/app/(app)/purchasing/blanket/page.tsx",
+        "apps/web/app/(app)/purchasing/contracts/page.tsx",
+        "apps/web/app/(app)/purchasing/landed/page.tsx",
+        "apps/web/app/(app)/purchasing/performance/page.tsx",
+        "apps/web/app/(app)/purchasing/po/page.tsx",
+        "apps/web/app/(app)/purchasing/receipts/page.tsx",
+        "apps/web/app/(app)/purchasing/suppliers/page.tsx",
+        "apps/web/app/(app)/sales/chains/page.tsx",
+        "apps/web/app/(app)/sales/orders/page.tsx",
+        "apps/web/app/(app)/sales/quotes/page.tsx",
+        "apps/web/app/(app)/tax/audit-pack/page.tsx",
+        "apps/web/app/(app)/tax/gcc-einvoice/page.tsx",
+        "apps/web/app/(app)/tax/hmrc-mtd/page.tsx",
+        "apps/web/app/(app)/tax/vat/page.tsx"
+      ]
+    },
+    {
+      "file": "apps/web/app/(app)/ai/overview/page.tsx",
+      "export": "fetchCache",
+      "duplicates": [
+        "apps/web/app/(app)/analytics/module/[module]/page.tsx",
+        "apps/web/app/(app)/analytics/overview/page.tsx",
+        "apps/web/app/(app)/analytics/snapshots/page.tsx",
+        "apps/web/app/(app)/banking/accounts/page.tsx",
+        "apps/web/app/(app)/banking/cash/forecast/page.tsx",
+        "apps/web/app/(app)/banking/cash/position/page.tsx",
+        "apps/web/app/(app)/banking/reconciliation/page.tsx",
+        "apps/web/app/(app)/crm/accounts/page.tsx",
+        "apps/web/app/(app)/crm/activities/page.tsx",
+        "apps/web/app/(app)/crm/contacts/page.tsx",
+        "apps/web/app/(app)/crm/pipelines/page.tsx",
+        "apps/web/app/(app)/dashboard/page.tsx",
+        "apps/web/app/(app)/finance/bills/page.tsx",
+        "apps/web/app/(app)/finance/gl/page.tsx",
+        "apps/web/app/(app)/finance/invoices/page.tsx",
+        "apps/web/app/(app)/finance/reports/page.tsx",
+        "apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx",
+        "apps/web/app/(app)/finance/reports/revenue/summary/page.tsx",
+        "apps/web/app/(app)/hr/contracts/page.tsx",
+        "apps/web/app/(app)/hr/departments/page.tsx",
+        "apps/web/app/(app)/hr/employees/page.tsx",
+        "apps/web/app/(app)/hr/payroll/hmrc/page.tsx",
+        "apps/web/app/(app)/hr/payroll/page.tsx",
+        "apps/web/app/(app)/hr/payroll/payslips/page.tsx",
+        "apps/web/app/(app)/hr/timesheets/page.tsx",
+        "apps/web/app/(app)/inventory/bins/page.tsx",
+        "apps/web/app/(app)/inventory/cyclecount/page.tsx",
+        "apps/web/app/(app)/inventory/fulfilment/page.tsx",
+        "apps/web/app/(app)/inventory/items/page.tsx",
+        "apps/web/app/(app)/inventory/stock/page.tsx",
+        "apps/web/app/(app)/inventory/transfers/page.tsx",
+        "apps/web/app/(app)/inventory/variance/page.tsx",
+        "apps/web/app/(app)/inventory/warehouses/page.tsx",
+        "apps/web/app/(app)/manufacturing/bom/page.tsx",
+        "apps/web/app/(app)/manufacturing/mrp/page.tsx",
+        "apps/web/app/(app)/manufacturing/routings/page.tsx",
+        "apps/web/app/(app)/manufacturing/work-orders/page.tsx",
+        "apps/web/app/(app)/manufacturing/workcenters/page.tsx",
+        "apps/web/app/(app)/manufacturing/workorders/page.tsx",
+        "apps/web/app/(app)/pos/cashup/page.tsx",
+        "apps/web/app/(app)/pos/promotions/page.tsx",
+        "apps/web/app/(app)/pos/reports/page.tsx",
+        "apps/web/app/(app)/pos/variance/page.tsx",
+        "apps/web/app/(app)/projects/analytics/page.tsx",
+        "apps/web/app/(app)/projects/billing/page.tsx",
+        "apps/web/app/(app)/projects/phases/page.tsx",
+        "apps/web/app/(app)/projects/projects/page.tsx",
+        "apps/web/app/(app)/projects/retainers/page.tsx",
+        "apps/web/app/(app)/projects/timesheets/page.tsx",
+        "apps/web/app/(app)/purchasing/blanket/page.tsx",
+        "apps/web/app/(app)/purchasing/contracts/page.tsx",
+        "apps/web/app/(app)/purchasing/landed/page.tsx",
+        "apps/web/app/(app)/purchasing/performance/page.tsx",
+        "apps/web/app/(app)/purchasing/po/page.tsx",
+        "apps/web/app/(app)/purchasing/receipts/page.tsx",
+        "apps/web/app/(app)/purchasing/suppliers/page.tsx",
+        "apps/web/app/(app)/sales/chains/page.tsx",
+        "apps/web/app/(app)/sales/orders/page.tsx",
+        "apps/web/app/(app)/sales/quotes/page.tsx",
+        "apps/web/app/(app)/tax/audit-pack/page.tsx",
+        "apps/web/app/(app)/tax/gcc-einvoice/page.tsx",
+        "apps/web/app/(app)/tax/hmrc-mtd/page.tsx",
+        "apps/web/app/(app)/tax/vat/page.tsx"
+      ]
+    }
+  ],
+  "unusedComponents": [],
+  "orphanedRoutes": [
+    {
+      "route": "/ai/automation",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/ai/automation/page.tsx"
+    },
+    {
+      "route": "/banking/statements/import",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/banking/statements/import/page.tsx"
+    },
+    {
+      "route": "/finance/reports/ap-ar/payables-aging",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/ap-ar/payables-aging/page.tsx"
+    },
+    {
+      "route": "/finance/reports/ap-ar/receivables-aging",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/ap-ar/receivables-aging/page.tsx"
+    },
+    {
+      "route": "/finance/reports/fx/realised",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/fx/realised/page.tsx"
+    },
+    {
+      "route": "/finance/reports/fx/unrealised",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/fx/unrealised/page.tsx"
+    },
+    {
+      "route": "/finance/reports/revenue/schedule",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx"
+    },
+    {
+      "route": "/finance/reports/revenue/summary",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/revenue/summary/page.tsx"
+    },
+    {
+      "route": "/inventory/suppliers",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/inventory/suppliers/page.tsx"
+    },
+    {
+      "route": "/manufacturing/workorders",
+      "file": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/manufacturing/workorders/page.tsx"
+    }
+  ],
+  "pagesWithoutAppShell": [],
+  "pagesWithoutPageHeader": [
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/ClientGate.tsx",
+      "file": "apps/web/app/(app)/finance/reports/ClientGate.tsx"
+    }
+  ],
+  "tablesNotUsingDataTable": [
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/banking/accounts/page.tsx",
+      "file": "apps/web/app/(app)/banking/accounts/page.tsx",
+      "line": 24
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/banking/cash/forecast/page.tsx",
+      "file": "apps/web/app/(app)/banking/cash/forecast/page.tsx",
+      "line": 25
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/banking/cash/position/page.tsx",
+      "file": "apps/web/app/(app)/banking/cash/position/page.tsx",
+      "line": 22
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/banking/reconciliation/page.tsx",
+      "file": "apps/web/app/(app)/banking/reconciliation/page.tsx",
+      "line": 34
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/banking/statements/import/page.tsx",
+      "file": "apps/web/app/(app)/banking/statements/import/page.tsx",
+      "line": 67
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/crm/accounts/page.tsx",
+      "file": "apps/web/app/(app)/crm/accounts/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/crm/contacts/page.tsx",
+      "file": "apps/web/app/(app)/crm/contacts/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/ap-ar/payables-aging/page.tsx",
+      "file": "apps/web/app/(app)/finance/reports/ap-ar/payables-aging/page.tsx",
+      "line": 28
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/ap-ar/receivables-aging/page.tsx",
+      "file": "apps/web/app/(app)/finance/reports/ap-ar/receivables-aging/page.tsx",
+      "line": 28
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/fx/unrealised/page.tsx",
+      "file": "apps/web/app/(app)/finance/reports/fx/unrealised/page.tsx",
+      "line": 19
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx",
+      "file": "apps/web/app/(app)/finance/reports/revenue/schedule/page.tsx",
+      "line": 47
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/hr/contracts/page.tsx",
+      "file": "apps/web/app/(app)/hr/contracts/page.tsx",
+      "line": 24
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/hr/departments/page.tsx",
+      "file": "apps/web/app/(app)/hr/departments/page.tsx",
+      "line": 24
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/hr/payroll/payslips/page.tsx",
+      "file": "apps/web/app/(app)/hr/payroll/payslips/page.tsx",
+      "line": 21
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/hr/timesheets/page.tsx",
+      "file": "apps/web/app/(app)/hr/timesheets/page.tsx",
+      "line": 24
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/inventory/bins/page.tsx",
+      "file": "apps/web/app/(app)/inventory/bins/page.tsx",
+      "line": 15
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/inventory/fulfilment/page.tsx",
+      "file": "apps/web/app/(app)/inventory/fulfilment/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/inventory/stock/page.tsx",
+      "file": "apps/web/app/(app)/inventory/stock/page.tsx",
+      "line": 35
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/inventory/warehouses/page.tsx",
+      "file": "apps/web/app/(app)/inventory/warehouses/page.tsx",
+      "line": 15
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/manufacturing/bom/page.tsx",
+      "file": "apps/web/app/(app)/manufacturing/bom/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/manufacturing/mrp/page.tsx",
+      "file": "apps/web/app/(app)/manufacturing/mrp/page.tsx",
+      "line": 23
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/manufacturing/routings/page.tsx",
+      "file": "apps/web/app/(app)/manufacturing/routings/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/manufacturing/workcenters/page.tsx",
+      "file": "apps/web/app/(app)/manufacturing/workcenters/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/manufacturing/workorders/page.tsx",
+      "file": "apps/web/app/(app)/manufacturing/workorders/page.tsx",
+      "line": 19
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/projects/projects/page.tsx",
+      "file": "apps/web/app/(app)/projects/projects/page.tsx",
+      "line": 18
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/purchasing/po/page.tsx",
+      "file": "apps/web/app/(app)/purchasing/po/page.tsx",
+      "line": 15
+    },
+    {
+      "route": "/Users/waheedraja/Desktop/Business Opportunities/Nexa ERP/Nexa ERP CLEAN PUSH/apps/web/app/(app)/purchasing/receipts/page.tsx",
+      "file": "apps/web/app/(app)/purchasing/receipts/page.tsx",
+      "line": 18
+    }
+  ]
+}

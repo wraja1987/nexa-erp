@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { buildJournalLineWhereWithDimensions, DimensionFilters } from "@/lib/finance/dimensions";
 import { auditEventInTx } from "@/lib/observability/audit";
 
 export type JournalLineInput = {
@@ -71,11 +72,34 @@ export async function postJournalEntry(input: PostJournalInput) {
   });
 }
 
-export async function getTrialBalance(tenantId: string, asOf?: Date) {
+export async function getTrialBalance(tenantId: string, asOf?: Date, dimensions?: DimensionFilters) {
   // Aggregate from journal lines joined to accounts
+  // Performance: Validate date range (max 1 year)
+  if (asOf) {
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    if (asOf < oneYearAgo) {
+      throw Object.assign(new Error("Date range exceeds 1 year limit"), { code: 400 });
+    }
+  }
+
+  const baseWhere = { tenantId };
+  const where = buildJournalLineWhereWithDimensions(baseWhere, dimensions || {});
+  // Performance: Explicit select to avoid fetching unnecessary fields
   const lines = await prisma.journalLine.findMany({
-    where: { tenantId },
-    include: { account: true },
+    where,
+    select: {
+      accountId: true,
+      debit: true,
+      credit: true,
+      account: {
+        select: {
+          code: true,
+          name: true,
+          type: true,
+        },
+      },
+    },
   });
   const map = new Map<
     string,
@@ -106,8 +130,8 @@ export async function getTrialBalance(tenantId: string, asOf?: Date) {
   return { asOf: (asOf || new Date()).toISOString(), rows, totals };
 }
 
-export async function getPnL(tenantId: string) {
-  const tb = await getTrialBalance(tenantId);
+export async function getPnL(tenantId: string, dimensions?: DimensionFilters) {
+  const tb = await getTrialBalance(tenantId, undefined, dimensions);
   const income = tb.rows.filter((r) => r.type === "revenue" || r.type === "income");
   const expense = tb.rows.filter((r) => r.type === "expense");
   const totalIncome = income.reduce((s, r) => s + (r.credit - r.debit), 0);
@@ -116,8 +140,8 @@ export async function getPnL(tenantId: string) {
   return { asOf: tb.asOf, totalIncome, totalExpense, net, income, expense };
 }
 
-export async function getBalanceSheet(tenantId: string) {
-  const tb = await getTrialBalance(tenantId);
+export async function getBalanceSheet(tenantId: string, dimensions?: DimensionFilters) {
+  const tb = await getTrialBalance(tenantId, undefined, dimensions);
   const assets = tb.rows.filter((r) => r.type === "asset");
   const liabilities = tb.rows.filter((r) => r.type === "liability");
   const equity = tb.rows.filter((r) => r.type === "equity");

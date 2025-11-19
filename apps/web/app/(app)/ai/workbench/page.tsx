@@ -1,17 +1,25 @@
-"use client";
-
-import NexaShell from "@/components/shells/nexa-shell";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card, CardContent } from "@/components/ui/Card";
 
 export default function Page() {
   return (
-    <NexaShell
-      title="Ai — Workbench"
-      subtitle="Manage workbench."
-      breadcrumbs={[{ label: "Ai", href: "/ai" }, { label: "Workbench", href: "/ai/workbench" }]}>
-      
-      <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">This is the Nexa Ai — Workbench workspace.</p>
-      </div>
-    </NexaShell>
+    <>
+      <PageHeader
+        title="AI — Workbench"
+        breadcrumb={[
+          { label: "AI", href: "/ai" },
+          { label: "Workbench" },
+        ]}
+      />
+      <main className="space-y-4 px-8 pb-24">
+        <Card>
+          <CardContent>
+            <p className="text-sm" style={{ color: "#6b7280" }}>
+              This is the Nexa AI — Workbench workspace.
+            </p>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 }

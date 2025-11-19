@@ -1,18 +1,38 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
 import Page from "@/components/layout/Page";
-import KpiCard from "@/components/ui/KpiCard";
-export default function P(){return(<Page title="Warehouses">
-  <KpiCard title="Revenue" value="€405,280" trend="12.5%" />
-  <div className="col-span-12 md:col-span-8 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">AI Insights</div>
-    <div className="border rounded-xl p-4">Optimising labour costs could enhance your profit margins for the current quarter</div>
-  </div>
-  <div className="col-span-12 md:col-span-4 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">Quick Links</div>
-    <div className="grid grid-cols-2 gap-3">
-      <button className="border rounded-xl py-3">New</button>
-      <button className="border rounded-xl py-3">Run Report</button>
-      <button className="border rounded-xl py-3">Import</button>
-      <button className="border rounded-xl py-3">Export</button>
-    </div>
-  </div>
-</Page>);}
+
+export default async function WarehousesPage() {
+  const res = await fetch("/api/inventory/warehouses/list", { cache: "no-store" });
+  const json = await res.json().catch(() => ({ ok: false }));
+  const rows = json?.ok ? json.data : [];
+  return (
+    <Page title="Inventory • Warehouses">
+      <div className="rounded-2xl border bg-white p-6" style={{ borderColor: "var(--border)" }}>
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead>
+              <tr className="text-left">
+                <th className="py-2 pr-4">Code</th>
+                <th className="py-2 pr-4">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r: any) => (
+                <tr key={r.id} className="border-t" style={{ borderColor: "var(--border)" }}>
+                  <td className="py-2 pr-4">{r.code}</td>
+                  <td className="py-2 pr-4">{r.name}</td>
+                </tr>
+              ))}
+              {!rows?.length && (
+                <tr><td className="py-6 text-sm" style={{ color: "var(--color-muted)" }}>No warehouses found.</td></tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Page>
+  );
+}

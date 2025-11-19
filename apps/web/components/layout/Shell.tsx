@@ -103,7 +103,11 @@ export default function Shell({ title, children }: { title?: string; children: R
   return (
     <div className="flex min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
       <aside data-testid="layout-sidebar" className="w-72 shrink-0 text-white" style={{ background: "linear-gradient(180deg,#2E6BFF 0%,#7A4DFF 100%)" }}>
-        <div className="flex items-center gap-3 px-6 h-20" />
+        <div className="flex items-center gap-3 px-6 h-20">
+          <button aria-label="Nexa" onClick={()=>signOut({ callbackUrl: 'https://www.nexaai.co.uk' })}>
+            <Image src="/logo-nexa.png" alt="Nexa" width={120} height={28} />
+          </button>
+        </div>
         <nav className="px-2 pb-6 overflow-y-auto">
           {NAV.map((item) => (
             <div key={item.href} className="mb-2">

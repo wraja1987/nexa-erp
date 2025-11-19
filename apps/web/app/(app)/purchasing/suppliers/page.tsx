@@ -1,18 +1,93 @@
-import Page from "@/components/layout/Page";
-import KpiCard from "@/components/ui/KpiCard";
-export default function P(){return(<Page title="Suppliers">
-  <KpiCard title="Revenue" value="€405,280" trend="12.5%" />
-  <div className="col-span-12 md:col-span-8 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">AI Insights</div>
-    <div className="border rounded-xl p-4">Optimising labour costs could enhance your profit margins for the current quarter</div>
-  </div>
-  <div className="col-span-12 md:col-span-4 bg-white border border-nexa-border rounded-2xl p-5 shadow-card">
-    <div className="text-nexa-subtext mb-3">Quick Links</div>
-    <div className="grid grid-cols-2 gap-3">
-      <button className="border rounded-xl py-3">New</button>
-      <button className="border rounded-xl py-3">Run Report</button>
-      <button className="border rounded-xl py-3">Import</button>
-      <button className="border rounded-xl py-3">Export</button>
-    </div>
-  </div>
-</Page>);}
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Button } from "@/components/ui/Button";
+import { DataTable, type Column } from "@/components/table/DataTable";
+import { CustomFieldsPanel } from "@/components/custom-fields/CustomFieldsPanel";
+
+async function getSuppliers() {
+  const base = process.env.NEXT_PUBLIC_APP_URL || "";
+  const res = await fetch(`${base}/api/purchasing/suppliers/list`, { cache: "no-store" });
+  const json = await res.json().catch(() => ({ ok: false }));
+  return json?.ok ? json.data : [];
+}
+
+type Supplier = {
+  id: string;
+  code: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+};
+
+export default async function SuppliersPage() {
+  const rows = await getSuppliers();
+
+  const columns: Column<Supplier>[] = [
+    {
+      key: "code",
+      header: "Code",
+      sortable: true,
+    },
+    {
+      key: "name",
+      header: "Name",
+      sortable: true,
+    },
+    {
+      key: "email",
+      header: "Email",
+      sortable: true,
+      accessor: (row) => row.email || "—",
+      hideOnMobile: true,
+    },
+    {
+      key: "phone",
+      header: "Phone",
+      sortable: true,
+      accessor: (row) => row.phone || "—",
+      hideOnMobile: true,
+    },
+  ];
+
+  return (
+    <>
+      <PageHeader
+        title="Purchasing — Suppliers"
+        breadcrumb={[
+          { label: "Purchasing", href: "/purchasing" },
+          { label: "Suppliers" },
+        ]}
+        actions={
+          <>
+            <Button variant="secondary" size="sm">
+              Import
+            </Button>
+            <Button variant="primary" size="sm">
+              New Supplier
+            </Button>
+          </>
+        }
+      />
+
+      <main className="space-y-4 px-8 pb-24">
+        <DataTable
+          columns={columns}
+          data={rows}
+          searchable={true}
+          searchPlaceholder="Search suppliers by code, name..."
+          emptyMessage="No suppliers found"
+        />
+
+        {/* Custom Fields Panel Demo - Would appear on detail/edit pages */}
+        {rows && rows.length > 0 && (
+          <div className="mt-6">
+            <CustomFieldsPanel entityType="purchasing.supplier" entityId={rows[0].id} mode="view" />
+          </div>
+        )}
+      </main>
+    </>
+  );
+}

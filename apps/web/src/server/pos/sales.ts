@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { auditEventInTx } from "@/lib/observability/audit";
 import { computeCogsForSkus } from "@/server/inventory/valuation";
+import { publishWithOutbox } from "@/server/events/publisher";
+import { newEventId, nowIso } from "@/server/events/types";
 
 /** Finalise a POS sale: mark as paid, create journal entry, link by docRef. */
 export async function finalisePosSale(tenantId: string, saleId: string, actorId: string) {
@@ -45,6 +47,37 @@ export async function finalisePosSale(tenantId: string, saleId: string, actorId:
 
     const updated = await tx.posSale.update({ where: { id: saleId }, data: { status: "paid" } });
     await auditEventInTx(tx as any, "pos.sale.finalised", { tenantId, actorId, saleId, entryId: entry.id, total: grossMinor });
+    
+    // Emit domain event after transaction (Phase 4C - Depth Pass)
+    // Note: We emit outside the transaction to avoid blocking on outbox write
+    try {
+      const type = await import("@/server/events/types");
+      await publishWithOutbox<type.PosSaleCompleted>({
+        id: newEventId(),
+        tenantId,
+        type: "pos.sale.completed",
+        occurredAt: nowIso(),
+        source: "pos.sales",
+        version: 1,
+        payload: {
+          saleId: updated.id,
+          saleNumber: updated.saleNumber,
+          storeId: updated.storeId,
+          sessionId: updated.sessionId || undefined,
+          shiftId: updated.shiftId || undefined,
+          customerId: updated.customerId || undefined,
+          subtotal: Number(updated.subtotal),
+          tax: Number(updated.tax),
+          total: Number(updated.total),
+          currency: updated.currency,
+          completedAt: updated.createdAt.toISOString(),
+          actorId,
+        },
+      });
+    } catch (error) {
+      console.error("[POS] Failed to emit sale.completed event:", error);
+    }
+    
     return updated;
   });
 }
